@@ -1,0 +1,16 @@
+p {
+  margin-bottom: 0em;
+}
+
+.button-children {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.span-full {
+  grid-column: span 2;
+}

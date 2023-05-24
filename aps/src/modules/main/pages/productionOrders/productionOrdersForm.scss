@@ -1,0 +1,78 @@
+$pc-breakpoint: 1100px;
+$tablet-breakpoint: 920px;
+
+.production-order-container {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0 0;
+
+  .form-container {
+    display: flex;
+
+    .productionOrder-form {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+      width: 100%;
+
+      @media screen and (width < $pc-breakpoint) {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+      }
+
+      @media screen and (width < $tablet-breakpoint) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .id-container {
+        display: flex;
+
+        .readonly {
+          padding-top: 16px;
+
+          @media screen and (width < 1150px) {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .remark {
+        grid-column: span 5;
+
+        @media screen and (width < $pc-breakpoint) {
+          grid-column: span 4;
+        }
+
+        @media screen and (width < $tablet-breakpoint) {
+          grid-column: span 3;
+        }
+      }
+
+      .label {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 150px;
+
+        @media screen and (width < 1200px) {
+          max-width: 130px;
+        }
+
+        @media screen and (width < 830px) {
+          max-width: 100px;
+        }
+      }
+    }
+  }
+
+  .productionOrder-table {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+
+    .ant-table-body {
+      overflow: auto !important;
+    }
+  }
+}

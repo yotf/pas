@@ -1,0 +1,5 @@
+npm_install:
+  stage: npm-install
+  allow_failure: false
+  script:
+    - npm install

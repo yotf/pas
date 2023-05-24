@@ -1,0 +1,37 @@
+image: node:18-alpine
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"
+      when: always
+    - when: never
+
+default:
+  tags:
+    - $TAG_NAME
+
+cache:
+  - key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+  - key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - test-report.xml
+      - eslint-report.json
+  - key: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_REF_SLUG}
+    paths:
+      - coverage
+
+variables:
+  PUBLISH_PATH: '${CI_PROJECT_DIR}/build'
+
+stages:
+  - npm-install
+  - build
+  - test-unit
+  - lint-check
+  - tsc
+  - sonar-qube
+
+include: 'jobs/*.yml'

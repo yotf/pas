@@ -1,0 +1,1321 @@
+{
+  "translation": {
+    "unit_test": "unit_test_de"
+  },
+  "not-found": {
+    "title": "Oops, this page is gone!_de",
+    "description": "We couldn’t find the page you’re looking for._de",
+    "button": "Go Back_de"
+  },
+  "error-page": {
+    "title": "Oops, something went wrong!_de",
+    "button-try-again": "Try Again_de",
+    "button-go-back": "Go Back_de",
+    "description": "Please try again later_de"
+  },
+  "login_form": {
+    "input": {
+      "username": "Username_de",
+      "password": "Password_de",
+      "placeholder_username": "Username_de"
+    },
+    "validation": {
+      "username": "Username is required_de",
+      "password": "Password is required_de",
+      "wrong_credentials": "Username and/or password do not match our records. Please double-check and try again_de",
+      "pass_min_character": "Required 6 characters minimum_de"
+    },
+    "button": "Sign in_de"
+  },
+  "home": {
+    "logo": "Huni Logo"
+  },
+  "settings_nav": {
+    "users": "Users_de",
+    "units_of_measure": "Units of Measure_de",
+    "department": "Departments_de",
+    "parameters": "Parameters_de",
+    "features": "Features_de",
+    "order_types": "Order Types_de",
+    "customers": "Customers_de",
+    "positions": "Positions_de",
+    "thickness": "Thicknesses_de",
+    "selections": "Selections_de",
+    "production_order_types": "Production Order Types_de",
+    "size_ranges": "Size Ranges_de",
+    "holidays": "Holidays_de",
+    "material_groups": "Material Groups_de",
+    "colors": "Colors_de",
+    "articles": "Articles_de"
+  },
+  "table": {
+    "empty": "The Table is Empty_de",
+    "action": "Actions_de",
+    "production_order_tooltip": "Create Production Order_de"
+  },
+  "side_menu": {
+    "settings": "Settings_de",
+    "operations": "Operations_de",
+    "routing": "Routing_de",
+    "work_center": "Work Center_de",
+    "production_calendar": "Production calendar_de",
+    "material": "Material_de",
+    "sales_order": "Sales Order_de",
+    "production_order": "Production Order_de",
+    "production_order_list": "Production Order List_de",
+    "overview": "Overview_de",
+    "order_replacement": "Order Replacement_de",
+    "simulation": "Simulation_de",
+    "statistics": "Statistics_de"
+  },
+  "settings": {
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "code": "Code_de",
+    "name": "Name_de",
+    "unit": "Unit_de",
+    "search": "Search_de",
+    "holidayDate": "Holiday Date_de",
+    "country": "Country_de",
+    "isActive": "Status_de",
+
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "active": "Active_de"
+    }
+  },
+  "users-table": {
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "active": "Active_de",
+    "inactive": "Inactive_de",
+    "id": "Id",
+    "firstName": "First name_de",
+    "lastName": "Last name_de",
+    "email": "Email Address_de",
+    "positionName": "Position_de",
+    "roleName": "Role_de",
+    "isActive": "Status_de",
+    "search": "Search_de"
+  },
+  "users": {
+    "new": "New_de",
+    "modal": {
+      "create_title": "Create New User_de",
+      "edit_title": "Edit User_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete User {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only + and numbers are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "form": {
+      "firstName": "First name_de",
+      "lastName": "Last name_de",
+      "username": "Username_de",
+      "password": "Password_de",
+      "email": "Email Address_de",
+      "role": "Role_de",
+      "position": "Position_de",
+      "phone": "Phone_de",
+      "active": "Active_de"
+    },
+    "notification": {
+      "create": "User has been successfully created_de",
+      "edit": "User has been successfully edited_de",
+      "delete_success": "User has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the user_de"
+    }
+  },
+  "features": {
+    "modal": {
+      "create_title": "Create New Feature_de",
+      "edit_title": "Edit Feature_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete User {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Feature has been successfully created_de",
+      "edit": "Feature has been successfully edited_de",
+      "delete_success": "Feature has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the feature_de",
+      "create_fail": "Feature with that code alredy exists"
+    }
+  },
+  "articles": {
+    "modal": {
+      "create_title": "Create New Article_de",
+      "edit_title": "Edit Article_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Article {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Article has been successfully created_de",
+      "edit": "Article has been successfully edited_de",
+      "delete_success": "Article has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Article_de",
+      "create_fail": "Article with that code alredy exists_de"
+    }
+  },
+  "unit_of_measure": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Unit of Measure_de",
+      "edit_title": "Edit Unit of Measure_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Unit of Measure {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "active": "Active_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Unit of Measure has been successfully created_de",
+      "edit": "Unit of Measure has been successfully edited_de",
+      "delete_success": "Unit of Measure has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Unit of Measure_de",
+      "create_fail": "Unit of Measure with that code alredy exists_de"
+    }
+  },
+  "colors": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inctive_de"
+    },
+    "modal": {
+      "create_title": "Create New Color_de",
+      "edit_title": "Edit Color_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Color {{name}}_de?",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "active": "Active_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only digits are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "create": "Color has been successfully created_de",
+      "edit": "Color has been successfully edited_de",
+      "create_fail": "Color with that code alredy exists_de",
+      "delete_success": "Color has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the color_de"
+    }
+  },
+  "thickness": {
+    "modal": {
+      "create_title": "Create New Thickness_de",
+      "edit_title": "Edit Thickness_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Thickness {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Thickness has been successfully created_de",
+      "edit": "Thickness has been successfully edited_de",
+      "delete_success": "Thickness has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Thickness_de",
+      "create_fail": "Thickness with that code alredy exists_de"
+    }
+  },
+  "production_order_types": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Production Order Type_de",
+      "edit_title": "Edit Production Order Type_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Production Order Type {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Production Order Type has been successfully created_de",
+      "edit": "Production Order Type has been successfully edited_de",
+      "delete_success": "Production Order Type has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Production Order Type_de",
+      "create_fail": "Production Order Type with that code alredy exists_de"
+    }
+  },
+  "size_ranges": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Size Range_de",
+      "edit_title": "Edit Size Range_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Size Range {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Size Range has been successfully created_de",
+      "edit": "Size Range has been successfully edited_de",
+      "delete_success": "Size Range has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Size Range_de",
+      "create_fail": "Size Range with that code alredy exists_de"
+    }
+  },
+  "material_groups": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Material Group_de",
+      "edit_title": "Edit Material Group_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Material Group {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Material Group has been successfully created_de",
+      "edit": "Material Group has been successfully edited_de",
+      "delete_success": "Material Group has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Material Group_de",
+      "create_fail": "Material Group with that code alredy exists_de"
+    }
+  },
+  "order_types": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Order Type_de",
+      "edit_title": "Edit Order Type_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Order Type {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de"
+    },
+    "notification": {
+      "create": "Order Type has been successfully created_de",
+      "edit": "Order Type has been successfully edited_de",
+      "delete_success": "Order Type has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Order Type_de",
+      "create_fail": "Order Type with that code alredy exists_de"
+    }
+  },
+  "customers": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Customer_de",
+      "edit_title": "Edit Customer_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Customer {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "country": "Country_de",
+      "active": "Active_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only digits are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "create": "Customer has been successfully created_de",
+      "edit": "Customer has been successfully edited_de",
+      "create_fail": "Customer with that code alredy exists_de",
+      "delete_success": "Customer has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Customer_de"
+    }
+  },
+  "parameters": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Parameter_de",
+      "edit_title": "Edit Parameter_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Parameter {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "country": "Country_de",
+      "active": "Active_de",
+      "unit": "Unit_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only digits are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "create": "Parameter has been successfully created_de",
+      "edit": "Parameter has been successfully edited_de",
+      "create_fail": "Parameter with that code alredy exists_de",
+      "delete_success": "Parameter has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Parameter_de"
+    }
+  },
+  "department": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Department_de",
+      "edit_title": "Edit Department_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Department {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "country": "Country_de",
+      "active": "Active_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only digits are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "create": "Department has been successfully created_de",
+      "edit": "Department has been successfully edited_de",
+      "create_fail": "Department with that code alredy exists_de",
+      "delete_success": "Department has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Department_de"
+    }
+  },
+  "selections": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Selection_de",
+      "edit_title": "Edit Selection_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Selection {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "code": "Code_de",
+      "name": "Name_de",
+      "active": "Active_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only digits are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "create": "Selection has been successfully created_de",
+      "edit": "Selection has been successfully edited_de",
+      "create_fail": "Selection with that code alredy exists_de",
+      "delete_success": "Selection has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Selection_de"
+    }
+  },
+  "positions": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inactive_de"
+    },
+    "modal": {
+      "create_title": "Create New Position_de",
+      "edit_title": "Edit Position_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Position {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "name": "Name_de",
+      "active": "Active_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "pass_min_character": "Required 6 characters minimum_de",
+      "format": "Incorrect format_de",
+      "numeric": "Only digits are supported_de",
+      "duplicate": "This value already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "create": "Position has been successfully created_de",
+      "edit": "Position has been successfully edited_de",
+      "create_fail": "Position with that code alredy exists_de",
+      "delete_success": "Position has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Position_de"
+    }
+  },
+  "operations": {
+    "title": "Operation_de",
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "active": "Active_de",
+    "inactive": "Inactive_de",
+    "id": "Id_de",
+    "operation_Id": "Operation ID_de",
+    "name": "Operation Name_de",
+    "interfaceCode": "Interface Code_de",
+    "interface": "Interface_de",
+    "departmentName": "Department_de",
+    "operationTime": "Standard Time_de",
+    "operation_time": "Operation time_de",
+    "waitingTime": "Waiting time_de",
+    "setupTime": "Setup Time_de",
+    "isActive": "Status_de",
+    "search": "Search_de",
+    "remark": "Remark_de",
+    "allocation_based": "Allocation Based_de",
+    "unit_of_measure_placeholder": "Unit of Measure_de",
+    "unit_of_measure_label": "Unit of Measure_de",
+    "interface_code": "Interface Code_de",
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Operation {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "notification": {
+      "delete_success": "Operation has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Operation_de",
+      "create_success": "Operation has been successfully created_de",
+      "edit_success": "Operation has been successfully edited_de",
+      "create_fail": "Operation with that name already exists_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de",
+      "positive": "Number must be positive_de",
+      "create_success": "Operation has been successfully created_de",
+      "edit_success": "Operation has been successfully edited_de",
+      "create_fail": "Operation with that name already exists_de"
+    }
+  },
+  "allocation_labels": {
+    "Quantity 1": "Quantity 1_de",
+    "Quantity 2": "Quantity 2_de",
+    "Recipe": "Formula_de"
+  },
+  "page-header": {
+    "copy": "Copy_de",
+    "save": "Save_de",
+    "delete": "Delete_de"
+  },
+  "routings": {
+    "title": "Routing_de",
+    "name": "Routing Name_de",
+    "isActive": "Status_de",
+    "active": "Active_de",
+    "inactive": "Inactive_de",
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "search": "Search_de",
+    "routing_id": "Routing ID_de",
+    "routingInterfaceId": "Interface ID_de",
+    "createdOn": "Creation Date_de",
+    "materialName": "Material_de",
+    "customerName": "Customer_de",
+    "lotStandardQuantity": "Lot Standard Qty._de",
+    "unitOfMeasureId": "Unit of Measure_de",
+    "materialId": "Material_de",
+    "customerId": "Customer_de",
+    "remark": "Remark_de",
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Routing {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "DuplicateRoutingName": "This value already exists_de",
+      "alphanumeric": "Value must be alphanumeric_de",
+      "max_length": "Max number of characters is {{value}}_de",
+      "max_digits": "Max number of digits is {{value}}_de",
+      "min_value": "Minimum value is {{value}}_de",
+      "edit_success": "Routing has been successfully edited_de",
+      "create_success": "Routing has been successfully created_de",
+      "create_fail": "Routing with that name already exists_de"
+    },
+    "notification": {
+      "delete_success": "Routing has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Routing_de"
+    },
+    "routes": {
+      "title": "Routes_de",
+      "subtitle": "Include the production steps to produce the material._de",
+      "add_operation": "Add Operation_de",
+      "excel_button": "Export to Excel_de",
+      "sequence": "Sequence_de",
+      "operationId": "Operation ID_de",
+      "operationName": "Operation_de",
+      "standardTime": "Std Time_de",
+      "setupTime": "Setup Time_de",
+      "waitingTime": "Waiting Time_de",
+      "leadTime": "Lead Time_de",
+      "departmentName": "Department_de",
+      "planning": "Planning_de",
+      "yes": "Yes_de",
+      "no": "No_de",
+      "modal": {
+        "cancel": "Cancel_de",
+        "save": "Save_de",
+        "add_operation": "Add Operation_de",
+        "search": "Search for Operation_de",
+        "operation_id": "Operation ID_de",
+        "sequence": "Sequence_de",
+        "standardTime": "Standard Time_de",
+        "setupTime": "Setup Time_de",
+        "waitingTime": "Waiting Time_de",
+        "leadTime": "Lead Time_de",
+        "departmentName": "Department Name_de",
+        "planning": "Planning_de",
+        "remark": "Remark_de"
+      },
+      "validation": {
+        "required": "This field is required_de",
+        "max_digits": "Max number of digits is {{value}}_de",
+        "min_value": "Minimum value is {{value}}_de",
+        "max_value": "Maximum value is {{value}}",
+        "must_be_number": "Value must be number",
+        "max_length": "Max number of characters is {{value}}_de"
+      }
+    }
+  },
+  "holidays": {
+    "table": {
+      "active": "Active_de",
+      "inactive": "Inctive_de"
+    },
+    "modal": {
+      "create_title": "Create New Holiday_de",
+      "edit_title": "Edit Holiday_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Holiday {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "form": {
+      "holidayDate": "Holiday Date_de",
+      "datePlaceholder": "Select date_de",
+      "name": "Name_de",
+      "active": "Active_de"
+    },
+    "notification": {
+      "create": "Holiday has been successfully created_de",
+      "create_fail": "Holiday with that date alredy exists_de",
+      "edit": "Holiday has been successfully edited_de",
+      "delete_success": "Holiday has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the holiday_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "duplicate": "This value already exists_de",
+      "invalidDate": "Invalid date format_de",
+      "max_length": "Max number of characters {{name}}_de"
+    }
+  },
+  "workCenters": {
+    "title": "Work Center_de",
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "active": "Active_de",
+    "inactive": "Inactive_de",
+    "id": "Work Center ID_de",
+    "name": "Work Center Name_de",
+    "workcenter_name": "Work center Name_de",
+    "interfaceCode": "Interface Code_de",
+    "departmentName": "Department_de",
+    "unitOfMeasureName": "Unit of Measure_de",
+    "allocationBasedName": "Allocation Based_de",
+    "workCenter_Id": "Work Center ID_de",
+    "isActive": "Status_de",
+    "remark": "Remark_de",
+    "search": "Search_de",
+    "workCenterInterfaceId": "Work Center Interface ID",
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Work Center {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "radio_modal": {
+      "cancel": "Cancel_de",
+      "ok_text": "Proceed_de",
+      "radio_modal_text": "Changing the allocation based will clear all assigned operations_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters {{name}}_de",
+      "duplicate": "This value already exists_de",
+      "positive": "Number must be positive_de",
+      "exact": "Max value length 4 characters_de",
+      "create_success": "Work Center has been successfully created_de",
+      "edit_success": "Work Center has been successfully edited_de",
+      "create_fail": "Work Center with that name already exists_de",
+      "max_value": "Maximum value is {{value}}_de",
+      "min_value": "Minimum value is {{value}}_de"
+    },
+    "notification": {
+      "delete_success": "Work Center has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Work Center_de"
+    },
+    "maintain": {
+      "title": "Edit_de",
+      "work_capacities": "Work Capacities_de",
+      "allowed_operations": "Allowed Operations_de",
+      "add_operation": "Add Operation_de",
+      "excel_button": "Export to excel_de",
+      "weekDay": "Week Day_de",
+      "date": "Date_de",
+      "start": "Start_de",
+      "break": "Break_de",
+      "end": "End_de",
+      "minutes": "Minutes_de",
+      "availableMinutes": "Available Minutes_de",
+      "capacity": "Capacity_de",
+      "efficiency": "Efficiency_de",
+      "operation": "Operation_de",
+      "code": "Operation ID_de",
+      "monday": "Monday_de",
+      "tuesday": "Tuesday_de",
+      "wednesday": "Wednesday_de",
+      "thursday": "Thursday_de",
+      "friday": "Friday_de",
+      "saturday": "Saturday_de",
+      "sunday": "Sunday_de",
+      "dayOfWeek": "Week day_de",
+      "save": "Save_de",
+      "cancel": "Cancel_de",
+      "remark": "Remark_de"
+    },
+    "allowedOperationsModal": {
+      "title": "Add Operation_de",
+      "add": "Add_de",
+      "remove": "Remove_de",
+      "search": "Search_de",
+      "search_label": "Search for Operation_de",
+      "cancel": "Cancel_de"
+    }
+  },
+  "maintain-header": {
+    "save": "Save",
+    "delete": "Delete",
+    "copy": "Copy"
+  },
+  "redirect": {
+    "ok_text": "Proceed_de",
+    "cancel": "Cancel_de",
+    "redirect_modal_text": "You are about to leave the page, all unsaved changes will be lost_de",
+    "copy_modal_text": "You are about to create a copy of this entry_de"
+  },
+  "materials": {
+    "title": "Materials_de",
+    "materialId": "Material ID_de",
+    "name": "Material Name_de",
+    "materialGroupName": "Material Group_de",
+    "interfaceCode": "Interface Code_de",
+    "unitOfMeasure1Name": "Unit of Measure 1_de",
+    "unitOfMeasure2Name": "Unit of Measure 2_de",
+    "factorAreaToKG": "Factor Area to KG_de",
+    "factorAreaToPC": "Factor Area to Pc_de",
+    "createdOn": "Creation Date_de",
+    "articleName": "Article_de",
+    "colorName": "Color_de",
+    "thicknessName": "Thickness_de",
+    "sizeRangeName": "Size Range_de",
+    "selectionName": "Selection_de",
+    "featureName": "Feature_de",
+    "routingName": "Routing_de",
+    "isActive": "Status_de",
+    "active": "Active_de",
+    "inactive": "Inactive_de",
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "search": "Search_de",
+    "materialGroupId": "MaterialGroup_de",
+    "unitOfMeasure1Id": "Unit of Measure 1_de",
+    "unitOfMeasure2Id": "Unit of Measure 2_de",
+    "articleId": "Article_de",
+    "colorId": "Color_de",
+    "thicknessId": "Thickness_de",
+    "sizeRangeId": "Size Range_de",
+    "selectionId": "Selection_de",
+    "feature_description": "Feature_de",
+    "routingId": "Routing_de",
+    "id": "Material ID_de",
+    "validation": {
+      "required": "This field is required_de",
+      "DuplicateMaterialName": "This value already exists_de",
+      "create_success": "Material has been successfully created_de",
+      "edit_success": "Material has been successfully edited_de",
+      "create_fail": "Material with that name already exists_de",
+      "max_length": "Max number of characters {{name}}_de"
+    },
+    "notification": {
+      "delete_success": "Material has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Material_de"
+    },
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Material {{name}}?_de",
+      "warning": "Warning_de"
+    }
+  },
+  "salesOrder": {
+    "title": "Sales Order_de",
+    "isActive": "Status_de",
+    "active": "Active_de",
+    "inactive": "Inactive_de",
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "search": "Search_de",
+    "materialId": "Material ID_de",
+    "orderNumber": "Order Number_de",
+    "customerId": "Customer_de",
+    "orderTypeId": "Order Type_de",
+    "createdOn": "Creation Date_de",
+    "customerOrderNumber": "Customer Order Number_de",
+    "customerName": "Customer_de",
+    "orderTypeName": "Order Type_de",
+    "status": "Status_de",
+    "remark": "Remark_de",
+    "sequence": "Sequence_de",
+    "material": "Material_de",
+    "materialDescription": "Feature_de",
+    "quantity1": "Quantity 1_de",
+    "quantity2": "Quantity 2_de",
+    "unitOfMeasure1": "Unit of Measure 1_de",
+    "unitOfMeasure2": "Unit of Measure 2_de",
+    "requestedDelivery": "Delivery Request_de",
+    "tanneryDelivery": "Tannery Delivery_de",
+    "add_material": "Add Material_de",
+    "materialName": "Material Name_de",
+    "deliveryDate": "Delivery Request Date_de",
+    "add_operation": "Add material_de",
+    "cancel": "Cancel_de",
+    "save": "Save_de",
+    "open": "Open_de",
+    "closed": "Closed_de",
+    "canceled": "Canceled_de",
+    "no_uom": "No unit of measure for selected Material_de",
+    "validation": {
+      "required": "This field is required_de",
+      "duplicate": "This value already exists_de",
+      "alphanumeric": "Value must be alphanumeric_de",
+      "max_length": "Max number of characters is {{value}}_de",
+      "max_digits": "Max number of digits is {{value}}_de",
+      "min_value": "Minimum value is {{value}}_de",
+      "max_value": "Maximum value is {{value}}_de",
+      "edit_success": "Sales Order has been successfully edited_de",
+      "create_success": "Sales Order has been successfully created_de",
+      "create_fail": "Sales Order with that name already exists_de"
+    },
+    "notification": {
+      "delete_success": "Sales Order has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Sales Order_de"
+    },
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Sales Order number {{name}}?_de",
+      "warning": "Warning_de"
+    }
+  },
+  "productionCalendar": {
+    "title": "Production Calendar_de",
+    "workCenterName": "Work Center_de",
+    "initialDate": "Initial Date_de",
+    "finalDate": "Final Date_de",
+    "new_button": "New_de",
+    "excel_button": "Export to excel_de",
+    "search": "Search_de",
+    "workCenterIds": "Work Center_de",
+    "generate_calendar": "Generate Calendar_de",
+    "holidays": "Holidays_de",
+    "results": "results_de",
+    "January": "January_de",
+    "February": "February_de",
+    "March": "March_de",
+    "April": "April_de",
+    "May": "May_de",
+    "June": "June_de",
+    "July": "July_de",
+    "August": "August_de",
+    "September": "September_de",
+    "October": "October_de",
+    "November": "November_de",
+    "December": "December_de",
+    "validation": {
+      "required": "This field is required_de",
+      "duplicate": "This value already exists_de",
+      "min_length": "At least one Work Center is required_de",
+      "edit_success": "Production Calendar has been successfully edited_de",
+      "create_success": "Production Calendar has been successfully created_de",
+      "create_fail": "One or multiple work centers have a generated production calendar_de"
+    },
+    "notification": {
+      "delete_success": "Production Calendar has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Production Calendar_de"
+    },
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Production Calendar {{name}}?_de",
+      "warning": "Warning_de",
+      "cancel": "Cancel_de",
+      "save": "Save_de",
+      "create_title": "Create New Holiday_de"
+    }
+  },
+  "productionOrder": {
+    "title": "Production Order_de",
+    "search": "Search_de",
+    "new_button": "New_de",
+    "excel_button": "Export to Excel_de",
+    "plan_PO": "Plan Selected PO_de",
+    "unschedule": "Unschedule_de",
+    "orderType": "Order Type_de",
+    "orderNumber": "Order Number_de",
+    "creationDate": "Creation Date_de",
+    "customerName": "Customer_de",
+    "salesOrderNumber": "Sales Order Number_de",
+    "salesOrderType": "Sales Order Type_de",
+    "materialName": "Material_de",
+    "articleName": "Article_de",
+    "colorName": "Color_de",
+    "quantity1": "Quantity 1_de",
+    "unitOfMeasure1": "Unit of Measure 1_de",
+    "quantity2": "Quantity 2_de",
+    "unitOfMeasure2": "Unit of Measure 2_de",
+    "quantity3": "Quantity 3_de",
+    "salesOrderDeliveryDate": "Sales Order Delivery Date_de",
+    "initialPlanningDate": "Initial Planning Date_de",
+    "POFinalDeliveryDate": "PO Final Delivery Date_de",
+    "POPosition": "PO Position_de",
+    "workCenterName": "Work Center_de",
+    "deliveryOfPosition": "Delivery of Position_de",
+    "originPO": "origin_de",
+    "situation": "Situation_de",
+    "all": "All_de",
+    "planned": "Planned_de",
+    "document": "Document_de",
+    "id": "ID PO_de",
+    "productionOrderTypeId": "Order Type_de",
+    "customerId": "Customer_de",
+    "customerOrderNumber": "Customer Order Number_de",
+    "statusOfPlanningEnum": "Status_de",
+    "situationEnum": "Situation_de",
+    "salesOrderId": "Sales Order Number_de",
+    "salesOrderMaterialId": "Material_de",
+    "unitOfMeasure3": "Unit of Measure 3_de",
+    "initialDate": "Initial Date_de",
+    "salesOrderDelivery": "Sales Order Delivery_de",
+    "foreseenDelivery": "Foreseen Delivery Date_de",
+    "foreseenDeliveryPOOrigin": "Foreseen Delivery PO Origin_de",
+    "finalDelivery": "Final Delivery Date_de",
+    "remark": "Remark_de",
+    "routingId": "Routing_de",
+    "not_planned": "Not Planned_de",
+    "cancel": "Cancel_de",
+    "executed": "Executed_de",
+    "open": "Open_de",
+    "closed": "Closed_de",
+    "origin": "Origin PO",
+    "materialGroupId": "Material Group_de",
+    "articleId": "Article_de",
+    "colorId": "Color_de",
+    "thicknessId": "Thickness_de",
+    "selectionId": "Selection_de",
+    "notification": {
+      "delete_success": "Production Order has been successfully deleted_de",
+      "delete_fail": "An error occurred while deleting the Production Order_de"
+    },
+    "modal": {
+      "confirm": "Confirm_de",
+      "decline": "Decline_de",
+      "delete_text": "Are you sure you want to delete Production Order {{name}}?_de",
+      "warning": "Warning_de"
+    },
+    "validation": {
+      "required": "This field is required_de",
+      "max_length": "Max number of characters is 5_de",
+      "min_length": "Must be greater than 0_de",
+      "create_success": "Production Order has been successfully created_de",
+      "edit_success": "Production Order has been successfully edited_de",
+      "create_fail": "Production Order with that name already exists_de",
+      "rejected_fail": "Planned Production Orders cannot be edited_de"
+    },
+    "routes": {
+      "title": "",
+      "subtitle": "",
+      "add_operation": "Add Operation_de",
+      "excel_button": "Export to Excel_de",
+      "sequence": "Sequence_de",
+      "operationId": "Operation ID_de",
+      "operationName": "Operation_de",
+      "standardTime": "Std Time_de",
+      "setupTime": "Setup Time_de",
+      "waitingTime": "Waiting Time_de",
+      "leadTime": "Lead Time_de",
+      "departmentName": "Department_de",
+      "planning": "Planning_de",
+      "yes": "Yes_de",
+      "no": "No_de",
+      "modal": {
+        "cancel": "Cancel_de",
+        "save": "Save_de",
+        "add_operation": "Add Operation_de",
+        "search": "Search for Operation_de",
+        "operation_id": "Operation ID_de",
+        "sequence": "Sequence_de",
+        "standardTime": "Standard Time_de",
+        "setupTime": "Setup Time_de",
+        "waitingTime": "Waiting Time_de",
+        "leadTime": "Lead Time_de",
+        "departmentName": "Department Name_de",
+        "planning": "Planning_de",
+        "remark": "Remark_de"
+      },
+      "validation": {
+        "required": "This field is required_de",
+        "max_digits": "Max number of digits is {{value}}_de",
+        "min_value": "Minimum value is {{value}}_de",
+        "max_value": "Maximum value is {{value}}_de",
+        "must_be_number": "Value must be number_de",
+        "max_length": "Max number of characters is {{value}}_de"
+      }
+    }
+  },
+  "overview": {
+    "title": "Overview_de",
+    "work_center_heading": "Work Center_de",
+    "finalDate": "Final Date_de",
+    "initialDate": "Initial Date_de",
+    "empty": "The Table is Empty_de",
+    "orderType": "Order Type_de",
+    "productionOrder": "Production Order_de",
+    "workCenters": "Work Centers_de",
+    "display_work_centers": "Display Work Centers_de",
+    "excel_button": "Export to Excel_de",
+    "adjust_calendar": "Adjust Production Calendar_de",
+    "reallocation": "Reallocation of Planning_de",
+    "statistics": "Statistics_de",
+    "orderNumber": "Order Number_de",
+    "customerName": "Customer_de",
+    "salesOrderNumber": "Sales Order Number_de",
+    "materialName": "Material_de",
+    "articleName": "Article_de",
+    "colorName": "Color_de",
+    "operationName": "Operation_de",
+    "foreseenDeliveryDate": "Foreseen Delivery Date_de",
+    "estimatedTime": "Estimated Time_de",
+    "setupTime": "Setup Time_de",
+    "quantity1": "Quantity 1_de",
+    "unitOfMeasure1": "Unit of Measure 1_de",
+    "salesOrderDeliveryDate": "Sales Order Delivery Date_de",
+    "PODelivery": " PO Delivery_de",
+    "POPosition": "PO Position_de",
+    "calendarName": "Calendar_de",
+    "validation": {
+      "required": "This field is required_de",
+      "date_range": "Date Range needs to be shorter than 2 weeks_de",
+      "min_length": "At least one Work Center is required_de",
+      "max_length": "Max number of Work Centers is 10_de",
+      "initial_date_lower": "Initial date must be lower than Final date_de"
+    }
+  },
+  "orderReplacement": {
+    "title": "Order Replacement_de",
+    "outCustomer": "Customer Name_de",
+    "inCustomer": "Customer Name_de",
+    "outSalesOrderNumber": "Out Order Number_de",
+    "inSalesOrderNumber": "In Order Number_de",
+    "generate_data": "Generate Data_de",
+    "replace_orders": "Replace Orders_de",
+    "confirmation_modal": {
+      "confirmation_message": "Are you sure you want to replace selecter Production Orders?_de",
+      "cancel": "Cancel_de",
+      "ok_text": "Proceed_de",
+      "create_success": "Production Orders have been successfully replaced_de",
+      "create_fail": "An error occured while replacing Production Orders_de"
+    },
+
+    "table": {
+      "out_production_orders_title": "Out Production Orders",
+      "in_production_orders_title": "In Production Orders",
+      "sequence": "Sequence",
+      "productionOrderNumber": "Production Order No.",
+      "materialName": "Material Name",
+      "quantity1": "Quantity 1",
+      "unitOfMeasure1": "Unit of Measure 1",
+      "quantity2": "Quantity 2",
+      "unitOfMeasure2": "Unit of Measure 2",
+      "foreseenDelivery": "Foreseen Delivery Date"
+    },
+    "validation": {
+      "required": "This field is required_de"
+    }
+  },
+  "statistics": {
+    "title": "Statistics_de",
+    "workCenters": "Work Center_de",
+    "initialDate": "Initial Date_de",
+    "finalDate": "Final Date_de",
+    "generate_statistics": "Generate Statistics_de",
+    "general_overview": "General Overview_de",
+    "delayed_orders": "Display Delayed Orders_de",
+    "workCenterId": "ID_de",
+    "workCenterName": "Work Center_de",
+    "availableMinutes": "Available Minutes_de",
+    "allocatedMinutes": "Allocated Minutes_de",
+    "availability": "Availability_de",
+    "numberOfSalesOrders": "No. of Sales Orders_de",
+    "delayedSalesOrders": "Delayed Sales Orders_de",
+    "numberOfPO": "No. of Production Orders_de",
+    "delayedPO": "Delayed Production Orders_de",
+    "occupancy": "Occupancy_de",
+    "setupMinutes": "Setup Minutes_de",
+    "allocatedTime": "Allocated Time_de",
+    "salesOrderNumber": "Sales Order Number_de",
+    "customerName": "Customer_de",
+    "materialName": "Material_de",
+    "quantity": "Quantity_de",
+    "foreseenDelivery": "Foreseen Delivery Date_de",
+    "salesOrderDelivery": "Sales Order Delivery_de",
+    "sequence": "Sequence_de",
+    "delayed_orders_heading": "Delayed Orders_de",
+    "setupTime": "Setup Time_de",
+    "validation": {
+      "initial_date_lower": "Initial date must be lower than Final date_de"
+    }
+  },
+  "simulation": {
+    "workCenterId": "ID_de",
+    "title": "Delivery Simulation_de",
+    "workCenterName": "Work Center_de",
+    "totalAvailability": "Total Availability_de",
+    "allocatedTime": "Allocated Time_de",
+    "allocatedMinutes": "Allocated Minutes_de",
+    "setupTime": "Setup Time_de",
+    "availableTime": "Available Time_de",
+    "simulatedAllocatedTime": "Allocated Time_de",
+    "simulatedSetupTime": "Setup Time_de",
+    "simulatedAvailableTime": "Available Time_de",
+    "occupancy": "Occupancy_de",
+    "initialDate": "Initial Date_de",
+    "finalDate": "Final Date_de",
+    "deliveryDate": "Delivery Date_de",
+    "generate_data": "Generate Data_de",
+    "routing_name": "Routing Name_de",
+    "quantity": "Quantity_de",
+    "numberOfPOs": "Number of POs_de",
+    "repeat": "Repeat_de",
+    "totalMinutes": "Total Minutes_de",
+    "minutes": "Minutes_de",
+    "availableMinutes": "Available Minutes_de",
+    "real_data_heading": "Real Data Overview_de",
+    "simulation_data_heading": "Simulation Data Overview_de",
+    "real_data": "Real Data_de",
+    "simulation_data": "Simulation Data_de",
+    "add_routing": "Add Routing_de",
+    "routingInitialDate": "Initial Date_de",
+    "routingDeliveryDate": "Delivery Date_de",
+    "routingId": "Routing_de",
+    "validation": {
+      "required": "This field is required_de",
+      "initial_date_error": "Routing Initial Date must be in range between Delivery Initial Date and Final Date_de",
+      "final_date_error": "Routing Delivery Date cannot be after Final Date_de",
+      "max_length": "Max number of characters is {{value}}_de",
+      "initial_date_lower": "Initial date must be lower than Final date_de"
+    }
+  },
+  "productionOrderModal": {
+    "po_modal_title": "Create Production Orders_de",
+    "productionOrderNumber": "Production Order Number_de",
+    "numberOfProductionOrders": "Number of POs_de",
+    "productionOrderQuantity": "Production Order Quantites_de",
+    "productionOrderTypeId": "Production Order Type_de",
+    "pieces": "Pieces_de",
+    "routingId": "Routing_de",
+    "lot_size": "Lot size_de",
+    "create_button": "Create_de",
+    "delivery": "Delivery_de",
+    "schedule": "Schedule_de",
+    "ok_text": "Save_de",
+    "cancel": "Cancel_de",
+    "validation": {
+      "required": "This field is required_de",
+      "min_length": "Number must be greater than 0_de",
+      "max_length": "Maximum number of digits is {{value}}_de",
+      "create_success": "Production Orders have been successfully created_de",
+      "create_fail": "An error occured while creating Production Orders_de"
+    }
+  },
+  "reallocationOfPlanning": {
+    "title": "Planning Reallocation_de",
+    "productionOrderNumber": "Production Order Number_de",
+    "numberOfProductionOrders": "Number of Production Orders_de",
+    "productionOrderDelivery": "Production Order Delivery_de",
+    "salesOrderDelivery": "Sales Order Delivery_de",
+    "sequence": "Sequence_de",
+    "operationId": "ID_de",
+    "operationName": "Operation_de",
+    "status": "Status_de",
+    "operationTime": "Time (Minutes)_de",
+    "setupTime": "Setup (Minutes)_de",
+    "leadTime": "Lead Time_de",
+    "workCenterId": "Work Center_de",
+    "planningDate": "Foreseen Date_de",
+    "executedDate": "Date of Execution_de",
+    "cancel": "Close_de",
+    "ok_text": "Save_de",
+    "schedule": "Schedule_de",
+    "unschedule": "Un-schedule_de",
+    "display_operations": "Display Operations_de",
+    "validation": {
+      "reallocation_success": "Production Order status changed successfully_de",
+      "reallocation_fail": "An error occured while changing Production Order status_de"
+    }
+  },
+  "confirmation_modal": {
+    "confirmation_message": "Change status for all operations on selected Production Order?_de",
+    "cancel": "Close_de",
+    "ok_text": "Proceed_de"
+  }
+}

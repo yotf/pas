@@ -1,0 +1,49 @@
+@import '@/styles/variables';
+
+.reallocation-of-planning {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+
+  .ant-modal-content {
+    height: 80vh;
+  }
+
+  .reallocation-inputs {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+
+    button {
+      align-self: flex-end;
+      height: 50px;
+    }
+  }
+}
+
+.indicator {
+  width: 30px;
+  height: 30px;
+  border: 1px solid $gray-light;
+  align-self: center;
+  margin-top: 25px;
+  border-radius: 8px;
+  background-color: $gray-light;
+}
+
+.green-indicator {
+  background-color: $green-color;
+}
+
+.red-indicator {
+  background-color: $red-color;
+}
+
+.table-wrapper {
+  margin-top: 25px;
+
+  .custom-input .ant-select {
+    width: 300px;
+  }
+}

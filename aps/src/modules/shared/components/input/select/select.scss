@@ -1,0 +1,8 @@
+@import '../../../../../styles/variables';
+
+.ant-select-multiple .ant-select-selection-search {
+  margin-inline-start: unset;
+}
+.ant-select-selection-placeholder {
+  color: $gray-medium !important;
+}

@@ -1,0 +1,6 @@
+unit_test:
+  stage: test-unit
+  allow_failure: false
+  script:
+    - npm run test:report
+  needs: ['npm_install']

@@ -1,0 +1,11 @@
+@import '../../../../../styles/variables';
+
+.custom-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .ant-switch-checked {
+    background-color: $green-color;
+  }
+}

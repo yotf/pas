@@ -1,0 +1,14 @@
+.env
+.env.development
+.env.production
+.env.test
+.gitignore
+.package.json
+.package-lock.json
+.README.md
+tsconfig.js
+node_modules/*
+public/*
+src/react-app-env.d.ts
+src/reportWebVitals.ts
+src/setupTests.ts

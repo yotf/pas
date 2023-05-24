@@ -1,0 +1,20 @@
+sonar_qube:
+  stage: sonar-qube
+  allow_failure: false
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  script:
+    - >
+      sonar-scanner
+      -Dsonar.host.url="$SONAR_HOST_URL"
+      -Dsonar.login="$SONAR_LOGIN_TOKEN"
+      -Dsonar.gitlab.commit_sha="$CI_COMMIT_SHA"
+      -Dsonar.gitlab.ref_name="$CI_COMMIT_REF_NAME"
+      -Dsonar.gitlab.project_id="$CI_PROJECT_ID"
+      -X
+  needs: ['build', 'lint_check', 'unit_test', 'tsc']
+

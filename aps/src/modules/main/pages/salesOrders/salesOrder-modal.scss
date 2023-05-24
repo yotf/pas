@@ -1,0 +1,11 @@
+.sales-order-modal {
+  .ant-modal-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 32px;
+
+    .colspan {
+      grid-column: span 2;
+    }
+  }
+}

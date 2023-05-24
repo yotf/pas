@@ -1,0 +1,24 @@
+@use '../../../../styles/variables';
+
+.login-page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 432px;
+    width: 100%;
+    position: relative;
+
+    .custom-input {
+      max-width: unset;
+    }
+
+    &>*:not(:last-child) {
+      margin: 0 0 24px;
+    }
+  }
+}

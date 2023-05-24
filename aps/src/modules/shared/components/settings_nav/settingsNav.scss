@@ -1,0 +1,25 @@
+@import '../../../../styles/variables';
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 200px;
+  gap: 24px;
+  padding-left: 1.5em;
+  overflow: auto;
+
+  .settings-link {
+    color: $gray-color;
+    font-size: 14px;
+    line-height: 21px;
+    font-family: $manrope;
+    text-align: left;
+    vertical-align: top;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .active {
+    color: $navy-100;
+  }
+}

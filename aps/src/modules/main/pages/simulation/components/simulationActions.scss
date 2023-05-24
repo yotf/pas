@@ -1,0 +1,24 @@
+.generate {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  button:last-child {
+    align-self: flex-end;
+    height: 50px;
+  }
+
+  .date-inputs {
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+
+    .custom-input {
+      width: 225px;
+
+      .error-message {
+        white-space: nowrap;
+      }
+    }
+  }
+}

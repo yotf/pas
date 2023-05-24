@@ -1,0 +1,28 @@
+@import '../../../../styles/variables';
+
+.dropdown {
+  width: 15em;
+  cursor: pointer;
+  border-radius: 8px;
+  background: $input-background;
+  border: 1px solid $input-border;
+  padding: 13px 16px;
+}
+
+.dropdown-container {
+  position: relative;
+
+  label {
+    color: $navy-100;
+    font-weight: 500;
+    font-size: 12px;
+    position: absolute;
+    top: -16px;
+    left: 0;
+  }
+}
+
+img {
+  float: right;
+  margin-top: 6px;
+}

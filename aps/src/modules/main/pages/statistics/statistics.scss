@@ -1,0 +1,100 @@
+@import '@/styles/variables';
+
+.title-container {
+  margin: 50px 0 0;
+  padding: 0 1.5em;
+}
+
+.statistics-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  gap: 20px 28px;
+  align-items: end;
+
+  .custom-input .error-message {
+    bottom: -30px;
+  }
+
+  @media screen and (width < 930px) {
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+  }
+
+  h2 {
+    margin-bottom: 0;
+    white-space: nowrap;
+    grid-column: span 2;
+  }
+
+  .button-children span {
+    @media screen and (width < 620px) {
+      font-size: 12px;
+    }
+  }
+
+  .heading {
+    align-self: center;
+  }
+
+  .workCenters {
+    grid-column: span 2;
+
+    @media screen and (width < 930px) {
+      grid-column: span 3;
+    }
+    .custom-input > * > input,
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+      min-height: 50px;
+      padding: 10px;
+    }
+  }
+
+  .divider {
+    grid-column: span 3;
+
+    @media screen and (width < 930px) {
+      grid-column: span 1;
+    }
+  }
+
+  .delayed-orders-header {
+    margin-bottom: 0;
+  }
+
+  .table-container {
+    grid-column: span 5;
+    padding: 0;
+    margin: 28px 0;
+
+    &.daleyed-order-table {
+      margin-top: 0;
+    }
+
+    @media screen and (width < 930px) {
+      grid-column: span 3;
+    }
+  }
+
+  .colored-columns {
+    .table-wrapper {
+      margin-bottom: 0;
+    }
+
+    table tbody tr > *:last-child {
+      padding: 0;
+    }
+
+    .availability {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      align-items: center;
+      padding-left: 16px;
+
+      @each $key, $val in $availability-colors {
+        &.#{$key} {
+          background-color: $val;
+        }
+      }
+    }
+  }
+}

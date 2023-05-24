@@ -1,0 +1,14 @@
+
+ .home-page {
+    width: 100%;
+    height: calc(100vh - 84px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+        height: 65%;
+        width: 65%;
+        opacity: 80%;
+    }
+}

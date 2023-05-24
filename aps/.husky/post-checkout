@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+protected_branches=(master develop test)
+from_hash=$1
+to_hash=$2
+
+if [ $from_hash != $to_hash ]
+then
+    exit 0 ; # Not checking out a new branch
+fi
+
+# create regex expression
+branches=''
+pos=$((${#protected_branches[*]} - 1))
+last=${protected_branches[$pos]}
+for str in ${protected_branches[@]};
+  do
+    branches+="^${str}$"
+    if [[ $str != $last ]]
+    then
+      branches+="|"
+    fi 
+done
+valid_branch_regex="(^(feature|bugfix|improvement|library|prerelease|release|hotfix|test)\/[a-z0-9._-]+$)"
+valid_branch_regex+="|($branches)"
+
+local_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+message="There is something wrong with your branch name. Branch names in this project must adhere to this contract: $valid_branch_regex. Your commit will be rejected. You should rename your branch to a valid name and try again."
+
+if [[ ! $local_branch =~ $valid_branch_regex ]]
+then
+  echo "$message"
+  git checkout develop --quiet
+  git branch --delete $local_branch --quiet
+  exit 1
+fi
+
+exit 0

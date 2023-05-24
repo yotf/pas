@@ -1,0 +1,22 @@
+@import '@/styles/variables';
+
+.back-button {
+  background-color: $background-button;
+  border: 1px solid $navy-5;
+  height: 36px;
+  width: 36px;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.back-button:active {
+  background-color: $gray-light;
+}

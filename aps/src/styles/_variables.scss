@@ -1,0 +1,41 @@
+$orange-color: #dfa523;
+$white-color: #ffffff;
+$blue-color: #417cff;
+$red-color: #fb5656;
+$green-color: #48bd77;
+$gray-color: #6e7585;
+$gray-medium: #9ea3ad;
+$gray-light: #c7cbd3;
+$background-color: #fafcfc;
+$yellow-light: #ffe4a8;
+$yellow-color: #ffd966;
+$header-sideMenu-black: #242424;
+$breakpoint-tablet: 768px;
+$manrope: 'Manrope';
+$inter: 'Inter';
+$background-button: #e7e8eb;
+$navy-100: #0d1933;
+$navy-60: #6e7585;
+$navy-20: #cfd1d6;
+$navy-10: #e7e8eb;
+$navy-5: #f3f4f5;
+$input-background: #f5f7fa;
+$input-border: #e7e8eb;
+$input-focus: #4096ff;
+
+$table-yellow-light: #ffe699;
+$table-yellow-lighter: #fff2cc;
+$table-green-light: #e2efda;
+$table-green: #c6e0b4;
+$table-green-dark: #a9d08e;
+
+$tablet-breakpoint: 1233px;
+
+$availability-colors: (
+  yellow-color: $yellow-color,
+  yellow-light: $table-yellow-light,
+  yellow-lighter: $table-yellow-lighter,
+  green-light: $table-green-light,
+  green-color: $table-green,
+  green-dark: $table-green-dark,
+);

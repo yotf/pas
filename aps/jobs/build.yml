@@ -1,0 +1,6 @@
+build:
+  stage: build
+  script:
+    - npm run build
+  allow_failure: false
+  needs: ['npm_install']

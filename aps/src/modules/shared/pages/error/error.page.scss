@@ -1,0 +1,36 @@
+@import '../../../../styles/variables';
+
+.error-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+
+    .page-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-family: $inter;
+        text-align: center;
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            button {
+                max-width: 200px;
+                width: 100%;
+                align-self: unset;
+                margin: 4px 0;
+            }
+        }
+    }
+}

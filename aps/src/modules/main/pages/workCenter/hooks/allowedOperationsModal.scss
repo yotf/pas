@@ -1,0 +1,44 @@
+@import '@/styles/variables';
+.work-center-modal {
+  .ant-modal {
+    width: 540px !important;
+  }
+}
+.allowed-operations-modal {
+  min-width: 350px;
+
+  .custom-input-container {
+    padding: 10px 0;
+  }
+
+  .modal-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $gray-light;
+    padding: 12px 24px;
+    width: 100%;
+
+    .modal-info {
+      display: flex;
+      gap: 55px;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    p:first-child {
+      width: 30px;
+    }
+
+    .add {
+      color: $blue-color;
+      cursor: pointer;
+    }
+
+    .remove {
+      color: $red-color;
+      cursor: pointer;
+    }
+  }
+}

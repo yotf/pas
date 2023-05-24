@@ -1,0 +1,28 @@
+@import '../../../../styles/variables';
+
+.settings-page {
+  background-color: $background-color;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 60px 1.5em 10px;
+  width: 100%;
+  overflow-y: auto;
+
+  .outlet {
+    flex: 0 0 calc(100% - 200px);
+    max-width: calc(100% - 200px);
+    padding-left: 1em;
+  }
+}
+
+.settings-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 32px;
+  row-gap: 24px;
+
+  .custom-input .error-message {
+    bottom: -20px;
+  }
+}

@@ -1,0 +1,32 @@
+@import '@/styles/variables';
+
+.table-container {
+  width: 100%;
+  padding: 0 1.5em;
+  margin: 50px 0 0;
+
+  @media (max-width: 768px) {
+    max-width: unset;
+  }
+
+  .ant-table-body {
+    overflow: auto !important;
+  }
+
+  &__title {
+    font: {
+      size: 24px;
+      weight: 600;
+    }
+    line-height: 150%;
+    margin: 0 0 40px;
+    letter-spacing: -0.02em;
+    color: $header-sideMenu-black;
+  }
+}
+
+.simulation-container .table-wrapper {
+  .ant-table .ant-table-content {
+    border: 0;
+  }
+}

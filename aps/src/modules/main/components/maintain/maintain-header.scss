@@ -1,0 +1,50 @@
+@import '@/styles/variables';
+
+.maintain-header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 40px;
+
+  .maintain-back {
+    display: flex;
+
+    h1 {
+      font-size: 32px;
+      line-height: 32px;
+      font-weight: 600;
+      font-family: $manrope;
+      align-self: center;
+      padding-left: 24px;
+    }
+  }
+
+  .maintain-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+
+    .action-button {
+      height: 38px;
+      width: 84px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      padding: 8.5px 12px;
+
+      .button-children {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        font-size: 14px;
+        white-space: nowrap;
+        text-align: center;
+
+        & img:first-child {
+          fill: $navy-100;
+        }
+      }
+    }
+  }
+}

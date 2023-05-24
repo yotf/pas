@@ -1,0 +1,1319 @@
+{
+  "translation": {
+    "unit_test": "unit_test_en"
+  },
+  "not-found": {
+    "title": "Oops, this page is gone!",
+    "description": "We couldn’t find the page you’re looking for.",
+    "button": "Go Back"
+  },
+  "error-page": {
+    "title": "Oops, something went wrong!",
+    "button-try-again": "Try Again",
+    "button-go-back": "Go Back",
+    "description": "Please try again later"
+  },
+  "login_form": {
+    "input": {
+      "username": "Username",
+      "password": "Password",
+      "placeholder_username": "Username"
+    },
+    "validation": {
+      "username": "Username is required",
+      "password": "Password is required",
+      "wrong_credentials": "Username and/or password do not match our records. Please double-check and try again",
+      "pass_min_character": "Required 6 characters minimum"
+    },
+    "button": "Sign in"
+  },
+  "home": {
+    "logo": "Huni Logo"
+  },
+  "settings_nav": {
+    "users": "Users",
+    "units_of_measure": "Units of Measure",
+    "department": "Departments",
+    "parameters": "Parameters",
+    "features": "Features",
+    "order_types": "Order Types",
+    "customers": "Customers",
+    "positions": "Positions",
+    "thickness": "Thicknesses",
+    "selections": "Selections",
+    "production_order_types": "Production Order Types",
+    "size_ranges": "Size Ranges",
+    "holidays": "Holidays",
+    "material_groups": "Material Groups",
+    "colors": "Colors",
+    "articles": "Articles"
+  },
+  "table": {
+    "empty": "The Table is Empty",
+    "action": "Actions",
+    "production_order_tooltip": "Create Production Order"
+  },
+  "side_menu": {
+    "settings": "Settings",
+    "operations": "Operations",
+    "routing": "Routing",
+    "work_center": "Work Center",
+    "production_calendar": "Production Calendar",
+    "material": "Material",
+    "sales_order": "Sales Order",
+    "production_order": "Production Order",
+    "production_order_list": "Production Order List",
+    "overview": "Overview",
+    "order_replacement": "Order Replacement",
+    "simulation": "Simulation",
+    "statistics": "Statistics"
+  },
+  "settings": {
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "code": "Code",
+    "name": "Name",
+    "unit": "Unit",
+    "search": "Search",
+    "holidayDate": "Holiday Date",
+    "country": "Country",
+    "isActive": "Status",
+
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "active": "Active"
+    }
+  },
+  "users-table": {
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "active": "Active",
+    "inactive": "Inactive",
+    "id": "Id",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email Address",
+    "positionName": "Position",
+    "roleName": "Role",
+    "isActive": "Status",
+    "search": "Search"
+  },
+  "users": {
+    "new": "New",
+    "modal": {
+      "create_title": "Create New User",
+      "edit_title": "Edit User",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete User {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only + and numbers are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "form": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "username": "Username",
+      "password": "Password",
+      "email": "Email Address",
+      "role": "Role",
+      "position": "Position",
+      "phone": "Phone",
+      "active": "Active"
+    },
+    "notification": {
+      "create": "User has been successfully created",
+      "edit": "User has been successfully edited",
+      "delete_success": "User has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the user"
+    }
+  },
+  "features": {
+    "modal": {
+      "create_title": "Create New Feature",
+      "edit_title": "Edit Feature",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Feature {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Feature has been successfully created",
+      "edit": "Feature has been successfully edited",
+      "delete_success": "Feature has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the feature",
+      "create_fail": "Feature with that code alredy exists"
+    }
+  },
+  "articles": {
+    "modal": {
+      "create_title": "Create New Article",
+      "edit_title": "Edit Article",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Article {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Article has been successfully created",
+      "edit": "Article has been successfully edited",
+      "delete_success": "Article has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Article",
+      "create_fail": "Article with that code alredy exists"
+    }
+  },
+  "unit_of_measure": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Unit of Measure",
+      "edit_title": "Edit Unit of Measure",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Unit of Measure {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Unit of Measure has been successfully created",
+      "edit": "Unit of Measure has been successfully edited",
+      "create_fail": "Unit of measure with that code alredy exists",
+      "delete_success": "Unit of Measure has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the unit of measure"
+    }
+  },
+  "colors": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Color",
+      "edit_title": "Edit Color",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Color {{name}}",
+      "warning": "Warning"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only digits are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Color has been successfully created",
+      "edit": "Color has been successfully edited",
+      "create_fail": "Color with that code alredy exists",
+      "delete_success": "Color has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the color"
+    }
+  },
+  "selections": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Selection",
+      "edit_title": "Edit Selection",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Selection {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only digits are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Selection has been successfully created",
+      "edit": "Selection has been successfully edited",
+      "create_fail": "Selection with that code alredy exists",
+      "delete_success": "Selection has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the selection"
+    }
+  },
+  "holidays": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inctive"
+    },
+    "modal": {
+      "create_title": "Create New Holiday",
+      "edit_title": "Edit Holiday",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Holiday {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "holidayDate": "Holiday Date",
+      "datePlaceholder": "Select date",
+      "name": "Name",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "duplicate": "This value already exists",
+      "invalidDate": "Invalid date format",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Holiday has been successfully created",
+      "edit": "Holiday has been successfully edited",
+      "create_fail": "Holiday with that date alredy exists",
+      "delete_success": "Holiday has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the holiday"
+    }
+  },
+  "thickness": {
+    "modal": {
+      "create_title": "Create New Thickness",
+      "edit_title": "Edit Thickness",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Thickness {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Thickness has been successfully created",
+      "edit": "Thickness has been successfully edited",
+      "delete_success": "Thickness has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Thickness",
+      "create_fail": "Thickness with that code alredy exists"
+    }
+  },
+  "production_order_types": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inctive"
+    },
+    "modal": {
+      "create_title": "Create New Production Order Type",
+      "edit_title": "Edit Production Order Type",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Production Order Type {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Production Order Type has been successfully created",
+      "edit": "Production Order Type has been successfully edited",
+      "create_fail": "Production Order Type with that code already exists",
+      "delete_success": "Production Order Type has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Production Order Type"
+    }
+  },
+  "size_ranges": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Size Range",
+      "edit_title": "Edit Size Range",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Size Range {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Size Range has been successfully created",
+      "edit": "Size Range has been successfully edited",
+      "create_fail": "Size Range with that code already exists",
+      "delete_success": "Size Range has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Size Range"
+    }
+  },
+  "material_groups": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Material Group",
+      "edit_title": "Edit Material Group",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Material Group {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Material Group has been successfully created",
+      "edit": "Material Group has been successfully edited",
+      "create_fail": "Material Group with that code already exists",
+      "delete_success": "Material Group has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Material Group"
+    }
+  },
+  "order_types": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Order Type",
+      "edit_title": "Edit Order Type",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Order Type {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists"
+    },
+    "notification": {
+      "create": "Order Type has been successfully created",
+      "edit": "Order Type has been successfully edited",
+      "create_fail": "Order Type with that code already exists",
+      "delete_success": "Order Type has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Order Type"
+    }
+  },
+  "customers": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Customer",
+      "edit_title": "Edit Customer",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Customer {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "country": "Country",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only digits are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Customer has been successfully created",
+      "edit": "Customer has been successfully edited",
+      "create_fail": "Customer with that code alredy exists",
+      "delete_success": "Customer has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Customer"
+    }
+  },
+  "parameters": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Parameter",
+      "edit_title": "Edit Parameter",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Parameter {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "country": "Country",
+      "active": "Active",
+      "unit": "Unit"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only digits are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Parameter has been successfully created",
+      "edit": "Parameter has been successfully edited",
+      "create_fail": "Parameter with that code alredy exists",
+      "delete_success": "Parameter has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Parameter"
+    }
+  },
+  "department": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Department",
+      "edit_title": "Edit Department",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Department {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "code": "Code",
+      "name": "Name",
+      "country": "Country",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only digits are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Department has been successfully created",
+      "edit": "Department has been successfully edited",
+      "create_fail": "Department with that code alredy exists",
+      "delete_success": "Department has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Department"
+    }
+  },
+  "positions": {
+    "table": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "modal": {
+      "create_title": "Create New Position",
+      "edit_title": "Edit Position",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Position {{name}}?",
+      "warning": "Warning"
+    },
+    "form": {
+      "name": "Name",
+      "active": "Active"
+    },
+    "validation": {
+      "required": "This field is required",
+      "pass_min_character": "Required 6 characters minimum",
+      "format": "Incorrect format",
+      "numeric": "Only digits are supported",
+      "duplicate": "This value already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "create": "Position has been successfully created",
+      "edit": "Position has been successfully edited",
+      "create_fail": "Position with that code alredy exists",
+      "delete_success": "Position has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Position"
+    }
+  },
+  "operations": {
+    "title": "Operation",
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "active": "Active",
+    "inactive": "Inactive",
+    "id": "Id",
+    "operation_Id": "Operation ID",
+    "name": "Operation Name",
+    "interfaceCode": "Interface Code",
+    "interface": "Interface",
+    "departmentName": "Department",
+    "operationTime": "Standard Time",
+    "operation_time": "Operation time",
+    "waitingTime": "Waiting time",
+    "setupTime": "Setup Time",
+    "isActive": "Status",
+    "search": "Search",
+    "remark": "Remark",
+    "allocation_based": "Allocation Based",
+    "unit_of_measure_placeholder": "Unit of Measure",
+    "unit_of_measure_label": "Unit of Measure",
+    "interface_code": "Interface Code",
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Operation {{name}}?",
+      "warning": "Warning"
+    },
+    "notification": {
+      "delete_success": "Operation has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Operation",
+      "create_success": "Operation has been successfully created",
+      "edit_success": "Operation has been successfully edited",
+      "create_fail": "Operation with that name already exists"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists",
+      "positive": "Number must be positive",
+      "create_success": "Operation has been successfully created",
+      "edit_success": "Operation has been successfully edited",
+      "create_fail": "Operation with that name already exists"
+    }
+  },
+  "allocation_labels": {
+    "Quantity 1": "Quantity 1",
+    "Quantity 2": "Quantity 2",
+    "Recipe": "Formula"
+  },
+  "page-header": {
+    "copy": "Copy",
+    "save": "Save",
+    "delete": "Delete"
+  },
+  "routings": {
+    "title": "Routing",
+    "name": "Routing Name",
+    "isActive": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "search": "Search",
+    "routing_id": "Routing ID",
+    "routingInterfaceId": "Interface ID",
+    "createdOn": "Creation Date",
+    "createdBy": "Created By",
+    "updatedBy": "Modified By",
+    "materialName": "Material",
+    "customerName": "Customer",
+    "lotStandardQuantity": "Lot Standard Qty.",
+    "unitOfMeasureId": "Unit of Measure",
+    "materialId": "Material",
+    "customerId": "Customer",
+    "remark": "Remark",
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Routing {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "DuplicateRoutingName": "This value already exists",
+      "alphanumeric": "Value must be alphanumeric",
+      "max_length": "Max number of characters is {{value}}",
+      "max_digits": "Max number of digits is {{value}}",
+      "min_value": "Minimum value is {{value}}",
+      "edit_success": "Routing has been successfully edited",
+      "create_success": "Routing has been successfully created",
+      "create_fail": "Routing with that name already exists"
+    },
+    "notification": {
+      "delete_success": "Routing has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Routing"
+    },
+    "routes": {
+      "title": "Routes",
+      "subtitle": "Include the production steps to produce the material.",
+      "add_operation": "Add Operation",
+      "excel_button": "Export to Excel",
+      "sequence": "Sequence",
+      "operationId": "Operation ID",
+      "operationName": "Operation",
+      "standardTime": "Std Time",
+      "setupTime": "Setup Time",
+      "waitingTime": "Waiting Time",
+      "leadTime": "Lead Time",
+      "departmentName": "Department",
+      "planning": "Planning",
+      "yes": "Yes",
+      "no": "No",
+      "modal": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "add_operation": "Add Operation",
+        "search": "Search for Operation",
+        "operation_id": "Operation ID",
+        "sequence": "Sequence",
+        "standardTime": "Standard Time",
+        "setupTime": "Setup Time",
+        "waitingTime": "Waiting Time",
+        "leadTime": "Lead Time",
+        "departmentName": "Department Name",
+        "planning": "Planning",
+        "remark": "Remark"
+      },
+      "validation": {
+        "required": "This field is required",
+        "max_digits": "Max number of digits is {{value}}",
+        "min_value": "Minimum value is {{value}}",
+        "max_value": "Maximum value is {{value}}",
+        "must_be_number": "Value must be number",
+        "max_length": "Max number of characters is {{value}}"
+      }
+    }
+  },
+  "workCenters": {
+    "title": "Work Center",
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "active": "Active",
+    "inactive": "Inactive",
+    "id": "Work Center ID",
+    "name": "Work Center Name",
+    "workcenter_name": "Work center Name",
+    "interfaceCode": "Interface Code",
+    "departmentName": "Department",
+    "unitOfMeasureName": "Unit of Measure",
+    "allocationBasedName": "Allocation Based",
+    "workCenter_Id": "Work Center ID",
+    "isActive": "Status",
+    "remark": "Remark",
+    "search": "Search",
+    "workCenterInterfaceId": "Work Center Interface ID",
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Work Center {{name}}?",
+      "warning": "Warning"
+    },
+    "radio_modal": {
+      "cancel": "Cancel",
+      "ok_text": "Proceed",
+      "radio_modal_text": "Changing the allocation based will clear all assigned operations"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters {{name}}",
+      "duplicate": "This value already exists",
+      "positive": "Number must be positive",
+      "exact": "Max value length 4 characters",
+      "create_success": "Work Center has been successfully created",
+      "edit_success": "Work Center has been successfully edited",
+      "create_fail": "Work Center with that name already exists",
+      "max_value": "Maximum value is {{value}}",
+      "min_value": "Minimum value is {{value}}"
+    },
+    "notification": {
+      "delete_success": "Work Center has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Work Center"
+    },
+    "maintain": {
+      "title": "Edit",
+      "work_capacities": "Work Capacities",
+      "allowed_operations": "Allowed Operations",
+      "add_operation": "Add Operation",
+      "excel_button": "Export to excel",
+      "weekDay": "Week Day",
+      "date": "Date",
+      "start": "Start",
+      "break": "Break",
+      "end": "End",
+      "minutes": "Minutes",
+      "availableMinutes": "Available Minutes",
+      "capacity": "Capacity",
+      "efficiency": "Efficiency",
+      "operation": "Operation",
+      "code": "Operation ID",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "dayOfWeek": "Week day",
+      "save": "Save",
+      "cancel": "Cancel",
+      "remark": "Remark"
+    },
+    "allowedOperationsModal": {
+      "title": "Add Operation",
+      "add": "Add",
+      "remove": "Remove",
+      "search": "Search",
+      "search_label": "Search for Operation",
+      "cancel": "Cancel"
+    }
+  },
+  "maintain-header": {
+    "save": "Save",
+    "delete": "Delete",
+    "copy": "Copy"
+  },
+  "redirect": {
+    "ok_text": "Proceed",
+    "cancel": "Cancel",
+    "redirect_modal_text": "You are about to leave the page, all unsaved changes will be lost",
+    "copy_modal_text": "You are about to create a copy of this entry"
+  },
+  "materials": {
+    "title": "Materials",
+    "name": "Material Name",
+    "materialId": "Material ID",
+    "materialGroupName": "Material Group",
+    "interfaceCode": "Interface Code",
+    "unitOfMeasure1Name": "Unit of Measure 1",
+    "unitOfMeasure2Name": "Unit of Measure 2",
+    "factorAreaToKG": "Factor Area to KG",
+    "factorAreaToPC": "Factor Area to Pc",
+    "createdOn": "Creation Date",
+    "articleName": "Article",
+    "colorName": "Color",
+    "thicknessName": "Thickness",
+    "sizeRangeName": "Size Range",
+    "selectionName": "Selection",
+    "featureName": "Feature",
+    "routingName": "Routing",
+    "isActive": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "search": "Search",
+    "materialGroupId": "Material Group",
+    "unitOfMeasure1Id": "Unit of Measure 1",
+    "unitOfMeasure2Id": "Unit of Measure 2",
+    "articleId": "Article",
+    "colorId": "Color",
+    "thicknessId": "Thickness",
+    "sizeRangeId": "Size Range",
+    "selectionId": "Selection",
+    "feature_description": "Feature",
+    "routingId": "Routing",
+    "id": "Material ID",
+    "validation": {
+      "required": "This field is required",
+      "DuplicateMaterialName": "This value already exists",
+      "create_success": "Material has been successfully created",
+      "edit_success": "Material has been successfully edited",
+      "create_fail": "Material with that name already exists",
+      "max_length": "Max number of characters {{name}}"
+    },
+    "notification": {
+      "delete_success": "Material has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Material"
+    },
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Material {{name}}?",
+      "warning": "Warning"
+    }
+  },
+  "salesOrder": {
+    "title": "Sales Order",
+    "isActive": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "search": "Search",
+    "materialId": "Material ID",
+    "orderNumber": "Order Number",
+    "customerId": "Customer",
+    "orderTypeId": "Order Type",
+    "createdOn": "Creation Date",
+    "customerOrderNumber": "Customer Order Number",
+    "customerName": "Customer",
+    "orderTypeName": "Order Type",
+    "status": "Status",
+    "remark": "Remark",
+    "sequence": "Sequence",
+    "material": "Material",
+    "materialDescription": "Feature",
+    "quantity1": "Quantity 1",
+    "quantity2": "Quantity 2",
+    "unitOfMeasure1": "Unit of Measure 1",
+    "unitOfMeasure2": "Unit of Measure 2",
+    "requestedDelivery": "Delivery Request",
+    "tanneryDelivery": "Tannery Delivery",
+    "add_material": "Add Material",
+    "materialName": "Material Name",
+    "deliveryDate": "Delivery Request Date",
+    "add_operation": "Add material",
+    "cancel": "Cancel",
+    "save": "Save",
+    "open": "Open",
+    "closed": "Closed",
+    "canceled": "Canceled",
+    "no_uom": "No unit of measure for selected Material",
+    "validation": {
+      "required": "This field is required",
+      "duplicate": "This value already exists",
+      "alphanumeric": "Value must be alphanumeric",
+      "max_length": "Max number of characters is {{value}}",
+      "max_digits": "Max number of digits is {{value}}",
+      "min_value": "Minimum value is {{value}}",
+      "max_value": "Maximum value is {{value}}",
+      "edit_success": "Sales Order has been successfully edited",
+      "create_success": "Sales Order has been successfully created",
+      "create_fail": "Sales Order with that name already exists"
+    },
+    "notification": {
+      "delete_success": "Sales Order has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Sales Order"
+    },
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Sales Order number {{name}}?",
+      "warning": "Warning"
+    }
+  },
+  "productionCalendar": {
+    "title": "Production Calendar",
+    "workCenterName": "Work Center",
+    "initialDate": "Initial Date",
+    "finalDate": "Final Date",
+    "new_button": "New",
+    "excel_button": "Export to excel",
+    "search": "Search",
+    "workCenterIds": "Work Center",
+    "generate_calendar": "Generate Calendar",
+    "holidays": "Holidays",
+    "results": "results",
+    "January": "January",
+    "February": "February",
+    "March": "March",
+    "April": "April",
+    "May": "May",
+    "June": "June",
+    "July": "July",
+    "August": "August",
+    "September": "September",
+    "October": "October",
+    "November": "November",
+    "December": "December",
+    "validation": {
+      "required": "This field is required",
+      "duplicate": "This value already exists",
+      "min_length": "At least one Work Center is required",
+      "edit_success": "Production Calendar has been successfully edited",
+      "create_success": "Production Calendar has been successfully created",
+      "create_fail": "One or multiple work centers have a generated production calendar"
+    },
+    "notification": {
+      "delete_success": "Production Calendar has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Production Calendar"
+    },
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Production Calendar {{name}}?",
+      "warning": "Warning",
+      "cancel": "Cancel",
+      "save": "Save",
+      "create_title": "Create New Holiday"
+    }
+  },
+  "productionOrder": {
+    "title": "Production Order",
+    "search": "Search",
+    "new_button": "New",
+    "excel_button": "Export to Excel",
+    "plan_PO": "Plan Selected PO",
+    "unschedule": "Unschedule",
+    "orderType": "Order Type",
+    "orderNumber": "Order Number",
+    "creationDate": "Creation Date",
+    "customerName": "Customer",
+    "salesOrderNumber": "Sales Order Number",
+    "salesOrderType": "Sales Order Type",
+    "materialName": "Material",
+    "articleName": "Article",
+    "colorName": "Color",
+    "quantity1": "Quantity 1",
+    "unitOfMeasure1": "Unit of Measure 1",
+    "quantity2": "Quantity 2",
+    "unitOfMeasure2": "Unit of Measure 2",
+    "quantity3": "Quantity 3",
+    "salesOrderDeliveryDate": "Sales Order Delivery Date",
+    "initialPlanningDate": "Initial Planning Date",
+    "POFinalDeliveryDate": "PO Final Delivery Date",
+    "POPosition": "PO Position",
+    "workCenterName": "Work Center",
+    "deliveryOfPosition": "Delivery of Position",
+    "originPO": "origin",
+    "situation": "Situation",
+    "all": "All",
+    "planned": "Planned",
+    "document": "Document",
+    "id": "ID PO",
+    "productionOrderTypeId": "Order Type",
+    "customerId": "Customer",
+    "customerOrderNumber": "Customer Order Number",
+    "statusOfPlanningEnum": "Status",
+    "situationEnum": "Situation",
+    "salesOrderId": "Sales Order Number",
+    "salesOrderMaterialId": "Material",
+    "unitOfMeasure3": "Unit of Measure 3",
+    "initialDate": "Initial Date",
+    "salesOrderDelivery": "Sales Order Delivery",
+    "foreseenDelivery": "Foreseen Delivery Date",
+    "foreseenDeliveryPOOrigin": "Foreseen Delivery PO Origin",
+    "finalDelivery": "Final Delivery Date",
+    "remark": "Remark",
+    "routingId": "Routing",
+    "not_planned": "Not Planned",
+    "cancel": "Cancel",
+    "executed": "Executed",
+    "open": "Open",
+    "closed": "Closed",
+    "origin": "Origin PO",
+    "materialGroupId": "Material Group",
+    "articleId": "Article",
+    "colorId": "Color",
+    "thicknessId": "Thickness",
+    "selectionId": "Selection",
+    "notification": {
+      "delete_success": "Production Order has been successfully deleted",
+      "delete_fail": "An error occurred while deleting the Production Order"
+    },
+    "modal": {
+      "confirm": "Confirm",
+      "decline": "Decline",
+      "delete_text": "Are you sure you want to delete Production Order number {{name}}?",
+      "warning": "Warning"
+    },
+    "validation": {
+      "required": "This field is required",
+      "max_length": "Max number of characters is 5",
+      "min_length": "Must be greater than 0",
+      "create_success": "Production Order has been successfully created",
+      "edit_success": "Production Order has been successfully edited",
+      "create_fail": "Production Order with that name already exists",
+      "rejected_fail": "Planned Production Orders cannot be edited"
+    },
+    "routes": {
+      "title": "",
+      "subtitle": "",
+      "add_operation": "Add Operation",
+      "excel_button": "Export to Excel",
+      "sequence": "Sequence",
+      "operationId": "Operation ID",
+      "operationName": "Operation",
+      "standardTime": "Std Time",
+      "setupTime": "Setup Time",
+      "waitingTime": "Waiting Time",
+      "leadTime": "Lead Time",
+      "departmentName": "Department",
+      "planning": "Planning",
+      "yes": "Yes",
+      "no": "No",
+      "modal": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "add_operation": "Add Operation",
+        "search": "Search for Operation",
+        "operation_id": "Operation ID",
+        "sequence": "Sequence",
+        "standardTime": "Standard Time",
+        "setupTime": "Setup Time",
+        "waitingTime": "Waiting Time",
+        "leadTime": "Lead Time",
+        "departmentName": "Department Name",
+        "planning": "Planning",
+        "remark": "Remark"
+      },
+      "validation": {
+        "required": "This field is required",
+        "max_digits": "Max number of digits is {{value}}",
+        "min_value": "Minimum value is {{value}}",
+        "max_value": "Maximum value is {{value}}",
+        "must_be_number": "Value must be number",
+        "max_length": "Max number of characters is {{value}}"
+      }
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "work_center_heading": "Work Center",
+    "finalDate": "Final Date",
+    "empty": "The Table is Empty",
+    "initialDate": "Initial Date",
+    "orderType": "Order Type",
+    "productionOrder": "Production Order",
+    "workCenters": "Work Centers",
+    "display_work_centers": "Display Work Centers",
+    "reallocation": "Reallocation of Planning",
+    "statistics": "Statistics",
+    "excel_button": "Export to Excel",
+    "adjust_calendar": "Adjust Production Calendar",
+    "orderNumber": "Order Number",
+    "customerName": "Customer",
+    "salesOrderNumber": "Sales Order Number",
+    "materialName": "Material",
+    "articleName": "Article",
+    "colorName": "Color",
+    "operationName": "Operation",
+    "foreseenDeliveryDate": "Foreseen Delivery Date",
+    "estimatedTime": "Estimated Time",
+    "setupTime": "Setup Time",
+    "quantity1": "Quantity 1",
+    "unitOfMeasure1": "Unit of Measure 1",
+    "salesOrderDeliveryDate": "Sales Order Delivery Date",
+    "PODelivery": " PO Delivery",
+    "POPosition": "PO Position",
+    "calendarName": "Calendar",
+    "validation": {
+      "required": "This field is required",
+      "date_range": "Date Range needs to be shorter than 2 weeks",
+      "min_length": "At least one Work Center is required",
+      "max_length": "Max number of Work Centers is 10",
+      "initial_date_lower": "Initial date must be lower than Final date"
+    }
+  },
+  "orderReplacement": {
+    "title": "Order Replacement",
+    "outCustomer": "Customer Name",
+    "inCustomer": "Customer Name",
+    "outSalesOrderNumber": "Out Order Number",
+    "inSalesOrderNumber": "In Order Number",
+    "generate_data": "Generate Data",
+    "replace_orders": "Replace Orders",
+    "confirmation_message": "Are you sure you want to replace selecter Production Orders?",
+    "cancel": "Cancel",
+    "ok_text": "Proceed",
+    "create_success": "Production Orders have been successfully replaced",
+    "create_fail": "An error occured while replacing Production Orders",
+    "table": {
+      "out_production_orders_title": "Out Production Orders",
+      "in_production_orders_title": "In Production Orders",
+      "sequence": "Sequence",
+      "productionOrderNumber": "Production Order No.",
+      "materialName": "Material Name",
+      "quantity1": "Quantity 1",
+      "unitOfMeasure1": "Unit of Measure 1",
+      "quantity2": "Quantity 2",
+      "unitOfMeasure2": "Unit of Measure 2",
+      "foreseenDelivery": "Foreseen Delivery Date"
+    },
+    "validation": {
+      "required": "This field is required"
+    }
+  },
+  "statistics": {
+    "title": "Statistics",
+    "workCenters": "Work Center",
+    "initialDate": "Initial Date",
+    "finalDate": "Final Date",
+    "generate_statistics": "Generate Statistics",
+    "general_overview": "General Overview",
+    "delayed_orders": "Display Delayed Orders",
+    "workCenterId": "ID",
+    "workCenterName": "Work Center",
+    "availableMinutes": "Available Minutes",
+    "allocatedMinutes": "Allocated Minutes",
+    "availability": "Availability",
+    "numberOfSalesOrders": "No. of Sales Orders",
+    "delayedSalesOrders": "Delayed Sales Orders",
+    "numberOfPO": "No. of Production Orders",
+    "delayedPO": "Delayed Production Orders",
+    "occupancy": "Occupancy",
+    "setupMinutes": "Setup Minutes",
+    "allocatedTime": "Allocated Time",
+    "salesOrderNumber": "Sales Order Number",
+    "customerName": "Customer",
+    "materialName": "Material",
+    "quantity": "Quantity",
+    "foreseenDelivery": "Foreseen Delivery Date",
+    "salesOrderDelivery": "Sales Order Delivery",
+    "sequence": "Sequence",
+    "delayed_orders_heading": "Delayed Orders",
+    "setupTime": "Setup Time",
+    "validation": {
+      "initial_date_lower": "Initial date must be lower than Final date"
+    }
+  },
+  "simulation": {
+    "workCenterId": "ID",
+    "title": "Delivery Simulation",
+    "workCenterName": "Work Center",
+    "totalAvailability": "Total Availability",
+    "allocatedTime": "Allocated Time",
+    "allocatedMinutes": "Allocated Minutes",
+    "setupTime": "Setup Time",
+    "availableTime": "Available Time",
+    "simulatedAllocatedTime": "Allocated Time",
+    "simulatedSetupTime": "Setup Time",
+    "simulatedAvailableTime": "Available Time",
+    "occupancy": "Occupancy",
+    "initialDate": "Initial Date",
+    "finalDate": "Final Date",
+    "deliveryDate": "Delivery Date",
+    "generate_data": "Generate Data",
+    "routing_name": "Routing Name",
+    "quantity": "Quantity",
+    "numberOfPOs": "Number of POs",
+    "repeat": "Repeat",
+    "totalMinutes": "Total Minutes",
+    "minutes": "Minutes",
+    "availableMinutes": "Available Minutes",
+    "real_data_heading": "Real Data Overview",
+    "simulation_data_heading": "Simulation Data Overview",
+    "real_data": "Real Data",
+    "simulation_data": "Simulation Data",
+    "add_routing": "Add Routing",
+    "routingInitialDate": "Initial Date",
+    "routingDeliveryDate": "Delivery Date",
+    "routingId": "Routing",
+    "validation": {
+      "required": "This field is required",
+      "initial_date_error": "Routing Initial Date must be in range between Delivery Initial Date and Final Date",
+      "final_date_error": "Routing Delivery Date cannot be after Final Date",
+      "max_length": "Max number of characters is {{value}}",
+      "initial_date_lower": "Initial date must be lower than Final date"
+    }
+  },
+  "productionOrderModal": {
+    "po_modal_title": "Create Production Orders",
+    "productionOrderNumber": "Production Order Number",
+    "numberOfProductionOrders": "Number of POs",
+    "productionOrderQuantity": "Production Order Quantites",
+    "productionOrderTypeId": "Production Order Type",
+    "pieces": "Pieces",
+    "routingId": "Routing",
+    "lot_size": "Lot size",
+    "create_button": "Create",
+    "delivery": "Delivery",
+    "schedule": "Schedule",
+    "ok_text": "Save",
+    "cancel": "Cancel",
+    "validation": {
+      "required": "This field is required",
+      "min_length": "Number must be greater than 0",
+      "max_length": "Maximum number of digits is {{value}}",
+      "create_success": "Production Orders have been successfully created",
+      "create_fail": "An error occured while creating Production Orders"
+    }
+  },
+  "reallocationOfPlanning": {
+    "title": "Planning Reallocation",
+    "productionOrderNumber": "Production Order Number",
+    "productionOrderDelivery": "Production Order Delivery",
+    "salesOrderDelivery": "Sales Order Delivery",
+    "sequence": "Sequence",
+    "operationId": "ID",
+    "operationName": "Operation",
+    "status": "Status",
+    "operationTime": "Time (Minutes)",
+    "setupTime": "Setup (Minutes)",
+    "leadTime": "Lead Time",
+    "workCenterId": "Work Center",
+    "planningDate": "Foreseen Date",
+    "executedDate": "Date of Execution",
+    "cancel": "Close",
+    "ok_text": "Save",
+    "schedule": "Schedule",
+    "unschedule": "Un-schedule",
+    "display_operations": "Display Operations",
+    "validation": {
+      "reallocation_success": "Production Order status changed successfully",
+      "reallocation_fail": "An error occured while changing Production Order status"
+    }
+  },
+  "confirmation_modal": {
+    "confirmation_message": "Change status for all operations on selected Production Order?",
+    "cancel": "Close",
+    "ok_text": "Proceed"
+  }
+}

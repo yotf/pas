@@ -1,0 +1,6 @@
+tsc:
+  stage: tsc
+  script:
+    - npm run typescript
+  allow_failure: false
+  needs: ['npm_install']

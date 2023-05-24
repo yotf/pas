@@ -1,0 +1,80 @@
+.routing-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+
+  :first-child .delete-icon {
+    margin-top: 20px;
+  }
+
+  .routing {
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+    label {
+      display: none;
+    }
+    &:first-of-type {
+      label {
+        display: block;
+      }
+    }
+    @media screen and (width < 1143px) {
+      padding-bottom: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid $gray-medium;
+      label {
+        display: block;
+      }
+    }
+
+    .error-message {
+      top: 55px !important;
+    }
+
+    > * {
+      min-width: 45px;
+    }
+
+    .custom-input .label {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .routing-name {
+      flex: 3 1 auto;
+      width: 100%;
+      max-width: 20em;
+    }
+
+    .custom-input {
+      width: 100%;
+
+      div {
+        width: 100%;
+      }
+    }
+
+    :nth-child(5),
+    :nth-child(6) {
+      flex: 1 1 auto;
+      min-width: 110px;
+    }
+
+    .error-message {
+      position: absolute;
+      top: 75px;
+    }
+
+    .delete-icon {
+      align-self: center;
+      cursor: pointer;
+      min-width: 60px;
+    }
+  }
+
+  .routing:first-child .error-message {
+    top: 75px !important;
+  }
+}

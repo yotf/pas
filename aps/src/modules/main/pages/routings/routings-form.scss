@@ -1,0 +1,90 @@
+.routings-form {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px 32px;
+
+  .active {
+    padding-top: 32px;
+  }
+
+  .break {
+    grid-column-start: 1;
+  }
+
+  .routingName {
+    grid-column: span 2;
+  }
+
+  .remark {
+    grid-row: span 2;
+    grid-column: span 4;
+
+    & > .custom-input {
+      height: 100%;
+
+      & > .custom-input-container {
+        height: 100%;
+      }
+    }
+  }
+
+  .routes {
+    grid-column: span 5;
+  }
+
+  .custom-switch {
+    justify-content: flex-start;
+    label {
+      margin-right: 32px;
+    }
+  }
+}
+.new {
+  .routings-form {
+    grid-template-columns: repeat(4, 1fr);
+    .break {
+      grid-column-start: revert;
+    }
+    .active.break {
+      order: 2;
+    }
+    .break:not(active) {
+      order: 7;
+    }
+    .routingName {
+      order: 3;
+      grid-column: span 3;
+      margin-right: 32px;
+    }
+    .remark {
+      order: 8;
+    }
+    .custom-input {
+      &:nth-child(1) {
+        order: 1;
+      }
+      &:nth-child(2) {
+        order: 4;
+      }
+      &:nth-child(3) {
+        order: 5;
+      }
+      &:nth-child(4) {
+        order: 4;
+      }
+      &:nth-child(5) {
+        order: 5;
+      }
+      &:nth-child(6) {
+        order: 6;
+      }
+    }
+    .routes {
+      order: 9;
+      padding-right: 32px;
+    }
+  }
+  .maintain-actions {
+    margin-right: 32px;
+  }
+}

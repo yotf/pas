@@ -1,0 +1,109 @@
+@import '@/styles/variables';
+
+.production-order-modal-wrapper {
+  .ant-modal-content {
+    height: 65vh;
+    overflow-y: auto;
+  }
+}
+.production-order-modal {
+  display: flex;
+  flex-direction: column;
+  width: 715px;
+
+  .inputs {
+    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+
+    input {
+      height: 50px;
+    }
+
+    > * {
+      flex: 1 1 33%;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+
+    p {
+      align-self: center;
+    }
+  }
+
+  .production-orders-labels {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 82% 1fr 5%;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+  }
+  .production-orders-info {
+    display: grid;
+    grid-template-columns: 82% 1fr 5%;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+
+    > * {
+      margin-top: 15px;
+    }
+
+    .custom-switch {
+      justify-content: unset;
+    }
+
+    span {
+      font-size: 18px;
+    }
+  }
+
+  .units-container {
+    .units {
+      height: 26px;
+      display: flex;
+      align-items: flex-end;
+      font-size: 14px;
+
+      span .custom-input {
+        width: 100%;
+        flex: 0.1;
+
+        input {
+          min-height: unset;
+          padding: 0 8px;
+          font-size: 14px;
+          width: 63px;
+          box-shadow: none;
+          background: $input-background;
+          border: 1px solid $navy-10;
+          border-radius: 8px;
+          font-weight: 400;
+
+          &:hover {
+            border-color: $input-focus;
+            border-inline-end-width: 1px;
+          }
+          &:focus,
+          &:focus-visible,
+          &:focus-within {
+            border-color: $input-focus;
+            box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+            border-inline-end-width: 1px;
+          }
+        }
+      }
+
+      p {
+        padding: 1px;
+        color: black;
+        font-weight: 400;
+      }
+    }
+  }
+}

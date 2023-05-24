@@ -1,0 +1,16 @@
+@import 'styles/variables';
+@import 'styles/fonts';
+@import 'styles/global';
+
+html, body {
+    overflow: hidden;
+}
+
+.main-content {
+    padding-top: 64px;
+    background-color: #FAFCFC;
+
+    >:first-child {
+        height: calc(100vh - 64px);
+    }
+}

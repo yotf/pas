@@ -1,0 +1,6 @@
+lint_check:
+  stage: lint-check
+  allow_failure: false
+  script:
+    - npm run lint:report --
+  needs: ['npm_install']

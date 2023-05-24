@@ -1,0 +1,72 @@
+.routes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .routes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 30px;
+      letter-spacing: 0em;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      height: 48px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: 0.02em;
+    }
+
+    .titles {
+      padding-bottom: 12px;
+    }
+  }
+
+  .button-children {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .ant-table-container {
+    overflow: auto;
+  }
+  .ant-table-body {
+    overflow: unset !important;
+  }
+
+  @media screen and (width > 830px) {
+    table tr > * {
+      width: 9%;
+      min-width: 50px;
+    }
+    table tr > *:nth-child(3) {
+      width: 15%;
+      min-width: 100px;
+    }
+  }
+
+  @media screen and (width < 830px) {
+    .table-wrapper {
+      overflow-y: auto;
+    }
+    .ant-table-wrapper {
+      width: 150%;
+      max-width: none;
+    }
+  }
+}

@@ -1,0 +1,186 @@
+* {
+  font-family: $manrope;
+}
+
+body {
+  margin: unset;
+
+  .disable-button {
+    color: #cccccc;
+    pointer-events: none;
+  }
+}
+
+.orange {
+  background-color: $orange-color;
+  color: $white-color;
+}
+
+.blue {
+  background-color: $blue-color;
+  color: $white-color;
+
+  &.disabled {
+    background-color: #749efa !important;
+    border-color: #749efa !important;
+    color: #ffffff;
+    font-weight: 600;
+  }
+}
+
+.red {
+  background-color: $red-color;
+  color: $white-color;
+}
+
+.green {
+  background-color: $green-color;
+  color: $white-color;
+}
+
+.green-color {
+  color: $green-color;
+}
+
+.gray-light {
+  color: $gray-light;
+}
+
+.white {
+  background-color: $white-color;
+  color: $blue-color;
+  border: 1px solid $blue-color !important;
+
+  &.disabled {
+    color: $white-color;
+    border: unset !important;
+  }
+}
+
+@mixin notification-message($color) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $color;
+
+  svg {
+    color: $color;
+  }
+
+  .ant-notification-notice-message {
+    color: $color;
+    margin: 0;
+  }
+
+  & > a {
+    position: unset;
+  }
+}
+
+.ant-notification-top .ant-notification-notice {
+  box-shadow: unset;
+  border: 1px solid #fdbbbb;
+  border-radius: 6px;
+  max-width: 480px;
+  width: 100%;
+  margin: 0;
+
+  svg {
+    color: $red-color;
+  }
+}
+
+.ant-notification-top {
+  .notification {
+    &-failed {
+      @include notification-message($red-color);
+    }
+
+    &-success {
+      @include notification-message($green-color);
+    }
+
+    &-info {
+      @include notification-message($blue-color);
+    }
+  }
+}
+
+.ant-modal {
+  width: unset !important;
+}
+
+.ant-modal-content {
+  border-radius: 8px !important;
+}
+
+.ant-modal .ant-modal-content {
+  padding: 0;
+}
+
+.ant-modal .ant-modal-footer .ant-btn-default {
+  background-color: $navy-5;
+  border-color: $navy-5;
+  color: $navy-100;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $navy-10;
+  }
+}
+
+.ant-modal .ant-modal-footer .ant-btn-primary {
+  background-color: $blue-color;
+  border-color: $blue-color;
+  color: $white-color;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $white-color;
+    color: $blue-color;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+
+    &:hover {
+      background-color: $blue-color;
+      color: $white-color;
+    }
+  }
+}
+
+.ant-modal .ant-modal-header {
+  padding: 16px;
+  border: {
+    bottom: 1px solid $navy-10;
+    top-left-radius: 8px;
+    top-right-radius: 8px;
+  }
+  margin: 0;
+
+  .ant-modal-title {
+    font: {
+      size: 18px;
+      weight: 500;
+    }
+  }
+}
+
+.ant-modal .ant-modal-body {
+  padding: 16px;
+}
+
+.ant-modal .ant-modal-footer {
+  padding: 16px;
+  border: {
+    top: 1px solid $navy-10;
+    bottom-left-radius: 8px;
+    bottom-right-radius: 8px;
+  }
+  margin: 0;
+
+  .ant-btn {
+    height: 38px;
+  }
+}

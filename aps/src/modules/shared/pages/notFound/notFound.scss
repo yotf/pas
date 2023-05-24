@@ -1,0 +1,39 @@
+@import '../../../../styles/variables';
+.not-found-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: calc(100vh - 61px);
+    flex-direction: column;
+    .page-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-family: $inter;
+        text-align: center;
+        & > * {
+            margin: 4px 0;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        button {
+            max-width: 200px;
+            width: 100%;
+            align-self: unset;
+        }
+    }
+    .image-content {
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+        }
+    }
+}

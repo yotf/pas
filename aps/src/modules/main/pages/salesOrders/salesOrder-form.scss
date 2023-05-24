@@ -1,0 +1,48 @@
+.sales-order-container {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0;
+
+  .form-container {
+    display: flex;
+
+    .salesOrder-form {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      width: 100%;
+      @media screen and (width < 900px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .remark {
+        grid-column: span 3;
+
+        & > .custom-input {
+          height: 100%;
+
+          & > .custom-input-container {
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.add-button {
+  align-self: flex-end;
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.salesOrder-table {
+  margin-top: 54px;
+  table tr > * {
+    white-space: nowrap;
+  }
+  .ant-table-content {
+    overflow: auto;
+  }
+}

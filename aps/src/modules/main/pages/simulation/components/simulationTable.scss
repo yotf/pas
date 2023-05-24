@@ -1,0 +1,71 @@
+.simulation-inputs .table-container {
+  padding: 0;
+
+  .ant-table-content {
+    padding-top: 0;
+  }
+
+  .ant-table-expanded-row-fixed {
+    max-width: 96.5vw;
+  }
+
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  thead {
+    border-bottom: 0;
+  }
+
+  tbody tr td:nth-child(3),
+  tbody tr td:nth-child(6) {
+    border-right: 3px solid $orange-color;
+  }
+
+  table {
+    border: none !important;
+  }
+
+  .ant-table-wrapper .ant-table-thead > tr > th[colspan]:not([colspan='1']) {
+    text-align: left;
+  }
+
+  thead tr:first-child th {
+    background-color: #fafcfc;
+    border: 0 solid white;
+    font-size: 18px;
+    color: black;
+  }
+
+  thead tr:last-child {
+    th:first-child {
+      border-top-left-radius: 8px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 8px;
+    }
+  }
+
+  table tbody tr > td:nth-child(6),
+  table tbody tr > td:nth-child(9) {
+    padding: 0;
+  }
+
+  .availability {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    padding-left: 16px;
+
+    @each $key, $val in $availability-colors {
+      &.#{$key} {
+        background-color: $val;
+      }
+    }
+  }
+  .green-color {
+    color: #0d1933;
+  }
+}
