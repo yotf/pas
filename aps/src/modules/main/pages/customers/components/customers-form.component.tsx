@@ -50,6 +50,7 @@ const CustomersForm: FC = () => {
         label={translate('country')}
         placeholder={translate('country')}
         register={register('country')}
+        isRequired={true}
       />
       <CustomSwitch label={translate('active')} name={register('isActive').name} />
     </form>
