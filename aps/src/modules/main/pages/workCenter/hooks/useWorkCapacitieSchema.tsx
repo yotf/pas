@@ -42,6 +42,7 @@ export const useWorkCapacitiesSchema = (): OptionalObjectSchema<
         minutes: Yup.number().notRequired(),
         availableMinutes: Yup.number().notRequired(),
         capacity: Yup.number()
+          .transform((value) => (isNaN(value) ? undefined : value))
           .notRequired()
           .moreThan(-1, translate('positive'))
           .max(9999, translate('max_length', { name: '4' })),
