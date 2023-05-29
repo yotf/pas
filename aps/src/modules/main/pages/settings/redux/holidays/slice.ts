@@ -14,10 +14,15 @@ const holidaysSlice = createSlice({
     filterHolidays: (state, action: PayloadAction<string>) => {
       state.filtered = state.data.filter((uom: SettingsPageItem) => {
         const searchCriteria = action.payload?.toLowerCase();
+        const holidayDateDottedFormat = uom.holidayDate? new Date(uom.holidayDate).toLocaleDateString("de-CH", {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        }) :undefined;
         return (
           uom.code?.toLowerCase().includes(searchCriteria) ||
           uom.name.toLowerCase().includes(searchCriteria) ||
-          uom.holidayDate?.toLowerCase().includes(searchCriteria)
+          holidayDateDottedFormat?.toLowerCase().includes(searchCriteria)
         );
       });
     },
