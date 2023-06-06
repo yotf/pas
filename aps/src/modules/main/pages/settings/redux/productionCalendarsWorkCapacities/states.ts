@@ -11,5 +11,5 @@ export const initialPCWorkCapacitiesState: ProductionCalendarWorkCapacitiesRespo
   error: undefined,
   holidays: [],
   workCapacities: [],
-  productionCalendarId: 0,
+  productionCalendarIds:[],
 };

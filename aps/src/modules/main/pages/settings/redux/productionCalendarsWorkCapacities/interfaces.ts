@@ -17,14 +17,14 @@ export interface ProductionCalendarWorkCapacities {
 export interface ProductionCalendarWorkCapacitiesResponse extends BaseResponse {
   workCapacities: WorkCapacity[];
   holidays: SettingsPageItem[];
-  productionCalendarId: number;
+  productionCalendarIds: number[];
 }
 
 export interface ProductionCalendarBaseInfoDto extends ProductionCalendarFormData {
   changeHistoryDto: ChangeHistoryDto;
   initialDate: string;
   finalDate: string;
-  workCenters: WorkCenter[];
+  workCenter: WorkCenter;
 }
 
 export interface ProductionCalendarDay {
@@ -64,6 +64,7 @@ export interface ProductionCalendarDayMapped {
 export interface ProductionCalendarTabs {
   [key: string]: ProductionCalendarDay[];
 }
+
 /**
  * Response when generating a production calendar
  */

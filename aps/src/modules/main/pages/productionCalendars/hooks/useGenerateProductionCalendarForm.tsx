@@ -8,8 +8,9 @@ import { useMaintainForm } from '../../../components/maintain/hooks/useMaintainF
 import {
   GenerateProductionCalendarFormData,
   ProductionCalendarResponse,
-  ProductionCalendarsResponse,
+  ProductionCalendarsResponse
 } from '../../settings/redux/productionCalendars/interfaces';
+import { ProductionCalendarPostResponse } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
 import { clearProductionCalendars } from '../../settings/redux/productionCalendars/slices';
 import { getProductionCalendar } from '../../settings/redux/productionCalendars/thunks';
 import { WorkCenter } from '../../settings/redux/workCenters/interfaces';
@@ -34,17 +35,14 @@ export const useProductionCalendarForm = ({
     [],
   );
   const validationSchema = useGenerateProductionCalendarSchema();
-
-  const mapEntityToFormData: (entity?: ProductionCalendarResponse) => any = useCallback(
+  const mapEntityToFormData: (entity?: ProductionCalendarPostResponse[]) => any = useCallback(
     (entity: any) =>
-      !entity || entity?.id === 0
-        ? { workCenterId: [], initialDate: '', finalDate: '', holidays: [] }
+      (!entity || entity?.[0].productionCalendarBaseInfoDto?.id === 0 || ! entity?.[0]?.productionCalendarBaseInfoDto?.workCenter )
+        ? { workCenterIds: [], initialDate: '', finalDate: '', holidays: [] }
         : {
-            workCenterIds: entity.productionCalendarBaseInfoDto.workCenters.map(
-              (wc: WorkCenter) => wc.id,
-            ),
-            initialDate: entity.productionCalendarBaseInfoDto.initialDate,
-            finalDate: entity.productionCalendarBaseInfoDto.finalDate,
+            workCenterIds: entity.map((pc:ProductionCalendarPostResponse) => pc.productionCalendarBaseInfoDto.workCenter.id),
+            initialDate: entity[0].productionCalendarBaseInfoDto.initialDate,
+            finalDate: entity[0].productionCalendarBaseInfoDto.finalDate,
           },
     [],
   );

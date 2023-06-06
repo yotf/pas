@@ -5,6 +5,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialPCWorkCapacitiesState } from './states';
 import { generateProductionCalendar, getProductionCalendarWorkCapacities } from './thunks';
+import { ProductionCalendarPostResponse } from './interfaces';
 
 const productionCalendarsWorkCapacitiesSlice = createSlice({
   name: 'productionCalendarsWorkCapacitiesSlice',
@@ -34,7 +35,7 @@ const productionCalendarsWorkCapacitiesSlice = createSlice({
     builder.addCase(generateProductionCalendar.fulfilled, (state, action) => {
       state.loading = false;
       state.error = undefined;
-      state.productionCalendarId = action.payload.productionCalendarBaseInfoDto.id;
+      state.productionCalendarIds = action.payload.map((prod:ProductionCalendarPostResponse) => prod.productionCalendarBaseInfoDto.id);
     });
     builder.addCase(generateProductionCalendar.rejected, (state, action) => {
       state.loading = false;
