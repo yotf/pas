@@ -36,6 +36,7 @@ export const BASE_ORDER_REPLACEMENT_RESPONSE = `${BASE_ORDER_REPLACEMENT}/table`
 export const PRODUCTION_ORDER_STATUS_API = `${BASE_PRODUCTION_ORDER_API}/productionOrdersStatus`;
 export const PRODUCTION_CALENDAR_WORK_CAPACITIES_API = `${BASE_PRODUCTION_CALENDAR_API}/getProductionCalendarWorkCapacities`;
 export const PRODUCTION_CALENDAR_GENERATE_API = `${BASE_PRODUCTION_CALENDAR_API}/generateProductionCalendarCreation`;
+export const PRODUCTION_ORDER_GENERATE_FROM_SALES_ORDER = `${BASE_PRODUCTION_ORDER_API}/createProductionOrderFromSalesOrder`;
 export const WORK_CENTER_GET_CAPACITIES_API = `${BASE_WORK_CENTERS_API}/getAllWorkCapacitiesByWorkCenter`;
 export const WORK_CENTER_GET_ALLOWED_OPERATIONS_BY_WORK_CENTER_API = `${BASE_WORK_CENTERS_API}/getAllAllowedOperationsByWorkCenter`;
 export const WORK_CENTER_GET_ACTIVE_OPERATIONS_BY_ALLOCATION_API = `${BASE_WORK_CENTERS_API}/getAllActiveOperationsByAllocationBased`;

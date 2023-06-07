@@ -3,13 +3,14 @@ import ApiService from '@/modules/shared/services/api.service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_PRODUCTION_ORDER_API } from '../../../consts/apiUrl';
 import { ProductionOrderFormData } from '../interfaces';
+import { PRODUCTION_ORDER_GENERATE_FROM_SALES_ORDER } from '../../../consts/apiUrl';
 /**Creates one production order for each object in the accepted array */
 export const createProductionOrdersFromSalesOrder = createAsyncThunk(
-  BASE_PRODUCTION_ORDER_API + 'fromSalesOrder',
+  PRODUCTION_ORDER_GENERATE_FROM_SALES_ORDER,
   async (productionOrders: ProductionOrderFormData[], { rejectWithValue }) => {
     try {
       const response = await ApiService.post<ProductionOrderFormData[]>(
-        BASE_PRODUCTION_ORDER_API,
+        PRODUCTION_ORDER_GENERATE_FROM_SALES_ORDER,
         productionOrders,
       );
       const { data } = response;
