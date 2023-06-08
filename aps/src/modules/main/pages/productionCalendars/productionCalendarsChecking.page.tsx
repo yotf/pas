@@ -44,8 +44,8 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
   const [activeTableKey, setActiveTableKey] = useState<number>(0);
 
   const tabsArray: [string, ProductionCalendarDay[]][] = useMemo(
-    () => Object.entries(entity?.productionCalendars || {}),
-    [entity?.productionCalendars],
+    () => Object.entries(entity?.[0]?.productionCalendars || {}),
+    [entity?.[0]?.productionCalendars],
   );
 
   const activeTableData = useMemo(() => {
@@ -75,6 +75,7 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
   };
   const onEdit = (modalData: ProductionCalendarDayMapped): void => {
     setSelectedPCDay(modalData);
+    
   };
 
   const { translate: translateTable } = useTranslate({ ns: 'workCenters', keyPrefix: 'maintain' });

@@ -23,7 +23,7 @@ export const useProductionCalendarValidationChecks = (ns: string): void => {
     reset,
   } = useFormContext();
   const { translate } = useTranslate({ ns, keyPrefix: 'validation' });
-  const { loading, error, productionCalendarId } = useAppSelector(
+  const { loading, error, productionCalendarIds } = useAppSelector(
     (state) => state.productionCalendarsWorkCapacities,
   );
   useEffect(() => {
@@ -41,6 +41,6 @@ export const useProductionCalendarValidationChecks = (ns: string): void => {
     }
 
     notificationSuccess(translate('create_success'));
-    navigate(`${PRODUCTION_CALENDAR_PAGE}/${EDIT_PAGE}`.replace(':id', `${productionCalendarId}`));
-  }, [error, isSubmitted, loading, navigate, productionCalendarId, reset, translate]);
+    navigate(`${PRODUCTION_CALENDAR_PAGE}/${EDIT_PAGE}`.replace(':id', productionCalendarIds.join(",")));
+  }, [error, isSubmitted, loading, navigate, productionCalendarIds, reset, translate]);
 };

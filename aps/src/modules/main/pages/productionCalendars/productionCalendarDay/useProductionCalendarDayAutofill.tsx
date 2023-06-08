@@ -43,10 +43,8 @@ export const useProductionCalendarDayAutofill = (
   useEffect(() => {
     if (selectedProductionCalendarDay) {
       reset({
-        ...selectedProductionCalendarDay,
-        minutes: calcMinutes,
-        availableMinutes: calcAvailableMinutes,
+        ...selectedProductionCalendarDay
       });
     }
-  }, [reset, selectedProductionCalendarDay, calcMinutes, calcAvailableMinutes]);
+  }, [reset, selectedProductionCalendarDay]);
 };

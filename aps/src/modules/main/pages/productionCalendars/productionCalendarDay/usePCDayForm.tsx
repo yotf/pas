@@ -33,7 +33,7 @@ export const usePCDayForm = ({ productionCalendarDay, onClose }: Props): Return 
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
   });
-  const { error } = useAppSelector((state) => state.productionCalendars);
+  const { error,entity } = useAppSelector((state) => state.productionCalendars);
 
   const dispatch = useAppDispatch();
 
@@ -43,10 +43,26 @@ export const usePCDayForm = ({ productionCalendarDay, onClose }: Props): Return 
 
   const onSubmit = useMemo(
     () =>
-      handleSubmit(async (data: ProductionCalendarDayMapped) => {
-        const dataMapped = { ...data, weekDay: data.date };
-        dispatch(upsertProductionCalendar(dataMapped));
+      handleSubmit(async (data: ProductionCalendarDayMapped) => { 
 
+        const mergedObj = entity?.map((ent:any)=>ent.productionCalendars).reduce((result, obj) => {
+          for (const key in obj) {
+            if (Array.isArray(obj[key])) {
+              if (Array.isArray(result[key])) {
+                result[key] = result[key].concat(obj[key]);
+              } else {
+                result[key] = obj[key];
+              }
+            }
+          }
+          return result;
+        }, {});
+        
+        const daysArray = Object.values(mergedObj).reduce((result, array) => [...result, ...array], []);
+        const otherDays = daysArray.filter(day => (day.weekDay===data.date) && (day.id!=data.id));
+        
+        const dataMapped = { ...data, weekDay: data.date,id:(otherDays && otherDays.length>0)? [...(otherDays.map(day=>day.id)),data.id].join(","): data.id};
+        dispatch(upsertProductionCalendar(dataMapped)); 
         onClose();
         if (!error) notificationSuccess(translate('edit_success'));
       }),

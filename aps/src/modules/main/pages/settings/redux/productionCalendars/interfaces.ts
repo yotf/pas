@@ -11,7 +11,7 @@ export interface ProductionCalendar {
   id: number;
   initialDate: string;
   finalDate: string;
-  workCenters: WorkCenter[];
+  workCenter: WorkCenter;
   changeHistoryDto: ChangeHistoryDto;
 }
 

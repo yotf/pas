@@ -34,7 +34,7 @@ const ProductionCalendarTable: FC = () => {
   const mapper = useCallback(
     (obj: ProductionCalendar): ProductionCalendarMapped => ({
       id: obj.id,
-      workCenterName: obj.workCenters[0].name,
+      workCenterName: obj.workCenter.name,
       initialDate: dateFormatter(obj.initialDate),
       finalDate: dateFormatter(obj.finalDate),
     }),

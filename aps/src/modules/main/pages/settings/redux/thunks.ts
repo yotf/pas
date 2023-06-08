@@ -67,8 +67,12 @@ const createUpsertThunk = <Entity, PostData extends IdentifiableEntity, SingleEn
   createAsyncThunk(api + '/upsert', async (payload: PostData, { rejectWithValue, dispatch }) => {
     const id = window.location.href.split('/').pop();
     try {
+
+      const api_id = payload.id as string;
+      payload.id = (payload.id && payload.id?.toString().includes(",")) ? payload.id.toString().split(",")[0] : payload.id;
+      
       const response = payload.id
-        ? await ApiService.put<PostData>(api, payload.id, payload)
+        ? await ApiService.put<PostData>(api, api_id, payload)
         : await ApiService.post<PostData>(api, productionOrderUpsert ? [payload] : payload);
       dispatch((getByUpdated ? readThunk(id) : getAllThunk()) as AsyncThunkAction<any, any, any>);
       if (!getByUpdated && shouldRead) dispatch(readThunk(id));

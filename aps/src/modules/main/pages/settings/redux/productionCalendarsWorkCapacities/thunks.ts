@@ -36,7 +36,7 @@ export const generateProductionCalendar = createAsyncThunk(
   PRODUCTION_CALENDAR_GENERATE_API,
   async (payload: GenerateProductionCalendarFormData, { rejectWithValue }) => {
     try {
-      const response = await ApiService.post<ProductionCalendarPostResponse>(
+      const response = await ApiService.post<ProductionCalendarPostResponse[]>(
         PRODUCTION_CALENDAR_GENERATE_API,
         payload,
       );
