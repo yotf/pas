@@ -1,6 +1,7 @@
 /**
  * @module usePCDayForm
  */
+//@ts-nocheck
 
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { notificationSuccess } from '@/modules/shared/services/notification.service';

@@ -5,7 +5,7 @@ export const mockedProductionCalendarData: ProductionCalendar = {
   changeHistoryDto: { createdBy: 'admin', createdOn: '' },
   finalDate: '2023-01-23T08:00:05.863Z',
   initialDate: '2023-01-23T08:00:05.863Z',
-  workCenters: [
+  workCenter: 
     {
       department: {
         code: 'new_code',
@@ -100,7 +100,6 @@ export const mockedProductionCalendarData: ProductionCalendar = {
         },
       ],
     },
-  ],
 };
 
 export const mockedProductionCalendarsData: ProductionCalendar[] = [
