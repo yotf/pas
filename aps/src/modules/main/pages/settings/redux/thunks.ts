@@ -69,7 +69,7 @@ const createUpsertThunk = <Entity, PostData extends IdentifiableEntity, SingleEn
     try {
       const response = payload.id
         ? await ApiService.put<PostData>(api, payload.id, payload)
-        : await ApiService.post<PostData>(api, productionOrderUpsert ? [payload] : payload);
+        : await ApiService.post<PostData>(api,productionOrderUpsert? [payload]: payload);
       dispatch((getByUpdated ? readThunk(id) : getAllThunk()) as AsyncThunkAction<any, any, any>);
       if (!getByUpdated && shouldRead) dispatch(readThunk(id));
       return payload.id ? payload : response.data;

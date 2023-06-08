@@ -69,7 +69,7 @@ export const usePOModalInitialValues = ({
       customerOrderNumber: entity?.customerOrderNumber,
       salesOrderId: entity?.id,
       salesOrderMaterialId: selectedMaterial?.id,
-      routingId: selectedRouting?.id,
+      routingId: selectedRouting? selectedRouting.id : selectedMaterialFull?.routing.id,
       creationDate: dayjs().format(),
       initialDate: dayjs().format(),
       salesOrderDelivery: entity?.salesOrderDelivery || undefined,
