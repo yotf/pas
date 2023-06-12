@@ -8,6 +8,7 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/es/cascader';
+import { dateFormatter } from '@/modules/shared/utils/utils';
 import dayjs from 'dayjs';
 import { FC, useContext, useEffect, useMemo } from 'react';
 import { FormProvider, useFormContext } from 'react-hook-form';
@@ -87,6 +88,7 @@ const ProductionOrderForm: FC = () => {
   };
 
   const { salesOrderMaterialId, salesOrderId } = watch();
+
   const materialMeasures = useMemo(
     () => materials.find((material) => material.id === salesOrderMaterialId),
     [salesOrderMaterialId, materials],
@@ -149,17 +151,27 @@ const ProductionOrderForm: FC = () => {
   }, [dispatch, entity?.routingId, routingId]);
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
+    Date.prototype.addDays = function(days:number) {
+      var date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;  
+  }
+    const initialDateString = getValues("initialDate");
+
+    const initialDate = initialDateString ? new Date(initialDateString) : undefined;
+
     return (
-      arr.map(({ operation, ...rest }, i) => ({
+      arr.map(({ operation, leadTime, ...rest }, i) => ({
         ...rest,
         operationName: operation?.name,
         departmentName: operation?.department?.name ?? '',
         id: operation.id,
         sequence: i + 1,
         workCenterId: undefined,
-        planningDate: undefined,
+        planningDate: initialDate && leadTime ? dateFormatter(initialDate.addDays(leadTime).toString()) : undefined,
         executedDate: undefined,
         operationTime: operation.operationTime ?? undefined,
+        leadTime,
       })) ?? []
     );
   };
@@ -171,7 +183,6 @@ const ProductionOrderForm: FC = () => {
         mapRoutingOperations(selectedRouting?.routingOperations),
       );
   }, [entity?.routingId, routingId, selectedRouting, setValue]);
-
   return (
     <div className='production-order-container'>
       <div className='form-container'>

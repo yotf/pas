@@ -1097,6 +1097,7 @@
       "leadTime": "Lead Time",
       "departmentName": "Department",
       "planning": "Planning",
+      "planningDate":"Foreseen Date",
       "yes": "Yes",
       "no": "No",
       "modal": {
@@ -1112,6 +1113,7 @@
         "leadTime": "Lead Time",
         "departmentName": "Department Name",
         "planning": "Planning",
+        "planningDate":"Foreseen Date",
         "remark": "Remark"
       },
       "validation": {

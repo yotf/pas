@@ -68,7 +68,7 @@ const ProductionOrdersTable: FC = () => {
     ],
     [],
   );
-
+  
   const mapper = useCallback(
     (obj: ProductionOrder): ProductionOrderMapped => ({
       id: obj.id,

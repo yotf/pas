@@ -1095,6 +1095,7 @@
       "leadTime": "Lead Time_de",
       "departmentName": "Department_de",
       "planning": "Planning_de",
+      "planningDate":"Foreseen Date_de",
       "yes": "Yes_de",
       "no": "No_de",
       "modal": {
@@ -1110,7 +1111,8 @@
         "leadTime": "Lead Time_de",
         "departmentName": "Department Name_de",
         "planning": "Planning_de",
-        "remark": "Remark_de"
+        "remark": "Remark_de",
+        "planningDate":"Foreseen Date_de"
       },
       "validation": {
         "required": "This field is required_de",

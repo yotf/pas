@@ -39,11 +39,12 @@ export const useRoutesTable = ({ onDelete, onEdit }: Props): JSX.Element => {
     'waitingTime',
     'leadTime',
     'departmentName',
-    'planning',
+    'planning'
   ];
+  ns === "productionOrder" ? columns.push("planningDate") : null;
   const customColumns: Partial<Record<keyof RoutingRouteFormData, (value: any) => ReactNode>> = {
-    planning: (value) => <span>{value ? translate('yes') : translate('no')}</span>,
-  };
+    planning: (value) => <span>{value ? translate('yes') : translate('no')}</span>
+  }
   const table = useTable({
     dataSource: memoOperations,
     translateHeader: translate,
