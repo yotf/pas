@@ -12,11 +12,11 @@ const productionOrderSlice = createEntitySlice<
 >(
   'productionOrderSlice',
   (entity) => [
-    String(entity.salesOrderDto?.orderNumber),
-    entity.salesOrderDto?.orderType?.name,
-    entity.salesOrderDto?.customer?.name,
+    String(entity.productionOrder_Id),
+    entity.productionOrderTypeDto?.name,
+    entity.customerDto?.name,
+    entity.customerOrderNumber,
     entity.salesOrderDto?.customerOrderNumber,
-    entity.salesOrderMaterialDto?.material.name,
     entity.materialDto?.name,
   ],
   productionOrderThunks,
