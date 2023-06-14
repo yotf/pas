@@ -26,6 +26,7 @@ import {
 import { RoutingRoute, RoutingRouteFormData } from '../settings/redux/routings/interfaces';
 import { getRouting } from '../settings/redux/routings/thunks';
 import { useProductionOrderOptions } from './hooks/useProductionOrderOptions';
+import { PORoutingOperationAddAndUpdate } from '../settings/redux/productionOrders/interfaces';
 import './productionOrdersForm.scss';
 
 /**
@@ -49,6 +50,11 @@ const ProductionOrderForm: FC = () => {
   const dispatch = useAppDispatch();
 
   const nameof = nameofFactory<ProductionOrderFormData>();
+  Date.prototype.addDays = function (days: number) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  };
 
   const {
     customerOptions,
@@ -87,11 +93,11 @@ const ProductionOrderForm: FC = () => {
     }));
   };
 
-  const { salesOrderMaterialId, salesOrderId } = watch();
+  const { materialId, salesOrderId } = watch();
 
   const materialMeasures = useMemo(
-    () => materials.find((material) => material.id === salesOrderMaterialId),
-    [salesOrderMaterialId, materials],
+    () => materials.find((material) => material.id === materialId),
+    [materialId, materials],
   );
 
   const selectedSalesOrder = useMemo(
@@ -134,9 +140,30 @@ const ProductionOrderForm: FC = () => {
     if (!salesOrderDelivery) setValue('salesOrderDelivery', undefined);
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
+  const initialDate = getValues('initialDate');
   useEffect(() => {
-    setValue('materialId', salesOrderMaterialId);
-  }, [salesOrderMaterialId, setValue]);
+    const maxOperation =
+      routingAddAndUpdateOperations?.length > 0
+        ? routingAddAndUpdateOperations?.reduce(
+            (maxOperation: RoutingRouteFormData, currentOperation: RoutingRouteFormData) => {
+              if (currentOperation?.leadTime > maxOperation?.leadTime) {
+                return currentOperation;
+              } else {
+                return maxOperation;
+              }
+            },
+          )
+        : undefined;
+    const foreseenDelivery =
+      initialDate && maxOperation
+        ? dayjs(initialDate).add(maxOperation?.leadTime, 'day').format()
+        : undefined;
+    setValue('foreseenDelivery', foreseenDelivery);
+  }, [initialDate, routingAddAndUpdateOperations]);
+
+  useEffect(() => {
+    setValue('materialId', materialId);
+  }, [materialId, setValue]);
 
   useEffect(() => {
     setValue('pO_RoutingOperationAddAndUpdateDtos', routingAddAndUpdateOperations, {
@@ -151,14 +178,9 @@ const ProductionOrderForm: FC = () => {
   }, [dispatch, entity?.routingId, routingId]);
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
-    Date.prototype.addDays = function(days:number) {
-      var date = new Date(this.valueOf());
-      date.setDate(date.getDate() + days);
-      return date;  
-  }
-    const initialDateString = getValues("initialDate");
+    const initialDateString = getValues('initialDate');
 
-    const initialDate = initialDateString ? new Date(initialDateString) : undefined;
+    const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
 
     return (
       arr.map(({ operation, leadTime, ...rest }, i) => ({
@@ -168,7 +190,8 @@ const ProductionOrderForm: FC = () => {
         id: operation.id,
         sequence: i + 1,
         workCenterId: undefined,
-        planningDate: initialDate && leadTime ? dateFormatter(initialDate.addDays(leadTime).toString()) : undefined,
+        planningDate:
+          initialDate && leadTime ? initialDate.add(leadTime, 'days').format() : undefined,
         executedDate: undefined,
         operationTime: operation.operationTime ?? undefined,
         leadTime,
@@ -266,8 +289,8 @@ const ProductionOrderForm: FC = () => {
           <CustomInput
             type='select'
             isRequired={true}
-            label={translate('salesOrderMaterialId')}
-            name={nameof('salesOrderMaterialId')}
+            label={translate('materialId')}
+            name={nameof('materialId')}
             options={materialOptions}
             isAutocomplete={true}
           />

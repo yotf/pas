@@ -24,6 +24,15 @@ export interface PORoutingOperationAddAndUpdate {
   executedDate: string;
 }
 
+export interface ProductionOrderTypeDto {
+  changeHistoryDto: ChangeHistoryDto;
+  code: string;
+  id: number;
+  isActive: boolean;
+  name: string;
+}
+
+
 export interface PORoutingOperations extends PORoutingOperationAddAndUpdate {
   workCenter: WorkCenter;
   workCenters: WorkCenter[];
@@ -88,6 +97,7 @@ export interface ProductionOrder {
   statusOfPlanning: StatusSituation;
   situation: StatusSituation;
   pO_RoutingOperations: PORoutingOperations[];
+  productionOrderTypeDto: ProductionOrderTypeDto;
 }
 
 export interface ProductionOrderMapped {
@@ -97,7 +107,7 @@ export interface ProductionOrderMapped {
   creationDate: string;
   status: string;
   customerName: string;
-  salesOrderNumber: string;
+  salesOrderNumber: number;
   salesOrderType: string;
   materialName: string;
   articleName: string;

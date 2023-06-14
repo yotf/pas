@@ -68,16 +68,16 @@ const ProductionOrdersTable: FC = () => {
     ],
     [],
   );
-  
+
   const mapper = useCallback(
     (obj: ProductionOrder): ProductionOrderMapped => ({
       id: obj.id,
-      orderNumber: obj.salesOrderDto?.orderNumber ?? '',
-      orderType: obj.salesOrderDto?.orderType?.name,
+      orderNumber: obj.productionOrder_Id ?? '',
+      orderType: obj?.productionOrderTypeDto?.name,
       creationDate: dateFormatter(obj.changeHistoryDto.createdOn),
       status: obj.statusOfPlanning?.name,
       customerName: obj.salesOrderDto?.customer.name || obj.customerDto?.name,
-      salesOrderNumber: obj.customerOrderNumber || obj.salesOrderDto?.customerOrderNumber,
+      salesOrderNumber: obj.salesOrderDto?.orderNumber,
       salesOrderType: obj.salesOrderDto?.orderType.name,
       materialName: obj.materialDto?.name ?? '',
       articleName:

@@ -51,17 +51,17 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         customerId: numberRequired,
         customerOrderNumber: stringNotRequired,
         salesOrderId: numberNotRequired,
-        salesOrderMaterialId: numberNotRequired,
         productionOrderNumber: numberNotRequired,
         materialId: numberRequired,
         routingId: numberNotRequired,
         initialDate: Yup.string().notRequired(),
         finalDelivery: stringNotRequired,
+        salesOrderMaterialId: numberNotRequired,
         foreseenDeliveryPOOrigin: stringNotRequired,
         origin: numberNotRequired,
         quantity1: numberRequired
-          .min(1, translate('min_length'))
-          .max(99999, translate('max_length')),
+          .min(1, translate('min_length', { name: '1' }))
+          .max(99999, translate('max_length', { name: '99999' })),
         quantity2: numberNotRequired,
         quantity3: numberNotRequired,
         unitOfMeasure1Id: numberNotRequired,

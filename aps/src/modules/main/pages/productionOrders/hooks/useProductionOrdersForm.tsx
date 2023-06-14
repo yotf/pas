@@ -42,8 +42,9 @@ export const useProductionOrderForm = ({
 
   const routingOperationMapper = useCallback(
     (obj: PORoutingOperations, i: number, arr: PORoutingOperations[]): RoutingRouteFormData => {
-      const { operation } = obj;
-      
+      const { operation, leadTime, planningDate } = obj;
+      debugger;
+
       return {
         ...obj,
         operationName: operation?.name,
@@ -51,15 +52,15 @@ export const useProductionOrderForm = ({
         id: copy ? 0 : operation.id,
         sequence: i + 1,
         workCenterId: undefined,
-        planningDate: undefined,
+        planningDate: planningDate ? dateFormatter(planningDate) : undefined,
         executedDate: undefined,
         operationTime: 0,
         pO_OperationStatusEnum: arr[i].pO_OperationStatusEnum ?? 1,
+        leadTime,
       };
     },
     [copy],
   );
-
   const mapEntityToFormData: (entity?: ProductionOrderResponse) => ProductionOrderFormData =
     useCallback(
       (entity) =>
@@ -72,7 +73,7 @@ export const useProductionOrderForm = ({
               salesOrderId: undefined,
               customerId: undefined,
               customerOrderNumber: '',
-              salesOrderMaterialId: undefined,
+              materialId: undefined,
               routingId: undefined,
               creationDate: dateFormatter(dayjs().format()),
               salesOrderDelivery: '',
@@ -106,7 +107,7 @@ export const useProductionOrderForm = ({
                 entity.customerOrderNumber || entity.salesOrderDto?.customerOrderNumber,
               salesOrderId: entity.salesOrderId,
               salesOrderMaterialId: entity.salesOrderMaterialId,
-              materialId: entity.materialDto?.id || entity?.salesOrderMaterialId,
+              materialId: entity.materialDto?.id,
               routingId: entity.routingId,
               initialDate: entity.initialDate ?? undefined,
               finalDelivery: entity.finalDelivery ?? undefined,

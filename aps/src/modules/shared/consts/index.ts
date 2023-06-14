@@ -29,21 +29,17 @@ export enum PlanningStatus {
 export enum POSituation {
   'open' = 1,
   'closed' = 2,
-  'document' = 3,
+  'cancel' = 3,
 }
 /** Status enum used in {@link ProductionOrderMaintain}  */
 export enum POFormStatus {
   'planned' = 1,
-  'not_planned' = 2,
-  'cancel' = 3,
-  'executed' = 4,
+  'document' = 2,
 }
 /** Dropdown options made from POFormStatus enum */
 export const statusDropdownOptions: DefaultOptionType[] = [
   { label: POFormStatus[1], value: 1 },
   { label: POFormStatus[2], value: 2 },
-  { label: POFormStatus[3], value: 3 },
-  { label: POFormStatus[4], value: 4 },
 ];
 /** Dropdown options made from POSituation enum */
 export const situationDropdownOptions: DefaultOptionType[] = [

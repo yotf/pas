@@ -1017,6 +1017,7 @@
     "salesOrderNumber": "Sales Order Number_de",
     "salesOrderType": "Sales Order Type_de",
     "materialName": "Material_de",
+    "materialId": "Material_de",
     "articleName": "Article_de",
     "colorName": "Color_de",
     "quantity1": "Quantity 1_de",
@@ -1079,7 +1080,8 @@
       "create_success": "Production Order has been successfully created_de",
       "edit_success": "Production Order has been successfully edited_de",
       "create_fail": "Production Order with that name already exists_de",
-      "rejected_fail": "Planned Production Orders cannot be edited_de"
+      "rejected_fail": "Planned Production Orders cannot be edited_de",
+      "numeric": "Only digits are supported_de"
     },
     "routes": {
       "title": "",
@@ -1095,7 +1097,7 @@
       "leadTime": "Lead Time_de",
       "departmentName": "Department_de",
       "planning": "Planning_de",
-      "planningDate":"Foreseen Date_de",
+      "planningDate": "Foreseen Date_de",
       "yes": "Yes_de",
       "no": "No_de",
       "modal": {
@@ -1112,7 +1114,7 @@
         "departmentName": "Department Name_de",
         "planning": "Planning_de",
         "remark": "Remark_de",
-        "planningDate":"Foreseen Date_de"
+        "planningDate": "Foreseen Date_de"
       },
       "validation": {
         "required": "This field is required_de",
