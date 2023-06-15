@@ -8,7 +8,6 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/es/cascader';
-import { dateFormatter } from '@/modules/shared/utils/utils';
 import dayjs from 'dayjs';
 import { FC, useContext, useEffect, useMemo } from 'react';
 import { FormProvider, useFormContext } from 'react-hook-form';
@@ -26,7 +25,6 @@ import {
 import { RoutingRoute, RoutingRouteFormData } from '../settings/redux/routings/interfaces';
 import { getRouting } from '../settings/redux/routings/thunks';
 import { useProductionOrderOptions } from './hooks/useProductionOrderOptions';
-import { PORoutingOperationAddAndUpdate } from '../settings/redux/productionOrders/interfaces';
 import './productionOrdersForm.scss';
 
 /**
@@ -180,7 +178,6 @@ const ProductionOrderForm: FC = () => {
     const initialDateString = getValues('initialDate');
 
     const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
-    debugger;
 
     return (
       arr.map(({ operation, leadTime, ...rest }, i) => ({
@@ -198,6 +195,18 @@ const ProductionOrderForm: FC = () => {
       })) ?? []
     );
   };
+  debugger;
+  useEffect(() => {
+    const initialDateString = getValues('initialDate');
+    const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
+    const withPlannedDate = routingAddAndUpdateOperations?.map(({ leadTime, ...rest }) => ({
+      ...rest,
+      planningDate:
+        initialDate && leadTime ? initialDate.add(leadTime, 'days').format() : undefined,
+      leadTime,
+    }));
+    setValue('routingAddAndUpdateOperations', withPlannedDate);
+  }, [routingAddAndUpdateOperations?.length]);
 
   useEffect(() => {
     if (

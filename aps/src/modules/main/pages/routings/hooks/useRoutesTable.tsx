@@ -6,7 +6,7 @@ import { useContext, ReactNode, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useTable } from '../../../../shared/hooks/table/table.hook';
 import { useTranslate } from '../../../../shared/hooks/translate.hook';
-import { nameofFactory } from '../../../../shared/utils/utils';
+import { dateFormatter, nameofFactory } from '../../../../shared/utils/utils';
 import { MaintainContext } from '../../../components/maintain/contexts/maintain.context';
 import { RoutingFormData, RoutingRouteFormData } from '../../settings/redux/routings/interfaces';
 
@@ -44,6 +44,7 @@ export const useRoutesTable = ({ onDelete, onEdit }: Props): JSX.Element => {
   ns === 'productionOrder' ? columns.push('planningDate') : null;
   const customColumns: Partial<Record<keyof RoutingRouteFormData, (value: any) => ReactNode>> = {
     planning: (value) => <span>{value ? translate('yes') : translate('no')}</span>,
+    planningDate: (value) => dateFormatter(value),
   };
   const table = useTable({
     dataSource: memoOperations,
