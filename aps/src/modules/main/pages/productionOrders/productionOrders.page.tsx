@@ -76,7 +76,7 @@ const ProductionOrdersTable: FC = () => {
       orderType: obj?.productionOrderTypeDto?.name,
       creationDate: dateFormatter(obj.changeHistoryDto.createdOn),
       status: obj.statusOfPlanning?.name,
-      customerName: obj.salesOrderDto?.customer.name || obj.customerDto?.name,
+      customerName: obj.customerDto?.name,
       salesOrderNumber: obj.salesOrderDto?.orderNumber,
       salesOrderType: obj.salesOrderDto?.orderType.name,
       materialName: obj.materialDto?.name ?? '',

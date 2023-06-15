@@ -89,6 +89,7 @@ export const useRoutingForm = ({
   const { routingAddAndUpdateOperations } = watch();
 
   useEffect(() => {
+    debugger;
     routingAddAndUpdateOperations?.forEach((o, i) => (o.sequence = i + 1));
     setValue('routingAddAndUpdateOperations', routingAddAndUpdateOperations);
   }, [JSON.stringify(routingAddAndUpdateOperations), setValue]);

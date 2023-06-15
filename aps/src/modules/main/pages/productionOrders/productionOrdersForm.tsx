@@ -50,11 +50,6 @@ const ProductionOrderForm: FC = () => {
   const dispatch = useAppDispatch();
 
   const nameof = nameofFactory<ProductionOrderFormData>();
-  Date.prototype.addDays = function (days: number) {
-    var date = new Date(this.valueOf());
-    date.setDate(date.getDate() + days);
-    return date;
-  };
 
   const {
     customerOptions,
@@ -181,13 +176,14 @@ const ProductionOrderForm: FC = () => {
     const initialDateString = getValues('initialDate');
 
     const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
+    debugger;
 
     return (
       arr.map(({ operation, leadTime, ...rest }, i) => ({
         ...rest,
         operationName: operation?.name,
         departmentName: operation?.department?.name ?? '',
-        id: operation.id,
+        id: 0,
         sequence: i + 1,
         workCenterId: undefined,
         planningDate:
@@ -200,11 +196,17 @@ const ProductionOrderForm: FC = () => {
   };
 
   useEffect(() => {
-    if (routingId && routingId !== entity?.routingId && selectedRouting?.routingOperations?.length)
+    if (
+      routingId &&
+      routingId !== entity?.routingId &&
+      selectedRouting?.routingOperations?.length
+    ) {
+      debugger;
       setValue(
         'routingAddAndUpdateOperations',
         mapRoutingOperations(selectedRouting?.routingOperations),
       );
+    }
   }, [entity?.routingId, routingId, selectedRouting, setValue]);
   return (
     <div className='production-order-container'>

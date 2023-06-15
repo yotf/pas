@@ -52,7 +52,7 @@ export const useProductionOrderForm = ({
         id: copy ? 0 : operation.id,
         sequence: i + 1,
         workCenterId: undefined,
-        planningDate: planningDate ? dateFormatter(planningDate) : undefined,
+        planningDate: planningDate,
         executedDate: undefined,
         operationTime: 0,
         pO_OperationStatusEnum: arr[i].pO_OperationStatusEnum ?? 1,
