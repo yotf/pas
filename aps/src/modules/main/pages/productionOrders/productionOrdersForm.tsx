@@ -138,10 +138,14 @@ const ProductionOrderForm: FC = () => {
   const initialDate = getValues('initialDate');
   useEffect(() => {
     const maxOperation =
-      routingAddAndUpdateOperations?.length > 0
+      routingAddAndUpdateOperations && routingAddAndUpdateOperations?.length > 0
         ? routingAddAndUpdateOperations?.reduce(
             (maxOperation: RoutingRouteFormData, currentOperation: RoutingRouteFormData) => {
-              if (currentOperation?.leadTime > maxOperation?.leadTime) {
+              if (
+                currentOperation?.leadTime &&
+                maxOperation?.leadTime &&
+                currentOperation?.leadTime > maxOperation?.leadTime
+              ) {
                 return currentOperation;
               } else {
                 return maxOperation;
@@ -150,7 +154,7 @@ const ProductionOrderForm: FC = () => {
           )
         : undefined;
     const foreseenDelivery =
-      initialDate && maxOperation
+      initialDate && maxOperation && maxOperation.leadTime
         ? dayjs(initialDate).add(maxOperation?.leadTime, 'day').format()
         : undefined;
     setValue('foreseenDelivery', foreseenDelivery);
