@@ -75,6 +75,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
     clearPOModalForm();
   }, [clearPOModalForm]);
 
+  debugger;
   const openPOModal = useCallback((material: SalesMaterialFormData | undefined): void => {
     setIsOpen(true);
     setSelectedMaterial(material);

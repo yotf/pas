@@ -45,7 +45,7 @@ export const useSalesOrderMaterialsTable = ({ onDelete, onEdit }: Props): JSX.El
   ];
 
   const { openPOModal, modal } = useProductionOrderModal();
-
+  debugger;
   const customColumns: Partial<Record<keyof SalesMaterialFormData, (value: any) => ReactNode>> = {
     requestedDelivery: (value) => <span>{value ? dateFormatter(value) : ''}</span>,
     tanneryDelivery: (value) => <span>{value ? dateFormatter(value) : ''}</span>,

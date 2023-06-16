@@ -15,6 +15,15 @@ import { ReactNode, useCallback, useContext, useEffect } from 'react';
 import { useTranslate } from '../translate.hook';
 import { createColumns } from './table.columns';
 import './table.scss';
+import {
+  MaintainContext,
+  MaintainContextValue,
+} from '@/modules/main/components/maintain/contexts/maintain.context';
+import { SalesOrder } from '@/modules/main/pages/settings/redux/orderReplacement/interfaces';
+import {
+  SalesOrderResponse,
+  SalesOrderFormData,
+} from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
 /**
  * @template T Type of objects to be rendered in the table. Each object represents one table row.
  */
@@ -80,6 +89,13 @@ export const useTable = <T extends object>({
   rowSelection,
 }: UseTableProps<T>): JSX.Element => {
   const { setUiData, setSort } = useContext(ExportToExcelContext);
+  const {
+    state: { entity },
+  } =
+    useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
+      MaintainContext,
+    );
+  debugger;
   useEffect(() => {
     setUiData(dataSource);
   }, [JSON.stringify(dataSource)]);
@@ -110,7 +126,7 @@ export const useTable = <T extends object>({
         const isDisabled = disableDeleteButtonCondition?.(record);
         return (
           <Space size='middle' className='action-container'>
-            {openProductionModal && (
+            {!!entity?.id && openProductionModal && (
               <Tooltip title={translate('production_order_tooltip')}>
                 <CodeSandboxOutlined onClick={doProductionModal(value)} />
               </Tooltip>

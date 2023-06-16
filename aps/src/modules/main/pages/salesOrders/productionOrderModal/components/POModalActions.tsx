@@ -28,6 +28,7 @@ const POModalActions: FC<POModalActionsProps> = ({ productionOrderInitial, trans
     setValue('productionOrders', newPOsTest);
   }, [numberOfProductionOrders, productionOrderInitial, setValue]);
 
+  debugger;
   const canCreatePOs =
     !numberOfProductionOrders ||
     !routingId ||

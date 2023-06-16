@@ -33,6 +33,7 @@ const SalesOrderForm: FC = () => {
     useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
       MaintainContext,
     );
+  debugger;
   const { translate } = useTranslate({ ns });
 
   const nameof = nameofFactory<SalesOrderFormData>();
