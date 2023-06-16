@@ -43,7 +43,6 @@ export const useProductionOrderForm = ({
   const routingOperationMapper = useCallback(
     (obj: PORoutingOperations, i: number, arr: PORoutingOperations[]): RoutingRouteFormData => {
       const { operation, leadTime, planningDate } = obj;
-      debugger;
 
       return {
         ...obj,

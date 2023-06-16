@@ -44,7 +44,6 @@ export const useRoutingRouteForm = ({ route, onClose, option }: Props): Return =
 
   const recalculateOperations = useCallback(
     (data: RoutingRouteFormData): RoutingRouteFormData[] => {
-      debugger;
       let { routingAddAndUpdateOperations: routingOperations = [] } = getValues();
       routingOperations = routingOperations.slice();
       if (route?.sequence !== undefined) {
@@ -67,7 +66,7 @@ export const useRoutingRouteForm = ({ route, onClose, option }: Props): Return =
   const onSubmit = useMemo(
     () =>
       handleSubmit((data: RoutingRouteFormData) => {
-        debugger;
+        // debugger;
         const routingOperations = recalculateOperations(data);
         setValue('routingAddAndUpdateOperations', routingOperations, {
           shouldDirty: true,

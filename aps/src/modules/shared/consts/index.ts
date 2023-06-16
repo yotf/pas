@@ -33,13 +33,15 @@ export enum POSituation {
 }
 /** Status enum used in {@link ProductionOrderMaintain}  */
 export enum POFormStatus {
-  'planned' = 1,
-  'document' = 2,
+  'planned' = 2,
+  'document' = 1,
 }
 /** Dropdown options made from POFormStatus enum */
 export const statusDropdownOptions: DefaultOptionType[] = [
   { label: POFormStatus[1], value: 1 },
   { label: POFormStatus[2], value: 2 },
+
+
 ];
 /** Dropdown options made from POSituation enum */
 export const situationDropdownOptions: DefaultOptionType[] = [

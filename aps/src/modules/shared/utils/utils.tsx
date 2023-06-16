@@ -16,6 +16,11 @@ export const dateFormatter = (date: string | undefined): string => {
   if (!date) return '';
   return dayjs(date).format(euDateFormat);
 };
+
+export const isEuropeanDateFormat = (dateString: string): boolean => {
+  const regex = /^\d{2}\.\d{2}\.\d{4}$/;
+  return regex.test(dateString);
+};
 /**  Error returned if a lstrings length passes the one needed in schema the validation schema*/
 export const translateMaxLengthMessage = (
   maxLength: number,

@@ -77,7 +77,8 @@ const ProductionOrderForm: FC = () => {
     routingAddAndUpdateOperations,
   } = watch();
 
-  const disableInitialDate = useMemo(() => !!entity?.origin, [entity?.origin]);
+  const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
+  const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
 
   const translateMapper = (array: DefaultOptionType[]): DefaultOptionType[] => {
     return array.map((option: DefaultOptionType) => ({
@@ -195,7 +196,7 @@ const ProductionOrderForm: FC = () => {
       })) ?? []
     );
   };
-  debugger;
+
   useEffect(() => {
     const initialDateString = getValues('initialDate');
     const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
@@ -214,7 +215,6 @@ const ProductionOrderForm: FC = () => {
       routingId !== entity?.routingId &&
       selectedRouting?.routingOperations?.length
     ) {
-      debugger;
       setValue(
         'routingAddAndUpdateOperations',
         mapRoutingOperations(selectedRouting?.routingOperations),
@@ -264,8 +264,8 @@ const ProductionOrderForm: FC = () => {
             label={translate('initialDate')}
             name={nameof('initialDate')}
             isRequired={true}
-            readOnly={disableInitialDate}
-            disabled={disableInitialDate}
+            readOnly={initialDateDisabled}
+            disabled={initialDateDisabled}
             disableDatesFrom={dayjs().subtract(1, 'day')}
           />
 
@@ -276,6 +276,8 @@ const ProductionOrderForm: FC = () => {
             name={nameof('statusOfPlanningEnum')}
             options={translateMapper(statusDropdownOptions as DefaultOptionType[])}
             isAutocomplete={true}
+            readOnly={!isEditing}
+            disabled={!isEditing}
           />
           <CustomInput
             type='select'
@@ -284,6 +286,8 @@ const ProductionOrderForm: FC = () => {
             name={nameof('situationEnum')}
             options={translateMapper(situationDropdownOptions as DefaultOptionType[])}
             isAutocomplete={true}
+            readOnly={!isEditing}
+            disabled={!isEditing}
           />
           <CustomInput
             type='select'

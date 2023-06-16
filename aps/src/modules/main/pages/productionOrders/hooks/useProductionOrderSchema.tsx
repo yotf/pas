@@ -50,7 +50,7 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         productionOrderTypeId: numberRequired,
         customerId: numberRequired,
         customerOrderNumber: stringNotRequired,
-        salesOrderId: numberNotRequired,
+        salesOrderId: numberRequired,
         productionOrderNumber: numberNotRequired,
         materialId: numberRequired,
         routingId: numberNotRequired,
