@@ -73,12 +73,14 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
   const closePOModal = useCallback((): void => {
     setIsOpen(false);
     clearPOModalForm();
+
+    debugger;
   }, [clearPOModalForm]);
 
-  debugger;
   const openPOModal = useCallback((material: SalesMaterialFormData | undefined): void => {
     setIsOpen(true);
     setSelectedMaterial(material);
+    debugger;
   }, []);
 
   const onSubmit = handleSubmit(async (data) => {
@@ -123,7 +125,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
         <div className='production-order-modal'>
           <div className='material-info'>
             <h3>{selectedMaterial?.materialName}</h3>
-            <POModalInputs ns={ns} />
+            <POModalInputs ns={ns} productionOrderInitial={productionOrderInitial} />
             <POModalActions productionOrderInitial={productionOrderInitial} translate={translate} />
           </div>
           {productionOrders?.length ? (

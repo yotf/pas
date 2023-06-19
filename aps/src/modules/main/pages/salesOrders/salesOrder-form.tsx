@@ -33,7 +33,6 @@ const SalesOrderForm: FC = () => {
     useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
       MaintainContext,
     );
-  debugger;
   const { translate } = useTranslate({ ns });
 
   const nameof = nameofFactory<SalesOrderFormData>();
@@ -49,6 +48,8 @@ const SalesOrderForm: FC = () => {
   const isFormActive = useMemo(() => {
     return status === 1;
   }, [status]);
+
+  const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
 
   const statusOptionsTranslate = useMemo(
     () =>
@@ -122,6 +123,8 @@ const SalesOrderForm: FC = () => {
             name={nameof('status')}
             width='full-width'
             options={statusOptionsTranslate}
+            disabled={!isEditing}
+            readOnly={!isEditing}
           />
           <div className='remark'>
             <CustomInput
