@@ -61,6 +61,8 @@ export type TableProps<Entity, EntityMapped, SingleEntity> = {
   rowSelection?: Partial<RefTable>;
   /** Export to excel function. Used with data returned from {@link ExportToExcelContext}. */
   exportToExcel?: () => void;
+  /** Specifies whether to render the delete button or not */
+  renderDeleteButton?: boolean;
 };
 /**
  * @template Entity Entity recieved from the API
@@ -80,6 +82,7 @@ const PageTable = <Entity, EntityMapped extends IdentifiableEntity, SingleEntity
   additionalElements,
   additionalSearch = undefined,
   exportToExcel,
+  renderDeleteButton,
   ...props
 }: TableProps<Entity, EntityMapped, SingleEntity>): ReactElement => {
   const { stateSelector } = props;
@@ -124,6 +127,7 @@ const PageTable = <Entity, EntityMapped extends IdentifiableEntity, SingleEntity
           additionalElements={additionalElements}
           rowSelection={rowSelection}
           exportToExcel={exportToExcel}
+          renderDeleteButton={renderDeleteButton}
         />
       </div>
       {modal}

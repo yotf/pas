@@ -40,7 +40,7 @@ const ProductionOrderMaintain: FC<ProductionOrderMaintainType> = ({
     formState: { isDirty },
   } = form;
   const ns = 'productionOrder';
-  
+
   const { onDelete, modal: deleteModal } = useEntityDeleteModal({
     ns,
     deleteThunk,

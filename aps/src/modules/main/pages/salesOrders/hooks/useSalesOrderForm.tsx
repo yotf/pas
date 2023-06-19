@@ -27,6 +27,7 @@ export type UseRoutingSetupPropsType = {
  */
 export const UseSalesOrderForm = ({
   state,
+  copy,
 }: UseRoutingSetupPropsType): UseFormReturn<SalesOrderFormData, any> => {
   const validationSchema = useSalesOrderSchema();
   const duplicateErrors: Record<string, Path<SalesOrderFormData>> = useMemo(
@@ -50,8 +51,8 @@ export const UseSalesOrderForm = ({
             salesOrderMaterialsAddAndUpdate: [],
           }
         : {
-            id: entity.id,
-            orderNumber: entity.orderNumber,
+            id: copy ? 0 : entity.id,
+            orderNumber: copy ? undefined : entity.orderNumber,
             orderTypeId: entity.orderTypeId,
             customerId: entity.customerId,
             customerOrderNumber: entity.customerOrderNumber,
@@ -59,8 +60,9 @@ export const UseSalesOrderForm = ({
             remark: entity.remark,
             salesOrderMaterialsAddAndUpdate:
               entity.salesOrderMaterials?.map(
-                ({ material, requestedDelivery, tanneryDelivery, ...rest }, i) => ({
+                ({ material, requestedDelivery, tanneryDelivery, id, ...rest }, i) => ({
                   ...rest,
+                  id: copy ? 0 : id,
                   guid: uuid(),
                   materialDescription: material.features?.name,
                   materialName: material.name,

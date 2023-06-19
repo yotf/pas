@@ -24,16 +24,13 @@ export type POModalInputsProps = {
  */
 const POModalInputs: FC<POModalInputsProps> = ({ ns, productionOrderInitial }) => {
   const { translate } = useTranslate({ ns: ns });
-  debugger;
   const { orderTypeOptions, routingOptions } = useProductionOrderModalOptions();
 
   const nameof = nameofFactory<ProductionOrderModalForm>();
 
   const form = useFormContext<ProductionOrderModalForm>();
   const { setValue } = form;
-  debugger;
   useEffect(() => {
-    debugger;
     setValue('routingId', productionOrderInitial.routingId);
   }, [setValue, productionOrderInitial.routingId, productionOrderInitial.materialId]);
 

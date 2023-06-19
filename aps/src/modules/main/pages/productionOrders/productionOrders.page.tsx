@@ -227,6 +227,7 @@ const ProductionOrdersTable: FC = () => {
         additionalElements={additionalElements}
         rowSelection={rowSelection}
         exportToExcel={exportToExcel}
+        renderDeleteButton={false}
       />
     </ExportToExcelProvider>
   );

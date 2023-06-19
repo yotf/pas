@@ -50,6 +50,8 @@ export interface SettingTableProps<T> {
   exportToExcel?: () => void;
   /** Condition for disabling export to excel */
   disableExportToExcelButton?: boolean;
+  /**Specifies whether to render the delete button in table actions */
+  renderDeleteButton?: boolean;
 }
 /**
  * @template T Type of entity rendered in the table
@@ -70,6 +72,7 @@ const SettingsTable = <T extends object>({
   preventSort,
   exportToExcel,
   disableExportToExcelButton,
+  renderDeleteButton,
 }: SettingTableProps<T>): JSX.Element => {
   const { translate } = useTranslate({
     ns: translateNs,
@@ -89,6 +92,7 @@ const SettingsTable = <T extends object>({
     disableDeleteButtonCondition,
     preventSort,
     rowSelection,
+    renderDeleteButton,
   });
   const form: UseFormReturn<FormCustomFilter, any> = useFormContext();
   const onExportToExcel = useCallback(() => exportToExcel?.(), [exportToExcel]);

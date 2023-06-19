@@ -158,10 +158,14 @@ const routes: Route[] = [
     children: [
       {
         path: NEW_PAGE,
-        element: <SalesOrderMaintain copy={true} />,
+        element: <SalesOrderMaintain />,
       },
       {
         path: EDIT_PAGE,
+        element: <SalesOrderMaintain />,
+      },
+      {
+        path: COPY_PAGE,
         element: <SalesOrderMaintain copy={true} />,
       },
       { index: true, element: <SalesOrdersTable /> },
@@ -173,12 +177,17 @@ const routes: Route[] = [
     children: [
       {
         path: NEW_PAGE,
-        element: <ProductionOrderMaintain copy={true} />,
+        element: <ProductionOrderMaintain />,
       },
       {
         path: EDIT_PAGE,
+        element: <ProductionOrderMaintain />,
+      },
+      {
+        path: COPY_PAGE,
         element: <ProductionOrderMaintain copy={true} />,
       },
+
       { index: true, element: <ProductionOrdersTable /> },
     ],
   },

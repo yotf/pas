@@ -95,7 +95,7 @@ export const useTable = <T extends object>({
     useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
       MaintainContext,
     );
-  //debugger;
+
   useEffect(() => {
     setUiData(dataSource);
   }, [JSON.stringify(dataSource)]);
