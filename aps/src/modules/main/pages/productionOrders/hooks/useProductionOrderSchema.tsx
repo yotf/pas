@@ -61,7 +61,8 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         origin: numberNotRequired,
         quantity1: numberRequired
           .min(1, translate('min_length', { name: '1' }))
-          .max(99999, translate('max_length', { name: '99999' })),
+          .max(99999, translate('max_length', { name: '99999' }))
+          .typeError(translate('must_be_number')),
         quantity2: numberNotRequired,
         quantity3: numberNotRequired,
         unitOfMeasure1Id: numberNotRequired,

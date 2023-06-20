@@ -12,7 +12,7 @@ const productionCalendarsSlice = createEntitySlice<
   ProductionCalendar,
   ProductionCalendarResponse,
   ProductionCalendarDayMapped
->('productionCalendarsSlice', (entity) => [entity.workCenter.name], productionCalendarThunks);
+>('productionCalendarsSlice', (entity) => [entity.workCenter.name,entity.initialDate,entity.finalDate], productionCalendarThunks);
 export const {
   filterEntities: filterProductionCalendars,
   clearEntity: clearProductionCalendars,

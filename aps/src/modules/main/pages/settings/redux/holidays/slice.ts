@@ -6,6 +6,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SettingsPageItem, SettingsValidationError } from '../../consts/interfaces';
 import { initialSettingsState } from './states';
 import { deleteHolidayThunk, getAllHolidays, upsertHolidayThunk } from './thunks';
+import { dateFormatter } from '@/modules/shared/utils/utils';
 
 const holidaysSlice = createSlice({
   name: 'holidaysSlice',
@@ -14,11 +15,7 @@ const holidaysSlice = createSlice({
     filterHolidays: (state, action: PayloadAction<string>) => {
       state.filtered = state.data.filter((uom: SettingsPageItem) => {
         const searchCriteria = action.payload?.toLowerCase();
-        const holidayDateDottedFormat = uom.holidayDate? new Date(uom.holidayDate).toLocaleDateString("de-CH", {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        }) :undefined;
+        const holidayDateDottedFormat = uom.holidayDate? dateFormatter(uom.holidayDate) :undefined;
         return (
           uom.code?.toLowerCase().includes(searchCriteria) ||
           uom.name.toLowerCase().includes(searchCriteria) ||
