@@ -122,7 +122,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
   const mapSalesOrdersToOptions = (data: SalesOrder[]): DefaultOptionType[] =>
     data
       .filter((so) => so.statusInfo.id !== 3)
-      .map((filteredSO) => ({ label: filteredSO.orderNumber, value: filteredSO.orderNumber }));
+      .map((filteredSO) => ({ label: filteredSO.orderNumber, value: filteredSO.id }));
 
   const salesOrderOptions: DefaultOptionType[] = useMemo(
     () => mapSalesOrdersToOptions(salesOrders),

@@ -16,7 +16,7 @@ import { useAppDispatch } from '@/store/hooks';
 import { CombinedState } from '@reduxjs/toolkit';
 import { DefaultOptionType } from 'antd/es/select';
 import { RefTable } from 'antd/es/table/interface';
-import { FC, Key, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, Key, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { StoreType } from '../../../../store';
 import { ExportToExcelProvider } from '../../components/maintain/contexts/exportToExcel.context';
@@ -228,6 +228,7 @@ const ProductionOrdersTable: FC = () => {
         rowSelection={rowSelection}
         exportToExcel={exportToExcel}
         renderDeleteButton={false}
+        disableExportToExcelButton={!uiData?.length}
       />
     </ExportToExcelProvider>
   );

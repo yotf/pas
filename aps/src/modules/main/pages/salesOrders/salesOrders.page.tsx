@@ -81,6 +81,7 @@ const SalesOrdersTable: FC = () => {
         getName={getName}
         customColumns={customColumns}
         exportToExcel={exportToExcel}
+        disableExportToExcelButton={!uiData?.length}
       />
     </ExportToExcelProvider>
   );

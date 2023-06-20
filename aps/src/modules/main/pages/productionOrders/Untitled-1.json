@@ -1,0 +1,65 @@
+{
+  "pO_RoutingOperationAddAndUpdateDtos": [
+    {
+      "changeHistoryDto": {
+        "createdBy": "Admin",
+        "createdOn": "2023-06-09T17:11:26.5898568",
+        "updatedBy": null,
+        "updatedOn": null
+      },
+      "id": 0,
+      "operationId": 2,
+      "planning": true,
+      "remark": "",
+      "standardTime": 55,
+      "setupTime": 0,
+      "waitingTime": 0,
+      "operationName": "savijanje",
+      "departmentName": "",
+      "sequence": 1,
+      "planningDate": "2023-07-01T14:35:31+02:00",
+      "operationTime": 55,
+      "leadTime": 10
+    }
+  ],
+  "routingAddAndUpdateOperations": [
+    {
+      "changeHistoryDto": {
+        "createdBy": "Admin",
+        "createdOn": "2023-06-09T17:11:26.5898568",
+        "updatedBy": null,
+        "updatedOn": null
+      },
+      "id": 0,
+      "operationId": 2,
+      "planning": true,
+      "remark": "",
+      "standardTime": 55,
+      "setupTime": 0,
+      "waitingTime": 0,
+      "operationName": "savijanje",
+      "departmentName": "",
+      "sequence": 1,
+      "planningDate": "2023-07-01T14:35:31+02:00",
+      "operationTime": 55,
+      "leadTime": 10
+    }
+  ],
+  "materialGroupId": 1,
+  "foreseenDelivery": "2023-07-01T14:35:31+02:00",
+  "creationDate": "20.06.2023",
+  "remark": "",
+  "unitOfMeasure3Id": 1,
+  "unitOfMeasure2Id": 1,
+  "unitOfMeasure1Id": 1,
+  "quantity1": 12,
+  "initialDate": "2023-06-21T14:35:31+02:00",
+  "routingId": 2,
+  "materialId": 2,
+  "salesOrderId": 2,
+  "customerOrderNumber": "",
+  "customerId": 1,
+  "productionOrderTypeId": 2,
+  "situationEnum": 1,
+  "statusOfPlanningEnum": 1
+}
