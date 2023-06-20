@@ -28,20 +28,21 @@ import './salesOrder-modal.scss';
 export type Props = {
   material?: SalesMaterialFormData;
   onClose: () => void;
+  option?: 'create' | 'edit';
 };
 /**
  * @param material Material selected by user when triggering the on edit function in the {@link SalesOrderMaterialsTable}.
  * @param onClose Clears selected material and closes the modal
  * @returns A modal for deleting and editing sales order materials. The onOk function will change materials defined in the main form
  */
-const SalesOrderModal: FC<Props> = ({ material, onClose }) => {
+const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
   const { ns } =
     useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
       MaintainContext,
     );
 
   const { translate } = useTranslate({ ns });
-  const { form, onSubmit } = useSalesOrderMaterialsForm({ material, onClose });
+  const { form, onSubmit } = useSalesOrderMaterialsForm({ material, onClose, option });
   const buttonProps = useModalProps(form);
   const nameof = nameofFactory<SalesMaterialFormData>();
   const { materialOptions } = useSalesOrderOptions();

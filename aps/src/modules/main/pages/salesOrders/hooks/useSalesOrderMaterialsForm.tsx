@@ -16,6 +16,7 @@ import { useSalesOrderMaterialsSchema } from './useSalesOrderMaterialsSchema';
 export type Props = {
   material?: SalesMaterialFormData;
   onClose: () => void;
+  option?: 'create' | 'edit';
 };
 
 export type Return = {
@@ -29,12 +30,14 @@ export type Return = {
  * @param onClose Clears selected sakes order material and closes the modal
  * @returns Sales order material form used in {@link SalesOrderModal}. The form recalculates sales order materials from the main form and their sequences. When on submit is triggered the main form gets updated.
  */
-export const useSalesOrderMaterialsForm = ({ material, onClose }: Props): Return => {
+export const useSalesOrderMaterialsForm = ({ material, onClose, option }: Props): Return => {
   const { watch, setValue, getValues } = useFormContext<SalesOrderFormData>();
   const { salesOrderMaterialsAddAndUpdate } = watch();
-  const validationSchema = useSalesOrderMaterialsSchema(
-    salesOrderMaterialsAddAndUpdate?.length ?? 0,
-  );
+  const setMaxSequence =
+    option === 'edit'
+      ? salesOrderMaterialsAddAndUpdate.length - 1
+      : salesOrderMaterialsAddAndUpdate?.length;
+  const validationSchema = useSalesOrderMaterialsSchema(setMaxSequence ?? 0);
   const form = useForm<SalesMaterialFormData>({
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
@@ -67,6 +70,7 @@ export const useSalesOrderMaterialsForm = ({ material, onClose }: Props): Return
   const onSubmit = useMemo(
     () =>
       handleSubmit((data: SalesMaterialFormData) => {
+        //debugger;
         const salesOrderMaterials = recalculateMaterials(data);
         setValue('salesOrderMaterialsAddAndUpdate', salesOrderMaterials, {
           shouldDirty: true,

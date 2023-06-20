@@ -66,15 +66,6 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
     keyName: 'fieldId',
   });
 
-  const clearPOModalForm = useCallback((): void => {
-    reset({ productionOrders: [] }, { keepIsSubmitted: false, keepDefaultValues: false });
-  }, [reset]);
-
-  const closePOModal = useCallback((): void => {
-    setIsOpen(false);
-    clearPOModalForm();
-  }, [clearPOModalForm]);
-
   const openPOModal = useCallback((material: SalesMaterialFormData | undefined): void => {
     setIsOpen(true);
     setSelectedMaterial(material);
@@ -102,6 +93,15 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
     selectedMaterial,
     selectedMaterialFull,
   });
+
+  const clearPOModalForm = useCallback((): void => {
+    reset({ productionOrders: [] }, { keepIsSubmitted: false, keepDefaultValues: false });
+  }, [reset]);
+
+  const closePOModal = useCallback((): void => {
+    setIsOpen(false);
+    clearPOModalForm();
+  }, [clearPOModalForm]);
 
   usePOModalValidation({ ns, form });
 

@@ -20,6 +20,7 @@ export const useSalesOrderMaterialsSchema = (
   if (maxSequence !== undefined) {
     maxSequence++;
   }
+
   const { translate } = useTranslate({
     ns: 'salesOrder',
     keyPrefix: 'validation',
@@ -38,16 +39,17 @@ export const useSalesOrderMaterialsSchema = (
           .transform((val) => val || undefined)
           .required(translate('required')),
         quantity2: Yup.number(),
-        requestedDelivery: Yup.string().transform((value: string) => value || undefined),
+        requestedDelivery: Yup.string().transform((value) => value || undefined),
         salesOrderId: Yup.number(),
-        tanneryDelivery: Yup.string(),
+        tanneryDelivery: Yup.string().transform((val) => val || undefined),
         unitOfMeasure1: Yup.string(),
         unitOfMeasure2: Yup.string(),
         sequence: maxSequence
           ? Yup.number()
               .required(translate('required'))
-              .min(0, translate('min_value'))
+              .min(1, translate('min_value', { value: '1' }))
               .max(maxSequence, translate('max_value', { value: maxSequence.toString() }))
+              .typeError(translate('must_be_number'))
               .transform((val) => val || undefined)
           : Yup.number()
               .required(translate('required'))

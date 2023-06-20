@@ -24,8 +24,10 @@ export type UseSalesOrderMaterialModalReturn = {
 export const useSalesOrderMaterialsModal = (): UseSalesOrderMaterialModalReturn => {
   const { getValues, setValue } = useFormContext<SalesOrderFormData>();
   const [material, setMaterial] = useState<SalesMaterialFormData>();
+  const [option, setOption] = useState<'create' | 'edit'>();
   const onClose = useCallback(() => setMaterial(undefined), []);
   const onAddMaterial = useCallback(() => {
+    setOption('create');
     setMaterial({
       id: 0,
       guid: uuid(),
@@ -41,6 +43,7 @@ export const useSalesOrderMaterialsModal = (): UseSalesOrderMaterialModalReturn 
     });
   }, []);
   const onEditOperation = useCallback((selectedMaterial: SalesMaterialFormData) => {
+    setOption('edit');
     setMaterial(selectedMaterial);
   }, []);
   const onDeleteOperation = useCallback(
@@ -64,7 +67,7 @@ export const useSalesOrderMaterialsModal = (): UseSalesOrderMaterialModalReturn 
   const tableAndModal = (
     <div className='materials-container'>
       {table}
-      <SalesOrderModal onClose={onClose} material={material} />
+      <SalesOrderModal onClose={onClose} material={material} option={option} />
     </div>
   );
 
