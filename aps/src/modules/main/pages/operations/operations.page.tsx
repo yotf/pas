@@ -77,6 +77,7 @@ const OperationsTable: FC = () => {
           mapEntityToUiData={mapper}
           getName={getName}
           exportToExcel={exportToExcel}
+          disableExportToExcelButton={!uiData?.length}
         />
       </div>
     </ExportToExcelProvider>
