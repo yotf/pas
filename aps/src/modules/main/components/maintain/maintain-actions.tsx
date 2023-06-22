@@ -11,6 +11,7 @@ import { useFormContext } from 'react-hook-form';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
 import { MaintainContext } from './contexts/maintain.context';
 import useMaintainActions from './hooks/useMaintainActions';
+import { POFormStatus } from '@/modules/shared/consts';
 
 export type MaintainActionProps = {
   copy?: boolean;
@@ -26,6 +27,7 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
   const {
     copying,
     state: { entity },
+    ns,
   } = useContext(MaintainContext);
   const {
     formState: { isDirty, isValid },
@@ -36,6 +38,14 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
   const shouldDelete = useMemo(() => {
     return entity?.isActive || (status === undefined ? true : status === 3);
   }, [entity?.isActive, status]);
+
+  const isPlannedProductionOrder = useMemo(
+    () =>
+      ns === 'productionOrder' &&
+      !!entity?.id &&
+      entity?.statusOfPlanningEnum == POFormStatus.planned,
+    [entity?.id, entity?.statusOfPlanningEnum],
+  );
 
   return (
     <div className='maintain-actions'>
@@ -51,7 +61,7 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
         customClass='action-button'
         color='blue'
         type='button'
-        isDisabled={!isDirty || !isValid}
+        isDisabled={!isDirty || !isValid || isPlannedProductionOrder}
         onClick={onSubmit}
       >
         <div className='button-children'>
@@ -64,7 +74,7 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
           customClass='action-button'
           color='red'
           type='button'
-          isDisabled={entity?.isActive || !shouldDelete}
+          isDisabled={entity?.isActive || !shouldDelete || isPlannedProductionOrder}
           onClick={onDeleteClick}
         >
           <div className='button-children'>

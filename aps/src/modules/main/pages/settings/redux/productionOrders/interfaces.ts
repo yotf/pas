@@ -95,7 +95,7 @@ export interface ProductionOrder {
   salesOrderDto: SalesOrderDto;
   salesOrderMaterialDto: SalesOrderMaterialDto;
   materialDto: Material;
-  statusOfPlanning: POFormStatus;
+  statusOfPlanning: StatusSituation;
   situation: StatusSituation;
   pO_RoutingOperations: PORoutingOperations[];
   productionOrderTypeDto: ProductionOrderTypeDto;
