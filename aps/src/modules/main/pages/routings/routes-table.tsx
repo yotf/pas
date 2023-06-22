@@ -70,7 +70,12 @@ const RoutesTable: React.FC<Props> = ({ useActions }) => {
           <span className='subtitle'>{translate('subtitle')}</span>
         </div>
         <div className='buttons'>
-          <CustomButton type='button' color='blue' onClick={onAddOperation}>
+          <CustomButton
+            type='button'
+            color='blue'
+            onClick={onAddOperation}
+            isDisabled={!useActions}
+          >
             <div className='button-children'>
               <img src={plusIcon} alt='' />
               <span>{translate('add_operation')}</span>
