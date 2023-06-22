@@ -97,7 +97,7 @@ const Overview: FC = () => {
     },
     [dispatch],
   );
-  
+
   const mappedTables = useMappedOverviewTables(data);
 
   useEffect(() => {

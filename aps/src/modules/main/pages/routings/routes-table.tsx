@@ -18,7 +18,12 @@ import './routes-table.scss';
  * @returns Table rendered by {@link useRoutesTable} hook. The onEdit function chooses a routing route which opens {@link RoutesModal | routes modal} for editing
  * routing routes. The on delete function remove a routing route from the array which is contained in the main form (form from {@link useRoutingForm}).
  */
-const RoutesTable: FC = () => {
+
+export interface Props {
+  useActions?: boolean;
+}
+
+const RoutesTable: React.FC<Props> = ({ useActions }) => {
   const { ns } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes' });
   const { getValues, setValue } = useFormContext<RoutingFormData>();
@@ -51,7 +56,11 @@ const RoutesTable: FC = () => {
     },
     [getValues, setValue],
   );
-  const table = useRoutesTable({ onEdit: onEditOperation, onDelete: onDeleteOperation });
+  const table = useRoutesTable({
+    onEdit: onEditOperation,
+    onDelete: onDeleteOperation,
+    useActions,
+  });
 
   return (
     <div className='routes'>

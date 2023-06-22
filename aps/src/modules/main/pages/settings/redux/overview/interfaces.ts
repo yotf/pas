@@ -15,7 +15,7 @@ export interface WorkCenterExpanded extends WorkCenter {
 export interface OverviewWorkCenter {
   workCenter: WorkCenterExpanded;
   productionOrders: ProductionOrder[];
-  productionCalendar: ProductionCalendarPostResponse;
+  productionCalendars: ProductionCalendarPostResponse;
 }
 
 export interface OverviewFormData {

@@ -3,7 +3,11 @@
  */
 
 import CustomInput from '@/modules/shared/components/input/input.component';
-import { situationDropdownOptions, statusDropdownOptions } from '@/modules/shared/consts';
+import {
+  POFormStatus,
+  situationDropdownOptions,
+  statusDropdownOptions,
+} from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -79,6 +83,11 @@ const ProductionOrderForm: FC = () => {
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
   const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
+  const isPlanned = useMemo(
+    () => !!entity?.id && entity?.statusOfPlanningEnum == POFormStatus.planned,
+    [entity?.id, entity?.statusOfPlanningEnum],
+  );
+  debugger;
 
   const translateMapper = (array: DefaultOptionType[]): DefaultOptionType[] => {
     return array.map((option: DefaultOptionType) => ({
@@ -276,8 +285,8 @@ const ProductionOrderForm: FC = () => {
             name={nameof('statusOfPlanningEnum')}
             options={translateMapper(statusDropdownOptions as DefaultOptionType[])}
             isAutocomplete={true}
-            readOnly={!isEditing}
-            disabled={!isEditing}
+            readOnly={true}
+            disabled={true}
           />
           <CustomInput
             type='select'
@@ -438,7 +447,7 @@ const ProductionOrderForm: FC = () => {
           isAutocomplete={true}
         />
         <FormProvider {...form}>
-          <RoutesTable />
+          <RoutesTable useActions={!isPlanned} />
         </FormProvider>
       </div>
     </div>

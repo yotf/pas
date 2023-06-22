@@ -25,6 +25,7 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   translate,
 }: OverviewTableProps): JSX.Element => {
   const { workCenterName, tableData } = overviewTableData;
+  debugger;
 
   const { data } = useAppSelector((state) => state.overview);
 

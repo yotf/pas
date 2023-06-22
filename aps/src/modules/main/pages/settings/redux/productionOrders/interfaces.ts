@@ -1,4 +1,5 @@
 /** @module ProductionOrderIntefaces */
+import { POFormStatus } from '@/modules/shared/consts';
 import { SettingsPageItem } from '../../consts/interfaces';
 import { ChangeHistoryDto } from '../change-history.dto';
 import { Material } from '../materials/interfaces';
@@ -94,7 +95,7 @@ export interface ProductionOrder {
   salesOrderDto: SalesOrderDto;
   salesOrderMaterialDto: SalesOrderMaterialDto;
   materialDto: Material;
-  statusOfPlanning: StatusSituation;
+  statusOfPlanning: POFormStatus;
   situation: StatusSituation;
   pO_RoutingOperations: PORoutingOperations[];
   productionOrderTypeDto: ProductionOrderTypeDto;

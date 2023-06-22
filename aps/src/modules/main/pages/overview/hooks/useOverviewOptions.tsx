@@ -8,6 +8,7 @@ import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { getAllOrderTypes } from '../../settings/redux/orderTypes/thunks';
 import { getAllWorkCenters } from '../../settings/redux/workCenters/thunks';
+import { getAllProductionOrderTypes } from '../../settings/redux/productionOrderTypes/thunks';
 
 export type UseProductionCalendarOptionsReturn = {
   orderTypeOptions: DefaultOptionType[];
@@ -21,11 +22,12 @@ export const useOverviewOptions = (): UseProductionCalendarOptionsReturn => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllWorkCenters());
-    dispatch(getAllOrderTypes());
+    // dispatch(getAllOrderTypes());
+    dispatch(getAllProductionOrderTypes());
   }, [dispatch]);
 
   const { workCenters, orderTypes } = useAppSelector((state) => ({
-    orderTypes: state.orderTypes.data,
+    orderTypes: state.productionOrderTypes.data,
     workCenters: state.workCenter.data,
   }));
 

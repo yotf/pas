@@ -36,6 +36,13 @@ export enum POFormStatus {
   'planned' = 2,
   'document' = 1,
 }
+
+export enum PORoutingOperationStatus {
+  "notPlanned" = 1,
+  "schedule" = 2,
+  "cancel" = 3,
+  "executed" = 4,
+}
 /** Dropdown options made from POFormStatus enum */
 export const statusDropdownOptions: DefaultOptionType[] = [
   { label: POFormStatus[1], value: 1 },

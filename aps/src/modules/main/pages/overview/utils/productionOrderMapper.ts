@@ -11,16 +11,16 @@ export const productionOrderMapper = (
 ): OverviewProductionOrderMapped[] => {
   const productionOrderRepeatedProperties = {
     id: productionOrder?.id,
-    orderNumber: productionOrder?.salesOrderDto.orderNumber,
-    orderType: productionOrder?.salesOrderDto.orderType.name,
-    customerName: productionOrder.salesOrderDto.customer.name,
+    orderNumber: productionOrder?.productionOrder_Id,
+    orderType: productionOrder?.productionOrderTypeDto.name,
+    customerName: productionOrder.customerDto.name,
     salesOrderNumber: productionOrder.salesOrderDto.orderNumber,
-    materialName: productionOrder.salesOrderMaterialDto.material.name,
-    articleName: productionOrder.salesOrderMaterialDto.material.article.name,
-    colorName: productionOrder.salesOrderMaterialDto.material.color.name,
+    materialName: productionOrder.materialDto.name,
+    articleName: productionOrder.materialDto?.article?.name,
+    colorName: productionOrder.materialDto?.color?.name,
     foreseenDeliveryDate: dateFormatter(productionOrder.foreseenDelivery),
     quantity1: productionOrder.quantity1,
-    unitOfMeasure1: productionOrder.salesOrderMaterialDto.material.unitOfMeasure1.name,
+    unitOfMeasure1: productionOrder.materialDto?.unitOfMeasure1?.name,
     salesOrderDeliveryDate: dateFormatter(productionOrder.foreseenDelivery),
   };
 
