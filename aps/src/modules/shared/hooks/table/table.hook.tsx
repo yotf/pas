@@ -91,6 +91,7 @@ export const useTable = <T extends object>({
   const { setUiData, setSort } = useContext(ExportToExcelContext);
   const {
     state: { entity },
+    copying,
   } =
     useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
       MaintainContext,
@@ -126,7 +127,7 @@ export const useTable = <T extends object>({
         const isDisabled = disableDeleteButtonCondition?.(record);
         return (
           <Space size='middle' className='action-container'>
-            {!!entity?.id && openProductionModal && (
+            {!!entity?.id && openProductionModal && !copying && (
               <Tooltip title={translate('production_order_tooltip')}>
                 <CodeSandboxOutlined onClick={doProductionModal(value)} />
               </Tooltip>
