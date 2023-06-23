@@ -15,6 +15,10 @@ $tablet-breakpoint: 920px;
       gap: 32px;
       width: 100%;
 
+      .custom-input .label.font-validation-error + input {
+        margin-bottom:-20px;
+      }
+
       @media screen and (width < $pc-breakpoint) {
         grid-template-columns: repeat(4, 1fr);
         gap: 28px;
