@@ -88,7 +88,13 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           label={translate('operation_id')}
           name={nameof('operationId')}
         />
-        <CustomInput type='number' label={translate('sequence')} name={nameof('sequence')} />
+        <CustomInput
+          type='number'
+          label={translate('sequence')}
+          name={nameof('sequence')}
+          disabled={true}
+          readOnly={true}
+        />
         <CustomInput
           isRequired={true}
           type='number'

@@ -87,7 +87,6 @@ const ProductionOrderForm: FC = () => {
     () => !!entity?.id && entity?.statusOfPlanningEnum == POFormStatus.planned,
     [entity?.id, entity?.statusOfPlanningEnum],
   );
-  debugger;
 
   const translateMapper = (array: DefaultOptionType[]): DefaultOptionType[] => {
     return array.map((option: DefaultOptionType) => ({
