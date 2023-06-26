@@ -23,7 +23,7 @@ export interface Props {
   useActions?: boolean;
 }
 
-const RoutesTable: React.FC<Props> = ({ useActions }) => {
+const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
   const { ns } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes' });
   const { getValues, setValue } = useFormContext<RoutingFormData>();
