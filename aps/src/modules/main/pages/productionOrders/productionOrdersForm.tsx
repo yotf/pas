@@ -371,7 +371,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             isAutocomplete={true}
             handleSelectionChange={
               isEditing && !discardOperations
-                ? (value, option, id) => handleRoutingChange(value, option, 'materialId')
+                ? (value, option) => handleRoutingChange(value, option, 'materialId')
                 : undefined
             }
           />
@@ -512,7 +512,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           isAutocomplete={true}
           handleSelectionChange={
             isEditing && !discardOperations
-              ? (value, option, id) => handleRoutingChange(value, option, 'routingId')
+              ? (value, option) => handleRoutingChange(value, option, 'routingId')
               : undefined
           }
         />

@@ -71,7 +71,7 @@ export interface Input {
   /**Used for checking user value before letting it get to form */
   onKeyDownEvent?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   /** Passed for select element to handle selection change */
-  handleSelectionChange?: (value: any, option: any,id:string) => void;
+  handleSelectionChange?: (value: any, option: any) => void;
 }
 
 export interface SwitchInput {

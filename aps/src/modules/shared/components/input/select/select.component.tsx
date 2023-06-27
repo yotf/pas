@@ -26,7 +26,7 @@ export type SelectProps = HTMLAttributes<HTMLInputElement> & {
   /** Renders a clear button inside the input */
   allowClear?: boolean;
   /** Callback for handling selection change  */
-  handleSelectionChange?: (value: any, option: any, id: string) => void;
+  handleSelectionChange?: (value: any, option: any) => void;
 };
 /** A customizable select input with options provided */
 const CustomSelect: React.FC<SelectProps> = ({
