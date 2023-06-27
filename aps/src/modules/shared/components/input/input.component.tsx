@@ -42,11 +42,14 @@ const CustomInput: React.FC<Input> = ({
   onKeyDownEvent = undefined,
   autoWidth = false,
   maxLength,
+  handleSelectionChange,
 }) => {
   const {
     watch,
     formState: { errors },
   } = useFormContext();
+
+  
   placeholder = placeholder === '' ? placeholder : placeholder || label;
   const fieldName = name || register?.name || '';
   error = error || (errors[fieldName] as FieldError);
@@ -111,6 +114,7 @@ const CustomInput: React.FC<Input> = ({
             isAutocomplete={isAutocomplete}
             mode={mode}
             allowClear={allowClear}
+            handleSelectionChange={handleSelectionChange}
           ></CustomSelect>
         );
       case 'date':

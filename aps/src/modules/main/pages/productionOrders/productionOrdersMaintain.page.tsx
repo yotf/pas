@@ -3,7 +3,7 @@
  */
 
 import { useAppSelector } from '@/store/hooks';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { MaintainContextProvider } from '../../components/maintain/contexts/maintain.context';
 import MaintainHeader from '../../components/maintain/maintain-header';
@@ -40,6 +40,7 @@ const ProductionOrderMaintain: FC<ProductionOrderMaintainType> = ({
     formState: { isDirty },
   } = form;
   const ns = 'productionOrder';
+  const [discardOperations, setDiscardOperations] = useState<boolean>(false);
 
   const { onDelete, modal: deleteModal } = useEntityDeleteModal({
     ns,
@@ -50,6 +51,10 @@ const ProductionOrderMaintain: FC<ProductionOrderMaintainType> = ({
   const { redirectModal, openRedirectModal } = useRedirectModal({
     isDirty,
   });
+
+  const updateDiscardOperations = (newValue: boolean) => {
+    setDiscardOperations(newValue);
+  };
 
   const contextValue = useMemo(
     () => ({
@@ -68,7 +73,12 @@ const ProductionOrderMaintain: FC<ProductionOrderMaintainType> = ({
       <MaintainContextProvider value={contextValue}>
         <div className='maintain' data-testid='maintain'>
           <MaintainHeader />
-          {!loading && <ProductionOrderForm />}
+          {!loading && (
+            <ProductionOrderForm
+              discardOperations={discardOperations}
+              updateDiscardOperations={updateDiscardOperations}
+            />
+          )}
         </div>
         {deleteModal}
         {redirectModal}

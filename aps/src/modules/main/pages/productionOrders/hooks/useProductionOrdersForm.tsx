@@ -44,8 +44,6 @@ export const useProductionOrderForm = ({
     (obj: PORoutingOperations, i: number, arr: PORoutingOperations[]): RoutingRouteFormData => {
       const { operation, leadTime, planningDate } = obj;
 
-      debugger;
-
       return {
         ...obj,
         operationName: operation?.name,

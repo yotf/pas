@@ -1066,6 +1066,7 @@
     "colorId": "Color",
     "thicknessId": "Thickness",
     "selectionId": "Selection",
+    "change_routing_selection": "Changing the routing or material fields will revert the operations to default operations for that material/routing",
     "notification": {
       "delete_success": "Production Order has been successfully deleted",
       "delete_fail": "An error occurred while deleting the Production Order"

@@ -3,6 +3,7 @@
  */
 
 import CustomInput from '@/modules/shared/components/input/input.component';
+import warningIcon from '@/assets/warning.svg';
 import {
   POFormStatus,
   situationDropdownOptions,
@@ -13,7 +14,7 @@ import { nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/es/cascader';
 import dayjs from 'dayjs';
-import { FC, useContext, useEffect, useMemo } from 'react';
+import { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useFormContext } from 'react-hook-form';
 import {
   MaintainContext,
@@ -30,13 +31,24 @@ import { RoutingRoute, RoutingRouteFormData } from '../settings/redux/routings/i
 import { getRouting } from '../settings/redux/routings/thunks';
 import { useProductionOrderOptions } from './hooks/useProductionOrderOptions';
 import './productionOrdersForm.scss';
+import { Modal } from 'antd';
 
 /**
  * The form reuses {@link RoutesTable} logic. The useEffect hooks are used to modifiy form values which are dependent on one another (for example when material changes so does routing and that changes the routing table operations).
  * The {@link useProductionOrderOptions} hook provides options for select inputs.
  * @returns Production orders Form component with {@link Input | inputs} connected to the form returned by {@link useProductionOrderForm} hook.
  */
-const ProductionOrderForm: FC = () => {
+
+type pendingFieldType = {
+  value: number | undefined;
+  id: 'routingId' | 'materialId' | undefined;
+};
+
+type POProps = {
+  discardOperations: boolean;
+  updateDiscardOperations: (value: boolean) => void;
+};
+const ProductionOrderForm: FC<POProps> = (props) => {
   const {
     ns,
     state: { entity },
@@ -44,11 +56,14 @@ const ProductionOrderForm: FC = () => {
     useContext<
       MaintainContextValue<ProductionOrder, ProductionOrderResponse, ProductionOrderFormData>
     >(MaintainContext);
+  const { discardOperations, updateDiscardOperations } = props;
   const { translate } = useTranslate({ ns });
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: salesOrders } = useAppSelector((state) => state.salesOrders);
   const { entity: selectedRouting } = useAppSelector((state) => state.routings);
 
+  const [discardOperationModalVisible, setDiscardOperationModalVisible] = useState<boolean>(false);
+  const [pendingValue, setPendingValue] = useState<pendingFieldType>();
   const dispatch = useAppDispatch();
 
   const nameof = nameofFactory<ProductionOrderFormData>();
@@ -180,12 +195,13 @@ const ProductionOrderForm: FC = () => {
   }, [routingAddAndUpdateOperations, setValue]);
 
   useEffect(() => {
-    if (routingId && routingId !== entity?.routingId) dispatch(getRouting(routingId));
+    if (routingId && (routingId !== entity?.routingId || discardOperations)) {
+      dispatch(getRouting(routingId));
+    }
   }, [dispatch, entity?.routingId, routingId]);
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
     const initialDateString = getValues('initialDate');
-
     const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
 
     return (
@@ -220,7 +236,7 @@ const ProductionOrderForm: FC = () => {
   useEffect(() => {
     if (
       routingId &&
-      routingId !== entity?.routingId &&
+      (routingId !== entity?.routingId || discardOperations) &&
       selectedRouting?.routingOperations?.length
     ) {
       setValue(
@@ -229,6 +245,38 @@ const ProductionOrderForm: FC = () => {
       );
     }
   }, [entity?.routingId, routingId, selectedRouting, setValue]);
+
+  const handleRoutingChange = (newValue: any, option: any, id: 'routingId' | 'materialId') => {
+    if (
+      routingAddAndUpdateOperations &&
+      ((id === 'routingId' && newValue !== entity?.routingId) ||
+        (id === 'materialId' && newValue !== entity?.materialDto?.id)) &&
+      !discardOperations
+    ) {
+      // will trigger on first change
+      setDiscardOperationModalVisible(true);
+      setPendingValue({ value: newValue, id });
+    } else {
+      setValue(id, newValue);
+    }
+  };
+
+  const handleDiscardOK = () => {
+    pendingValue?.id && pendingValue?.value
+      ? setValue(pendingValue?.id, pendingValue?.value, {
+          shouldDirty: true,
+          shouldValidate: true,
+          shouldTouch: true,
+        })
+      : null;
+    setDiscardOperationModalVisible(false);
+    updateDiscardOperations(true);
+  };
+
+  const handleDiscardCancel = () => {
+    setPendingValue({ id: undefined, value: undefined });
+    setDiscardOperationModalVisible(false);
+  };
   return (
     <div className='production-order-container'>
       <div className='form-container'>
@@ -314,12 +362,18 @@ const ProductionOrderForm: FC = () => {
             disabled={true}
           />
           <CustomInput
+            key={new Date().getTime()}
             type='select'
             isRequired={true}
             label={translate('materialId')}
             name={nameof('materialId')}
             options={materialOptions}
             isAutocomplete={true}
+            handleSelectionChange={
+              isEditing && !discardOperations
+                ? (value, option, id) => handleRoutingChange(value, option, 'materialId')
+                : undefined
+            }
           />
           <CustomInput
             type='text'
@@ -435,6 +489,18 @@ const ProductionOrderForm: FC = () => {
           </div>
         </form>
       </div>
+      <Modal
+        title={translate('modal.warning')}
+        open={discardOperationModalVisible}
+        centered={true}
+        onOk={handleDiscardOK}
+        onCancel={handleDiscardCancel}
+      >
+        <div className='confirm-modal-content'>
+          <img src={warningIcon} alt={'warning'} />
+          <span>{translate('change_routing_selection')}</span>
+        </div>
+      </Modal>
       <div className='productionOrder-table'>
         <CustomInput
           type='select'
@@ -444,6 +510,11 @@ const ProductionOrderForm: FC = () => {
           width='regular'
           options={routingOptions}
           isAutocomplete={true}
+          handleSelectionChange={
+            isEditing && !discardOperations
+              ? (value, option, id) => handleRoutingChange(value, option, 'routingId')
+              : undefined
+          }
         />
         <FormProvider {...form}>
           <RoutesTable useActions={!isPlanned} />
