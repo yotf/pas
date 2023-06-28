@@ -65,6 +65,8 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           label={translate('sequence')}
           name={nameof('sequence')}
           width='full-width'
+          readOnly={true}
+          disabled={true}
         />
 
         <CustomInput

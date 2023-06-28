@@ -14,7 +14,7 @@ import { nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/es/cascader';
 import dayjs from 'dayjs';
-import { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, useContext, useEffect, useId, useMemo, useState } from 'react';
 import { FormProvider, useFormContext } from 'react-hook-form';
 import {
   MaintainContext,
@@ -362,7 +362,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             disabled={true}
           />
           <CustomInput
-            key={new Date().getTime()}
+            key={isEditing ? new Date().getTime() : useId()} //uniqueId to force re-render on change of discardOperations state
             type='select'
             isRequired={true}
             label={translate('materialId')}
