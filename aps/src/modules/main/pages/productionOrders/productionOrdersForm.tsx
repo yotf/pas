@@ -47,6 +47,7 @@ type pendingFieldType = {
 type POProps = {
   discardOperations: boolean;
   updateDiscardOperations: (value: boolean) => void;
+  copy: boolean | undefined;
 };
 const ProductionOrderForm: FC<POProps> = (props) => {
   const {
@@ -56,7 +57,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     useContext<
       MaintainContextValue<ProductionOrder, ProductionOrderResponse, ProductionOrderFormData>
     >(MaintainContext);
-  const { discardOperations, updateDiscardOperations } = props;
+  const { discardOperations, updateDiscardOperations, copy } = props;
   const { translate } = useTranslate({ ns });
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: salesOrders } = useAppSelector((state) => state.salesOrders);
@@ -94,13 +95,15 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     routingId,
     salesOrderDelivery,
     routingAddAndUpdateOperations,
+    statusOfPlanningEnum,
+    initialDate,
   } = watch();
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
   const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
   const isPlanned = useMemo(
-    () => !!entity?.id && entity?.statusOfPlanningEnum == POFormStatus.planned,
-    [entity?.id, entity?.statusOfPlanningEnum],
+    () => !!entity?.id && statusOfPlanningEnum == POFormStatus.planned,
+    [entity?.id, entity?.statusOfPlanningEnum, statusOfPlanningEnum],
   );
 
   const translateMapper = (array: DefaultOptionType[]): DefaultOptionType[] => {
@@ -157,7 +160,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     if (!salesOrderDelivery) setValue('salesOrderDelivery', undefined);
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
-  const initialDate = getValues('initialDate');
   useEffect(() => {
     const maxOperation =
       routingAddAndUpdateOperations && routingAddAndUpdateOperations?.length > 0
@@ -231,7 +233,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
       leadTime,
     }));
     setValue('routingAddAndUpdateOperations', withPlannedDate);
-  }, [routingAddAndUpdateOperations?.length]);
+  }, [routingAddAndUpdateOperations?.length, initialDate, copy]);
 
   useEffect(() => {
     if (

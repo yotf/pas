@@ -77,6 +77,7 @@ const ProductionOrderMaintain: FC<ProductionOrderMaintainType> = ({
             <ProductionOrderForm
               discardOperations={discardOperations}
               updateDiscardOperations={updateDiscardOperations}
+              copy={copy}
             />
           )}
         </div>

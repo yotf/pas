@@ -31,6 +31,7 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
   } = useContext(MaintainContext);
   const {
     formState: { isDirty, isValid },
+    watch,
   } = useFormContext();
 
   const status = useMemo(() => entity?.status, [entity?.status]);
@@ -39,12 +40,15 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
     return entity?.isActive || (status === undefined ? true : status === 3);
   }, [entity?.isActive, status]);
 
+  const { statusOfPlanningEnum } = watch();
+
   const isPlannedProductionOrder = useMemo(
     () =>
       ns === 'productionOrder' &&
       !!entity?.id &&
-      entity?.statusOfPlanningEnum == POFormStatus.planned,
-    [entity?.id, entity?.statusOfPlanningEnum],
+      //     (entity?.statusOfPlanningEnum === POFormStatus.planned &&
+      statusOfPlanningEnum === POFormStatus.planned,
+    [(entity?.id, entity?.statusOfPlanningEnum), statusOfPlanningEnum],
   );
 
   return (

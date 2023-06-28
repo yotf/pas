@@ -54,7 +54,7 @@ export const useProductionOrderForm = ({
         planningDate: planningDate,
         executedDate: undefined,
         operationTime: 0,
-        pO_OperationStatusEnum: arr[i].pO_OperationStatusEnum ?? 1,
+        pO_OperationStatusEnum: copy ? undefined : arr[i].pO_OperationStatusEnum ?? 1,
         leadTime,
       };
     },
@@ -108,7 +108,7 @@ export const useProductionOrderForm = ({
               salesOrderMaterialId: entity.salesOrderMaterialId,
               materialId: entity.materialDto?.id,
               routingId: entity.routingId,
-              initialDate: entity.initialDate ?? undefined,
+              initialDate: copy ? dayjs().add(1, 'day').format() : entity.initialDate ?? undefined,
               finalDelivery: entity.finalDelivery ?? undefined,
               foreseenDeliveryPOOrigin: entity.foreseenDeliveryPOOrigin ?? undefined,
               foreseenDelivery: entity.foreseenDelivery ?? undefined,
