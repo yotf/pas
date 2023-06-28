@@ -98,7 +98,7 @@ export const useProductionOrderForm = ({
             }
           : {
               id: copy ? 0 : entity.id,
-              statusOfPlanningEnum: entity.statusOfPlanningEnum,
+              statusOfPlanningEnum: copy ? 1 : entity.statusOfPlanningEnum,
               situationEnum: entity.situationEnum,
               productionOrderTypeId: entity.productionOrderTypeId,
               customerId: entity.salesOrderDto?.customerId,
