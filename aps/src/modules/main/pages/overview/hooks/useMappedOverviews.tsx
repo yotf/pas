@@ -22,7 +22,7 @@ export const useMappedOverviewTables = (data: OverviewWorkCenter[]): MappedOverv
   const mappedTables: MappedOverviewTable[] = [];
 
   while (i < data.length) {
-    const mappedTable = data[i].productionOrders.map(productionOrderMapper).flat();
+    const mappedTable = data[i].pO_RoutingOperations.map(productionOrderMapper);
     mappedTables.push({ workCenterName: data[i].workCenter.name, tableData: mappedTable });
     i++;
   }

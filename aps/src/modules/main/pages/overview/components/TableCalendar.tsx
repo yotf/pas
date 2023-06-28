@@ -19,9 +19,9 @@ export type TableCalendarType = {
  * The data is passed down to {@link CalendarBody} and {@link TableHeader} for rendering
  */
 const TableCalendar: FC<TableCalendarType> = ({ calendarData }: TableCalendarType) => {
-  const { productionOrders, productionCalendar } = calendarData!;
+  const { pO_RoutingOperations, productionCalendars } = calendarData!;
   const [currentDay, setCurrentDay] = useState(dayjs().get('day'));
-  const allProductionCalendarDays = Object.values(productionCalendar.productionCalendars).flat();
+  const allProductionCalendarDays = Object.values(productionCalendars);
 
   const activeWeek = useMemo(() => {
     const monday = dayjs().subtract(currentDay - 1, 'days');
@@ -34,10 +34,10 @@ const TableCalendar: FC<TableCalendarType> = ({ calendarData }: TableCalendarTyp
     return currentWeek;
   }, [currentDay]);
 
-  const { allOperations, weekWithWorkingDayinfo } = useCalendarOperations({
+  const { operationsWithDelayInfo, weekWithWorkingDayinfo } = useCalendarOperations({
     activeWeek,
     allProductionCalendarDays,
-    productionOrders,
+    pO_RoutingOperations,
   });
 
   return (
@@ -46,10 +46,10 @@ const TableCalendar: FC<TableCalendarType> = ({ calendarData }: TableCalendarTyp
         <CalendarHeader
           activeWeek={activeWeek}
           allProductionCalendarDays={allProductionCalendarDays}
-          allProductionOrderOperations={allOperations}
+          allProductionOrderOperations={operationsWithDelayInfo}
         />
         <CalendarBody
-          allProductionOrderOperations={allOperations}
+          allProductionOrderOperations={operationsWithDelayInfo}
           weekWithWorkingDays={weekWithWorkingDayinfo}
         />
       </table>

@@ -4,12 +4,15 @@
 
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import { PORoutingOperations } from '../../settings/redux/productionOrders/interfaces';
+import {
+  OverviewPORoutingOperationAddAndUpdate,
+  PORoutingOperations,
+} from '../../settings/redux/productionOrders/interfaces';
 import { TableCellData } from '../utils/interfaces';
 import { v4 as uuid } from 'uuid';
 
 export type CalendarBodyProps = {
-  allProductionOrderOperations: PORoutingOperations[];
+  allProductionOrderOperations: OverviewPORoutingOperationAddAndUpdate[];
   weekWithWorkingDays: TableCellData[];
 };
 /**
@@ -22,6 +25,7 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
   allProductionOrderOperations,
   weekWithWorkingDays,
 }): JSX.Element => {
+  debugger;
   const tableBody = (
     <tbody>
       {allProductionOrderOperations.map((poOperation) => {
@@ -32,7 +36,7 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
                 <td
                   className={`${dayjs(poOperation.executedDate).isAfter(dayjs())} ${
                     day.isWorkingDay
-                  }`}
+                  } ${poOperation.isDelayed}`}
                 >
                   {poOperation.operationTime}
                 </td>

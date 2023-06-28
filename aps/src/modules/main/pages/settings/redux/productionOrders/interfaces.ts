@@ -25,6 +25,12 @@ export interface PORoutingOperationAddAndUpdate {
   executedDate: string;
 }
 
+export interface OverviewPORoutingOperationAddAndUpdate extends PORoutingOperationAddAndUpdate {
+  productionOrder: ProductionOrder;
+  operation: Operation;
+  isDelayed?: string;
+}
+
 export interface ProductionOrderTypeDto {
   changeHistoryDto: ChangeHistoryDto;
   code: string;
