@@ -5,7 +5,7 @@
 import CustomButton from '@/modules/shared/components/button/button.component';
 import { Status, statusOptions } from '@/modules/shared/consts';
 import { DefaultOptionType } from 'antd/es/select';
-import { FC, useContext, useMemo } from 'react';
+import { FC, useContext, useEffect, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
@@ -22,6 +22,9 @@ import {
 import { useSalesOrderOptions } from './hooks/useSalesOrderOptions';
 import './salesOrder-form.scss';
 import { useSalesOrderMaterialsModal } from './salesOrderMaterials-table';
+import dayjs from 'dayjs';
+import { SalesOrderMaterialDto } from '../settings/redux/productionOrders/interfaces';
+import { latest } from 'immer/dist/internal';
 /**
  * @returns Sales Order Form component with {@link Input | inputs} connected to the form returned by {@link useSalesOrderForm} hook.
  */
@@ -41,9 +44,9 @@ const SalesOrderForm: FC = () => {
 
   const { tableAndModal, onAddMaterial } = useSalesOrderMaterialsModal();
 
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
-  const { status } = watch();
+  const { status, salesOrderMaterialsAddAndUpdate } = watch();
 
   const isFormActive = useMemo(() => {
     return status === 1;
@@ -59,6 +62,25 @@ const SalesOrderForm: FC = () => {
       })),
     [translate],
   );
+
+  useEffect(() => {
+    console.log(salesOrderMaterialsAddAndUpdate);
+
+    const latestRequestedDate = salesOrderMaterialsAddAndUpdate?.reduce(
+      (latest: SalesOrderMaterialDto, material: SalesOrderMaterialDto) => {
+        const currentDate = dayjs(material.requestedDelivery);
+        return !latest || currentDate.isAfter(latest.requestedDelivery) ? currentDate : latest;
+      },
+      null,
+    );
+
+    setValue('salesOrderDelivery', latestRequestedDate?.toISOString());
+    // const latestDate = objects.reduce((latest, obj) => {
+    //   const currentDate = dayjs(obj.date);
+    //   return !latest || currentDate.isAfter(latest) ? currentDate : latest;
+    // }, null);
+    //setValue('salesOrderDelivery', sa);
+  }, [salesOrderMaterialsAddAndUpdate, setValue]);
 
   return (
     <div className='sales-order-container'>

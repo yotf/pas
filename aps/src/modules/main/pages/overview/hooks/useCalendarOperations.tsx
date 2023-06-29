@@ -38,7 +38,7 @@ export const useCalendarOperations = ({
   const lastOperation = pO_RoutingOperations[pO_RoutingOperations.length - 1];
   const operationsWithDelayInfo: OverviewPORoutingOperationAddAndUpdate[] =
     pO_RoutingOperations.map((operation) => {
-      const operationDate = dayjs(operation.planningDate); // TODO foreseen delivery date? 
+      const operationDate = dayjs(operation.foreseenDeliveryDate); // TODO foreseen delivery date?
       let backgroundColor = dayjs(
         operation.productionOrder.salesOrderDto.salesOrderDelivery,
       ).isAfter(operationDate, 'day')

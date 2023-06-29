@@ -289,7 +289,11 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           onSubmit={(e): void => e.preventDefault()}
         >
           <div className='id-container'>
-            <CustomInput type='readonly' label={translate('id')} name={nameof('id')} />
+            <CustomInput
+              type='readonly'
+              label={translate('orderNumber')}
+              name={nameof('orderNumber')}
+            />
             <CustomInput
               type='readonly'
               label={translate('creationDate')}
@@ -303,11 +307,15 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             name={nameof('customerId')}
             options={customerOptions}
             isAutocomplete={true}
+            readOnly={isPlanned}
+            disabled={isPlanned}
           />
           <CustomInput
             type='text'
             label={translate('customerOrderNumber')}
             name={nameof('customerOrderNumber')}
+            readOnly={isPlanned}
+            disabled={isPlanned}
           />
           <CustomInput
             type='select'
@@ -316,14 +324,16 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             name={nameof('salesOrderId')}
             options={salesOrderOptions}
             isAutocomplete={true}
+            readOnly={isPlanned}
+            disabled={isPlanned}
           />
           <CustomInput
             type='date'
             label={translate('initialDate')}
             name={nameof('initialDate')}
             isRequired={true}
-            readOnly={initialDateDisabled}
-            disabled={initialDateDisabled}
+            readOnly={initialDateDisabled || isPlanned}
+            disabled={initialDateDisabled || isPlanned}
             disableDatesFrom={dayjs().subtract(1, 'day')}
           />
 
@@ -344,8 +354,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             name={nameof('situationEnum')}
             options={translateMapper(situationDropdownOptions as DefaultOptionType[])}
             isAutocomplete={true}
-            readOnly={!isEditing}
-            disabled={!isEditing}
+            readOnly={!isEditing || isPlanned}
+            disabled={!isEditing || isPlanned}
           />
           <CustomInput
             type='select'
@@ -353,9 +363,17 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             label={translate('productionOrderTypeId')}
             name={nameof('productionOrderTypeId')}
             options={orderTypeOptions}
+            readOnly={isPlanned}
+            disabled={isPlanned}
           />
 
-          <CustomInput type='text' label={translate('origin')} name={nameof('origin')} />
+          <CustomInput
+            type='text'
+            label={translate('origin')}
+            name={nameof('origin')}
+            disabled={isPlanned}
+            readOnly={isPlanned}
+          />
           <CustomInput
             type='date'
             label={translate('salesOrderDelivery')}
@@ -376,12 +394,16 @@ const ProductionOrderForm: FC<POProps> = (props) => {
                 ? (value, option) => handleRoutingChange(value, option, 'materialId')
                 : undefined
             }
+            readOnly={isPlanned}
+            disabled={isPlanned}
           />
           <CustomInput
             type='text'
             label={translate('quantity1')}
             name={nameof('quantity1')}
             isRequired={true}
+            readOnly={isPlanned}
+            disabled={isPlanned}
           />
           <CustomInput
             type='select'
@@ -411,6 +433,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             label={translate('quantity2')}
             name={nameof('quantity2')}
             readOnly
+            disabled={true}
           />
           <CustomInput
             type='select'
@@ -512,6 +535,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           width='regular'
           options={routingOptions}
           isAutocomplete={true}
+          readOnly={isPlanned}
+          disabled={isPlanned}
           handleSelectionChange={
             isEditing && !discardOperations
               ? (value, option) => handleRoutingChange(value, option, 'routingId')

@@ -49,6 +49,7 @@ export const UseSalesOrderForm = ({
             status: 1,
             remark: '',
             salesOrderMaterialsAddAndUpdate: [],
+            salesOrderDelivery: undefined,
           }
         : {
             id: copy ? 0 : entity.id,
@@ -58,6 +59,7 @@ export const UseSalesOrderForm = ({
             customerOrderNumber: entity.customerOrderNumber,
             status: entity.status,
             remark: entity.remark,
+            salesOrderDelivery: entity.salesOrderDelivery,
             salesOrderMaterialsAddAndUpdate:
               entity.salesOrderMaterials?.map(
                 ({ material, requestedDelivery, tanneryDelivery, id, ...rest }, i) => ({

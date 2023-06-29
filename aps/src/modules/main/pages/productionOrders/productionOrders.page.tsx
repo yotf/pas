@@ -16,13 +16,14 @@ import { useAppDispatch } from '@/store/hooks';
 import { CombinedState } from '@reduxjs/toolkit';
 import { DefaultOptionType } from 'antd/es/select';
 import { RefTable } from 'antd/es/table/interface';
-import { FC, Key, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, Key, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { StoreType } from '../../../../store';
 import { ExportToExcelProvider } from '../../components/maintain/contexts/exportToExcel.context';
 import PageTable from '../../components/table/page-table.component';
 import {
   ProductionOrder,
+  ProductionOrderFormData,
   ProductionOrderMapped,
 } from '../settings/redux/productionOrders/interfaces';
 import { StatusUpdateData } from '../settings/redux/productionOrders/productionOrdersStatus/interfaces';
@@ -88,7 +89,7 @@ const ProductionOrdersTable: FC = () => {
       quantity2: obj.quantity2,
       unitOfMeasure2: obj.unitOfMeasure2?.name,
       quantity3: obj.quantity3,
-      salesOrderDeliveryDate: obj.salesOrderDto?.salesOrderDelivery,
+      salesOrderDeliveryDate: dateFormatter(obj.salesOrderDto?.salesOrderDelivery),
       initialPlanningDate: dateFormatter(obj.initialDate),
       POFinalDeliveryDate: dateFormatter(obj.finalDelivery),
       POPosition: 'Added later',

@@ -23,7 +23,7 @@ export const productionOrderMapper = (
     foreseenDeliveryDate: dateFormatter(productionOrder.foreseenDelivery),
     quantity1: productionOrder.quantity1,
     unitOfMeasure1: productionOrder.materialDto?.unitOfMeasure1?.name,
-    salesOrderDeliveryDate: dateFormatter(productionOrder.foreseenDelivery),
+    salesOrderDeliveryDate: dateFormatter(productionOrder.salesOrderDto.salesOrderDelivery),
     operationName: productionOrderOperation.operation.name,
     operationId: productionOrderOperation.operation.operation_Id,
     estimatedTime: productionOrder.quantity1 * Number(productionOrderOperation.operationTime),

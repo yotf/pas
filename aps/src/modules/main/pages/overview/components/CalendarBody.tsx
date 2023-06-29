@@ -25,7 +25,6 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
   allProductionOrderOperations,
   weekWithWorkingDays,
 }): JSX.Element => {
-  debugger;
   const tableBody = (
     <tbody>
       {allProductionOrderOperations.map((poOperation) => {

@@ -29,6 +29,7 @@ export interface OverviewPORoutingOperationAddAndUpdate extends PORoutingOperati
   productionOrder: ProductionOrder;
   operation: Operation;
   isDelayed?: string;
+  foreseenDeliveryDate: string;
 }
 
 export interface ProductionOrderTypeDto {
