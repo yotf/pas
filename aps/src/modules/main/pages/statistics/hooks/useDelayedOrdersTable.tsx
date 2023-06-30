@@ -14,18 +14,17 @@ export const useDelayedOrders = (): JSX.Element => {
 
   const { translate } = useTranslate({ ns: 'statistics' });
 
-  const mapper = useCallback(
-    (obj: DelayedOrder): DelayedOrderMapped => ({
+  const mapper = useCallback((obj: DelayedOrder): DelayedOrderMapped => {
+    return {
       sequence: obj.sequence,
       salesOrderNumber: obj.salesOrderNumber,
-      customerName: obj.customer.name,
-      materialName: obj.material.name,
+      customerName: obj.customer,
+      materialName: obj.material,
       quantity: obj.quantity,
-      foreseenDelivery: dateFormatter(obj.foreseenDelivery),
+      foreseenDelivery: dateFormatter(obj.forseenDelivery),
       salesOrderDelivery: dateFormatter(obj.salesOrderDelivery),
-    }),
-    [],
-  );
+    };
+  }, []);
 
   const delayedOrdersTable = useTable({
     rowKey: 'salesOrderNumber',

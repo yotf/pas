@@ -30,13 +30,23 @@ export interface StatisticsGeneratedData {
   workCentersData: WorkCenterStatistics[];
 }
 /**Delayed order recieved from the API */
+// export interface DelayedOrder {
+// sequence: number;
+// salesOrderNumber: number;
+// customer: SettingsPageItem;
+// material: Material;
+// quantity: number;
+// foreseenDelivery: string;
+// salesOrderDelivery: string;
+// }
+
 export interface DelayedOrder {
   sequence: number;
   salesOrderNumber: number;
-  customer: SettingsPageItem;
-  material: Material;
+  customer: string;
+  material: string;
   quantity: number;
-  foreseenDelivery: string;
+  forseenDelivery: string;
   salesOrderDelivery: string;
 }
 /**Delayed order shown in the table delayed orders table */
