@@ -4,12 +4,11 @@
 
 import dayjs from 'dayjs';
 import { FC } from 'react';
-import {
-  OverviewPORoutingOperationAddAndUpdate,
-  PORoutingOperations,
-} from '../../settings/redux/productionOrders/interfaces';
+
 import { TableCellData } from '../utils/interfaces';
 import { v4 as uuid } from 'uuid';
+import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
+import { OverviewPORoutingOperationAddAndUpdate } from '../../settings/redux/productionOrders/interfaces';
 
 export type CalendarBodyProps = {
   allProductionOrderOperations: OverviewPORoutingOperationAddAndUpdate[];

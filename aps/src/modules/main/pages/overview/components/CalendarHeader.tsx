@@ -6,10 +6,9 @@ import dayjs from 'dayjs';
 import { FC } from 'react';
 import { v4 as uuid } from 'uuid';
 import { ProductionCalendarDay } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
-import {
-  OverviewPORoutingOperationAddAndUpdate,
-  PORoutingOperations,
-} from '../../settings/redux/productionOrders/interfaces';
+
+import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
+import { OverviewPORoutingOperationAddAndUpdate } from '../../settings/redux/productionOrders/interfaces';
 
 export type CalendarHeaderProps = {
   activeWeek: dayjs.Dayjs[];

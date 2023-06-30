@@ -3,12 +3,12 @@
  */
 
 import { dateFormatter } from '@/modules/shared/utils/utils';
-import { OverviewProductionOrderMapped } from '../../settings/redux/overview/interfaces';
+import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
 import { OverviewPORoutingOperationAddAndUpdate, ProductionOrder } from '../../settings/redux/productionOrders/interfaces';
 
 export const productionOrderMapper = (
   productionOrderOperation: OverviewPORoutingOperationAddAndUpdate,
-): OverviewProductionOrderMapped => {
+): OverviewProductionOrderOperationMapped => {
 
   const productionOrder = productionOrderOperation.productionOrder;
  return ({
@@ -30,7 +30,11 @@ export const productionOrderMapper = (
     setupTime: Number(productionOrderOperation.setupTime) || 1,
     PODelivery: productionOrderOperation?.executedDate ? "" : dateFormatter(productionOrderOperation.planningDate), //TODO check
     POPosition: productionOrderOperation.executedDate === '' ? dateFormatter(productionOrderOperation.executedDate) : '',
-    calendarName:'Calendar'
+    operationTime: productionOrderOperation.operationTime,
+    calendarName: 'Calendar',
+    planningDate: productionOrderOperation.planningDate,
+   salesOrderDelivery: productionOrder?.salesOrderDto?.salesOrderDelivery,
+   executedDate: productionOrderOperation?.executedDate,
   });
 
 

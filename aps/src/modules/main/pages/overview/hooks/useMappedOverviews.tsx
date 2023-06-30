@@ -4,13 +4,13 @@
 
 import {
   OverviewWorkCenter,
-  OverviewProductionOrderMapped,
+  OverviewProductionOrderOperationMapped,
 } from '../../settings/redux/overview/interfaces';
 import { productionOrderMapper } from '../utils/productionOrderMapper';
 
 export type MappedOverviewTable = {
   workCenterName: string;
-  tableData: OverviewProductionOrderMapped[];
+  tableData: OverviewProductionOrderOperationMapped[];
 };
 /**
  *

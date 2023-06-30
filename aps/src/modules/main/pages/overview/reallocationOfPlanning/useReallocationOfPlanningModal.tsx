@@ -11,7 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { OverviewProductionOrderMapped } from '../../settings/redux/overview/interfaces';
+import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
 import { getAllProductionOrders } from '../../settings/redux/productionOrders/thunks';
 import { ReallocationOfPlanningForm } from '../../settings/redux/reallocationOfPlanning/interfaces';
 import { ConfirmationModal } from './hooks/ConfirmationModal';
@@ -24,7 +24,7 @@ import { Modal } from 'antd';
 
 export type UseRedirectModalReturnType = {
   reallocationModal: JSX.Element;
-  openReallocationModal: (selectedOperation: OverviewProductionOrderMapped) => void;
+  openReallocationModal: (selectedOperation: OverviewProductionOrderOperationMapped) => void;
 };
 /**
  *
@@ -57,7 +57,7 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
     setIsOpen(false);
   }, []);
   const openReallocationModal = useCallback(
-    (selectedOperation: OverviewProductionOrderMapped): void => {
+    (selectedOperation: OverviewProductionOrderOperationMapped): void => {
       setIsOpen(true);
       setSelectedPOid(selectedOperation.id);
     },

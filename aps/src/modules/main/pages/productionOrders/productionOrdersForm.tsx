@@ -68,6 +68,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const nameof = nameofFactory<ProductionOrderFormData>();
+  debugger;
 
   const {
     customerOptions,
@@ -161,6 +162,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
   useEffect(() => {
+    debugger;
     const maxOperation =
       routingAddAndUpdateOperations && routingAddAndUpdateOperations?.length > 0
         ? routingAddAndUpdateOperations?.reduce(
@@ -189,6 +191,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [materialId, setValue]);
 
   useEffect(() => {
+    debugger;
     setValue('pO_RoutingOperationAddAndUpdateDtos', routingAddAndUpdateOperations, {
       shouldValidate: true,
       shouldDirty: true,
@@ -224,6 +227,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   };
 
   useEffect(() => {
+    debugger;
     const initialDateString = getValues('initialDate');
     const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
     const withPlannedDate = routingAddAndUpdateOperations?.map(({ leadTime, ...rest }) => ({
@@ -232,10 +236,11 @@ const ProductionOrderForm: FC<POProps> = (props) => {
         initialDate && leadTime ? initialDate.add(leadTime, 'days').format() : undefined,
       leadTime,
     }));
-    setValue('routingAddAndUpdateOperations', withPlannedDate);
-  }, [routingAddAndUpdateOperations?.length, initialDate, copy]);
+    setValue('pO_RoutingOperationAddAndUpdateDtos', withPlannedDate);
+  }, [routingAddAndUpdateOperations, initialDate, copy]);
 
   useEffect(() => {
+    debugger;
     if (
       routingId &&
       (routingId !== entity?.routingId || discardOperations) &&
@@ -510,6 +515,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               label={translate('remark')}
               name={nameof('remark')}
               width={'full-width'}
+              disabled={isPlanned}
+              readOnly={isPlanned}
             />
           </div>
         </form>

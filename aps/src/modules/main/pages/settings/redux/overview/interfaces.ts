@@ -14,7 +14,7 @@ export interface WorkCenterExpanded extends WorkCenter {
 /** Represents one work center table shown in {@link OverviewPage} */
 export interface OverviewWorkCenter {
   workCenter: WorkCenterExpanded;
-  pO_RoutingOperations: OverviewPORoutingOperationAddAndUpdate[];
+  pO_RoutingOperations:  OverviewPORoutingOperationAddAndUpdate[];
  // productionOrders: ProductionOrder[];
   productionCalendars: ProductionCalendarPostResponse;
 }
@@ -29,7 +29,7 @@ export interface OverviewFormData {
 /**
  * One table row shown in one overview work center table
  */
-export interface OverviewProductionOrderMapped {
+export interface OverviewProductionOrderOperationMapped {
   id: number;
   orderNumber: number;
   orderType: string;
@@ -50,6 +50,11 @@ export interface OverviewProductionOrderMapped {
   POPosition: string;
   calendarName: string;
   guid?: string;
+  operationTime: number | string | undefined;
+  isDelayed?: string;
+  planningDate: string;
+  salesOrderDelivery: string;
+  executedDate?: string;
 }
 
 export interface OverviewResponse extends BaseResponse {

@@ -7,7 +7,7 @@ import { useAppSelector } from '@/store/hooks';
 import { BranchesOutlined } from '@ant-design/icons';
 import { Empty, Space, Table } from 'antd';
 import { FC, useMemo, useState } from 'react';
-import { OverviewProductionOrderMapped } from '../../settings/redux/overview/interfaces';
+import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
 import { MappedOverviewTable } from '../hooks/useMappedOverviews';
 import { useReallocationOfPlanningModal } from '../reallocationOfPlanning/useReallocationOfPlanningModal';
 import TableCalendar from './TableCalendar';
@@ -36,7 +36,7 @@ export const OverviewTable: FC<OverviewTableProps> = ({
     title: translate('action'),
     key: 'action',
     width: 100,
-    render: (value: OverviewProductionOrderMapped) => {
+    render: (value: OverviewProductionOrderOperationMapped) => {
       return (
         <Space size='middle' className='action-container'>
           <BranchesOutlined onClick={(): void => openReallocationModal(value)} />

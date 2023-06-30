@@ -4,13 +4,28 @@
 
 import dayjs, { Dayjs } from 'dayjs';
 import { FC, useMemo, useState } from 'react';
-import { OverviewWorkCenter } from '../../settings/redux/overview/interfaces';
+import {
+  OverviewProductionOrderOperationMapped,
+  OverviewWorkCenter,
+  WorkCenterExpanded,
+} from '../../settings/redux/overview/interfaces';
 import { useCalendarOperations } from '../hooks/useCalendarOperations';
 import { CalendarBody } from './CalendarBody';
 import { CalendarHeader } from './CalendarHeader';
+import { ProductionCalendarPostResponse } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
+import { OverviewPORoutingOperationAddAndUpdate } from '../../settings/redux/productionOrders/interfaces';
+import { useFormContext } from 'react-hook-form';
+import { init } from 'i18next';
+
+export type OverviewWorkCenterCalendar = {
+  workCenter: WorkCenterExpanded;
+  pO_RoutingOperations: OverviewPORoutingOperationAddAndUpdate[];
+  // productionOrders: ProductionOrder[];
+  productionCalendars: ProductionCalendarPostResponse;
+};
 
 export type TableCalendarType = {
-  calendarData: OverviewWorkCenter | undefined;
+  calendarData: OverviewWorkCenterCalendar | undefined;
 };
 /**
  *
@@ -20,19 +35,35 @@ export type TableCalendarType = {
  */
 const TableCalendar: FC<TableCalendarType> = ({ calendarData }: TableCalendarType) => {
   const { pO_RoutingOperations, productionCalendars } = calendarData!;
-  const [currentDay, setCurrentDay] = useState(dayjs().get('day'));
+  const { watch } = useFormContext();
+  const { initialDate, finalDate } = watch();
+  const [currentDay, setCurrentDay] = useState(dayjs(initialDate).get('day'));
   const allProductionCalendarDays = Object.values(productionCalendars);
 
+ 
+
+  // const activeWeek = useMemo(() => {
+  //   const monday = dayjs().subtract(currentDay - 1, 'days');
+  //   const currentWeek: Dayjs[] = [];
+
+  //   for (let i = 0; i < 7; i++) {
+  //     currentWeek.splice(i, 0, monday.add(i, 'days'));
+  //   }
+
+  //   return currentWeek;
+  // }, [currentDay]);
+
   const activeWeek = useMemo(() => {
-    const monday = dayjs().subtract(currentDay - 1, 'days');
-    const currentWeek: Dayjs[] = [];
-
-    for (let i = 0; i < 7; i++) {
-      currentWeek.splice(i, 0, monday.add(i, 'days'));
+    let dateArray = [];
+    for (
+      let date = dayjs(initialDate);
+      date.isBefore(finalDate) || date.isSame(finalDate);
+      date = date.add(1, 'day')
+    ) {
+      dateArray.push(date);
     }
-
-    return currentWeek;
-  }, [currentDay]);
+    return dateArray;
+  }, [initialDate, finalDate]);
 
   const { operationsWithDelayInfo, weekWithWorkingDayinfo } = useCalendarOperations({
     activeWeek,

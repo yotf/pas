@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { STATISTICS_PAGE } from '../../consts/pageRouter';
 import {
   OverviewFormData,
-  OverviewProductionOrderMapped,
+  OverviewProductionOrderOperationMapped,
 } from '../settings/redux/overview/interfaces';
 import { clearData } from '../settings/redux/overview/slice';
 import { getAllOverviewCenters } from '../settings/redux/overview/thunks';
@@ -41,7 +41,7 @@ const Overview: FC = () => {
   const { data } = useAppSelector((state) => state.overview);
 
   const columnsOrder = useCallback(
-    (): (keyof OverviewProductionOrderMapped)[] => [
+    (): (keyof OverviewProductionOrderOperationMapped)[] => [
       'orderNumber',
       'orderType',
       'customerName',
