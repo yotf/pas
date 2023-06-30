@@ -52,6 +52,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
       availableMinutes: availableMinutes,
       isOverbooked: totalAllocatedTime === availableMinutes ? '' : isCenterTooBusy,
       isWorkingDay: isWorkingDay,
+      totalAllocatedTime,
     };
   });
 
@@ -61,7 +62,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
         <th key={uuid()} className={day.isWorkingDay}>
           <span>{day.date.format('DD/MM').replace('/', '.')}</span>
           <br />
-          <span className={day.isOverbooked}>{day.availableMinutes}</span>
+          <span className={day.isOverbooked}>{day.totalAllocatedTime}</span>
         </th>
       ))}
     </thead>

@@ -3,7 +3,7 @@
  */
 
 import dayjs, { Dayjs } from 'dayjs';
-import { FC, useMemo, useState } from 'react';
+import { FC, useContext, useMemo, useState } from 'react';
 import {
   OverviewProductionOrderOperationMapped,
   OverviewWorkCenter,
@@ -16,6 +16,7 @@ import { ProductionCalendarPostResponse } from '../../settings/redux/productionC
 import { OverviewPORoutingOperationAddAndUpdate } from '../../settings/redux/productionOrders/interfaces';
 import { useFormContext } from 'react-hook-form';
 import { init } from 'i18next';
+import { OverviewContextValue, OverviewContext } from '../context/overview.context';
 
 export type OverviewWorkCenterCalendar = {
   workCenter: WorkCenterExpanded;
@@ -40,8 +41,6 @@ const TableCalendar: FC<TableCalendarType> = ({ calendarData }: TableCalendarTyp
   const [currentDay, setCurrentDay] = useState(dayjs(initialDate).get('day'));
   const allProductionCalendarDays = Object.values(productionCalendars);
 
- 
-
   // const activeWeek = useMemo(() => {
   //   const monday = dayjs().subtract(currentDay - 1, 'days');
   //   const currentWeek: Dayjs[] = [];
@@ -63,7 +62,7 @@ const TableCalendar: FC<TableCalendarType> = ({ calendarData }: TableCalendarTyp
       dateArray.push(date);
     }
     return dateArray;
-  }, [initialDate, finalDate]);
+  }, [calendarData]);
 
   const { operationsWithDelayInfo, weekWithWorkingDayinfo } = useCalendarOperations({
     activeWeek,

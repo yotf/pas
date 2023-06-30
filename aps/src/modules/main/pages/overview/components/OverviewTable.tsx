@@ -59,7 +59,13 @@ export const OverviewTable: FC<OverviewTableProps> = ({
       <div className='calendar-wrapper'>
         {tableData.length ? (
           <>
-            <Table columns={columns} dataSource={tableData} rowKey={'id'} pagination={false} />
+            <Table
+              columns={columns}
+              dataSource={tableData}
+              rowKey={'id'}
+              pagination={false}
+              key={new Date().getTime()}
+            />
             <div className={`calendar ${toggleCalendar ? 'calendar-open' : ''}`}>
               <button onClick={(): void => setToggleCalendar(!toggleCalendar)}>
                 {toggleCalendar ? '>' : '<'}

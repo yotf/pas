@@ -36,7 +36,6 @@ export const useCalendarOperations = ({
   allProductionCalendarDays,
   pO_RoutingOperations,
 }: UseCalendarOperationsProps): UseCalendarOperationsReturn => {
-  const lastOperation = pO_RoutingOperations[pO_RoutingOperations.length - 1];
   const operationsWithDelayInfo: OverviewPORoutingOperationAddAndUpdate[] =
     pO_RoutingOperations.map((operation) => {
       const operationDate = dayjs(operation.productionOrder.foreseenDelivery); // TODO foreseen delivery date?
