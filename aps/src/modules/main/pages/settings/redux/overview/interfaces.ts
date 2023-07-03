@@ -53,7 +53,6 @@ export interface OverviewProductionOrderOperationMapped {
   operationTime: number | string | undefined;
   isDelayed?: string;
   planningDate: string;
-  salesOrderDelivery: string;
   executedDate?: string;
 }
 

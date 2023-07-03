@@ -33,7 +33,6 @@ export const productionOrderMapper = (
     operationTime: productionOrderOperation.operationTime,
     calendarName: 'Calendar',
     planningDate: productionOrderOperation.planningDate,
-   salesOrderDelivery: productionOrder?.salesOrderDto?.salesOrderDelivery,
    executedDate: productionOrderOperation?.executedDate,
   });
 

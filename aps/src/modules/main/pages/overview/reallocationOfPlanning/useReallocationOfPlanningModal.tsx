@@ -12,7 +12,10 @@ import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
-import { getAllProductionOrders } from '../../settings/redux/productionOrders/thunks';
+import {
+  getAllProductionOrders,
+  getProductionOrder,
+} from '../../settings/redux/productionOrders/thunks';
 import { ReallocationOfPlanningForm } from '../../settings/redux/reallocationOfPlanning/interfaces';
 import { ConfirmationModal } from './hooks/ConfirmationModal';
 import { useReallocationValidation } from './hooks/useReallocationOfPlanningValidation';
@@ -33,7 +36,7 @@ export type UseRedirectModalReturnType = {
 export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
-  const { data, loading } = useAppSelector((state) => state.productionOrders);
+  const { data, loading, entity } = useAppSelector((state) => state.productionOrders);
 
   const [selectedPOId, setSelectedPOid] = useState<number>();
   const dispatch = useAppDispatch();
@@ -52,6 +55,10 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
   const selectedProductionOrder = useMemo(() => {
     return data.find((po) => po.id === selectedPOId);
   }, [data, selectedPOId]);
+
+  useEffect(() => {
+    dispatch(getProductionOrder(selectedPOId));
+  }, [selectedProductionOrder]);
 
   const closeModal = useCallback((): void => {
     setIsOpen(false);
@@ -88,8 +95,8 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
     setValue('productionOrderNumber', selectedProductionOrder?.id ?? 0);
     setValue('productionOrderDelivery', selectedProductionOrder?.finalDelivery || '');
     setValue('salesOrderDelivery', selectedProductionOrder?.salesOrderDto.salesOrderDelivery || '');
-    setValue('reallocationOperations', mockedReallocationOperations);
-  }, [selectedProductionOrder, setValue]);
+    setValue('reallocationOperations', entity?.pO_RoutingOperations);
+  }, [selectedProductionOrder, setValue, entity?.pO_RoutingOperations]);
 
   const activePO = useMemo(
     () =>
