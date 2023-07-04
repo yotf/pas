@@ -10,6 +10,8 @@ export const initialOrderPlacementState: OrderReplacementResponse = {
   data: {
     outProductionOrders: [],
     inProductionOrders: [],
+    inSalesOrders: [],
+    outSalesOrders:[],
   },
   form: [],
   loading: true,

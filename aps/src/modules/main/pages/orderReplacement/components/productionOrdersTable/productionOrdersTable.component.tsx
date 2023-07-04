@@ -7,16 +7,19 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { dateFormatter } from '@/modules/shared/utils/utils';
 import { useAppSelector } from '@/store/hooks';
 import { Table } from 'antd';
-import { FC, ReactNode } from 'react';
-import { ProductionOrder } from '../../../settings/redux/orderReplacement/interfaces';
+import { FC, ReactNode, useCallback } from 'react';
+import {
+  ProductionOrder,
+  ProductionOrderResponse,
+} from '../../../settings/redux/orderReplacement/interfaces';
 import './productionOrdersTable.component.scss';
+import PageTable from '@/modules/main/components/table/page-table.component';
 
 export interface ProductionOrdersTableProps {
   tableType: 'in' | 'out';
 }
 
-const columnOrder: (keyof ProductionOrder)[] = [
-  'sequence',
+const columnsOrder: (keyof ProductionOrder)[] = [
   'productionOrderNumber',
   'materialName',
   'quantity1',
@@ -31,9 +34,9 @@ const columnOrder: (keyof ProductionOrder)[] = [
  * @returns Production Orders table used in {@link OrderReplacementPage}
  */
 const ProductionOrdersTable: FC<ProductionOrdersTableProps> = ({ tableType }) => {
-  const customColumns: Partial<Record<keyof ProductionOrder, (value: any) => ReactNode>> = {
-    foreseenDelivery: (value: string) => <span>{dateFormatter(value)}</span>,
-  };
+  // const customColumns: Partial<Record<keyof ProductionOrder, (value: any) => ReactNode>> = {
+  //   foreseenDelivery: (value: string) => <span>{dateFormatter(value)}</span>,
+  // };
 
   const { translate } = useTranslate({
     ns: 'orderReplacement',
@@ -44,14 +47,38 @@ const ProductionOrdersTable: FC<ProductionOrdersTableProps> = ({ tableType }) =>
     (state) => state.orderReplacement.data,
   );
 
-  const columns = createColumns(inProductionOrders, translate, columnOrder, customColumns, true);
+  const mapper = useCallback(
+    (obj: ProductionOrderResponse): ProductionOrder => ({
+      sequence: 0,
+      productionOrderNumber: obj.productionOrder_Id,
+      materialName: obj.materialDto.name,
+      quantity1: obj.quantity1,
+      unitOfMeasure1: obj.unitOfMeasure1.name,
+      quantity2: obj.quantity2,
+      unitOfMeasure2: obj.unitOfMeasure2.name,
+      foreseenDelivery: dateFormatter(obj.foreseenDelivery),
+    }),
+    [],
+  );
+
+  const columns = createColumns(
+    inProductionOrders.map(mapper),
+    translate,
+    columnsOrder,
+    undefined,
+    true,
+  );
   return (
     <div className='table-wrapper'>
       <h3>{translate(`${tableType}_production_orders_title`)}</h3>
       <div className='production-order-table'>
         <Table
           columns={columns}
-          dataSource={tableType === 'in' ? inProductionOrders : outProductionOrders}
+          dataSource={
+            tableType === 'in'
+              ? (inProductionOrders.map(mapper) as ProductionOrder[])
+              : (outProductionOrders.map(mapper) as ProductionOrder[])
+          }
           rowKey={'id'}
           pagination={false}
           scroll={{ x: 'fit-content' }}

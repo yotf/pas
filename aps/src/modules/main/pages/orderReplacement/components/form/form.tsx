@@ -4,19 +4,21 @@
 
 import CustomButton from '@/modules/shared/components/button/button.component';
 import CustomInput from '@/modules/shared/components/input/input.component';
-import { nameofFactory } from '@/modules/shared/utils/utils';
+import { mapDataToOptions, nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { OrderReplacementFormData } from '../../../settings/redux/orderReplacement/interfaces';
 import { clearOrderReplacementData } from '../../../settings/redux/orderReplacement/slices';
 import {
   getOrderReplacement,
-  getSalesOrderReplacementForm,
+  getSalesOrderByCustomer,
 } from '../../../settings/redux/orderReplacement/thunks';
 import { useConfirmationModal } from '../../hooks/useConfirmationModal';
-import { useOrderReplacementForm } from '../../hooks/useOrderReplacementForm';
 import { useOrderReplacementValidationChecks } from '../../hooks/useOrderReplacementValidationChecks';
+import { getAllCustomers } from '../../../settings/redux/customers/thunks';
+import { DefaultOptionType } from 'antd/es/select';
+import { SalesOrderResponse } from '../../../settings/redux/salesOrders/interfaces';
 
 export interface FormProps {
   translate: (value: string, options?: Record<string, string> | undefined) => string;
@@ -26,18 +28,71 @@ export interface FormProps {
  * @returns Order replacement form. Validates user inputs and sends API requests if entered data is valid
  */
 const Form: FC<FormProps> = ({ translate }) => {
-  const { inProductionOrders, outProductionOrders } = useAppSelector(
+  const { inProductionOrders, outProductionOrders, inSalesOrders, outSalesOrders } = useAppSelector(
     (state) => state.orderReplacement.data,
   );
+  const { data: customers } = useAppSelector((state) => state.customers);
+
+  const customerOptions: DefaultOptionType[] = useMemo(
+    () => mapDataToOptions(customers),
+    [customers],
+  );
+
+  const form = useFormContext();
+  const {
+    formState: { isDirty, isValid },
+    getValues,
+    watch,
+    setValue,
+  } = form;
+
+  const { inCustomerId, outCustomerId } = watch();
+
+  console.log(getValues());
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getSalesOrderReplacementForm());
-
     return () => {
       dispatch(clearOrderReplacementData());
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllCustomers());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getSalesOrderByCustomer({ id: outCustomerId, salesOrderType: 'out' }));
+    setValue('outSalesOrderNumberId', '');
+  }, [dispatch, outCustomerId, setValue]);
+
+  useEffect(() => {
+    dispatch(getSalesOrderByCustomer({ id: inCustomerId, salesOrderType: 'in' }));
+    setValue('inSalesOrderNumberId', '');
+  }, [dispatch, inCustomerId]);
+
+  const inSalesOrderOptions: DefaultOptionType[] = useMemo(
+    () =>
+      inSalesOrders?.map((salesOrder: SalesOrderResponse) => {
+        return {
+          label: salesOrder.orderNumber,
+          value: salesOrder.id,
+        };
+      }),
+    [inSalesOrders],
+  );
+
+  const outSalesOrderOptions: DefaultOptionType[] = useMemo(
+    () =>
+      outSalesOrders?.map((salesOrder: SalesOrderResponse) => {
+        debugger;
+        return {
+          label: salesOrder.orderNumber,
+          value: salesOrder.id,
+        };
+      }),
+    [outSalesOrders],
+  );
 
   const nameOf = nameofFactory<OrderReplacementFormData>();
 
@@ -50,20 +105,15 @@ const Form: FC<FormProps> = ({ translate }) => {
 
   const { openConfirmationModal, modal } = useConfirmationModal(translate);
 
-  const replaceOrdersDisable = !(inProductionOrders.length || outProductionOrders.length);
-
-  const form = useFormContext();
-  const {
-    formState: { isDirty, isValid },
-    getValues,
-  } = form;
+  const replaceOrdersDisable = useMemo(
+    () => !(inProductionOrders?.length || outProductionOrders?.length),
+    [inProductionOrders, outProductionOrders],
+  );
 
   const handleFetchOrderReplacement = useCallback(
     () => fetchOrderReplacement(getValues()),
     [fetchOrderReplacement, getValues],
   );
-
-  const { customerOptions, inSalesOrderNumbers, outSalesOrderNumbers } = useOrderReplacementForm();
 
   useOrderReplacementValidationChecks(translate);
 
@@ -86,7 +136,7 @@ const Form: FC<FormProps> = ({ translate }) => {
           label={translate('outSalesOrderNumber')}
           name={nameOf('outSalesOrderNumberId')}
           isAutocomplete={true}
-          options={outSalesOrderNumbers}
+          options={outSalesOrderOptions}
         />
         <CustomInput
           type='select'
@@ -105,7 +155,7 @@ const Form: FC<FormProps> = ({ translate }) => {
           label={translate('inSalesOrderNumber')}
           name={nameOf('inSalesOrderNumberId')}
           isAutocomplete={true}
-          options={inSalesOrderNumbers}
+          options={inSalesOrderOptions}
         />
       </div>
       <div className='button-container'>

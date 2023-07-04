@@ -74,12 +74,12 @@ const SalesOrderForm: FC = () => {
       null,
     );
 
-    setValue('salesOrderDelivery', latestRequestedDate?.toISOString());
-    // const latestDate = objects.reduce((latest, obj) => {
-    //   const currentDate = dayjs(obj.date);
-    //   return !latest || currentDate.isAfter(latest) ? currentDate : latest;
-    // }, null);
-    //setValue('salesOrderDelivery', sa);
+    setValue(
+      'salesOrderDelivery',
+      !!latestRequestedDate && latestRequestedDate.isValid()
+        ? latestRequestedDate?.toISOString()
+        : undefined,
+    );
   }, [salesOrderMaterialsAddAndUpdate, setValue]);
 
   return (
