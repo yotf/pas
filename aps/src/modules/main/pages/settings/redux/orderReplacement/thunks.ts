@@ -2,9 +2,8 @@
  * @module OrderReplacementThunks
  */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { BASE_ORDER_REPLACEMENT, BASE_ORDER_REPLACEMENT_RESPONSE, ORDER_REPLACEMENT_GENERATE, ORDER_REPLACEMENT_SALES_ORDER_BY_CUSTOMER_ID } from '../../consts/apiUrl';
-import { OrderReplacementFormData, ProductionOrder, ProductionOrderReplacementResponse, SalesOrderTypes } from './interfaces';
-import { mocked, mockedFormData } from './mocked';
+import { BASE_ORDER_REPLACEMENT, BASE_ORDER_REPLACEMENT_RESPONSE, ORDER_REPLACEMENT_GENERATE, ORDER_REPLACEMENT_REPLACE_ORDERS, ORDER_REPLACEMENT_SALES_ORDER_BY_CUSTOMER_ID } from '../../consts/apiUrl';
+import { OrderReplacementFormData, ProductionOrder, ProductionOrderReplacementResponse, ReplaceProductionOrdersRequest, SalesOrderTypes } from './interfaces';
 import { IdType } from '../thunks';
 import ApiService from '@/modules/shared/services/api.service';
 import { SalesOrderResponse } from '../salesOrders/interfaces';
@@ -59,15 +58,13 @@ export const getSalesOrderByCustomer = createAsyncThunk(
 );
 
 export const performOrderReplacement = createAsyncThunk(
-  BASE_ORDER_REPLACEMENT + '-replace',
-  async (orderReplacementInfo: OrderReplacementFormData, { rejectWithValue }) => {
+ ORDER_REPLACEMENT_REPLACE_ORDERS,
+  async (orderReplacementInfo: ReplaceProductionOrdersRequest, { rejectWithValue }) => {
     try {
-      // const response = await ApiService.post<OrderReplacementFormData>(
-      //   BASE_ORDER_REPLACEMENT,
-      //   orderReplacementInfo,
-      // );
-      // return response.data;
-      return '';
+
+      const response = await ApiService.post(ORDER_REPLACEMENT_REPLACE_ORDERS, orderReplacementInfo);
+      debugger;
+      return response.data;
     } catch (err: any) {
       return rejectWithValue(err.response ? err.response.status : err.message);
     }
