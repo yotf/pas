@@ -5,9 +5,9 @@
 import warningIcon from '@/assets/warning.svg';
 import '@/modules/main/pages/settings/components/entity-delete-modal.component.scss';
 import { notificationSuccess } from '@/modules/shared/services/notification.service';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { Modal } from 'antd';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useFormContext, UseFormReturn } from 'react-hook-form';
 import { OrderReplacementFormData } from '../../settings/redux/orderReplacement/interfaces';
 import { clearOrderReplacementData } from '../../settings/redux/orderReplacement/slices';
@@ -26,6 +26,9 @@ export const useConfirmationModal = (
   translate: (value: string, options?: Record<string, string> | undefined) => string,
 ): UseConfirmationModalReturn => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { inProductionOrders, outProductionOrders } = useAppSelector(
+    (state) => state.orderReplacement.data,
+  );
 
   const closeModal = useCallback((): void => {
     setIsOpen(false);
@@ -37,20 +40,26 @@ export const useConfirmationModal = (
   const form: UseFormReturn<OrderReplacementFormData> = useFormContext();
   const { handleSubmit } = form;
 
-  const handleOk = useCallback((): void => {
-    handleSubmit((formData: OrderReplacementFormData) => {
-      dispatch(performOrderReplacement(formData));
-    });
-    //TODO
-    //mocked because no real BE calls are made so redux state doesn't change
-    notificationSuccess(translate('create_success'));
-    dispatch(clearOrderReplacementData());
-    form.reset(undefined, {
-      keepIsSubmitted: false,
-    });
-    //
-    closeModal();
-  }, [closeModal, dispatch, form, handleSubmit, translate]);
+  const handleOk = useMemo(
+    () =>
+      handleSubmit((formData: OrderReplacementFormData) => {
+      
+        const data = {
+          outProductionOrders: outProductionOrders.map((po) => po.id),
+          inProductionOrders: inProductionOrders.map((po) => po.id),
+        };
+    
+        dispatch(performOrderReplacement(data));
+        dispatch(clearOrderReplacementData());
+        //    notificationSuccess(translate('create_success'));
+        form.reset(undefined, {
+          keepIsSubmitted: false,
+        });
+        //
+        closeModal();
+      }),
+    [closeModal, dispatch, form, handleSubmit, translate, inProductionOrders, outProductionOrders],
+  );
 
   const modal: JSX.Element = (
     <Modal
@@ -64,7 +73,7 @@ export const useConfirmationModal = (
     >
       <div className='confirm-modal-content'>
         <img src={warningIcon} alt={'warning'} />
-        <span>{translate('confirmation_message')}</span>
+        <span>{translate('confirmation_message')}haha</span>
       </div>
     </Modal>
   );

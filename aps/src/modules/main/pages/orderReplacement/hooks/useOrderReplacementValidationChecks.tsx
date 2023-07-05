@@ -36,7 +36,6 @@ export const useOrderReplacementValidationChecks = (
       });
       return;
     }
-    dispatch(clearOrderReplacementData());
     notificationSuccess(translate('create_success'));
     reset(undefined, {
       keepIsSubmitted: false,

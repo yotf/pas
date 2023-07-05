@@ -85,7 +85,6 @@ const Form: FC<FormProps> = ({ translate }) => {
   const outSalesOrderOptions: DefaultOptionType[] = useMemo(
     () =>
       outSalesOrders?.map((salesOrder: SalesOrderResponse) => {
-        debugger;
         return {
           label: salesOrder.orderNumber,
           value: salesOrder.id,
