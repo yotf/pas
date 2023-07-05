@@ -1079,7 +1079,7 @@
     },
     "validation": {
       "required": "This field is required",
-      "max_length": "Max number of characters is 5",
+      "max_length": "Max number of characters is {{name}}",
       "min_length": "Must be greater than 0",
       "create_success": "Production Order has been successfully created",
       "edit_success": "Production Order has been successfully edited",

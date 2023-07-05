@@ -28,8 +28,8 @@ export enum PlanningStatus {
 /** Situation enum used in {@link ProductionOrderMaintain} */
 export enum POSituation {
   'open' = 1,
-  'closed' = 2,
-  'cancel' = 3,
+  'closed' = 3,
+  'cancel' = 2,
 }
 /** Status enum used in {@link ProductionOrderMaintain}  */
 export enum POFormStatus {

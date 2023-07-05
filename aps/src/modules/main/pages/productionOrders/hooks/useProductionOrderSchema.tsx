@@ -69,7 +69,7 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         unitOfMeasure1Id: numberNotRequired,
         unitOfMeasure2Id: numberNotRequired,
         unitOfMeasure3Id: numberNotRequired,
-        remark: stringNotRequired,
+        remark: stringNotRequired.max(200, translate('max_length', { name: '200' })),
         creationDate: Yup.string().notRequired(),
         foreseenDelivery: stringNotRequired,
         salesOrderDelivery: stringNotRequired,
