@@ -34,6 +34,11 @@ export interface ProductionOrderReplacementResponse {
   inProductionOrders: ProductionOrderResponse[];
 }
 
+export interface ReplaceProductionOrdersRequest {
+  inProductionOrders: number[] | string[];
+  outProductionOrders: number[] | string[];
+}
+
 export interface ProductionOrder {
   sequence: number;
   productionOrderNumber?: number;
