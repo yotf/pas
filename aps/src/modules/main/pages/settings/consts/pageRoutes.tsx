@@ -23,3 +23,4 @@ export const SETTINGS_USERS = `${SETTINGS_PAGE}/${USERS}`;
 export const SETTINGS_UNITS = `${SETTINGS_PAGE}/${UNITS_OF_MEASURE}`;
 export const ARTICLES = 'articles';
 export const WORK_CENTER = 'work_center';
+export const CONFIGURATION = 'configuration';

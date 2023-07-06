@@ -46,7 +46,8 @@
     "holidays": "Holidays",
     "material_groups": "Material Groups",
     "colors": "Colors",
-    "articles": "Articles"
+    "articles": "Articles",
+    "configuration": "Configuration"
   },
   "table": {
     "empty": "The Table is Empty",
@@ -221,6 +222,11 @@
       "delete_success": "Unit of Measure has been successfully deleted",
       "delete_fail": "An error occurred while deleting the unit of measure"
     }
+  },
+  "configuration": {
+    "save": "Save",
+    "quantity1": "Quantity 1",
+    "quantity2": "Quantity 2"
   },
   "colors": {
     "table": {
@@ -801,7 +807,7 @@
       "title": "Edit",
       "work_capacities": "Work Capacities",
       "allowed_operations": "Allowed Operations",
-      "add_operation": "Add Operation",
+      "add_operation": "Linked Operations",
       "excel_button": "Export to excel",
       "weekDay": "Week Day",
       "date": "Date",
@@ -1167,6 +1173,7 @@
     "PODelivery": " PO Delivery",
     "POPosition": "PO Position",
     "calendarName": "Calendar",
+    "planningDate": "Foreseen Date",
     "validation": {
       "required": "This field is required",
       "date_range": "Date Range needs to be shorter than 2 weeks",
@@ -1183,7 +1190,7 @@
     "inSalesOrderNumber": "In Order Number",
     "generate_data": "Generate Data",
     "replace_orders": "Replace Orders",
-    "confirmation_message": "Are you sure you want to replace selecter Production Orders?",
+    "confirmation_message": "Are you sure you want to replace selected Production Orders?",
     "cancel": "Cancel",
     "ok_text": "Proceed",
     "create_success": "Production Orders have been successfully replaced",

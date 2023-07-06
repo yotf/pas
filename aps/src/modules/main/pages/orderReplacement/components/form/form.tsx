@@ -105,7 +105,7 @@ const Form: FC<FormProps> = ({ translate }) => {
   const { openConfirmationModal, modal } = useConfirmationModal(translate);
 
   const replaceOrdersDisable = useMemo(
-    () => !(inProductionOrders?.length || outProductionOrders?.length),
+    () => !inProductionOrders?.length || !outProductionOrders?.length,
     [inProductionOrders, outProductionOrders],
   );
 

@@ -1,0 +1,61 @@
+@import '@/styles/variables';
+
+$pc-breakpoint: 1100px;
+$tablet-breakpoint: 920px;
+
+
+.configuration-container {
+
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    min-height:70%;
+    margin:0 5%;
+
+    form {
+        flex:1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px 32px;
+        flex:1;
+    }
+
+
+    .custom-input-container {
+        gap:10px;
+    }
+
+    .action-button {
+
+    height: 38px;
+    width: 84px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 8.5px 12px;
+    border-radius: 8px;
+    border: none;
+    align-self:flex-end;
+
+    .button-children {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        font-size: 14px;
+        white-space: nowrap;
+        text-align: center;
+    }
+    }
+
+    .blue.disabled {
+        background-color: #749efa !important;
+        border-color: #749efa !important;
+        color: #ffffff;
+        font-weight: 600;
+    }
+    .blue {
+        background-color: #417cff;
+        color: #ffffff;
+    }
+
+}

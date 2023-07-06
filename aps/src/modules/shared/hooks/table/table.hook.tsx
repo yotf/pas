@@ -64,6 +64,9 @@ export type UseTableProps<T> = {
   rowSelection?: object;
   /** Renders custom columns in place of default ones provided by the {@link TableColumns} function */
   columns?: ColumnsType<T>;
+
+  /**Specifies number of rows per table page */
+  pageSize?: number;
 };
 /**
  *
@@ -87,6 +90,7 @@ export const useTable = <T extends object>({
   hasViewOnlyElements = false,
   preventSort,
   rowSelection,
+  pageSize,
 }: UseTableProps<T>): JSX.Element => {
   const { setUiData, setSort } = useContext(ExportToExcelContext);
   const {
@@ -160,6 +164,7 @@ export const useTable = <T extends object>({
             usePaging && {
               current: pageNumber,
               onChange: onPaginationChange,
+              pageSize: pageSize,
             }
           }
           {...(rowSelection && {

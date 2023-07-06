@@ -46,7 +46,8 @@
     "holidays": "Holidays_de",
     "material_groups": "Material Groups_de",
     "colors": "Colors_de",
-    "articles": "Articles_de"
+    "articles": "Articles_de",
+    "configuration": "Configuration_de"
   },
   "table": {
     "empty": "The Table is Empty_de",
@@ -798,7 +799,7 @@
       "title": "Edit_de",
       "work_capacities": "Work Capacities_de",
       "allowed_operations": "Allowed Operations_de",
-      "add_operation": "Add Operation_de",
+      "add_operation": "Linked Operations_de",
       "excel_button": "Export to excel_de",
       "weekDay": "Week Day_de",
       "date": "Date_de",
@@ -1163,6 +1164,7 @@
     "PODelivery": " PO Delivery_de",
     "POPosition": "PO Position_de",
     "calendarName": "Calendar_de",
+    "planningDate": "Foreseen Date_de",
     "validation": {
       "required": "This field is required_de",
       "date_range": "Date Range needs to be shorter than 2 weeks_de",
@@ -1180,7 +1182,7 @@
     "generate_data": "Generate Data_de",
     "replace_orders": "Replace Orders_de",
     "confirmation_modal": {
-      "confirmation_message": "Are you sure you want to replace selecter Production Orders?_de",
+      "confirmation_message": "Are you sure you want to replace selected Production Orders?_de",
       "cancel": "Cancel_de",
       "ok_text": "Proceed_de",
       "create_success": "Production Orders have been successfully replaced_de",

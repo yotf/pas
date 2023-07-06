@@ -6,11 +6,13 @@ import '@/modules/shared/hooks/table/table.scss';
 import { useAppSelector } from '@/store/hooks';
 import { BranchesOutlined } from '@ant-design/icons';
 import { Empty, Space, Table } from 'antd';
-import { FC, useMemo, useState } from 'react';
+import { FC, ReactNode, useMemo, useState } from 'react';
 import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
 import { MappedOverviewTable } from '../hooks/useMappedOverviews';
 import { useReallocationOfPlanningModal } from '../reallocationOfPlanning/useReallocationOfPlanningModal';
 import TableCalendar from './TableCalendar';
+import { zeroHourPlaceholder } from '@/modules/shared/consts';
+import { dateFormatter } from '@/modules/shared/utils/utils';
 
 export type OverviewTableProps = {
   overviewTableData: MappedOverviewTable;
@@ -31,7 +33,39 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   const [toggleCalendar, setToggleCalendar] = useState(false);
 
   const { openReallocationModal, reallocationModal } = useReallocationOfPlanningModal();
-  const columns = createColumns(tableData, translate, undefined, undefined, true);
+  const columnsOrder: (keyof OverviewProductionOrderOperationMapped)[] = useMemo(
+    () => [
+      'orderNumber',
+      'orderType',
+      'customerName',
+      'salesOrderNumber',
+      'materialName',
+      'articleName',
+      'colorName',
+      'operationName',
+      'foreseenDeliveryDate',
+      'estimatedTime',
+      'setupTime',
+      'quantity1',
+      'unitOfMeasure1',
+      'salesOrderDeliveryDate',
+      'PODelivery',
+      'POPosition',
+      'operationTime',
+      'planningDate',
+      'executedDate',
+    ],
+    [],
+  );
+
+  const customColumns: Partial<
+    Record<keyof OverviewProductionOrderOperationMapped, (value: any) => ReactNode>
+  > = {
+    planningDate: (value: string) => <span>{dateFormatter(value)}</span>,
+  };
+
+  const columns = createColumns(tableData, translate, columnsOrder, customColumns, true);
+
   columns.push({
     title: translate('action'),
     key: 'action',

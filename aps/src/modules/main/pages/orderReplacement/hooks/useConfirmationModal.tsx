@@ -73,7 +73,7 @@ export const useConfirmationModal = (
     >
       <div className='confirm-modal-content'>
         <img src={warningIcon} alt={'warning'} />
-        <span>{translate('confirmation_message')}haha</span>
+        <span>{translate('confirmation_message')}</span>
       </div>
     </Modal>
   );

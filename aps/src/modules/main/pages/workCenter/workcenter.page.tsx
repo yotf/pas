@@ -74,6 +74,7 @@ const WorkCenterTable: FC = () => {
           getName={getName}
           exportToExcel={exportToExcel}
           disableExportToExcelButton={!uiData?.length}
+          pageSize={20}
         />
       </div>
     </ExportToExcelProvider>

@@ -32,12 +32,14 @@ import {
   USERS,
   HOLIDAYS,
   ARTICLES,
+  CONFIGURATION,
 } from '../pages/settings/consts/pageRoutes';
 import SizeRanges from '../pages/sizeRanges/sizeRanges.page';
 import Thickness from '../pages/thickness/thickness.page';
 import UnitsOfMeasure from '../pages/unitOfMeasure/unitOfMeasure.page';
 import Users from '../pages/users/users.page';
 import { Route } from './route.type';
+import Configuration from '../pages/configuration/configuration.page';
 
 export const sharedRoutes: Route[] = [
   {
@@ -54,6 +56,7 @@ export const sharedRoutes: Route[] = [
   { element: <Departments />, path: DEPARTMENT, name: DEPARTMENT },
   { element: <Parameters />, path: PARAMETERS, name: PARAMETERS },
   { element: <Features />, path: FEATURES, name: FEATURES },
+  { element: <Configuration />, path: CONFIGURATION, name: CONFIGURATION },
   { element: <Colors />, path: COLORS, name: COLORS },
   { element: <OrderTypes />, path: ORDER_TYPES, name: ORDER_TYPES },
   { element: <Customers />, path: CUSTOMERS, name: CUSTOMERS },
