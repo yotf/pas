@@ -68,6 +68,8 @@ import thunk, { ThunkMiddleware } from 'redux-thunk';
 import { MaterialsResponse } from './../modules/main/pages/settings/redux/materials/interfaces';
 import { materialsReducer } from './../modules/main/pages/settings/redux/materials/slice';
 import BaseResponse from '@/modules/shared/services/interfaces';
+import { configurationReducer } from '@/modules/main/pages/settings/redux/configuration/slice';
+import { ConfigurationResponse } from '@/modules/main/pages/settings/redux/configuration/states';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -110,6 +112,7 @@ export const rootReducer = combineReducers<StoreType>({
   reallocationOfPlanning: reallocationReducer,
   overview: overviewReducer,
   orderReplacement: orderReplacementReducer,
+  configuration:configurationReducer
 });
 /**Type used for settings page slices */
 export type SettingsType = {
@@ -152,6 +155,7 @@ export type StoreType = CombinedState<
     simulation: SimulationDataOverview;
     overview: OverviewResponse;
     orderReplacement: OrderReplacementResponse;
+    configuration: ConfigurationResponse;
   } & SettingsType
 >;
 /**
