@@ -223,6 +223,12 @@
       "create_fail": "Unit of Measure with that code alredy exists_de"
     }
   },
+  "configuration": {
+    "save": "Save_de",
+    "quantity1": "Quantity 1_de",
+    "quantity2": "Quantity 2_de",
+    "isKg": "Unit of Measure That is in Kg_de"
+  },
   "colors": {
     "table": {
       "active": "Active_de",
