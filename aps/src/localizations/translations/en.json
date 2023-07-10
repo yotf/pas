@@ -773,6 +773,7 @@
     "unitOfMeasureName": "Unit of Measure",
     "allocationBasedName": "Allocation Based",
     "workCenter_Id": "Work Center ID",
+    "weightCapacity": "Weight Capacity",
     "isActive": "Status",
     "remark": "Remark",
     "search": "Search",

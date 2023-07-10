@@ -25,6 +25,11 @@ export enum PlanningStatus {
   'planned' = 2,
   'document' = 3,
 }
+
+export enum AllocationBasedEnum  {
+  "quantity1" = 1,
+    "formula" = 2,
+}
 /** Situation enum used in {@link ProductionOrderMaintain} */
 export enum POSituation {
   'open' = 1,

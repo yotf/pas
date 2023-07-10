@@ -25,6 +25,7 @@ export interface WorkCenter {
   allocations: AllocationBased[];
   unitOfMeasures: SettingsPageItem[];
   workCenterAddAndUpdateDto?: WorkCapacity[];
+  weightCapacity?: number;
 }
 
 export interface WorkCenterFormData {
@@ -35,11 +36,12 @@ export interface WorkCenterFormData {
   allocationBased?: number;
   isActive: boolean;
   remark: string;
-  unitOfMeasureId?: number;
+  unitOfMeasureId?: number | null;
   workCenter_Id: number;
   workCapacities?: WorkCapacity[];
   allowedOperations?: AllowedOperation[];
   workCenterAddAndUpdateDto?: WorkCapacity[];
+  weightCapacity?: number;
 }
 export interface WorkCenterMapped {
   id: number;

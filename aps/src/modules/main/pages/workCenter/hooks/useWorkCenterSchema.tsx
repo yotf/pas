@@ -43,6 +43,10 @@ export const useWorkCenterSchema = (): OptionalObjectSchema<
           .transform((value) => (isNaN(value) ? undefined : value))
           .notRequired(),
         workCenterInterfaceId: Yup.string().max(15, translate('max_length', { name: '15' })),
+        weightCapacity: Yup.number()
+          .max(99999, translate('max_length', { name: '5' }))
+          .required()
+          .transform((value) => (isNaN(value) ? undefined : value)),
       }),
     [requiredNumber, requiredString, translate],
   );
