@@ -58,7 +58,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
     const unitOfMeasures = quantities1.map((q1) => q1.unitOfMeasure);
     const kgMeasure = quantities1?.find((uom) => uom.isKg)?.unitOfMeasure;
     return allocationBased === AllocationBasedEnum.quantity1
-      ? convertForDropdown(unitOfMeasures)
+      ? convertForDropdown(unitOfMeasures as SettingsPageItem[])
       : convertForDropdown(kgMeasure ? [kgMeasure] : undefined);
   }, [allocationBased, quantities1]);
 

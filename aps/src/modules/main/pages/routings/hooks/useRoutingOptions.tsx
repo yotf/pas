@@ -52,7 +52,7 @@ export const useRoutingOptions = (): UseRoutingSetupReturnType => {
   const { quantities1 } = useAppSelector((state) => state.configuration.data);
 
   const unitOptions: DefaultOptionType[] = useMemo(
-    () => convertForDropdown(quantities1.map((q1) => q1.unitOfMeasure)),
+    () => convertForDropdown(quantities1.map((q1) => q1.unitOfMeasure) as SettingsPageItem[]),
     [unitOfMeasures],
   );
   const materialOptions: DefaultOptionType[] = useMemo(
