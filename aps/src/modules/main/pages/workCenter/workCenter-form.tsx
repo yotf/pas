@@ -69,7 +69,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
 
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
-      ? setValue('unitOfMeasureId', UoMs?.[0].value as number)
+      ? setValue('unitOfMeasureId', UoMs?.[0]?.value as number)
       : null;
   }, [allocationBased]);
 

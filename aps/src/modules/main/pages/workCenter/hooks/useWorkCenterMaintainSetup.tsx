@@ -76,6 +76,7 @@ export const useWorkCenterMaintainSetup = (copy: boolean): UseWorkCenterMaintain
               ? entity?.allowedOperations.map((ao: AllowedOperation) => ({ ...ao, id: 0 })) ?? []
               : entity?.allowedOperations ?? [],
             workCenterAddAndUpdateDto: entity?.workCenterAddAndUpdateDto ?? [],
+            weightCapacity: entity?.weightCapacity,
           } as WorkCenterFormData);
     setWorkCenterForEdit(WorkCenterData);
   }, [copy, entity]);
