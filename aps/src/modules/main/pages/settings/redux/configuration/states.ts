@@ -14,6 +14,6 @@ export interface ConfigurationResponse extends BaseResponse {
 export const initialSettingsState: ConfigurationResponse = {
   loading: true,
   error: undefined,
-  data: {quantities1:[],quantities2:[]},
+    data: { quantities1: [], quantities2: [] },
 
 };

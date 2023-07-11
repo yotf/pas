@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Configuration } from "./interfaces";
 import ApiService from "@/modules/shared/services/api.service";
-import { BASE_CONFIGURATION_API } from "../../consts/apiUrl";
+import { BASE_CONFIGURATION_API, CONFIGURATION_GET_LINKED_UOMS } from "../../consts/apiUrl";
 
 
 export const postConfigurationThunk = createAsyncThunk(BASE_CONFIGURATION_API + "-upsert", async (payload: Configuration, { rejectWithValue, dispatch }) => {

@@ -8,6 +8,6 @@ export interface Configuration {
 export interface UnitOfMeasure {
     unitOfMeasureId: number;
     isKg: boolean;
-    unitOfMeasure: SettingsPageItem;
+    unitOfMeasure?: SettingsPageItem;
 
 }
