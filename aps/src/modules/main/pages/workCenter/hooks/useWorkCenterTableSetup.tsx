@@ -109,6 +109,14 @@ export const useWorkCenterTableSetup = ({
     dayOfWeek: (value: number) => <span>{translate(String(DayOfWeek[value]))}</span>,
   };
 
+  const handleRowDoubleClick = (
+    record: any,
+    index: number | undefined,
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    onEdit ? onEdit(record) : null;
+  };
+
   const isWorkCapacity = activeGroup === true;
 
   const table = useTable<WorkCapacityMapped | AllowedOperationMapped>({
@@ -121,6 +129,7 @@ export const useWorkCenterTableSetup = ({
     renderDeleteButton: false,
     rowKey: 'guid',
     columnsOrder: columnsOrder as any,
+    handleRowDoubleClick: handleRowDoubleClick,
   });
   useEffect(() => {
     dispatch(getAllWorkCapacitiesByWorkCenterId(Number(id ?? 0)));

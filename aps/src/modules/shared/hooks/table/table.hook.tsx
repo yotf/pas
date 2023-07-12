@@ -27,6 +27,7 @@ import {
 /**
  * @template T Type of objects to be rendered in the table. Each object represents one table row.
  */
+
 export type UseTableProps<T> = {
   /** Data to be rendered in the table. Each object in the array is one table row */
   dataSource: T[];
@@ -67,6 +68,12 @@ export type UseTableProps<T> = {
 
   /**Specifies number of rows per table page */
   pageSize?: number;
+
+  handleRowDoubleClick?: (
+    record: any,
+    index: number | undefined,
+    event: React.MouseEvent<HTMLElement>,
+  ) => void;
 };
 /**
  *
@@ -91,6 +98,7 @@ export const useTable = <T extends object>({
   preventSort,
   rowSelection,
   pageSize,
+  handleRowDoubleClick,
 }: UseTableProps<T>): JSX.Element => {
   const { setUiData, setSort } = useContext(ExportToExcelContext);
   const {
@@ -129,6 +137,7 @@ export const useTable = <T extends object>({
       width: 100,
       render: (value: T & { date: string }, record: T) => {
         const isDisabled = disableDeleteButtonCondition?.(record);
+        debugger;
         return (
           <Space size='middle' className='action-container'>
             {!!entity?.id && openProductionModal && !copying && (
@@ -160,6 +169,14 @@ export const useTable = <T extends object>({
           dataSource={dataSource}
           rowKey={rowKey}
           scroll={{ x: 'fit-content', y: height }}
+          onRow={
+            handleRowDoubleClick
+              ? (record, index) => ({
+                  onDoubleClick: (event: React.MouseEvent<HTMLElement>) =>
+                    handleRowDoubleClick(record, index, event),
+                })
+              : undefined
+          }
           pagination={
             usePaging && {
               current: pageNumber,

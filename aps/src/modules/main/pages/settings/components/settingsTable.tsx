@@ -84,6 +84,13 @@ const SettingsTable = <T extends object>({
   const doNew = useCallback(() => onNew?.(), [onNew]);
 
   const { register } = useFormContext();
+  const handleRowDoubleClick = (
+    record: any,
+    index: number | undefined,
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    onEdit ? onEdit(record) : null;
+  };
 
   const table = useTable({
     dataSource: filteredData,
@@ -97,6 +104,7 @@ const SettingsTable = <T extends object>({
     rowSelection,
     renderDeleteButton,
     pageSize,
+    handleRowDoubleClick,
   });
   const form: UseFormReturn<FormCustomFilter, any> = useFormContext();
   const onExportToExcel = useCallback(() => exportToExcel?.(), [exportToExcel]);
