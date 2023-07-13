@@ -2,7 +2,7 @@ import ApiService from "@/modules/shared/services/api.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PRODUCTION_ORDER_GET_LINKED } from "../../../consts/apiUrl";
 import { ProductionOrderFormData } from "../interfaces";
-import { ProductionOrder } from "../../orderReplacement/interfaces";
+import { ProductionOrder } from "../interfaces";
 
 type GetLinkedProductionOrdersParams = {
     salesOrderId: number;
