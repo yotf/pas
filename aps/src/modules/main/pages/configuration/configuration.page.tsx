@@ -13,6 +13,7 @@ import './configuration.scss';
 import { DefaultOptionType } from 'antd/lib/select';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getConfiguration, postConfigurationThunk } from '../settings/redux/configuration/thunks';
+import { useConfigurationValidation } from './hooks/useConfigurationValidation';
 
 const Configuration: FC = () => {
   const ns = 'configuration';
@@ -51,7 +52,6 @@ const Configuration: FC = () => {
   );
 
   const quantityOptions = useConfigurationOptions();
-  
 
   const radioOptions: DefaultOptionType[] = useMemo(
     () =>
@@ -61,7 +61,6 @@ const Configuration: FC = () => {
       })),
     [quantity1],
   );
-
 
   const onSubmit = (data: ConfigurationFormData) => {
     const { quantity1, quantity2, isKg } = data;
@@ -80,6 +79,8 @@ const Configuration: FC = () => {
   };
 
   // const onSubmit = useMemo(() => null, []); //TODO
+
+  useConfigurationValidation({ form, ns });
 
   return (
     <FormProvider {...form}>

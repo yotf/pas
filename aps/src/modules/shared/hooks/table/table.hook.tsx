@@ -137,7 +137,6 @@ export const useTable = <T extends object>({
       width: 100,
       render: (value: T & { date: string }, record: T) => {
         const isDisabled = disableDeleteButtonCondition?.(record);
-        debugger;
         return (
           <Space size='middle' className='action-container'>
             {!!entity?.id && openProductionModal && !copying && (

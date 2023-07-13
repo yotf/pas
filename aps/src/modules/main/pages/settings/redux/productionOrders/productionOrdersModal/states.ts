@@ -1,6 +1,6 @@
 /**@module ProductionOrderModalStates */
 import BaseResponse from '@/modules/shared/services/interfaces';
-import { ProductionOrderFormData } from '../interfaces';
+import { ProductionOrderFormData} from '../interfaces';
 
 export interface POModalInitialStateResponse extends BaseResponse {
   data?: ProductionOrderFormData[];

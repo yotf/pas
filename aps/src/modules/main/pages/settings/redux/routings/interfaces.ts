@@ -73,7 +73,7 @@ export interface RoutingFormData {
   lotStandardQuantity?: number;
 
   customerId?: number;
-  unitOfMeasureId?: string;
+  unitOfMeasureId?: number;
   materialId?: number;
 
   routingAddAndUpdateOperations?: RoutingRouteFormData[];

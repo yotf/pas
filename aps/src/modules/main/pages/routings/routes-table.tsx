@@ -3,7 +3,7 @@
  */
 
 import plusIcon from '@/assets/plus.png';
-import { FC, useCallback, useContext, useState } from 'react';
+import { FC, useCallback, useContext, useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { v4 as uuid } from 'uuid';
 import CustomButton from '../../../shared/components/button/button.component';
@@ -26,10 +26,11 @@ export interface Props {
 const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
   const { ns } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes' });
-  const { getValues, setValue } = useFormContext<RoutingFormData>();
+  const { getValues, setValue, watch } = useFormContext<RoutingFormData>();
   const [route, setRoute] = useState<RoutingRouteFormData>();
   const onClose = useCallback(() => setRoute(undefined), []);
   const [option, setOption] = useState<'create' | 'edit'>();
+  const { routingAddAndUpdateOperations } = watch();
   const onAddOperation = useCallback(() => {
     setRoute({
       id: 0,
@@ -44,6 +45,15 @@ const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
     setRoute(selectedRoute);
     setOption('edit');
   }, []);
+
+  const totalLeadTime = useMemo(
+    () =>
+      routingAddAndUpdateOperations?.reduce(
+        (total, obj) => total + (obj?.leadTime ? obj?.leadTime : 0),
+        0,
+      ),
+    [routingAddAndUpdateOperations],
+  );
   const onDeleteOperation = useCallback(
     (selectedRoute: RoutingRouteFormData) => {
       const routingOperations = getValues().routingAddAndUpdateOperations ?? [];
@@ -65,10 +75,17 @@ const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
   return (
     <div className='routes'>
       <div className='routes-header'>
-        <div className='titles'>
-          <h1>{translate('title')}</h1>
-          <span className='subtitle'>{translate('subtitle')}</span>
+        <div className='routes-info'>
+          <div className='titles'>
+            <h1>{translate('title')}</h1>
+            <span className='subtitle'>{translate('subtitle')}</span>
+          </div>
+          <div className='total-lead'>
+            {translate('total_lead_time')}
+            {'  '}:{' ' + totalLeadTime}
+          </div>
         </div>
+
         <div className='buttons'>
           <CustomButton
             type='button'

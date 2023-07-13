@@ -70,6 +70,8 @@ import { materialsReducer } from './../modules/main/pages/settings/redux/materia
 import BaseResponse from '@/modules/shared/services/interfaces';
 import { configurationReducer } from '@/modules/main/pages/settings/redux/configuration/slice';
 import { ConfigurationResponse } from '@/modules/main/pages/settings/redux/configuration/states';
+import { linkedProductionOrderReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersLinkedOrders/slice';
+import { LinkedPOInitialStateResponse } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersLinkedOrders/states';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -106,6 +108,7 @@ export const rootReducer = combineReducers<StoreType>({
   productionCalendars: productionCalendarsReducer,
   productionCalendarsWorkCapacities: productionCalendarsWorkCapacitesReducer,
   productionOrders: productionOrderReducer,
+  linkedProductionOrders:linkedProductionOrderReducer,
   productionOrdersModal: productionOrdersModalReducer,
   statistics: statisticsReducer,
   simulation: simulationReducer,
@@ -149,6 +152,7 @@ export type StoreType = CombinedState<
     productionCalendars: ProductionCalendarsResponse;
     productionCalendarsWorkCapacities: ProductionCalendarWorkCapacitiesResponse;
     productionOrders: ProductionOrdersResponse;
+    linkedProductionOrders: LinkedPOInitialStateResponse;
     productionOrdersModal: POModalInitialStateResponse;
     reallocationOfPlanning: BaseResponse;
     statistics: StatisticsResponse;

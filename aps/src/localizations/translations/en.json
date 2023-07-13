@@ -227,7 +227,11 @@
     "save": "Save",
     "quantity1": "Quantity 1",
     "quantity2": "Quantity 2",
-    "isKg": "Unit of Measure That is in Kg"
+    "isKg": "Unit of Measure That is in Kg",
+    "validation": {
+      "create_success": "Configuration has been successfully saved",
+      "create_fail": "Configuration could not be saved"
+    }
   },
   "colors": {
     "table": {
@@ -731,6 +735,7 @@
       "leadTime": "Lead Time",
       "departmentName": "Department",
       "planning": "Planning",
+      "total_lead_time": "Total lead time",
 
       "yes": "Yes",
       "no": "No",
@@ -1288,7 +1293,7 @@
   },
   "productionOrderModal": {
     "po_modal_title": "Create Production Orders",
-    "productionOrderNumber": "Production Order Number",
+    "productionOrderNumber": "PO Number",
     "numberOfProductionOrders": "Number of POs",
     "productionOrderQuantity": "Production Order Quantites",
     "productionOrderTypeId": "Production Order Type",
@@ -1300,6 +1305,10 @@
     "schedule": "Schedule",
     "ok_text": "Save",
     "cancel": "Cancel",
+    "quantity1": "Quantity 1",
+    "quantity2": "Quantity 2",
+    "situation": "Situation",
+    "linkedProductionOrders": "Linked Production Orders",
     "validation": {
       "required": "This field is required",
       "min_length": "Number must be greater than 0",

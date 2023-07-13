@@ -37,24 +37,21 @@ export const useRoutingOptions = (): UseRoutingSetupReturnType => {
     [],
   );
   useEffect(() => {
-    dispatch(getAllUnitsOfMeasure());
     dispatch(getAllMaterials());
     dispatch(getAllCustomers());
     dispatch(getConfiguration());
   }, [dispatch]);
 
-  const { unitOfMeasures, materials, customers } = useAppSelector((state) => ({
-    unitOfMeasures: state.unitOfMeasure.data,
+  const { materials, customers } = useAppSelector((state) => ({
     materials: state.materials.data,
     customers: state.customers.data,
   }));
 
   const { quantities1 } = useAppSelector((state) => state.configuration.data);
 
-  const unitOptions: DefaultOptionType[] = useMemo(
-    () => convertForDropdown(quantities1.map((q1) => q1.unitOfMeasure) as SettingsPageItem[]),
-    [unitOfMeasures],
-  );
+  const unitOptions: DefaultOptionType[] = useMemo(() => {
+    return convertForDropdown(quantities1.map((q1) => q1.unitOfMeasure) as SettingsPageItem[]);
+  }, [quantities1]);
   const materialOptions: DefaultOptionType[] = useMemo(
     () => mapDataToOptions(materials),
     [materials],

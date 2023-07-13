@@ -46,7 +46,7 @@ export const useRoutingSchema = (): OptionalObjectSchema<
         remark: Yup.string().max(200, translate('max_length', { value: '200' })),
         isActive: Yup.boolean().required(translate('required')),
         materialId: Yup.number().notRequired(),
-        unitOfMeasureId: Yup.string().notRequired(),
+        unitOfMeasureId: Yup.number().notRequired(),
         routingAddAndUpdateOperations: Yup.array(Yup.object())
           .required()
           .min(1) as unknown as Yup.AnyObjectSchema,

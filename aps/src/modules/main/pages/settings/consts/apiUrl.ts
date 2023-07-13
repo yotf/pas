@@ -48,3 +48,4 @@ export const STATISTICS_DELAYED_ORDERS_API = `${BASE_STATISTICS_API}/getDelayedO
 export const STATISTICS_GENERATE_DATA_API = `${BASE_STATISTICS_API}/generateData`;
 export const BASE_CONFIGURATION_API = 'Configurations';
 export const CONFIGURATION_GET_LINKED_UOMS = `${BASE_CONFIGURATION_API}/getUoMByQuantityType`;
+export const PRODUCTION_ORDER_GET_LINKED = `${BASE_PRODUCTION_ORDER_API}/getLinkedProductionOrders`;

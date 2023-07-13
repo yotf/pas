@@ -58,7 +58,7 @@ export const useRoutingForm = ({
             remark: entity?.remark,
             lotStandardQuantity: entity?.lotStandardQuantity,
 
-            unitOfMeasureId: entity.unitOfMeasure?.code,
+            unitOfMeasureId: entity.unitOfMeasure?.id,
             materialId: entity.material?.id,
             customerId: entity?.customer?.id,
             routingInterfaceId: entity?.routingInterfaceId,
