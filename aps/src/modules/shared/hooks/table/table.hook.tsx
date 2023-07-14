@@ -23,6 +23,7 @@ import { SalesOrder } from '@/modules/main/pages/settings/redux/orderReplacement
 import {
   SalesOrderResponse,
   SalesOrderFormData,
+  SalesMaterialFormData,
 } from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
 /**
  * @template T Type of objects to be rendered in the table. Each object represents one table row.
@@ -139,11 +140,14 @@ export const useTable = <T extends object>({
         const isDisabled = disableDeleteButtonCondition?.(record);
         return (
           <Space size='middle' className='action-container'>
-            {!!entity?.id && openProductionModal && !copying && (
-              <Tooltip title={translate('production_order_tooltip')}>
-                <CodeSandboxOutlined onClick={doProductionModal(value)} />
-              </Tooltip>
-            )}
+            {!!entity?.id &&
+              openProductionModal &&
+              !copying &&
+              (value as unknown as SalesMaterialFormData)?.id !== 0 && (
+                <Tooltip title={translate('production_order_tooltip')}>
+                  <CodeSandboxOutlined onClick={doProductionModal(value)} />
+                </Tooltip>
+              )}
             {hasViewOnlyElements &&
             (dayjs(value.date).isBefore(dayjs(), 'day') ||
               dayjs(value.date).isSame(dayjs(), 'day')) ? (
