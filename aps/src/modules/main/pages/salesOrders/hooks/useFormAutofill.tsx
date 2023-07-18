@@ -44,10 +44,7 @@ export const useFormAutofill = (form: UseFormReturn<SalesMaterialFormData>): voi
     [materialId, materials],
   );
 
-  useEffect(() => {
-    const newValue = (selectedMaterial?.factorAreaToKG || 0) * (getValues().quantity1 ?? 0);
-    setValue('quantity2', Math.ceil(newValue));
-  }, [getValues, quantity1, selectedMaterial?.factorAreaToKG, setValue]);
+
   useEffect(() => {
     if (form.formState.defaultValues && selectedMaterial) {
       setValue(
@@ -55,11 +52,7 @@ export const useFormAutofill = (form: UseFormReturn<SalesMaterialFormData>): voi
         selectedMaterial.unitOfMeasure1?.name || translate('no_uom'),
         options,
       );
-      setValue(
-        'quantity2',
-        Math.ceil(selectedMaterial.factorAreaToKG * (getValues().quantity1 ?? 0)),
-        options,
-      );
+
       setValue('unitOfMeasure2', selectedMaterial.unitOfMeasure2?.name ?? '', options);
       setValue('materialName', selectedMaterial.name, options);
       setValue('materialDescription', selectedMaterial.features?.name || undefined, options);
