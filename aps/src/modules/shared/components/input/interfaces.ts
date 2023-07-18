@@ -72,6 +72,8 @@ export interface Input {
   onKeyDownEvent?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   /** Passed for select element to handle selection change */
   handleSelectionChange?: (value: any, option: any) => void;
+  dropDownStyle?: object;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface SwitchInput {

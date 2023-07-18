@@ -43,13 +43,14 @@ const CustomInput: React.FC<Input> = ({
   autoWidth = false,
   maxLength,
   handleSelectionChange,
+  dropDownStyle,
+  onBlur,
 }) => {
   const {
     watch,
     formState: { errors },
   } = useFormContext();
 
-  
   placeholder = placeholder === '' ? placeholder : placeholder || label;
   const fieldName = name || register?.name || '';
   error = error || (errors[fieldName] as FieldError);
@@ -115,6 +116,7 @@ const CustomInput: React.FC<Input> = ({
             mode={mode}
             allowClear={allowClear}
             handleSelectionChange={handleSelectionChange}
+            dropDownStyle={dropDownStyle}
           ></CustomSelect>
         );
       case 'date':
@@ -141,6 +143,7 @@ const CustomInput: React.FC<Input> = ({
             autoWidth={autoWidth}
             onKeyDownEvent={onKeyDownEvent}
             maxLength={maxLength}
+            onBlur={onBlur}
           />
         );
     }

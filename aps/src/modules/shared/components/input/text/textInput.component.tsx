@@ -24,6 +24,8 @@ export type TextInputProps = {
   autoWidth?: boolean;
   /** Max number of characters the input accepts */
   maxLength?: number;
+
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 /**
  *
@@ -37,6 +39,7 @@ const CustomTextInput: React.FC<TextInputProps> = ({
   onKeyDownEvent,
   autoWidth,
   maxLength,
+  onBlur,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -71,9 +74,10 @@ const CustomTextInput: React.FC<TextInputProps> = ({
             calcWidth(value.length);
             onChange(name === 'password' ? trimInputPassword(value) : trimInput(value));
           }}
-          onBlur={({ target: { value } }): void => {
+          onBlur={(event): void => {
             field.onBlur();
-            calcWidth(value.length);
+            onBlur ? onBlur(event) : null;
+            calcWidth(event.target.value.length);
           }}
           className={disabled ? 'ant-input-disabled' : ''}
           {...(onKeyDownEvent && {

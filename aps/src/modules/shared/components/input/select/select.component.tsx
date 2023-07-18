@@ -27,6 +27,7 @@ export type SelectProps = HTMLAttributes<HTMLInputElement> & {
   allowClear?: boolean;
   /** Callback for handling selection change  */
   handleSelectionChange?: (value: any, option: any) => void;
+  dropDownStyle?: object;
 };
 /** A customizable select input with options provided */
 const CustomSelect: React.FC<SelectProps> = ({
@@ -36,6 +37,7 @@ const CustomSelect: React.FC<SelectProps> = ({
   mode,
   allowClear,
   handleSelectionChange,
+  dropDownStyle,
   ...props
 }) => {
   const { control, getValues } = useFormContext();
@@ -52,6 +54,7 @@ const CustomSelect: React.FC<SelectProps> = ({
       mode={mode}
       listHeight={133}
       showSearch={isAutocomplete}
+      dropdownStyle={dropDownStyle}
       {...(isAutocomplete && {
         filterOption: (input: string, option: DefaultOptionType | undefined): boolean =>
           (option?.label ?? '').toString().toLowerCase().includes(input.toLowerCase()) ?? false,
