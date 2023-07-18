@@ -14,16 +14,14 @@
     padding-right:0px;
   }
   .linked-po-title{
-    font-weight:600;
-    font-size:18px;
-    padding:20px;
+    font-weight:500;
+    font-size:14px;
+    padding:10px;
     padding-left:5px;
   }
   .linked-po-header{
     display:flex;
     padding: 12px 24px;
-
-   
     width:95%;
     justify-content: space-between;
     border-bottom: 2px solid $blue-color;
@@ -35,9 +33,25 @@
     max-height:20vh ; /* Adjust the max-height as needed */
     overflow-y: auto;
     margin-top:0px;
-
-
   }
+
+  .material-info-header {
+    display:flex;
+    gap:20px;
+    border-bottom: 1px solid $gray-light;
+    margin-bottom:20px;
+    width:100%;
+
+    h3 {
+      font-size:14px;
+      font-weight:700;
+    }
+
+    h3 span {
+      font-weight: 200;
+    }
+  }
+
 
   .modal-item {
     display: flex;

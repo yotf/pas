@@ -59,6 +59,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
     reset,
     watch,
     getValues,
+    setValue,
   } = form;
 
   useEffect(() => {
@@ -66,6 +67,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
   }, [dispatch]);
 
   useEffect(() => {
+    setValue('routingId', selectedMaterialFull?.routingId);
     if (selectedMaterial && selectedMaterial?.id)
       dispatch(
         getLinkedProductionOrders({
@@ -73,7 +75,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
           salesOrderMaterialId: selectedMaterial?.id,
         }),
       );
-  }, [dispatch, selectedMaterial]);
+  }, [dispatch, selectedMaterial, isOpen]);
 
   const { productionOrders } = watch();
 
@@ -140,11 +142,21 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
         <FormProvider {...form}>
           <div className='production-order-modal'>
             <div className='material-info'>
-              <h3>{selectedMaterial?.materialName}</h3>
+              <div className='material-info-header'>
+                <h3>{selectedMaterial?.materialName}</h3>
+                <h3>
+                  <span>{translate('quantity1')}</span>= {selectedMaterial?.quantity1}
+                </h3>
+                <h3>
+                  <span>{translate('quantity2')}</span>={selectedMaterial?.quantity2}
+                </h3>
+              </div>
               <POModalInputs ns={ns} productionOrderInitial={productionOrderInitial} />
               <POModalActions
                 productionOrderInitial={productionOrderInitial}
                 translate={translate}
+                selectedMaterialFull={selectedMaterialFull}
+                selectedMaterial={selectedMaterial}
               />
             </div>
             {productionOrders?.length ? (
