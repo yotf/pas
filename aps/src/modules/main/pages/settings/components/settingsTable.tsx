@@ -15,7 +15,7 @@ import {
   PageTableAdditionalElements,
 } from '@/modules/shared/utils/utils';
 import { RefTable } from 'antd/es/table/interface';
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { useFormContext, UseFormReturn } from 'react-hook-form';
 import './settingsTable.scss';
 /**
@@ -108,6 +108,11 @@ const SettingsTable = <T extends object>({
   });
   const form: UseFormReturn<FormCustomFilter, any> = useFormContext();
   const onExportToExcel = useCallback(() => exportToExcel?.(), [exportToExcel]);
+
+  const hasSituation = useMemo(
+    () => additionalElements?.filters.some((f) => f.register === 'situation'),
+    [additionalElements],
+  );
   return isLoading ? (
     <></>
   ) : (
@@ -121,7 +126,14 @@ const SettingsTable = <T extends object>({
             register={register('search')}
           />
           {additionalElements &&
-            additionalElements.filters.map((filter) => createCustomFilter(form, filter))}
+            additionalElements.filters.map((filter, ix) => {
+              return ix === 1 && hasSituation
+                ? [
+                    <div className='situation-label'>{translate('situation')}:</div>,
+                    createCustomFilter(form, filter),
+                  ]
+                : createCustomFilter(form, filter);
+            })}
         </div>
         <div className='buttons'>
           {onNew && (

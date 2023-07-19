@@ -31,9 +31,16 @@ export enum AllocationBasedEnum  {
     "formula" = 2,
 }
 /** Situation enum used in {@link ProductionOrderMaintain} */
+
+export enum SituationStatus {
+  'all' = 0,
+  'open' = 1,
+  'close' = 3,
+  'cancel' = 2,
+}
 export enum POSituation {
   'open' = 1,
-  'closed' = 3,
+  'close' = 3,
   'cancel' = 2,
 }
 /** Status enum used in {@link ProductionOrderMaintain}  */
@@ -72,4 +79,11 @@ export const POStatusOptions: DefaultOptionType[] = [
   { label: PlanningStatus[1], value: 1 },
   { label: PlanningStatus[2], value: 2 },
   { label: PlanningStatus[3], value: 3 },
+];
+
+export const POSituationOptions: DefaultOptionType[] = [
+  { label: SituationStatus[0], value: 0 },
+  { label: SituationStatus[1], value: 1 },
+  { label: SituationStatus[2], value: 2 },
+  { label: SituationStatus[3], value: 3 },
 ];

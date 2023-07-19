@@ -14,7 +14,7 @@ export interface UseTableDataType<Entity, EntityMapped> {
   loading: boolean | undefined;
   uiData: EntityMapped[];
   data: Entity[];
-  form: UseFormReturn<{ search: string; status: number | string | undefined }, any>;
+  form: UseFormReturn<{ search: string; status: number | string | undefined;situation: number | string | undefined }, any>;
 }
 
 export interface UseTableDataProps<Entity, EntityMapped, SingleEntity> {
@@ -42,10 +42,11 @@ export const useTableData = <Entity, EntityMapped, SingleEntity>({
   EntityMapped
 > => {
   const dispatch = useAppDispatch();
-  const form = useForm<{ search: string; status: number | string | undefined }>({
+  const form = useForm<{ search: string; status: number | string | undefined; situation: number | string | undefined  }>({
     defaultValues: {
       search: '',
       status: 1,
+      situation:0,
     },
   });
   const { search } = form.watch();

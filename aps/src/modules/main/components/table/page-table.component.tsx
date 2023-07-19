@@ -48,7 +48,14 @@ export type TableProps<Entity, EntityMapped, SingleEntity> = {
   preventSort?: (keyof EntityMapped)[] | boolean;
   /** Used to search data by additional parameters */
   additionalSearch?: (
-    form: UseFormReturn<{ search: string; status: number | string | undefined }, any>,
+    form: UseFormReturn<
+      {
+        search: string;
+        status: number | string | undefined;
+        situation: number | string | undefined;
+      },
+      any
+    >,
   ) => void;
   /** Renders additional Elements to be rendered above the table. Usually used with additionalFilter and additionalSearch props to create inputs which will trigger the additional filtering */
   additionalElements?: {

@@ -5,9 +5,9 @@
 import CustomButton from '@/modules/shared/components/button/button.component';
 import {
   PlanningStatus,
-  POSituation,
+  POSituationOptions,
   POStatusOptions,
-  situationDropdownOptions,
+  SituationStatus,
 } from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useExportToExcel } from '@/modules/shared/hooks/useExportToExcel';
@@ -21,14 +21,13 @@ import { useAppDispatch } from '@/store/hooks';
 import { CombinedState } from '@reduxjs/toolkit';
 import { DefaultOptionType } from 'antd/es/select';
 import { RefTable } from 'antd/es/table/interface';
-import { FC, Key, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, Key, useCallback, useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { StoreType } from '../../../../store';
 import { ExportToExcelProvider } from '../../components/maintain/contexts/exportToExcel.context';
 import PageTable from '../../components/table/page-table.component';
 import {
   ProductionOrder,
-  ProductionOrderFormData,
   ProductionOrderMapped,
 } from '../settings/redux/productionOrders/interfaces';
 import { StatusUpdateData } from '../settings/redux/productionOrders/productionOrdersStatus/interfaces';
@@ -39,6 +38,7 @@ import {
   getAllProductionOrders,
 } from '../settings/redux/productionOrders/thunks';
 import { IdentifiableEntity } from '../settings/redux/thunks';
+import './productionOrders.scss';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * Adds additional filters and checkbox row selection to the table which is specific for this page.
@@ -130,6 +130,7 @@ const ProductionOrdersTable: FC = () => {
   };
 
   const [statusValue, setStatusValue] = useState<number>(1);
+  const [situationValue, setSituationValue] = useState<number>(0);
 
   useEffect(() => {
     onSelectionChange();
@@ -142,19 +143,28 @@ const ProductionOrdersTable: FC = () => {
       if (name === 'status') {
         setStatusValue(value.status as number);
       }
+      if (name === 'situation') {
+        setSituationValue(value.situation as number);
+      }
     });
   }, []);
 
   const additionalFilter = useCallback(
     (data: (ProductionOrderMapped & IdentifiableEntity)[]) => {
-      if (statusValue === PlanningStatus.all) return data;
+      // if (statusValue === PlanningStatus.all && situationValue === SituationStatus.all) return data;
       const filteredByStatus = data.filter((entity: ProductionOrderMapped) => {
-        return entity.status?.toString().toLowerCase() === PlanningStatus[statusValue as number];
+        return (
+          (statusValue === PlanningStatus.all ||
+            entity.status?.toString().toLowerCase() === PlanningStatus[statusValue as number]) &&
+          (situationValue == SituationStatus.all ||
+            entity.situation?.toString().toLowerCase() ===
+              SituationStatus[situationValue as number])
+        );
       });
 
       return filteredByStatus;
     },
-    [statusValue],
+    [statusValue, situationValue],
   );
   const ns = 'productionOrder';
 
@@ -189,7 +199,7 @@ const ProductionOrdersTable: FC = () => {
   }, [translate]);
 
   const situationOptions = useMemo((): DefaultOptionType[] => {
-    return situationDropdownOptions.map((option) => ({
+    return POSituationOptions.map((option) => ({
       ...option,
       label: translate(String(option.label)),
     }));
@@ -201,6 +211,11 @@ const ProductionOrdersTable: FC = () => {
         options: translatedOptions,
         type: 'radio',
         register: 'status',
+      },
+      {
+        options: situationOptions,
+        type: 'select',
+        register: 'situation',
       },
     ],
     buttons: actionButtons,

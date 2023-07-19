@@ -150,7 +150,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [selectedSalesOrder, setValue]);
 
   useEffect(() => {
-    setValue('routingId', materialMeasures?.routingId ?? undefined);
+    if (routingId && routingId !== entity?.routingId)
+      setValue('routingId', materialMeasures?.routingId ?? undefined);
   }, [JSON.stringify(materialMeasures), setValue]);
 
   useEffect(() => {
@@ -209,6 +210,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
       (routingId !== entity?.routingId || discardOperations) &&
       selectedRouting?.routingOperations?.length
     ) {
+      debugger;
       setValue(
         'routingAddAndUpdateOperations',
         mapRoutingOperations(selectedRouting?.routingOperations),

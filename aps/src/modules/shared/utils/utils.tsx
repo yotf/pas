@@ -63,10 +63,11 @@ export const calculateMinutes = (
 };
 
 export type FilterInput = 'radio' | 'select';
-export type FilterRegister = 'search' | 'status';
+export type FilterRegister = 'search' | 'status' | 'situation';
 export type FormCustomFilter = {
   search: string;
   status: string | number | undefined;
+  situation: string | number | undefined;
 };
 
 export type AdditionalFilterInfo = {
