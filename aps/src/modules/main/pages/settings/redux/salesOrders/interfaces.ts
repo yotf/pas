@@ -21,6 +21,7 @@ export interface SalesOrder {
   salesOrderMaterials?: SalesMaterial[];
   changeHistoryDto: ChangeHistoryDto;
   salesOrderDelivery: string;
+  salesOrderSequence?: string;
 }
 
 export interface SalesOrderFormData {
@@ -56,6 +57,7 @@ export interface SalesMaterial {
   tanneryDelivery: string;
   material: Material;
   changeHistoryDto: ChangeHistoryDto;
+  sequence?: number;
 }
 /**
  * Used for editing a material in the table

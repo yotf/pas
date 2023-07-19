@@ -18,12 +18,13 @@ import { getAllSalesOrders } from '../../settings/redux/salesOrders/thunks';
 import { getAllSelections } from '../../settings/redux/selections/thunks';
 import { getAllThickness } from '../../settings/redux/thickness/thunks';
 import { getAllUnitsOfMeasure } from '../../settings/redux/unitOfMeasure/thunks';
+import { getSalesOrdersWithMaterials } from '../../settings/redux/salesOrders/salesOrdersWithMaterials/thunks';
 
 export type UseProductionOrderOptions = {
   customerOptions: DefaultOptionType[];
   orderTypeOptions: DefaultOptionType[];
   materialOptions: DefaultOptionType[];
-  salesOrderOptions: DefaultOptionType[];
+  //salesOrderOptions: DefaultOptionType[];
   routingOptions: DefaultOptionType[];
   unitOfMeasureOptions: DefaultOptionType[];
   materialGroupOptions: DefaultOptionType[];
@@ -31,6 +32,7 @@ export type UseProductionOrderOptions = {
   articleOptions: DefaultOptionType[];
   thicknessOptions: DefaultOptionType[];
   selectionOptions: DefaultOptionType[];
+  salesOrderSequenceOptions: DefaultOptionType[];
 };
 /**
  * Fetches and converts data to options usable by select and radio inputs.
@@ -42,7 +44,6 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     dispatch(getAllCustomers());
     dispatch(getAllProductionOrderTypes());
     dispatch(getAllMaterials());
-    dispatch(getAllSalesOrders());
     dispatch(getAllRoutings());
     dispatch(getAllUnitsOfMeasure());
     dispatch(getAllMaterialGroups());
@@ -50,6 +51,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     dispatch(getAllColors());
     dispatch(getAllThickness());
     dispatch(getAllSelections());
+    dispatch(getSalesOrdersWithMaterials());
   }, [dispatch]);
 
   const {
@@ -68,7 +70,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     customers: state.customers.data,
     productionOrderTypes: state.productionOrderTypes.data,
     materials: state.materials.data,
-    salesOrders: state.salesOrders.data,
+    salesOrders: state.salesOrdersWithMaterials.data,
     routings: state.routings.data,
     unitsOfMeasure: state.unitOfMeasure.data,
     materialGroups: state.materialGroups.data,
@@ -119,21 +121,39 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     [selections],
   );
 
-  const mapSalesOrdersToOptions = (data: SalesOrder[]): DefaultOptionType[] =>
-    data
-      .filter((so) => so.statusInfo.id !== 3)
-      .map((filteredSO) => ({ label: filteredSO.orderNumber, value: filteredSO.id }));
+  const salesOrderSequenceOptions: DefaultOptionType[] = useMemo(() => {
+    const salesOrderMaterialValuePairs: any = [];
+    const salesOrderMaterialLabelPairs: any = [];
 
-  const salesOrderOptions: DefaultOptionType[] = useMemo(
-    () => mapSalesOrdersToOptions(salesOrders),
-    [salesOrders],
-  );
+    salesOrders.forEach((so) => {
+      so.salesOrderMaterials?.forEach((som) => {
+        salesOrderMaterialValuePairs.push(`${so.id}-${som.id}`);
+        salesOrderMaterialLabelPairs.push(`${so.orderNumber} - ${som.sequence}`);
+      });
+    });
+
+    const combined = salesOrderMaterialValuePairs.map((value: any, ix: number) => {
+      const label = salesOrderMaterialLabelPairs[ix];
+      return { value, label };
+    });
+    return combined;
+  }, [salesOrders]);
+
+  // const mapSalesOrdersToOptions = (data: SalesOrder[]): DefaultOptionType[] =>
+  //   data
+  //     .filter((so) => so.statusInfo.id !== 3)
+  //     .map((filteredSO) => ({ label: filteredSO.orderNumber, value: filteredSO.id }));
+
+  // const salesOrderOptions: DefaultOptionType[] = useMemo(
+  //   () => mapSalesOrdersToOptions(salesOrders),
+  //   [salesOrders],
+  // );
 
   return {
     customerOptions,
     orderTypeOptions,
     materialOptions,
-    salesOrderOptions,
+    //   salesOrderOptions,
     routingOptions,
     unitOfMeasureOptions,
     materialGroupOptions,
@@ -141,5 +161,6 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     colorOptions,
     thicknessOptions,
     selectionOptions,
+    salesOrderSequenceOptions,
   };
 };

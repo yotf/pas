@@ -1055,6 +1055,7 @@
     "document": "Document",
     "id": "Order Id",
     "productionOrderTypeId": "Order Type",
+    "salesOrderSequence": "SO Number",
     "customerId": "Customer",
     "customerOrderNumber": "Customer Order Number",
     "statusOfPlanningEnum": "Status",

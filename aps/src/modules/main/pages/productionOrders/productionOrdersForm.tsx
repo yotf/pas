@@ -68,13 +68,11 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const nameof = nameofFactory<ProductionOrderFormData>();
-  debugger;
 
   const {
     customerOptions,
     orderTypeOptions,
     materialOptions,
-    salesOrderOptions,
     routingOptions,
     unitOfMeasureOptions,
     materialGroupOptions,
@@ -82,6 +80,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     articleOptions,
     selectionOptions,
     thicknessOptions,
+    salesOrderSequenceOptions,
   } = useProductionOrderOptions();
 
   const form = useFormContext<ProductionOrderFormData>();
@@ -97,7 +96,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     salesOrderDelivery,
     routingAddAndUpdateOperations,
     statusOfPlanningEnum,
-    initialDate,
+    salesOrderSequence,
   } = watch();
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
@@ -129,7 +128,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   useEffect(() => {
     setValue('unitOfMeasure1Id', materialMeasures?.unitOfMeasure1?.id || undefined);
     setValue('unitOfMeasure2Id', materialMeasures?.unitOfMeasure2?.id || undefined);
-    setValue('unitOfMeasure3Id', materialMeasures?.unitOfMeasure1?.id || undefined);
+    setValue('unitOfMeasure3Id', materialMeasures?.unitOfMeasure1?.id || undefined); //TODO use default value from configurator
   }, [materialMeasures, setValue]);
 
   useEffect(() => {
@@ -162,36 +161,10 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
   useEffect(() => {
-    debugger;
-    const maxOperation =
-      routingAddAndUpdateOperations && routingAddAndUpdateOperations?.length > 0
-        ? routingAddAndUpdateOperations?.reduce(
-            (maxOperation: RoutingRouteFormData, currentOperation: RoutingRouteFormData) => {
-              if (
-                currentOperation?.leadTime &&
-                maxOperation?.leadTime &&
-                currentOperation?.leadTime > maxOperation?.leadTime
-              ) {
-                return currentOperation;
-              } else {
-                return maxOperation;
-              }
-            },
-          )
-        : undefined;
-    const foreseenDelivery =
-      initialDate && maxOperation && maxOperation.leadTime
-        ? dayjs(initialDate).add(maxOperation?.leadTime, 'day').format()
-        : undefined;
-    setValue('foreseenDelivery', foreseenDelivery);
-  }, [initialDate, routingAddAndUpdateOperations]);
-
-  useEffect(() => {
     setValue('materialId', materialId);
   }, [materialId, setValue]);
 
   useEffect(() => {
-    debugger;
     setValue('pO_RoutingOperationAddAndUpdateDtos', routingAddAndUpdateOperations, {
       shouldValidate: true,
       shouldDirty: true,
@@ -205,10 +178,15 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     }
   }, [dispatch, entity?.routingId, routingId]);
 
-  const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
-    const initialDateString = getValues('initialDate');
-    const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
+  useEffect(() => {
+    if (salesOrderSequence) {
+      const [soID, soMid] = salesOrderSequence?.split('-');
+      setValue('salesOrderId', Number(soID));
+      setValue('salesOrderMaterialId', Number(soMid));
+    }
+  }, [salesOrderSequence]);
 
+  const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
     return (
       arr.map(({ operation, leadTime, ...rest }, i) => ({
         ...rest,
@@ -217,8 +195,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
         id: 0,
         sequence: i + 1,
         workCenterId: undefined,
-        planningDate:
-          initialDate && leadTime ? initialDate.add(leadTime, 'days').format() : undefined,
+        planningDate: undefined,
         executedDate: undefined,
         operationTime: operation.operationTime ?? undefined,
         leadTime,
@@ -227,20 +204,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   };
 
   useEffect(() => {
-    debugger;
-    const initialDateString = getValues('initialDate');
-    const initialDate = initialDateString ? dayjs(initialDateString) : undefined;
-    const withPlannedDate = routingAddAndUpdateOperations?.map(({ leadTime, ...rest }) => ({
-      ...rest,
-      planningDate:
-        initialDate && leadTime ? initialDate.add(leadTime, 'days').format() : undefined,
-      leadTime,
-    }));
-    setValue('pO_RoutingOperationAddAndUpdateDtos', withPlannedDate);
-  }, [routingAddAndUpdateOperations, initialDate, copy]);
-
-  useEffect(() => {
-    debugger;
     if (
       routingId &&
       (routingId !== entity?.routingId || discardOperations) &&
@@ -322,12 +285,12 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             readOnly={isPlanned}
             disabled={isPlanned}
           />
+
           <CustomInput
             type='select'
-            isRequired={true}
-            label={translate('salesOrderId')}
-            name={nameof('salesOrderId')}
-            options={salesOrderOptions}
+            label={translate('salesOrderSequence')}
+            name={nameof('salesOrderSequence')}
+            options={salesOrderSequenceOptions}
             isAutocomplete={true}
             readOnly={isPlanned}
             disabled={isPlanned}

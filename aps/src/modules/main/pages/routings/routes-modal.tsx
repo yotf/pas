@@ -46,6 +46,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
   const buttonProps = useModalProps<RoutingRouteFormData>(form);
   const nameof = nameofFactory<RoutingRouteFormData>();
   const { data: operations } = useAppSelector((state) => state.operation);
+  const { register } = form;
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!operations.length) {
@@ -64,7 +65,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
         className='routes-modal'
         centered
         open={!!route}
-        title={translate('add_operation')}
+        title={option == 'edit' ? translate('edit_operation') : translate('add_operation')}
         okText={translate('save')}
         onOk={onSubmit}
         cancelText={translate('cancel')}
@@ -92,8 +93,10 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           type='number'
           label={translate('sequence')}
           name={nameof('sequence')}
-          disabled={true}
-          readOnly={true}
+          register={register('sequence')}
+          isRequired={true}
+          // disabled={true}
+          // readOnly={true}
         />
         <CustomInput
           isRequired={true}

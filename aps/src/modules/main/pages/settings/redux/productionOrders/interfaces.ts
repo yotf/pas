@@ -115,7 +115,7 @@ export interface ProductionOrderMapped {
   creationDate: string;
   status: string;
   customerName: string;
-  salesOrderNumber: number;
+  salesOrderNumber: number | string;
   salesOrderType: string;
   materialName: string;
   articleName: string;
@@ -132,6 +132,7 @@ export interface ProductionOrderMapped {
   deliveryOfPosition: string;
   originPO: number;
   situation: string;
+  salesOrderSequence?: string;
 }
 
 export interface ProductionOrderFormData {
@@ -143,6 +144,7 @@ export interface ProductionOrderFormData {
   customerId?: number;
   customerOrderNumber?: string;
   salesOrderId?: number;
+  salesOrderSequence?: string;
   salesOrderMaterialId?: number;
   routingId?: number;
   creationDate?: string;

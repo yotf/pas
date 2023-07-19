@@ -50,7 +50,7 @@ export const useProductionOrderForm = ({
         departmentName: operation?.department?.name ?? '',
         id: copy ? 0 : operation.id,
         sequence: i + 1,
-        workCenterId: undefined,
+        workCenterId: undefined, // why??? TODO
         planningDate: planningDate,
         executedDate: executedDate,
         operationTime: 0,
@@ -71,6 +71,7 @@ export const useProductionOrderForm = ({
               situationEnum: 1,
               productionOrderTypeId: undefined,
               salesOrderId: undefined,
+              salesOrderSequence: undefined,
               customerId: undefined,
               customerOrderNumber: '',
               materialId: undefined,
@@ -107,6 +108,7 @@ export const useProductionOrderForm = ({
               customerOrderNumber:
                 entity.customerOrderNumber || entity.salesOrderDto?.customerOrderNumber,
               salesOrderId: entity.salesOrderId,
+              salesOrderSequence: `${entity.salesOrderId}-${entity?.salesOrderMaterialDto?.id}`,
               salesOrderMaterialId: entity.salesOrderMaterialId,
               materialId: entity.materialDto?.id,
               routingId: entity.routingId,

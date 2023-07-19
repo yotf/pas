@@ -62,13 +62,13 @@ export const UseSalesOrderForm = ({
             salesOrderDelivery: entity.salesOrderDelivery,
             salesOrderMaterialsAddAndUpdate:
               entity.salesOrderMaterials?.map(
-                ({ material, requestedDelivery, tanneryDelivery, id, ...rest }, i) => ({
+                ({ material, requestedDelivery, tanneryDelivery, id, sequence, ...rest }, i) => ({
                   ...rest,
                   id: copy ? 0 : id,
                   guid: uuid(),
                   materialDescription: material.features?.name,
                   materialName: material.name,
-                  sequence: i + 1,
+                  sequence: sequence,
                   unitOfMeasure1: material.unitOfMeasure1?.name,
                   unitOfMeasure2: material.unitOfMeasure2?.name,
                   requestedDelivery: requestedDelivery,

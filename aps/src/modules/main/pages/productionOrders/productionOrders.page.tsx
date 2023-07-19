@@ -3,7 +3,12 @@
  */
 
 import CustomButton from '@/modules/shared/components/button/button.component';
-import { PlanningStatus, POStatusOptions } from '@/modules/shared/consts';
+import {
+  PlanningStatus,
+  POSituation,
+  POStatusOptions,
+  situationDropdownOptions,
+} from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useExportToExcel } from '@/modules/shared/hooks/useExportToExcel';
 import { exportToExcelFile, getDataForExcel } from '@/modules/shared/utils/exportToExcel.utils';
@@ -49,7 +54,7 @@ const ProductionOrdersTable: FC = () => {
       'creationDate',
       'status',
       'customerName',
-      'salesOrderNumber',
+      'salesOrderSequence',
       'salesOrderType',
       'materialName',
       'articleName',
@@ -78,6 +83,10 @@ const ProductionOrdersTable: FC = () => {
       creationDate: dateFormatter(obj.changeHistoryDto.createdOn),
       status: obj.statusOfPlanning?.name,
       customerName: obj.customerDto?.name,
+      salesOrderSequence:
+        obj.salesOrderDto?.orderNumber.toString() +
+        ' - ' +
+        obj.salesOrderMaterialDto?.sequence?.toString(),
       salesOrderNumber: obj.salesOrderDto?.orderNumber,
       salesOrderType: obj.salesOrderDto?.orderType.name,
       materialName: obj.materialDto?.name ?? '',
@@ -174,6 +183,13 @@ const ProductionOrdersTable: FC = () => {
 
   const translatedOptions = useMemo((): DefaultOptionType[] => {
     return POStatusOptions.map((option) => ({
+      ...option,
+      label: translate(String(option.label)),
+    }));
+  }, [translate]);
+
+  const situationOptions = useMemo((): DefaultOptionType[] => {
+    return situationDropdownOptions.map((option) => ({
       ...option,
       label: translate(String(option.label)),
     }));
