@@ -63,6 +63,7 @@ export const useProductionOrderModalSchema = (): OptionalObjectSchema<
             customerOrderNumber: stringNotRequired,
             salesOrderId: numberNotRequired,
             salesOrderMaterialId: numberNotRequired,
+            salesOrderSequence: Yup.string().notRequired(),
             materialId: numberNotRequired,
             routingId: numberNotRequired,
             initialDate: Yup.string().notRequired(),
