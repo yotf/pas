@@ -45,6 +45,7 @@ const CustomInput: React.FC<Input> = ({
   handleSelectionChange,
   dropDownStyle,
   onBlur,
+  onTextChange,
 }) => {
   const {
     watch,
@@ -144,6 +145,7 @@ const CustomInput: React.FC<Input> = ({
             onKeyDownEvent={onKeyDownEvent}
             maxLength={maxLength}
             onBlur={onBlur}
+            onTextChange={onTextChange}
           />
         );
     }

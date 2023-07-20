@@ -17,7 +17,7 @@ const productionOrderSlice = createEntitySlice<
     entity.productionOrder_Id.toString(),
     entity.customerDto?.name,
     entity.salesOrderDto?.orderNumber.toString(),
-    `${entity?.salesOrderDto.orderNumber}-${entity?.salesOrderMaterialDto.sequence}`,
+    `${entity?.salesOrderDto?.orderNumber}-${entity?.salesOrderMaterialDto?.sequence}`,
    // entity.customerOrderNumber,
     entity.materialDto?.name,
   ],
