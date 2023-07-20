@@ -7,7 +7,16 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useModalProps } from '@/modules/shared/hooks/useModalProps.hook';
 import { nameofFactory } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
-import { ChangeEvent, FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { FormProvider } from 'react-hook-form';
 import {
   MaintainContext,
@@ -108,6 +117,12 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
     });
   };
 
+  const handleSubmit = useCallback(() => {
+    setQuantityExited(false);
+    quantityExitedRef.current = false;
+    onSubmit();
+  }, [onSubmit]);
+
   return (
     <FormProvider {...form}>
       <Modal
@@ -117,7 +132,7 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
         open={!!material}
         title={translate('add_operation')}
         okText={translate('save')}
-        onOk={onSubmit}
+        onOk={handleSubmit}
         cancelText={translate('cancel')}
         onCancel={() => {
           onClose();
