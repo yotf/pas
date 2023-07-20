@@ -7,7 +7,7 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useModalProps } from '@/modules/shared/hooks/useModalProps.hook';
 import { nameofFactory } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
-import { ChangeEvent, FC, useContext, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, FC, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import {
   MaintainContext,
@@ -26,6 +26,7 @@ import { useSalesOrderOptions } from './hooks/useSalesOrderOptions';
 import './salesOrder-modal.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getAllMaterials } from '../settings/redux/materials/thunks';
+import { flushSync } from 'react-dom';
 
 export type Props = {
   material?: SalesMaterialFormData;
@@ -51,12 +52,13 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
     formState: { isDirty },
     register,
   } = form;
-  const { quantity1, quantity2, materialId } = watch();
+  const { materialId } = watch();
   const buttonProps = useModalProps(form);
   const nameof = nameofFactory<SalesMaterialFormData>();
   const { materialOptions } = useSalesOrderOptions();
-  const [q1Changed, setQ1changed] = useState<boolean>(false);
-  const [q2Changed, setQ2changed] = useState<boolean>(false);
+
+  const [quantityExited, setQuantityExited] = useState<boolean>(false);
+  const quantityExitedRef = useRef(quantityExited);
 
   const { data: materials } = useAppSelector((state) => state.materials);
   const dispatch = useAppDispatch();
@@ -66,39 +68,44 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
 
   const quantitiesDisabled = useMemo(() => !materialId, [materialId]);
 
+  useEffect(() => {
+    quantityExitedRef.current = quantityExited;
+  }, [quantityExited]);
+
   const selectedMaterialFull = useMemo(
     () => materials.find((mt) => materialId === mt.id),
     [materialId],
   );
 
-  useEffect(() => {
-    if (!q1Changed && quantity1 && isDirty && material?.id === 0)
+  const onQ1change = (value: number | string) => {
+    const q1 = value;
+    if (!quantityExitedRef.current && !!q1 && material?.id === 0) {
       setValue(
         'quantity2',
         selectedMaterialFull?.factorAreaToPc
-          ? selectedMaterialFull?.factorAreaToPc * Number(quantity1)
+          ? selectedMaterialFull?.factorAreaToPc * Number(q1)
           : undefined,
       );
-  }, [quantity1]);
-
-  useEffect(() => {
-    if (
-      !q2Changed &&
-      quantity2 &&
-      selectedMaterialFull?.factorAreaToPc &&
-      isDirty &&
-      material?.id === 0
-    )
-      setValue('quantity1', Math.ceil(Number(quantity2) / selectedMaterialFull.factorAreaToPc));
-  }, [quantity2]);
-
-  const q1OnBlur = (event: ChangeEvent<HTMLInputElement>) => {
-    setQ1changed(true);
+    }
   };
 
-  const q2onBlur = (event: ChangeEvent<HTMLInputElement>) => {
-    debugger;
-    setQ2changed(true);
+  const onQ2change = (value: number | string) => {
+    const q2 = value;
+    if (
+      !quantityExitedRef.current &&
+      !!q2 &&
+      selectedMaterialFull?.factorAreaToPc &&
+      material?.id === 0
+    ) {
+      setValue('quantity1', Math.ceil(Number(q2) / selectedMaterialFull.factorAreaToPc));
+    }
+  };
+
+  const onQuantityBlur = (event: ChangeEvent<HTMLInputElement>) => {
+    flushSync(() => {
+      setQuantityExited(true);
+      quantityExitedRef.current = true;
+    });
   };
 
   return (
@@ -114,8 +121,8 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
         cancelText={translate('cancel')}
         onCancel={() => {
           onClose();
-          setQ1changed(false);
-          setQ2changed(false);
+          setQuantityExited(false);
+          quantityExitedRef.current = false;
         }}
       >
         <CustomInput
@@ -142,8 +149,9 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           label={translate('quantity1')}
           name={nameof('quantity1')}
           register={register('quantity1')}
-          onBlur={q1OnBlur}
+          onBlur={onQuantityBlur}
           disabled={quantitiesDisabled}
+          onTextChange={onQ1change}
         />
         <CustomInput
           type='readonly'
@@ -154,9 +162,10 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           type='number'
           label={translate('quantity2')}
           name={nameof('quantity2')}
-          onBlur={q2onBlur}
+          onBlur={onQuantityBlur}
           isRequired={true}
           register={register('quantity2')}
+          onTextChange={onQ2change}
           disabled={quantitiesDisabled}
         />
         <CustomInput
