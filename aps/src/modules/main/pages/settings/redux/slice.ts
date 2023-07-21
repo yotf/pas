@@ -76,7 +76,7 @@ export const createEntitySlice = <
         const searchCriteria = action.payload?.toLocaleLowerCase();
         state.filtered = state.data.filter((entity) =>
           searchFields(entity as Entity).some((value) => {
-            const valueToSearch = dayjs(value).isValid() && !value?.includes("-") ? dateFormatter(value) : value;
+            const valueToSearch = dayjs(value).isValid() ? dateFormatter(value) : value;
             return valueToSearch?.toString().toLowerCase().includes(searchCriteria)
           },
           ),

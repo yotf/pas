@@ -128,7 +128,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     salesOrders.forEach((so) => {
       so.salesOrderMaterials?.forEach((som) => {
         salesOrderMaterialValuePairs.push(`${so.id}-${som.id}`);
-        salesOrderMaterialLabelPairs.push(`${so.orderNumber} - ${som.sequence}`);
+        salesOrderMaterialLabelPairs.push(`${so.orderNumber} - Seq. ${som.sequence}`);
       });
     });
 

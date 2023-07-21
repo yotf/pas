@@ -85,7 +85,7 @@ const ProductionOrdersTable: FC = () => {
       customerName: obj.customerDto?.name,
       salesOrderSequence:
         obj.salesOrderDto?.orderNumber.toString() +
-        ' - ' +
+        ' - Seq. ' +
         obj.salesOrderMaterialDto?.sequence?.toString(),
       salesOrderNumber: obj.salesOrderDto?.orderNumber,
       salesOrderType: obj.salesOrderDto?.orderType.name,
