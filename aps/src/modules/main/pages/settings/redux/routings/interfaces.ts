@@ -19,6 +19,7 @@ export interface RoutingRoute {
   departmentName?: string;
   changeHistoryDto: ChangeHistoryDto;
   operation: Operation;
+  sequence: number;
 }
 /** Form data used for editing routing routes */
 export interface RoutingRouteFormData {

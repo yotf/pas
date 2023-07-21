@@ -64,13 +64,13 @@ export const useRoutingForm = ({
             routingInterfaceId: entity?.routingInterfaceId,
 
             routingAddAndUpdateOperations:
-              entity.routingOperations?.map(({ operation, ...rest }, i) => ({
+              entity.routingOperations?.map(({ operation, sequence, ...rest }, i) => ({
                 ...rest,
                 guid: uuid(),
                 operationName: operation.name,
                 departmentName: operation.department?.name,
                 id: copy ? 0 : rest.id,
-                sequence: i + 1,
+                sequence: sequence,
               })) ?? [],
           },
     [copy],
@@ -85,10 +85,15 @@ export const useRoutingForm = ({
     readThunk: getRouting,
   });
 
-  const { setValue, watch } = form;
+  const {
+    setValue,
+    watch,
+    formState: { isDirty },
+  } = form;
   const { routingAddAndUpdateOperations } = watch();
 
   useEffect(() => {
+    if (!isDirty) return;
     routingAddAndUpdateOperations?.forEach((o, i) => (o.sequence = i + 1));
     setValue('routingAddAndUpdateOperations', routingAddAndUpdateOperations);
   }, [JSON.stringify(routingAddAndUpdateOperations), setValue]);

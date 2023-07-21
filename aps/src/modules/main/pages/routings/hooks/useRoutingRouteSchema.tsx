@@ -46,7 +46,8 @@ export const useRoutingRouteSchema = (
         standardTime: Yup.number()
           .required(translate('required'))
           .test(timeValidator)
-          .typeError(translate('required')),
+          .typeError(translate('required'))
+          .transform((val) => Number(val) || 0),
         setupTime: Yup.number()
           .notRequired()
           .test(timeValidator)
@@ -59,7 +60,8 @@ export const useRoutingRouteSchema = (
           .required(translate('required'))
           .min(0, translate('min_value', { value: '0' }))
           .max(99, translate('max_digits', { value: '2' }))
-          .typeError(translate('required')),
+          .typeError(translate('required'))
+          .transform((val) => Number(val) || 0),
         planning: Yup.boolean().required(),
         remark: Yup.string()
           .notRequired()
@@ -72,6 +74,7 @@ export const useRoutingRouteSchema = (
               .min(1, translate('min_value', { value: '1' }))
               .max(maxSequence, translate('max_value', { value: maxSequence.toString() }))
               .typeError(translate('must_be_number'))
+              .transform((val) => Number(val) || 0)
           : Yup.number().required(),
         guid: Yup.string().notRequired(),
         executedDate: Yup.string().notRequired(),

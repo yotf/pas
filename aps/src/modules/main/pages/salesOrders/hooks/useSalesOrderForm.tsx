@@ -88,9 +88,14 @@ export const UseSalesOrderForm = ({
     readThunk: getSalesOrder,
   });
 
-  const { setValue, watch } = form;
+  const {
+    setValue,
+    watch,
+    formState: { isDirty },
+  } = form;
   const { salesOrderMaterialsAddAndUpdate } = watch();
   useEffect(() => {
+    if (!isDirty) return;
     salesOrderMaterialsAddAndUpdate?.forEach((o, i) => (o.sequence = i + 1));
     setValue('salesOrderMaterialsAddAndUpdate', salesOrderMaterialsAddAndUpdate);
   }, [JSON.stringify(salesOrderMaterialsAddAndUpdate), setValue]);
