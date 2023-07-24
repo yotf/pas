@@ -13,8 +13,7 @@ import {
 import { StoreType } from '../../../../../store';
 import { CrudThunks, IdentifiableEntity, VALIDATION_ERRORS_KEY } from './thunks';
 import { ValidationError } from './validation-error.type';
-import { dateFormatter, isEuropeanDateFormat } from '@/modules/shared/utils/utils';
-import dayjs from 'dayjs';
+import { dateFormatter, isValidDateFormat } from '@/modules/shared/utils/utils';
 
 export type StateSelector<Entity, SingleEntity> = (
   state: CombinedState<StoreType>,
@@ -76,7 +75,7 @@ export const createEntitySlice = <
         const searchCriteria = action.payload?.toLocaleLowerCase();
         state.filtered = state.data.filter((entity) =>
           searchFields(entity as Entity).some((value) => {
-            const valueToSearch = dayjs(value).isValid() ? dateFormatter(value) : value;
+            const valueToSearch = value && isValidDateFormat(value) ? dateFormatter(value) : value;
             return valueToSearch?.toString().toLowerCase().includes(searchCriteria)
           },
           ),

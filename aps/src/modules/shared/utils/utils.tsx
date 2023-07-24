@@ -17,8 +17,24 @@ export const dateFormatter = (date: string | undefined): string => {
   return dayjs(date).format(euDateFormat);
 };
 
-export const isEuropeanDateFormat = (dateString: string): boolean => {
+export const isValidDateFormat = (dateString: string) => {
+  const formats = [
+    'YYYY-MM-DD',
+    'YYYY-MM-DDTHH:mm:ss.SSSSSSS', // Added the format for '2023-07-19T13:16:36.8241272'
+  ];
+
+  for (const format of formats) {
+    if (dayjs(dateString, format).isValid()) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+export const isEuropeanDateFormat = (dateString: string | undefined): boolean => {
   const regex = /^\d{2}\.\d{2}\.\d{4}$/;
+  if (!dateString) return false;
   return regex.test(dateString);
 };
 /**  Error returned if a lstrings length passes the one needed in schema the validation schema*/
