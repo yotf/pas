@@ -32,7 +32,10 @@ import { productionOrderTypesReducer } from '@/modules/main/pages/settings/redux
 import { RoutingsResponse } from '@/modules/main/pages/settings/redux/routings/interfaces';
 import { routingsReducer } from '@/modules/main/pages/settings/redux/routings/slice';
 import { reallocationReducer } from '@/modules/main/pages/settings/redux/reallocationOfPlanning/slice';
-import { SalesOrder, SalesOrdersResponse } from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
+import {
+  SalesOrder,
+  SalesOrdersResponse,
+} from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
 import { salesOrdersReducer } from '@/modules/main/pages/settings/redux/salesOrders/slice';
 import { selectionsReducer } from '@/modules/main/pages/settings/redux/selections/slice';
 import { sharedTableReducer } from '@/modules/main/pages/settings/redux/sharedTableState/slice';
@@ -73,6 +76,10 @@ import { ConfigurationResponse } from '@/modules/main/pages/settings/redux/confi
 import { linkedProductionOrderReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersLinkedOrders/slice';
 import { LinkedPOInitialStateResponse } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersLinkedOrders/states';
 import { salesOrdersWithMaterialsReducer } from '@/modules/main/pages/settings/redux/salesOrders/salesOrdersWithMaterials/slice';
+import {
+  ProductionOrderNumberInitialStateResponse,
+} from '@/modules/main/pages/settings/redux/productionOrders/productionOrderOrderNumbers/states';
+import { productionOrderNumbersReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrderOrderNumbers/slice';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -104,20 +111,21 @@ export const rootReducer = combineReducers<StoreType>({
   routings: routingsReducer,
   materials: materialsReducer,
   salesOrders: salesOrdersReducer,
-  salesOrdersWithMaterials:salesOrdersWithMaterialsReducer,
+  salesOrdersWithMaterials: salesOrdersWithMaterialsReducer,
   workCenterCapacities: workCapacitiesReducer,
   allowedOperations: allowedOperationsReducer,
   productionCalendars: productionCalendarsReducer,
   productionCalendarsWorkCapacities: productionCalendarsWorkCapacitesReducer,
   productionOrders: productionOrderReducer,
-  linkedProductionOrders:linkedProductionOrderReducer,
+  linkedProductionOrders: linkedProductionOrderReducer,
+  productionOrderNumbers: productionOrderNumbersReducer,
   productionOrdersModal: productionOrdersModalReducer,
   statistics: statisticsReducer,
   simulation: simulationReducer,
   reallocationOfPlanning: reallocationReducer,
   overview: overviewReducer,
   orderReplacement: orderReplacementReducer,
-  configuration:configurationReducer
+  configuration: configurationReducer,
 });
 /**Type used for settings page slices */
 export type SettingsType = {
@@ -163,6 +171,7 @@ export type StoreType = CombinedState<
     overview: OverviewResponse;
     orderReplacement: OrderReplacementResponse;
     configuration: ConfigurationResponse;
+    productionOrderNumbers: ProductionOrderNumberInitialStateResponse;
   } & SettingsType
 >;
 /**

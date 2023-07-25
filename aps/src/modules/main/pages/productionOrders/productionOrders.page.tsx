@@ -5,6 +5,7 @@
 import CustomButton from '@/modules/shared/components/button/button.component';
 import {
   PlanningStatus,
+  POSituation,
   POSituationOptions,
   POStatusOptions,
   SituationStatus,
@@ -104,7 +105,7 @@ const ProductionOrdersTable: FC = () => {
       POPosition: 'Added later',
       deliveryOfPosition: 'Added Later',
       originPO: obj.origin,
-      situation: obj.situation?.name ?? '',
+      situation: translate(POSituation[obj.situationEnum]),
     }),
     [],
   );
@@ -119,6 +120,10 @@ const ProductionOrdersTable: FC = () => {
   const onSelectionChange = useCallback((newSelectedRowKeys?: Key[]): void => {
     setSelectedRowKeys(newSelectedRowKeys || []);
   }, []);
+
+  const anyCheckboxSelected = useMemo(() => {
+    return !!selectedRowKeys?.length ? true : false;
+  }, [selectedRowKeys]);
 
   const updateStatuses = (status: number): void => {
     const putData: StatusUpdateData = {
@@ -173,7 +178,7 @@ const ProductionOrdersTable: FC = () => {
   const actionButtons = (
     <>
       <CustomButton
-        isDisabled={statusValue !== PlanningStatus.document}
+        isDisabled={statusValue !== PlanningStatus.document || !anyCheckboxSelected}
         color='blue'
         type='submit'
         onClick={(): void => updateStatuses(statusValue)}
@@ -181,7 +186,7 @@ const ProductionOrdersTable: FC = () => {
         {translate('plan_PO')}
       </CustomButton>
       <CustomButton
-        isDisabled={statusValue !== PlanningStatus.planned}
+        isDisabled={statusValue !== PlanningStatus.planned || !anyCheckboxSelected}
         color='white'
         type='submit'
         onClick={(): void => updateStatuses(statusValue)}
@@ -224,9 +229,15 @@ const ProductionOrdersTable: FC = () => {
   const rowSelection: Partial<RefTable> = {
     selectedRowKeys,
     onChange: onSelectionChange,
-    getCheckboxProps: (record: any) => ({
-      disabled: statusValue === PlanningStatus.all || record.originPO,
-    }),
+    getCheckboxProps: (record: any) => {
+      return {
+        disabled:
+          statusValue === PlanningStatus.all ||
+          record.originPO ||
+          (statusValue === PlanningStatus.document &&
+            record.situation === translate(POSituation[POSituation.close])),
+      };
+    },
   };
 
   const { contextValue, uiData, sort } = useExportToExcel<ProductionOrderMapped>();

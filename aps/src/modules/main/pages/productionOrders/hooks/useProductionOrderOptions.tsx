@@ -19,6 +19,9 @@ import { getAllSelections } from '../../settings/redux/selections/thunks';
 import { getAllThickness } from '../../settings/redux/thickness/thunks';
 import { getAllUnitsOfMeasure } from '../../settings/redux/unitOfMeasure/thunks';
 import { getSalesOrdersWithMaterials } from '../../settings/redux/salesOrders/salesOrdersWithMaterials/thunks';
+import { getAllProductionOrders } from '../../settings/redux/productionOrders/thunks';
+import { ProductionOrder } from '../../settings/redux/productionOrders/interfaces';
+import { getProductionOrderNumbers } from '../../settings/redux/productionOrders/productionOrderOrderNumbers/thunks';
 
 export type UseProductionOrderOptions = {
   customerOptions: DefaultOptionType[];
@@ -33,12 +36,15 @@ export type UseProductionOrderOptions = {
   thicknessOptions: DefaultOptionType[];
   selectionOptions: DefaultOptionType[];
   salesOrderSequenceOptions: DefaultOptionType[];
+  originPOOptions: DefaultOptionType[];
 };
 /**
  * Fetches and converts data to options usable by select and radio inputs.
  * @returns An object containing arrays of objects with values and labels
  */
-export const useProductionOrderOptions = (): UseProductionOrderOptions => {
+export const useProductionOrderOptions = (
+  entity: ProductionOrder | undefined,
+): UseProductionOrderOptions => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllCustomers());
@@ -52,6 +58,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     dispatch(getAllThickness());
     dispatch(getAllSelections());
     dispatch(getSalesOrdersWithMaterials());
+    dispatch(getProductionOrderNumbers());
   }, [dispatch]);
 
   const {
@@ -66,6 +73,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     colors,
     thickness,
     selections,
+    productionOrderNumbers,
   } = useAppSelector((state) => ({
     customers: state.customers.data,
     productionOrderTypes: state.productionOrderTypes.data,
@@ -78,6 +86,7 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     colors: state.colors.data,
     thickness: state.thickness.data,
     selections: state.selections.data,
+    productionOrderNumbers: state.productionOrderNumbers.data,
   }));
 
   const customerOptions: DefaultOptionType[] = useMemo(
@@ -106,6 +115,14 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     () => mapDataToOptions(materialGroups),
     [materialGroups],
   );
+
+  const originPOOptions: DefaultOptionType[] = useMemo(() => {
+    return (
+      productionOrderNumbers
+        ?.filter((po) => po.id !== entity?.id)
+        .map((po) => ({ label: po.orderNumber, value: po.id })) ?? []
+    );
+  }, [productionOrderNumbers]);
 
   const articleOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(articles), [articles]);
 
@@ -162,5 +179,6 @@ export const useProductionOrderOptions = (): UseProductionOrderOptions => {
     thicknessOptions,
     selectionOptions,
     salesOrderSequenceOptions,
+    originPOOptions,
   };
 };

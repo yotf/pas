@@ -81,7 +81,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     selectionOptions,
     thicknessOptions,
     salesOrderSequenceOptions,
-  } = useProductionOrderOptions();
+    originPOOptions,
+  } = useProductionOrderOptions(entity);
 
   const form = useFormContext<ProductionOrderFormData>();
 
@@ -189,12 +190,12 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
     return (
-      arr.map(({ operation, leadTime, ...rest }, i) => ({
+      arr.map(({ operation, leadTime, sequence, ...rest }, i) => ({
         ...rest,
         operationName: operation?.name,
         departmentName: operation?.department?.name ?? '',
         id: 0,
-        sequence: i + 1,
+        sequence: sequence,
         workCenterId: undefined,
         planningDate: undefined,
         executedDate: undefined,
@@ -338,9 +339,10 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           />
 
           <CustomInput
-            type='text'
+            type='select'
             label={translate('origin')}
             name={nameof('origin')}
+            options={originPOOptions}
             disabled={isPlanned}
             readOnly={isPlanned}
           />

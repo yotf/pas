@@ -4,7 +4,7 @@
 
 import { dateFormatter } from '@/modules/shared/utils/utils';
 import dayjs from 'dayjs';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Path, UseFormReturn } from 'react-hook-form';
 import { useMaintainForm } from '../../../components/maintain/hooks/useMaintainForm';
 import {
@@ -42,14 +42,14 @@ export const useProductionOrderForm = ({
 
   const routingOperationMapper = useCallback(
     (obj: PORoutingOperations, i: number, arr: PORoutingOperations[]): RoutingRouteFormData => {
-      const { operation, leadTime, planningDate, workCenterId, executedDate } = obj;
+      const { operation, leadTime, planningDate, workCenterId, executedDate, sequence } = obj;
 
       return {
         ...obj,
         operationName: operation?.name,
         departmentName: operation?.department?.name ?? '',
         id: copy ? 0 : operation.id,
-        sequence: i + 1,
+        sequence: sequence,
         workCenterId: undefined, // why??? TODO
         planningDate: planningDate,
         executedDate: executedDate,
@@ -148,6 +148,20 @@ export const useProductionOrderForm = ({
     clearEntity: clearProductionOrder,
     readThunk: getProductionOrder,
   });
+
+  const {
+    watch,
+    formState: { isDirty },
+    setValue,
+  } = form;
+
+  const { routingAddAndUpdateOperations } = watch();
+
+  useEffect(() => {
+    if (!isDirty) return;
+    routingAddAndUpdateOperations?.forEach((o, i) => (o.sequence = i + 1));
+    setValue('routingAddAndUpdateOperations', routingAddAndUpdateOperations);
+  }, [JSON.stringify(routingAddAndUpdateOperations), setValue]);
 
   return form;
 };

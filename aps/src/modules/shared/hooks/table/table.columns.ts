@@ -44,7 +44,6 @@ export const createColumns = <T>(
         dataIndex: key,
         key: i,
         showSorterTooltip: false,
-        defaultSortOrder: key === 'sequence' ? 'ascend' : undefined,
         sorter: returnSorter(key),
         render: customColumns?.[key as keyof T],
       };
