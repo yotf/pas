@@ -8,7 +8,6 @@ import { useFormContext } from 'react-hook-form';
 import { ProductionOrderFormData } from '../../../settings/redux/productionOrders/interfaces';
 import { ProductionOrderModalForm } from '../../../settings/redux/productionOrders/productionOrdersModal/interfaces';
 import { useAppSelector } from '@/store/hooks';
-import { number } from 'yup';
 import { SalesMaterialFormData } from '../../../settings/redux/salesOrders/interfaces';
 
 export type POModalActionsProps = {
@@ -42,29 +41,32 @@ const POModalActions: FC<POModalActionsProps> = ({
 
   const POGenerator = useCallback((): void => {
     const newPOsTest = Array(Number(numberOfProductionOrders) || 0).fill(productionOrderInitial);
-    debugger;
+
+    let productionOrderQuantities: number[] = [];
     const lotSize = selectedRouting?.lotStandardQuantity;
-    const numberOfWholeLotSizes =
-      selectedMaterial?.quantity1 && lotSize
-        ? Math.floor(selectedMaterial?.quantity1 / lotSize)
-        : 0;
-    const numberOfRemains = numberOfProductionOrders
-      ? numberOfProductionOrders - numberOfWholeLotSizes
-      : 0;
-    const equalRestSize =
-      (selectedMaterial?.quantity1 && lotSize
-        ? selectedMaterial?.quantity1 - numberOfWholeLotSizes * lotSize
-        : 0) / numberOfRemains;
+    let q1 = selectedMaterial?.quantity1;
+    while (lotSize && q1 && q1 > 0) {
+      const quantityInCurrentOrder = Math.min(q1, lotSize);
+      q1 -= quantityInCurrentOrder;
+      productionOrderQuantities.push(quantityInCurrentOrder);
+    }
+
+    productionOrderQuantities =
+      numberOfProductionOrders && productionOrderQuantities.length < numberOfProductionOrders
+        ? productionOrderQuantities.concat(
+            Array(numberOfProductionOrders - productionOrderQuantities.length).fill(0),
+          )
+        : productionOrderQuantities;
 
     const withq1 = newPOsTest.map((po, i) => {
-      po.quantity1 = i < numberOfWholeLotSizes ? lotSize : equalRestSize;
-      po.quantity2 = po.quantity1 ? po.quantity1 / (selectedMaterialFull?.factorAreaToPc || 1) : 0;
-      po.quantity3 = po.quantity1 ? po.quantity1 / (selectedMaterialFull?.factorAreaToKG || 1) : 0;
-      return po;
+      const updatedPO = { ...po };
+      updatedPO.quantity1 = productionOrderQuantities[i];
+      updatedPO.quantity2 = po.quantity1 * (selectedMaterialFull?.factorAreaToPc || 1); //TODO
+      updatedPO.quantity3 = po.quantity1 * (selectedMaterialFull?.factorAreaToKG || 1); //TODO
+      return updatedPO;
     });
-    debugger;
 
-    setValue('productionOrders', newPOsTest);
+    setValue('productionOrders', withq1);
 
     // quantity1: selectedMaterial?.quantity1
     //       ? Number((selectedMaterial?.quantity1 / (numberOfProductionOrders || 1)).toFixed(2))

@@ -50,7 +50,7 @@ export const useProductionOrderForm = ({
         departmentName: operation?.department?.name ?? '',
         id: copy ? 0 : operation.id,
         sequence: sequence,
-        workCenterId: undefined, // why??? TODO
+        workCenterId: obj?.workCenterId, // why??? TODO
         planningDate: planningDate,
         executedDate: executedDate,
         operationTime: 0,
