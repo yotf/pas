@@ -13,6 +13,13 @@ export const useGeneratedSequence = <T extends { sequence?: number }, F extends 
   const { getValues } = useFormContext<F>();
 
   const { setValue, reset } = form;
+
+  for (const prop in entity) {
+    if (entity[prop] === null) {
+      entity[prop] = undefined as any;
+    }
+  }
+
   useEffect(() => {
     if (entity?.sequence) {
       reset(entity);
