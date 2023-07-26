@@ -5,6 +5,7 @@
 import CustomButton from '@/modules/shared/components/button/button.component';
 import {
   PlanningStatus,
+  POFormStatus,
   POSituation,
   POSituationOptions,
   POStatusOptions,
@@ -18,7 +19,7 @@ import {
   FormCustomFilter,
   PageTableAdditionalElements,
 } from '@/modules/shared/utils/utils';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { CombinedState } from '@reduxjs/toolkit';
 import { DefaultOptionType } from 'antd/es/select';
 import { RefTable } from 'antd/es/table/interface';
@@ -221,10 +222,13 @@ const ProductionOrdersTable: FC = () => {
         options: situationOptions,
         type: 'select',
         register: 'situation',
+        allowClear: false,
       },
     ],
     buttons: actionButtons,
   };
+
+  const state = useAppSelector(stateSelector);
 
   const rowSelection: Partial<RefTable> = {
     selectedRowKeys,
@@ -233,9 +237,11 @@ const ProductionOrdersTable: FC = () => {
       return {
         disabled:
           statusValue === PlanningStatus.all ||
-          record.originPO ||
+          (record.originPO &&
+            state.data.find((po) => po.id === record.originPO)?.statusOfPlanningEnum !==
+              POFormStatus.planned) ||
           (statusValue === PlanningStatus.document &&
-            record.situation === translate(POSituation[POSituation.close])),
+            record.situation === translate(POSituation[POSituation.closed])),
       };
     },
   };

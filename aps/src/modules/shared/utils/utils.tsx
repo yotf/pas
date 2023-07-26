@@ -90,6 +90,7 @@ export type AdditionalFilterInfo = {
   options: DefaultOptionType[];
   type: FilterInput;
   register: FilterRegister;
+  allowClear?: boolean;
 };
 export interface PageTableAdditionalElements {
   filters: AdditionalFilterInfo[];
@@ -101,13 +102,14 @@ export const createCustomFilter = (
   filter: AdditionalFilterInfo,
 ): JSX.Element => {
   const { register } = form;
-  const { type, options, register: registerParam } = filter;
+  const { type, options, register: registerParam, allowClear } = filter;
   return (
     <CustomInput
       type={type}
       register={register(registerParam)}
       options={options}
       width='full-width'
+      allowClear={allowClear}
     />
   );
 };

@@ -3,7 +3,6 @@
 $pc-breakpoint: 1100px;
 $tablet-breakpoint: 920px;
 
-
 .confirm-modal-content {
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@ $tablet-breakpoint: 920px;
     color: $navy-60;
     word-wrap: break-word;
     max-width: 560px;
-    text-align:center;
+    text-align: center;
   }
 }
 
@@ -29,54 +28,192 @@ $tablet-breakpoint: 920px;
   flex-direction: column;
   margin: 50px 0 0;
 
-  
-
   .form-container {
-    display: flex;
-
     .productionOrder-form {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 32px;
-      width: 100%;
-
-      .custom-input .label.font-validation-error + input {
-        margin-bottom:-20px;
+      .top {
+        margin-bottom: 5em;
       }
-
-      @media screen and (width < $pc-breakpoint) {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 28px;
-      }
-
-      @media screen and (width < $tablet-breakpoint) {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-
-      .id-container {
+      .form-header {
         display: flex;
+        //grid-template-columns: repeat(5,1fr);
+        width: 100%;
+        //gap:200px;
+        margin-bottom: 2em;
+        padding-bottom: 2em;
+        border-bottom: 1px lightgray solid;
+        justify-content: space-between;
+        @media (max-width: 768px) {
+          flex-direction: column;
+          gap: 2em;
+        }
 
-        .readonly {
-          padding-top: 16px;
+        // @media screen and (width<768px) {
+        //   flex-direction: row;
 
-          @media screen and (width < 1150px) {
-            font-size: 14px;
+        // }
+
+        .id-container {
+          display: flex;
+          flex-grow: 1;
+          justify-content: left;
+          .custom-input:first-child {
+            font-size: 24px;
+            font-weight: 600;
+            .readonly {
+              padding-left: 10px;
+
+              @media screen and (width < 1150px) {
+                font-size: 20px;
+              }
+            }
+          }
+
+          .readonly {
+            padding-top: 16px;
+
+            @media screen and (width < 1150px) {
+              font-size: 14px;
+            }
+          }
+        }
+        .header-right {
+          display: flex;
+          flex-grow: 1;
+          justify-content: right;
+          gap: 16px;
+          .custom-input {
+            max-width: 250px;
           }
         }
       }
 
-      .remark {
-        grid-column: span 5;
-
-        @media screen and (width < $pc-breakpoint) {
-          grid-column: span 4;
+      .customer-section {
+        display: flex;
+        width: 100%;
+        //gap:20em;
+        padding-bottom: 3em;
+        margin-bottom: 36px;
+        border-bottom: 1px lightgray solid;
+        justify-content: space-between;
+        @media (max-width: 768px) {
+          flex-direction: column;
+          gap: 2em;
         }
 
-        @media screen and (width < $tablet-breakpoint) {
-          grid-column: span 3;
+        .customer {
+          display: flex;
+          flex-grow: 1;
+          justify-content: left;
+
+          gap: 1em;
+
+          .custom-input {
+            max-width: 250px;
+          }
+        }
+        .sales-order {
+          display: flex;
+          gap: 1em;
+          flex-grow: 1;
+          justify-content: right;
+          @media (max-width: 768px) {
+            justify-content: start;
+          }
+        }
+        .custom-input {
+          max-width: 250px;
         }
       }
+
+      .material-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 16px;
+
+        border-right: 1px solid lightgray;
+        flex: 1;
+        padding-right: 3em;
+        @media (max-width: 768px) {
+          border-right: none;
+          width: 100%;
+          padding-right: 0;
+          border-bottom: 1px lightgray solid;
+          padding-bottom: 1em;
+        }
+
+        .custom-input {
+          max-width: none;
+        }
+
+        .custom-input:nth-child(1) {
+          grid-column: span 2; /* Single column that spans 2 grid tracks */
+          max-width: unset;
+        }
+
+        .details {
+          grid-column: span 2;
+          padding: 5px;
+        }
+      }
+
+      .date-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 16px;
+        flex: 1;
+        padding-left: 3em;
+        width: 100%;
+        @media (max-width: 768px) {
+          width: 100%;
+          padding-left: 0;
+        }
+
+        .custom-input {
+          max-width: none;
+        }
+        .remark {
+          grid-column: span 2;
+        }
+      }
+      .middle {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 3em;
+
+        @media (max-width: 768px) {
+          flex-direction: column;
+          gap: 2em;
+          align-items: flex-start;
+        }
+
+        /// justify-content:space-between;
+      }
+
+      .custom-input .label.font-validation-error + input {
+        margin-bottom: -20px;
+      }
+
+      // @media screen and (width < $pc-breakpoint) {
+      //   grid-template-columns: repeat(4, 1fr);
+      //   gap: 28px;
+      // }
+
+      // @media screen and (width < $tablet-breakpoint) {
+      //   grid-template-columns: repeat(3, 1fr);
+      //   gap: 18px;
+      // }
+
+      // .remark {
+      //   grid-column: span 5;
+
+      //   @media screen and (width < $pc-breakpoint) {
+      //     grid-column: span 4;
+      //   }
+
+      //   @media screen and (width < $tablet-breakpoint) {
+      //     grid-column: span 3;
+      //   }
+      // }
 
       .label {
         text-overflow: ellipsis;

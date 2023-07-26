@@ -26,22 +26,22 @@ export enum PlanningStatus {
   'document' = 3,
 }
 
-export enum AllocationBasedEnum  {
-  "quantity1" = 1,
-    "formula" = 2,
+export enum AllocationBasedEnum {
+  'quantity1' = 1,
+  'formula' = 2,
 }
 /** Situation enum used in {@link ProductionOrderMaintain} */
 
 export enum SituationStatus {
   'all' = 0,
   'open' = 1,
-  'close' = 3,
-  'cancel' = 2,
+  'closed' = 3,
+  'canceled' = 2,
 }
 export enum POSituation {
   'open' = 1,
-  'close' = 3,
-  'cancel' = 2,
+  'closed' = 3,
+  'canceled' = 2,
 }
 /** Status enum used in {@link ProductionOrderMaintain}  */
 export enum POFormStatus {
@@ -50,17 +50,15 @@ export enum POFormStatus {
 }
 
 export enum PORoutingOperationStatus {
-  "notPlanned" = 1,
-  "schedule" = 2,
-  "cancel" = 3,
-  "executed" = 4,
+  'notPlanned' = 1,
+  'schedule' = 2,
+  'cancel' = 3,
+  'executed' = 4,
 }
 /** Dropdown options made from POFormStatus enum */
 export const statusDropdownOptions: DefaultOptionType[] = [
   { label: POFormStatus[1], value: 1 },
   { label: POFormStatus[2], value: 2 },
-
-
 ];
 /** Dropdown options made from POSituation enum */
 export const situationDropdownOptions: DefaultOptionType[] = [

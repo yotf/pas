@@ -259,232 +259,256 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           autoComplete='off'
           onSubmit={(e): void => e.preventDefault()}
         >
-          <div className='id-container'>
-            <CustomInput
-              type='readonly'
-              label={translate('orderNumber')}
-              name={nameof('orderNumber')}
-            />
-            <CustomInput
-              type='readonly'
-              label={translate('creationDate')}
-              name={nameof('creationDate')}
-            />
+          <div className='top'>
+            <div className='form-header'>
+              <div className='id-container'>
+                <CustomInput
+                  type='readonly'
+                  label={translate('orderNumber')}
+                  name={nameof('orderNumber')}
+                />
+                <CustomInput
+                  type='readonly'
+                  label={translate('creationDate')}
+                  name={nameof('creationDate')}
+                />
+              </div>
+              <div className='header-right'>
+                <CustomInput
+                  type='select'
+                  isRequired={true}
+                  label={translate('productionOrderTypeId')}
+                  name={nameof('productionOrderTypeId')}
+                  options={orderTypeOptions}
+                  readOnly={isPlanned}
+                  disabled={isPlanned}
+                />
+
+                <CustomInput
+                  type='select'
+                  isRequired={true}
+                  label={translate('situationEnum')}
+                  name={nameof('situationEnum')}
+                  options={translateMapper(situationDropdownOptions as DefaultOptionType[])}
+                  isAutocomplete={true}
+                  readOnly={!isEditing || isPlanned}
+                  disabled={!isEditing || isPlanned}
+                />
+                <CustomInput
+                  type='select'
+                  isRequired={true}
+                  label={translate('statusOfPlanningEnum')}
+                  name={nameof('statusOfPlanningEnum')}
+                  options={translateMapper(statusDropdownOptions as DefaultOptionType[])}
+                  isAutocomplete={true}
+                  readOnly={true}
+                  disabled={true}
+                />
+              </div>
+            </div>
+            <div className='customer-section'>
+              <div className='customer'>
+                <CustomInput
+                  type='select'
+                  isRequired={true}
+                  label={translate('customerId')}
+                  name={nameof('customerId')}
+                  options={customerOptions}
+                  isAutocomplete={true}
+                  readOnly={isPlanned}
+                  disabled={isPlanned}
+                />
+                <CustomInput
+                  type='text'
+                  label={translate('customerOrderNumber')}
+                  name={nameof('customerOrderNumber')}
+                  readOnly={isPlanned}
+                  disabled={isPlanned}
+                />
+              </div>
+
+              <div className='sales-order'>
+                <CustomInput
+                  type='select'
+                  label={translate('salesOrderSequence')}
+                  name={nameof('salesOrderSequence')}
+                  options={salesOrderSequenceOptions}
+                  isAutocomplete={true}
+                  readOnly={isPlanned}
+                  disabled={isPlanned}
+                />
+                <CustomInput
+                  type='date'
+                  label={translate('salesOrderDelivery')}
+                  name={nameof('salesOrderDelivery')}
+                  readOnly
+                  disabled={true}
+                />
+              </div>
+            </div>
           </div>
-          <CustomInput
-            type='select'
-            isRequired={true}
-            label={translate('customerId')}
-            name={nameof('customerId')}
-            options={customerOptions}
-            isAutocomplete={true}
-            readOnly={isPlanned}
-            disabled={isPlanned}
-          />
-          <CustomInput
-            type='text'
-            label={translate('customerOrderNumber')}
-            name={nameof('customerOrderNumber')}
-            readOnly={isPlanned}
-            disabled={isPlanned}
-          />
+          <div className='middle'>
+            <div className='material-section'>
+              <CustomInput
+                key={isEditing ? new Date().getTime() : useId()} //uniqueId to force re-render on change of discardOperations state
+                type='select'
+                isRequired={true}
+                label={translate('materialId')}
+                name={nameof('materialId')}
+                options={materialOptions}
+                isAutocomplete={true}
+                handleSelectionChange={
+                  isEditing && !discardOperations
+                    ? (value, option) => handleRoutingChange(value, option, 'materialId')
+                    : undefined
+                }
+                readOnly={isPlanned}
+                disabled={isPlanned}
+              />
+              <CustomInput
+                type='text'
+                label={translate('quantity1')}
+                name={nameof('quantity1')}
+                isRequired={true}
+                readOnly={isPlanned}
+                disabled={isPlanned}
+              />
+              <CustomInput
+                type='select'
+                label={translate('unitOfMeasure1')}
+                name={nameof('unitOfMeasure1Id')}
+                readOnly
+                disabled={true}
+                options={unitOfMeasureOptions}
+              />
 
-          <CustomInput
-            type='select'
-            label={translate('salesOrderSequence')}
-            name={nameof('salesOrderSequence')}
-            options={salesOrderSequenceOptions}
-            isAutocomplete={true}
-            readOnly={isPlanned}
-            disabled={isPlanned}
-          />
-          <CustomInput
-            type='date'
-            label={translate('initialDate')}
-            name={nameof('initialDate')}
-            isRequired={true}
-            readOnly={initialDateDisabled || isPlanned}
-            disabled={initialDateDisabled || isPlanned}
-            disableDatesFrom={dayjs().subtract(1, 'day')}
-          />
+              <CustomInput
+                type='text'
+                label={translate('quantity2')}
+                name={nameof('quantity2')}
+                readOnly
+                disabled={true}
+              />
+              <CustomInput
+                type='select'
+                label={translate('unitOfMeasure2')}
+                name={nameof('unitOfMeasure2Id')}
+                readOnly
+                disabled={true}
+                options={unitOfMeasureOptions}
+              />
+              <CustomInput
+                type='text'
+                label={translate('quantity3')}
+                name={nameof('quantity3')}
+                readOnly
+              />
+              <CustomInput
+                type='select'
+                label={translate('unitOfMeasure3')}
+                name={nameof('unitOfMeasure3Id')}
+                readOnly
+                disabled={true}
+                options={unitOfMeasureOptions}
+              />
 
-          <CustomInput
-            type='select'
-            isRequired={true}
-            label={translate('statusOfPlanningEnum')}
-            name={nameof('statusOfPlanningEnum')}
-            options={translateMapper(statusDropdownOptions as DefaultOptionType[])}
-            isAutocomplete={true}
-            readOnly={true}
-            disabled={true}
-          />
-          <CustomInput
-            type='select'
-            isRequired={true}
-            label={translate('situationEnum')}
-            name={nameof('situationEnum')}
-            options={translateMapper(situationDropdownOptions as DefaultOptionType[])}
-            isAutocomplete={true}
-            readOnly={!isEditing || isPlanned}
-            disabled={!isEditing || isPlanned}
-          />
-          <CustomInput
-            type='select'
-            isRequired={true}
-            label={translate('productionOrderTypeId')}
-            name={nameof('productionOrderTypeId')}
-            options={orderTypeOptions}
-            readOnly={isPlanned}
-            disabled={isPlanned}
-          />
+              <div className='details'>{translate('material_details')}</div>
 
-          <CustomInput
-            type='select'
-            label={translate('origin')}
-            name={nameof('origin')}
-            options={originPOOptions}
-            disabled={isPlanned}
-            readOnly={isPlanned}
-          />
-          <CustomInput
-            type='date'
-            label={translate('salesOrderDelivery')}
-            name={nameof('salesOrderDelivery')}
-            readOnly
-            disabled={true}
-          />
-          <CustomInput
-            key={isEditing ? new Date().getTime() : useId()} //uniqueId to force re-render on change of discardOperations state
-            type='select'
-            isRequired={true}
-            label={translate('materialId')}
-            name={nameof('materialId')}
-            options={materialOptions}
-            isAutocomplete={true}
-            handleSelectionChange={
-              isEditing && !discardOperations
-                ? (value, option) => handleRoutingChange(value, option, 'materialId')
-                : undefined
-            }
-            readOnly={isPlanned}
-            disabled={isPlanned}
-          />
-          <CustomInput
-            type='text'
-            label={translate('quantity1')}
-            name={nameof('quantity1')}
-            isRequired={true}
-            readOnly={isPlanned}
-            disabled={isPlanned}
-          />
-          <CustomInput
-            type='select'
-            label={translate('unitOfMeasure1')}
-            name={nameof('unitOfMeasure1Id')}
-            readOnly
-            disabled={true}
-            options={unitOfMeasureOptions}
-          />
+              <CustomInput
+                type='select'
+                label={translate('materialGroupId')}
+                name={nameof('materialGroupId')}
+                readOnly
+                disabled={true}
+                options={materialGroupOptions}
+              />
+              <CustomInput
+                type='select'
+                label={translate('articleId')}
+                name={nameof('articleId')}
+                readOnly
+                disabled={true}
+                options={articleOptions}
+              />
+              <CustomInput
+                type='select'
+                label={translate('colorId')}
+                name={nameof('colorId')}
+                readOnly
+                disabled={true}
+                options={colorOptions}
+              />
+              <CustomInput
+                type='select'
+                label={translate('thicknessId')}
+                name={nameof('thicknessId')}
+                readOnly
+                disabled={true}
+                options={thicknessOptions}
+              />
+              <CustomInput
+                type='select'
+                label={translate('selectionId')}
+                name={nameof('selectionId')}
+                readOnly
+                disabled={true}
+                options={selectionOptions}
+              />
+            </div>
 
-          <CustomInput
-            type='date'
-            label={translate('foreseenDeliveryPOOrigin')}
-            name={nameof('foreseenDeliveryPOOrigin')}
-            readOnly
-            disabled={true}
-          />
-          <CustomInput
-            type='date'
-            label={translate('foreseenDelivery')}
-            name={nameof('foreseenDelivery')}
-            readOnly
-            disabled={true}
-          />
-          <CustomInput
-            type='text'
-            label={translate('quantity2')}
-            name={nameof('quantity2')}
-            readOnly
-            disabled={true}
-          />
-          <CustomInput
-            type='select'
-            label={translate('unitOfMeasure2')}
-            name={nameof('unitOfMeasure2Id')}
-            readOnly
-            disabled={true}
-            options={unitOfMeasureOptions}
-          />
-          <CustomInput
-            type='text'
-            label={translate('quantity3')}
-            name={nameof('quantity3')}
-            readOnly
-          />
-          <CustomInput
-            type='select'
-            label={translate('unitOfMeasure3')}
-            name={nameof('unitOfMeasure3Id')}
-            readOnly
-            disabled={true}
-            options={unitOfMeasureOptions}
-          />
-          <CustomInput
-            type='date'
-            label={translate('finalDelivery')}
-            name={nameof('finalDelivery')}
-            readOnly
-            disabled={true}
-          />
-          <CustomInput
-            type='select'
-            label={translate('materialGroupId')}
-            name={nameof('materialGroupId')}
-            readOnly
-            disabled={true}
-            options={materialGroupOptions}
-          />
-          <CustomInput
-            type='select'
-            label={translate('articleId')}
-            name={nameof('articleId')}
-            readOnly
-            disabled={true}
-            options={articleOptions}
-          />
-          <CustomInput
-            type='select'
-            label={translate('colorId')}
-            name={nameof('colorId')}
-            readOnly
-            disabled={true}
-            options={colorOptions}
-          />
-          <CustomInput
-            type='select'
-            label={translate('thicknessId')}
-            name={nameof('thicknessId')}
-            readOnly
-            disabled={true}
-            options={thicknessOptions}
-          />
-          <CustomInput
-            type='select'
-            label={translate('selectionId')}
-            name={nameof('selectionId')}
-            readOnly
-            disabled={true}
-            options={selectionOptions}
-          />
-          <div className='remark'>
-            <CustomInput
-              type='textarea'
-              label={translate('remark')}
-              name={nameof('remark')}
-              width={'full-width'}
-              disabled={isPlanned}
-              readOnly={isPlanned}
-            />
+            <div className='date-section'>
+              <CustomInput
+                type='date'
+                label={translate('initialDate')}
+                name={nameof('initialDate')}
+                isRequired={true}
+                readOnly={initialDateDisabled || isPlanned}
+                disabled={initialDateDisabled || isPlanned}
+                disableDatesFrom={dayjs().subtract(1, 'day')}
+              />
+              <CustomInput
+                type='select'
+                label={translate('origin')}
+                name={nameof('origin')}
+                options={originPOOptions}
+                disabled={isPlanned}
+                readOnly={isPlanned}
+              />
+
+              <CustomInput
+                type='date'
+                label={translate('foreseenDeliveryPOOrigin')}
+                name={nameof('foreseenDeliveryPOOrigin')}
+                readOnly
+                disabled={true}
+              />
+              <CustomInput
+                type='date'
+                label={translate('foreseenDelivery')}
+                name={nameof('foreseenDelivery')}
+                readOnly
+                disabled={true}
+              />
+
+              <CustomInput
+                type='date'
+                label={translate('finalDelivery')}
+                name={nameof('finalDelivery')}
+                readOnly
+                disabled={true}
+              />
+
+              <div className='remark'>
+                <CustomInput
+                  type='textarea'
+                  label={translate('remark')}
+                  name={nameof('remark')}
+                  width={'full-width'}
+                  disabled={isPlanned}
+                  readOnly={isPlanned}
+                />
+              </div>
+            </div>
           </div>
         </form>
       </div>
