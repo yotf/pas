@@ -71,10 +71,13 @@ export const useProductionOrderModalSchema = (): OptionalObjectSchema<
             foreseenDeliveryPOOrigin: stringNotRequired,
             productionOrderNumber: numberNotRequired,
             origin: numberNotRequired,
-            quantity1: numberRequired
-              .min(1, translate('min_length'))
-              .max(99999, translate('max_length', { value: '5' })),
-            quantity2: numberRequired,
+            quantity1: Yup.number()
+              .required()
+              .min(0, translate('min_length'))
+              .max(99999, translate('max_length', { value: '5' }))
+              .transform((val: number | undefined) => (val || val == 0 ? val : undefined)),
+            quantity2: Yup.number().required(),
+            //  .transform((val: number | undefined) => (val || val == 0 ? val : undefined)),
             quantity3: numberNotRequired,
             unitOfMeasure1Id: numberNotRequired,
             unitOfMeasure2Id: numberNotRequired,

@@ -3,6 +3,9 @@
 $pc-breakpoint: 1100px;
 $tablet-breakpoint: 920px;
 
+.productionOrder-form {
+}
+
 .confirm-modal-content {
   display: flex;
   flex-direction: column;
@@ -30,102 +33,97 @@ $tablet-breakpoint: 920px;
 
   .form-container {
     .productionOrder-form {
-      .top {
-        margin-bottom: 5em;
-      }
-      .form-header {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      .id-container {
         display: flex;
-        //grid-template-columns: repeat(5,1fr);
-        width: 100%;
-        //gap:200px;
-        margin-bottom: 2em;
-        padding-bottom: 2em;
-        border-bottom: 1px lightgray solid;
-        justify-content: space-between;
-        @media (max-width: 768px) {
-          flex-direction: column;
-          gap: 2em;
-        }
-
-        // @media screen and (width<768px) {
-        //   flex-direction: row;
-
-        // }
-
-        .id-container {
+        flex-grow: 1;
+        justify-content: left;
+        padding-right: 3em;
+        .custom-input:nth-child(2) {
           display: flex;
-          flex-grow: 1;
-          justify-content: left;
-          .custom-input:first-child {
-            font-size: 24px;
-            font-weight: 600;
-            .readonly {
-              padding-left: 10px;
-
-              @media screen and (width < 1150px) {
-                font-size: 20px;
-              }
-            }
-          }
-
+          justify-content: center;
+          align-items: center;
+        }
+        .custom-input:first-child {
+          font-size: 36px;
+          font-weight: lighter;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           .readonly {
-            padding-top: 16px;
+            padding-left: 10px;
 
             @media screen and (width < 1150px) {
-              font-size: 14px;
+              font-size: 20px;
             }
           }
         }
-        .header-right {
-          display: flex;
-          flex-grow: 1;
-          justify-content: right;
-          gap: 16px;
-          .custom-input {
-            max-width: 250px;
-          }
-        }
       }
-
-      .customer-section {
+      .header-right {
         display: flex;
-        width: 100%;
-        //gap:20em;
-        padding-bottom: 3em;
-        margin-bottom: 36px;
-        border-bottom: 1px lightgray solid;
-        justify-content: space-between;
-        @media (max-width: 768px) {
-          flex-direction: column;
-          gap: 2em;
-        }
-
-        .customer {
-          display: flex;
-          flex-grow: 1;
-          justify-content: left;
-
-          gap: 1em;
-
-          .custom-input {
-            max-width: 250px;
-          }
-        }
-        .sales-order {
-          display: flex;
-          gap: 1em;
-          flex-grow: 1;
-          justify-content: right;
-          @media (max-width: 768px) {
-            justify-content: start;
-          }
-        }
+        flex-grow: 1;
+        justify-content: right;
+        gap: 16px;
+        padding-left: 3em;
         .custom-input {
           max-width: 250px;
         }
       }
 
+      .border {
+        grid-column: span 2;
+        border-bottom: 1px lightgrey solid;
+        padding-bottom: 1.5em;
+        margin-bottom: 1.5em;
+      }
+
+      .customer {
+        display: flex;
+        flex-grow: 1;
+        justify-content: left;
+
+        gap: 1em;
+
+        .custom-input {
+          max-width: none;
+
+          padding-right: 3em;
+        }
+      }
+      .sales-order {
+        padding-left: 3em;
+        display: flex;
+        gap: 1em;
+        flex-grow: 1;
+        justify-content: right;
+        @media (max-width: 768px) {
+          justify-content: start;
+        }
+      }
+      .custom-input {
+        max-width: 250px;
+      }
+
+      .material-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 16px;
+
+        border-right: 1px solid lightgray;
+        flex: 1;
+        padding-right: 3em;
+        padding-top: 2em;
+
+        .details {
+          grid-column: span 2;
+          padding: 5px;
+        }
+      }
+
       .material-section {
+        padding-top: 1em;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 16px;
@@ -140,6 +138,11 @@ $tablet-breakpoint: 920px;
           border-bottom: 1px lightgray solid;
           padding-bottom: 1em;
         }
+        .uom-label {
+          align-self: end;
+          justify-self: left;
+          padding: 1em;
+        }
 
         .custom-input {
           max-width: none;
@@ -149,20 +152,21 @@ $tablet-breakpoint: 920px;
           grid-column: span 2; /* Single column that spans 2 grid tracks */
           max-width: unset;
         }
-
-        .details {
-          grid-column: span 2;
-          padding: 5px;
-        }
       }
 
       .date-section {
+        padding-top: 1em;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 16px;
         flex: 1;
         padding-left: 3em;
         width: 100%;
+
+        .custom-input:last-child {
+          align-self: end;
+          padding-bottom: 4px;
+        }
         @media (max-width: 768px) {
           width: 100%;
           padding-left: 0;
@@ -171,23 +175,19 @@ $tablet-breakpoint: 920px;
         .custom-input {
           max-width: none;
         }
-        .remark {
-          grid-column: span 2;
+      }
+
+      .remark {
+        flex: 1;
+        padding-left: 3em;
+        padding-top: 4.7em;
+
+        .custom-input {
+          max-width: none;
         }
       }
-      .middle {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 3em;
 
-        @media (max-width: 768px) {
-          flex-direction: column;
-          gap: 2em;
-          align-items: flex-start;
-        }
-
-        /// justify-content:space-between;
-      }
+      /// justify-content:space-between;
 
       .custom-input .label.font-validation-error + input {
         margin-bottom: -20px;
@@ -235,7 +235,7 @@ $tablet-breakpoint: 920px;
   .productionOrder-table {
     display: flex;
     flex-direction: column;
-    margin: 20px 0;
+    margin: 3em 0;
 
     .ant-table-body {
       overflow: auto !important;
