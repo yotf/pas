@@ -26,7 +26,7 @@ export type WorkCenterFormType = {
  *  */
 const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
   const { entity } = useAppSelector((state) => state.workCenter);
-  const { quantities1 } = useAppSelector((state) => state.configuration.data);
+  const { quantities1, defaultKg } = useAppSelector((state) => state.configuration.data);
   const ns = 'workCenters';
   const { translate } = useTranslate({ ns: ns });
   const dispatch = useAppDispatch();
@@ -56,7 +56,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
 
   const UoMs = useMemo(() => {
     const unitOfMeasures = quantities1.map((q1) => q1.unitOfMeasure);
-    const kgMeasure = quantities1?.find((uom) => uom.isKg)?.unitOfMeasure;
+    const kgMeasure = defaultKg.unitOfMeasure;
     return allocationBased === AllocationBasedEnum.quantity1
       ? convertForDropdown(unitOfMeasures as SettingsPageItem[])
       : convertForDropdown(kgMeasure ? [kgMeasure] : undefined);

@@ -1,5 +1,5 @@
 export interface ConfigurationFormData {
-    quantity1: number[];
-    quantity2: number[];
-    isKg: number | undefined;
+  quantities1: number[];
+  quantities2: number[];
+  defaultKg: number;
 }

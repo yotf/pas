@@ -27,7 +27,7 @@ const Configuration: FC = () => {
   const form = useForm<ConfigurationFormData>();
   const { register, handleSubmit, setValue } = form;
 
-  const { quantity1, quantity2, isKg } = form.watch();
+  const { quantities1, quantities2, defaultKg } = form.watch();
   const { translate } = useTranslate({ ns: ns });
 
   useEffect(() => {
@@ -35,22 +35,22 @@ const Configuration: FC = () => {
     const q2values = sliceState.quantities2.map((uom) => uom.unitOfMeasureId);
     const uomInKg = sliceState.defaultKg?.unitOfMeasureId;
     debugger;
-    setValue('quantity1', q1values);
-    setValue('quantity2', q2values);
-    setValue('isKg', uomInKg);
+    setValue('quantities1', q1values);
+    setValue('quantities2', q2values);
+    setValue('defaultKg', uomInKg);
   }, [sliceState]);
 
   const nameof = nameofFactory<ConfigurationFormData>();
 
   const isSaveDisabled = useMemo(
-    () => !quantity1?.length || !quantity2?.length || !isKg,
-    [quantity1, quantity2, isKg],
+    () => !quantities1?.length || !quantities2?.length || !defaultKg,
+    [quantities1, quantities2, defaultKg],
   );
 
   const quantityOptions = useConfigurationOptions();
 
   const onSubmit = (data: ConfigurationFormData) => {
-    const { quantity1, quantity2, isKg } = data;
+    const { quantities1: quantity1, quantities2: quantity2, defaultKg } = data;
 
     const quantity1UoMs = quantity1.map((qid) => ({
       unitOfMeasureId: qid,
@@ -64,7 +64,7 @@ const Configuration: FC = () => {
       postConfigurationThunk({
         quantities1: quantity1UoMs,
         quantities2: quantity2UoMs,
-        defaultKg: { unitOfMeasureId: isKg! },
+        defaultKg: { unitOfMeasureId: defaultKg! },
       }),
     );
   };
@@ -86,7 +86,7 @@ const Configuration: FC = () => {
             isAutocomplete={true}
             type={'select'}
             label={translate('quantity1')}
-            name={nameof('quantity1')}
+            name={nameof('quantities1')}
             width='full-width'
             mode='multiple'
             options={quantityOptions}
@@ -97,8 +97,8 @@ const Configuration: FC = () => {
           <CustomInput
             type='select'
             label={translate('isKg')}
-            name={nameof('isKg')}
-            register={register('isKg')}
+            name={nameof('defaultKg')}
+            register={register('defaultKg')}
             options={quantityOptions}
           />
           {/* ))} */}
@@ -106,7 +106,7 @@ const Configuration: FC = () => {
             isAutocomplete={true}
             type={'select'}
             label={translate('quantity2')}
-            name={nameof('quantity2')}
+            name={nameof('quantities2')}
             width='full-width'
             mode='multiple'
             options={quantityOptions}
