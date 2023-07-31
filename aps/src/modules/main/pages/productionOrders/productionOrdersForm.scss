@@ -115,11 +115,6 @@ $tablet-breakpoint: 920px;
         flex: 1;
         padding-right: 3em;
         padding-top: 2em;
-
-        .details {
-          grid-column: span 2;
-          padding: 5px;
-        }
       }
 
       .material-section {
@@ -138,6 +133,12 @@ $tablet-breakpoint: 920px;
           border-bottom: 1px lightgray solid;
           padding-bottom: 1em;
         }
+
+        .details {
+          grid-column: span 2;
+          padding: 5px;
+        }
+
         .uom-label {
           align-self: end;
           justify-self: left;
@@ -163,24 +164,28 @@ $tablet-breakpoint: 920px;
         padding-left: 3em;
         width: 100%;
 
-        .custom-input:last-child {
-          align-self: end;
-          padding-bottom: 4px;
+        .remark {
+          flex: 1;
+
+          grid-column: span 2;
+
+          .custom-input {
+            max-width: none;
+            padding-top: 134px;
+            textarea {
+              height: 225px !important; //TODO -134 and add padding to custom-input of 134px 358-134=244
+            }
+          }
         }
+
+        // .custom-input:last-child {
+        //   align-self: end;
+        //   padding-bottom: 4px;
+        // }
         @media (max-width: 768px) {
           width: 100%;
           padding-left: 0;
         }
-
-        .custom-input {
-          max-width: none;
-        }
-      }
-
-      .remark {
-        flex: 1;
-        padding-left: 3em;
-        padding-top: 4.7em;
 
         .custom-input {
           max-width: none;

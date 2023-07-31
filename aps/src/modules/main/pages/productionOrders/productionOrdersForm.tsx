@@ -398,52 +398,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
             <div className='uom-label'>
               {unitOfMeasureOptions.find((uom) => uom.value === unitOfMeasure3Id)?.label}
             </div>
-          </div>
-
-          <div className='date-section'>
-            <CustomInput
-              type='date'
-              label={translate('initialDate')}
-              name={nameof('initialDate')}
-              isRequired={true}
-              readOnly={initialDateDisabled || isPlanned}
-              disabled={initialDateDisabled || isPlanned}
-              disableDatesFrom={dayjs().subtract(1, 'day')}
-            />
-            <CustomInput
-              type='select'
-              label={translate('origin')}
-              name={nameof('origin')}
-              options={originPOOptions}
-              disabled={isPlanned}
-              readOnly={isPlanned}
-            />
-
-            <CustomInput
-              type='date'
-              label={translate('foreseenDeliveryPOOrigin')}
-              name={nameof('foreseenDeliveryPOOrigin')}
-              readOnly
-              disabled={true}
-            />
-            <CustomInput
-              type='date'
-              label={translate('foreseenDelivery')}
-              name={nameof('foreseenDelivery')}
-              readOnly
-              disabled={true}
-            />
-
-            <CustomInput
-              type='date'
-              label={translate('finalDelivery')}
-              name={nameof('finalDelivery')}
-              readOnly
-              disabled={true}
-            />
-          </div>
-
-          <div className='material-details'>
             <div className='details'>{translate('material_details')}</div>
 
             <CustomInput
@@ -487,15 +441,59 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               options={selectionOptions}
             />
           </div>
-          <div className='remark'>
+
+          <div className='date-section'>
             <CustomInput
-              type='textarea'
-              label={translate('remark')}
-              name={nameof('remark')}
-              width={'full-width'}
+              type='date'
+              label={translate('initialDate')}
+              name={nameof('initialDate')}
+              isRequired={true}
+              readOnly={initialDateDisabled || isPlanned}
+              disabled={initialDateDisabled || isPlanned}
+              disableDatesFrom={dayjs().subtract(1, 'day')}
+            />
+            <CustomInput
+              type='select'
+              label={translate('origin')}
+              name={nameof('origin')}
+              options={originPOOptions}
               disabled={isPlanned}
               readOnly={isPlanned}
             />
+
+            <CustomInput
+              type='date'
+              label={translate('foreseenDeliveryPOOrigin')}
+              name={nameof('foreseenDeliveryPOOrigin')}
+              readOnly
+              disabled={true}
+            />
+            <CustomInput
+              type='date'
+              label={translate('foreseenDelivery')}
+              name={nameof('foreseenDelivery')}
+              readOnly
+              disabled={true}
+            />
+
+            <CustomInput
+              type='date'
+              label={translate('finalDelivery')}
+              name={nameof('finalDelivery')}
+              readOnly
+              disabled={true}
+            />
+
+            <div className='remark'>
+              <CustomInput
+                type='textarea'
+                label={translate('remark')}
+                name={nameof('remark')}
+                width={'full-width'}
+                disabled={isPlanned}
+                readOnly={isPlanned}
+              />
+            </div>
           </div>
         </form>
       </div>
