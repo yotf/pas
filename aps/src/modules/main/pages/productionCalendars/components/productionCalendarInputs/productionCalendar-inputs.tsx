@@ -50,6 +50,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           disabled={checking}
           isRequired={!checking}
           allowClear={true}
+          listHeight={320}
         />
 
         <CustomInput

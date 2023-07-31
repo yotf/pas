@@ -74,7 +74,8 @@ export interface Input {
   handleSelectionChange?: (value: any, option: any) => void;
   dropDownStyle?: object;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onTextChange?: (value: number| string) => void;
+  onTextChange?: (value: number | string) => void;
+  listHeight?: number;
 }
 
 export interface SwitchInput {

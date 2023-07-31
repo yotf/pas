@@ -46,6 +46,7 @@ const CustomInput: React.FC<Input> = ({
   dropDownStyle,
   onBlur,
   onTextChange,
+  listHeight,
 }) => {
   const {
     watch,
@@ -118,6 +119,7 @@ const CustomInput: React.FC<Input> = ({
             allowClear={allowClear}
             handleSelectionChange={handleSelectionChange}
             dropDownStyle={dropDownStyle}
+            listHeight={listHeight}
           ></CustomSelect>
         );
       case 'date':
