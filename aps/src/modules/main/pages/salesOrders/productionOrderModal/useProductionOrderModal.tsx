@@ -23,6 +23,8 @@ import { MaintainContext } from '@/modules/main/components/maintain/contexts/mai
 import { getLinkedProductionOrders } from '../../settings/redux/productionOrders/productionOrdersLinkedOrders/thunks';
 import { POSituation } from '@/modules/shared/consts';
 
+import warningIcon from '@/assets/warning.svg';
+import { flushSync } from 'react-dom';
 export type UseRedirectModalReturnType = {
   modal: JSX.Element;
   openPOModal: (material: SalesMaterialFormData) => void;
@@ -33,6 +35,9 @@ export type UseRedirectModalReturnType = {
  */
 export const useProductionOrderModal = (): UseRedirectModalReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [confirmationOpen, setIsConfirmationOpen] = useState<boolean>(false);
+  const [warning, setWarning] = useState<string>('');
+  const [warningType, setWarningType] = useState<string>('');
   const [selectedMaterial, setSelectedMaterial] = useState<SalesMaterialFormData>();
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: linkedProductionOrders } = useAppSelector((state) => state.linkedProductionOrders);
@@ -58,7 +63,6 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
     formState: { isValid, isDirty },
     reset,
     watch,
-    getValues,
     setValue,
   } = form;
 
@@ -99,7 +103,29 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
     setSelectedMaterial(material);
   }, []);
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    const total = productionOrders?.reduce(
+      (total, current) => (current?.quantity1 ? total + Number(current?.quantity1) : total),
+      0,
+    );
+    if (total > selectedMaterial?.quantity1!) {
+      setIsConfirmationOpen(true);
+      setWarning(translate('overproduction_warning_message'));
+      setWarningType(translate('overproduction_warning'));
+    } else if (total < selectedMaterial?.quantity1!) {
+      setIsConfirmationOpen(true);
+      setWarning(translate('underproduction_warning_message'));
+      setWarningType(translate('underproduction_warning'));
+    } else {
+      handleSubmit(handleConfirm)();
+    }
+  };
+
+  const handleConfirm = async (data: ProductionOrderModalForm) => {
     dispatch(
       createProductionOrdersFromSalesOrder(
         data.productionOrders.map((po) => ({
@@ -108,8 +134,14 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
         })),
       ),
     );
+    flushSync(() => setIsConfirmationOpen(false));
+
     closePOModal();
-  });
+  };
+
+  const handleCancel = () => {
+    setIsConfirmationOpen(false);
+  };
 
   const selectedMaterialFull = useMemo(
     () => materials.find((material) => selectedMaterial?.materialId === material.id),
@@ -199,6 +231,18 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
               <p>{translate('quantity2')}</p>
               <p>{translate('situation')}</p>
             </div>
+            <Modal
+              title={warningType}
+              open={confirmationOpen}
+              centered={true}
+              onOk={handleSubmit(handleConfirm)}
+              onCancel={handleCancel}
+            >
+              <div className='confirm-modal-content'>
+                <img src={warningIcon} alt={'warning'} />
+                <span>{warning}</span>
+              </div>
+            </Modal>
             <div className='table-container'>
               {linkedProductionOrders
                 ? linkedProductionOrders.map((po) => {

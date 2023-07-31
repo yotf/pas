@@ -40,11 +40,12 @@ const SingleProductionOrder: FC<SingleProductionOrderProps> = ({
 
   const { productionOrders } = watch();
 
-  const quantity1 = productionOrders[index].quantity1;
-
   useEffect(() => {
-    setValue(`productionOrders.${index}.quantity2`, Math.ceil(quantity1! * (factorAreaToPc || 1)));
-  }, [factorAreaToPc, index, quantity1, setValue]);
+    setValue(
+      `productionOrders.${index}.quantity2`,
+      Math.ceil(productionOrders[index]?.quantity1! * (factorAreaToPc || 1)),
+    );
+  }, [factorAreaToPc, index, productionOrders[index]?.quantity1, setValue, productionOrders]);
 
   return (
     <>
@@ -59,7 +60,7 @@ const SingleProductionOrder: FC<SingleProductionOrderProps> = ({
           </span>
           <p>{translate('pieces')}- </p>
           <p>
-            {productionOrders[index].quantity2} {translate('m2')}
+            {productionOrders[index]?.quantity2} {translate('m2')}
           </p>
         </div>
       </div>

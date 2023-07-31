@@ -1301,6 +1301,10 @@
   },
   "productionOrderModal": {
     "po_modal_title": "Create Production Orders",
+    "underproduction_warning_message": "Number of pcs is smaller than Quantity1. Is this what you wanted?",
+    "overproduction_warning_message": "Number of pcs is larger than Quantity1. Is this what you wanted?",
+    "underproduction_warning": "Underproduction Warning",
+    "overproduction_warning": "Overproduction Warning",
     "productionOrderNumber": "PO Number",
     "numberOfProductionOrders": "Number of POs",
     "productionOrderQuantity": "Production Order Quantites",
