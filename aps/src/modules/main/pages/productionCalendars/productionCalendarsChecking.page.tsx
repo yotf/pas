@@ -122,6 +122,7 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
     usePaging: false,
     onEdit: onEdit,
     hasViewOnlyElements: true,
+    height: 600,
   });
 
   return (
