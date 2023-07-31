@@ -1301,8 +1301,9 @@
   },
   "productionOrderModal": {
     "po_modal_title": "Create Production Orders",
-    "underproduction_warning_message": "Number of pcs is smaller than Quantity1. Is this what you wanted?",
-    "overproduction_warning_message": "Number of pcs is larger than Quantity1. Is this what you wanted?",
+    "underproduction_warning_message": "Total amount of production quantity for all orders is less than Quantity 1 defined for {{material}}. ",
+    "overproduction_warning_message": "Total amount of production quantity for all orders is bigger than Quantity 1 defined for {{material}}. ",
+    "zero_quantity_warning": "Production orders with quantities equal to zero will not be created or scheduled for execution. ",
     "underproduction_warning": "Underproduction Warning",
     "overproduction_warning": "Overproduction Warning",
     "productionOrderNumber": "PO Number",
@@ -1322,6 +1323,8 @@
     "quantity2": "Quantity 2",
     "situation": "Situation",
     "linkedProductionOrders": "Linked Production Orders",
+    "warning": "Warning",
+    "proceed": "Proceed",
     "validation": {
       "required": "This field is required",
       "min_length": "Number must be greater than 0",

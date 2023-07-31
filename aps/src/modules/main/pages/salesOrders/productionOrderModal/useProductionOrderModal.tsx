@@ -37,7 +37,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [confirmationOpen, setIsConfirmationOpen] = useState<boolean>(false);
   const [warning, setWarning] = useState<string>('');
-  const [warningType, setWarningType] = useState<string>('');
+
   const [selectedMaterial, setSelectedMaterial] = useState<SalesMaterialFormData>();
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: linkedProductionOrders } = useAppSelector((state) => state.linkedProductionOrders);
@@ -112,23 +112,34 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
       (total, current) => (current?.quantity1 ? total + Number(current?.quantity1) : total),
       0,
     );
+    let message = '';
+    const hasZeroQ1 = productionOrders.some((po) => po.quantity1 === 0);
+
     if (total > selectedMaterial?.quantity1!) {
       setIsConfirmationOpen(true);
-      setWarning(translate('overproduction_warning_message'));
-      setWarningType(translate('overproduction_warning'));
+      message += translate('overproduction_warning_message', {
+        material: selectedMaterial?.materialName!,
+      });
+      message += hasZeroQ1 ? translate('zero_quantity_warning') : '';
+      setWarning(message);
     } else if (total < selectedMaterial?.quantity1!) {
       setIsConfirmationOpen(true);
-      setWarning(translate('underproduction_warning_message'));
-      setWarningType(translate('underproduction_warning'));
-    } else {
-      handleSubmit(handleConfirm)();
-    }
+      message += translate('underproduction_warning_message', {
+        material: selectedMaterial?.materialName!,
+      });
+      message += hasZeroQ1 ? translate('zero_quantity_warning') : '';
+      setWarning(message);
+    } else if (hasZeroQ1) {
+      setIsConfirmationOpen(true);
+      setWarning(translate('zero_quantity_warning'));
+    } else handleSubmit(handleConfirm)();
   };
 
   const handleConfirm = async (data: ProductionOrderModalForm) => {
+    const withoutZero = data.productionOrders.filter((po) => po.quantity1 && po.quantity1 > 0);
     dispatch(
       createProductionOrdersFromSalesOrder(
-        data.productionOrders.map((po) => ({
+        withoutZero?.map((po) => ({
           ...po,
           statusOfPlanningEnum: po.statusOfPlanningBoolean ? 2 : 1,
         })),
@@ -232,11 +243,11 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
               <p>{translate('situation')}</p>
             </div>
             <Modal
-              title={warningType}
               open={confirmationOpen}
               centered={true}
               onOk={handleSubmit(handleConfirm)}
               onCancel={handleCancel}
+              okText={translate('proceed')}
             >
               <div className='confirm-modal-content'>
                 <img src={warningIcon} alt={'warning'} />

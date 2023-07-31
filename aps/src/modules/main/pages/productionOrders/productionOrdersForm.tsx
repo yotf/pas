@@ -498,7 +498,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
         </form>
       </div>
       <Modal
-        title={translate('modal.warning')}
+        //  title={translate('modal.warning')}
         open={discardOperationModalVisible}
         centered={true}
         onOk={handleDiscardOK}
