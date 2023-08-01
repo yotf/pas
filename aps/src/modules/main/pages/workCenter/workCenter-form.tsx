@@ -19,12 +19,13 @@ import { AllocationBasedEnum } from '@/modules/shared/consts';
 
 export type WorkCenterFormType = {
   form: UseFormReturn<WorkCenterFormData, any>;
+  formulaCallback: (f: boolean) => void;
 };
 /**
  * @returns Work Center Form component with {@link Input | inputs} connected to the form returned by {@link useWorkCenterMaintainSetup} hook.
  * When allocationBased value is changed a modal returned from {@link useRadioChangeModal} hook opens, asking for user confirmation. Confirming the action clears all allowed operations.
  *  */
-const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
+const WorkCenterForm: FC<WorkCenterFormType> = ({ form, formulaCallback }) => {
   const { entity } = useAppSelector((state) => state.workCenter);
   const { quantities1, defaultKg } = useAppSelector((state) => state.configuration.data);
   const ns = 'workCenters';
@@ -73,7 +74,11 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
       : null;
   }, [allocationBased]);
 
-  const { openRadioChangeModal, radioChangeModal } = useRadioChangeModal({ ns: ns, form: form });
+  const { openRadioChangeModal, radioChangeModal } = useRadioChangeModal({
+    ns: ns,
+    form: form,
+    formulaCallback,
+  });
 
   return (
     <form

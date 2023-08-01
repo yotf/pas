@@ -14,11 +14,9 @@ type UserShape = Shape<WorkCenterFormData>;
 /**
  *  Schema used for Work center form. Validates user inputs and renders errors in case the values don't match the Schema rules
  */
-export const useWorkCenterSchema = (): OptionalObjectSchema<
-  UserShape,
-  AnyObject,
-  TypeOfShape<UserShape>
-> => {
+export const useWorkCenterSchema = (
+  formulaSelected: boolean,
+): OptionalObjectSchema<UserShape, AnyObject, TypeOfShape<UserShape>> => {
   const { translate } = useTranslate({
     ns: 'workCenters',
     keyPrefix: 'validation',
@@ -43,12 +41,14 @@ export const useWorkCenterSchema = (): OptionalObjectSchema<
           .transform((value) => (isNaN(value) ? undefined : value))
           .notRequired(),
         workCenterInterfaceId: Yup.string().max(15, translate('max_length', { name: '15' })),
-        weightCapacity: Yup.number()
-          .max(99999, translate('max_length', { name: '5' }))
-          .required()
-          .transform((value) => (isNaN(value) ? undefined : value)),
+        weightCapacity: formulaSelected
+          ? Yup.number()
+              .max(99999, translate('max_length', { name: '5' }))
+              .required()
+              .transform((value) => (isNaN(value) ? undefined : value))
+          : undefined,
       }),
-    [requiredNumber, requiredString, translate],
+    [requiredNumber, requiredString, translate, formulaSelected],
   );
   return schema;
 };

@@ -8,6 +8,7 @@ import { Modal } from 'antd';
 import { useCallback, useRef, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form/dist/types';
 import { WorkCenterFormData } from '../../settings/redux/workCenters/interfaces';
+import { AllocationBasedEnum } from '@/modules/shared/consts';
 
 export type UseRadioChangeModalReturnType = {
   radioChangeModal: JSX.Element;
@@ -17,6 +18,7 @@ export type UseRadioChangeModalReturnType = {
 export type UseRadioChangeModalProps = {
   ns: string;
   form: UseFormReturn<WorkCenterFormData>;
+  formulaCallback: (f: boolean) => void;
 };
 /**
  *
@@ -25,10 +27,11 @@ export type UseRadioChangeModalProps = {
 export const useRadioChangeModal = ({
   ns,
   form,
+  formulaCallback,
 }: UseRadioChangeModalProps): UseRadioChangeModalReturnType => {
   const [isRadioChangeModalOpen, setIsRadioChangeModalOpen] = useState<boolean>(false);
   const callbackRef = useRef<() => void>();
-  const { setValue } = form;
+  const { setValue, getValues } = form;
   const { translate } = useTranslate({
     ns: ns,
     keyPrefix: 'radio_modal',
@@ -39,13 +42,14 @@ export const useRadioChangeModal = ({
   }, []);
   const openRadioChangeModal = useCallback((callback: () => void): void => {
     callbackRef.current = callback;
-
     setIsRadioChangeModalOpen(true);
   }, []);
 
   const handleOk = useCallback((): void => {
     callbackRef.current!();
     setValue('allowedOperations', []);
+    const allocationBased = getValues('allocationBased');
+    formulaCallback(allocationBased === AllocationBasedEnum.formula);
     closeRedirectModal();
   }, [closeRedirectModal, setValue]);
 
