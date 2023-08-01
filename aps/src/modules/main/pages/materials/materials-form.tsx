@@ -32,7 +32,8 @@ const MaterialsForm: FC = () => {
 
   const nameof = nameofFactory<MaterialFormData>();
   const {
-    unitOptions,
+    unit1Options,
+    unit2Options,
     articleOptions,
     colorOptions,
     materialGroupOptions,
@@ -100,7 +101,7 @@ const MaterialsForm: FC = () => {
         isRequired={true}
         label={translate('unitOfMeasure1Id')}
         name={nameof('unitOfMeasure1Id')}
-        options={unitOptions}
+        options={unit1Options}
         width='full-width'
         isAutocomplete={true}
       />
@@ -109,7 +110,7 @@ const MaterialsForm: FC = () => {
         isRequired={true}
         label={translate('unitOfMeasure2Id')}
         name={nameof('unitOfMeasure2Id')}
-        options={unitOptions}
+        options={unit2Options}
         width='full-width'
         isAutocomplete={true}
       />

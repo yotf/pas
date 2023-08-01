@@ -17,7 +17,8 @@ import { getAllThickness } from '../../settings/redux/thickness/thunks';
 import { getAllUnitsOfMeasure } from '../../settings/redux/unitOfMeasure/thunks';
 
 export type UseRoutingSetupReturnType = {
-  unitOptions: DefaultOptionType[];
+  unit1Options: DefaultOptionType[];
+  unit2Options: DefaultOptionType[];
   materialGroupOptions: DefaultOptionType[];
   articleOptions: DefaultOptionType[];
   colorOptions: DefaultOptionType[];
@@ -55,6 +56,7 @@ export const useMaterialsOptions = (): UseRoutingSetupReturnType => {
     selections,
     routings,
     features,
+    configuration,
   } = useAppSelector((state) => ({
     unitOfMeasures: state.unitOfMeasure.data,
     customers: state.customers.data,
@@ -66,10 +68,16 @@ export const useMaterialsOptions = (): UseRoutingSetupReturnType => {
     selections: state.selections.data,
     routings: state.routings.data,
     features: state.features.data,
+    configuration: state.configuration.data,
   }));
 
-  const unitOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(unitOfMeasures),
+  const unit1Options: DefaultOptionType[] = useMemo(
+    () => mapDataToOptions(configuration.quantities1.map((q) => q.unitOfMeasure!)),
+    [unitOfMeasures],
+  );
+
+  const unit2Options: DefaultOptionType[] = useMemo(
+    () => mapDataToOptions(configuration.quantities2.map((q) => q.unitOfMeasure!)),
     [unitOfMeasures],
   );
 
@@ -102,7 +110,8 @@ export const useMaterialsOptions = (): UseRoutingSetupReturnType => {
   const routingOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(routings), [routings]);
 
   return {
-    unitOptions,
+    unit1Options,
+    unit2Options,
     materialGroupOptions,
     articleOptions,
     colorOptions,
