@@ -1,0 +1,1359 @@
+{
+  "translation": {
+    "unit_test": "Teste Unitário"
+  },
+  "not-found": {
+    "title": "Oops, página não encontrada!",
+    "description": "Não foi possível encontrar a página que você está procurando.",
+    "button": "Voltar"
+  },
+  "error-page": {
+    "title": "Oops, página não encontrada!",
+    "button-try-again": "Tente Novamente",
+    "button-go-back": "Voltar",
+    "description": "Por Favor Tentar Novamente"
+  },
+  "login_form": {
+    "input": {
+      "username": "Usuário",
+      "password": "Senha",
+      "placeholder_username": "Usuário"
+    },
+    "validation": {
+      "username": "Usuário é obrigatório",
+      "password": "Senha é obrigatório",
+      "wrong_credentials": "Usuário e/ou senha não está correto. Por favor verifique e tente novamente",
+      "pass_min_character": "Necessário mínimo 6 caracteres"
+    },
+    "button": "Entrar"
+  },
+  "home": {
+    "logo": "Huni Logo"
+  },
+  "settings_nav": {
+    "users": "Usuários",
+    "units_of_measure": "Unidades de Medida",
+    "department": "Departamentos",
+    "parameters": "Parâmetros",
+    "features": "Caracteristicas",
+    "order_types": "Tipos de Pedido de Venda",
+    "customers": "Clientes",
+    "positions": "Cargo",
+    "thickness": "Espessura",
+    "selections": "Classes",
+    "production_order_types": "Tipos de Order de Produção",
+    "size_ranges": "Grupos de Tamanho",
+    "holidays": "Feriados",
+    "material_groups": "Grupo do Materiais",
+    "colors": "Cores",
+    "articles": "Artigos",
+    "configuration": "Configuração"
+  },
+  "table": {
+    "empty": "A tabela está vazia",
+    "action": "Ações",
+    "production_order_tooltip": "Criar Ordem de Produção"
+  },
+  "side_menu": {
+    "settings": "Settings",
+    "operations": "Operações",
+    "routing": "Roteiros",
+    "work_center": "Centros de Trabalho",
+    "production_calendar": "Calendário Produção",
+    "material": "Materiais",
+    "sales_order": "Pedido Venda",
+    "production_order": "Ordem Produção",
+    "production_order_list": "Lista Ordem Produção",
+    "overview": "Overview",
+    "order_replacement": "Substituição de Pedidos",
+    "simulation": "Simulação",
+    "statistics": "Estatísticas"
+  },
+  "settings": {
+    "new_button": "Novo",
+    "excel_button": "Exportar excel",
+    "code": "Código",
+    "name": "Nome",
+    "unit": "Unidade",
+    "search": "Buscar",
+    "holidayDate": "Dia Feriado",
+    "country": "País",
+    "isActive": "Status",
+
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "active": "Ativo"
+    }
+  },
+  "users-table": {
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "id": "Id",
+    "firstName": "Primeiro Nome",
+    "lastName": "Sobrenome",
+    "email": "Email",
+    "positionName": "Posição",
+    "roleName": "Função",
+    "isActive": "Status",
+    "search": "Buscar"
+  },
+  "users": {
+    "new": "Novo",
+    "modal": {
+      "create_title": "Criar Novo Usuário",
+      "edit_title": "Editar Usuário",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar o usuário {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Apenas + e números são aceitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Max número de caracteres é {{name}}"
+    },
+    "form": {
+      "firstName": "Primeiro nome",
+      "lastName": "Sobrenome",
+      "username": "Usuário",
+      "password": "Senha",
+      "email": "Email",
+      "role": "Função",
+      "position": "Posição",
+      "phone": "Telefone",
+      "active": "Ativo"
+    },
+    "notification": {
+      "create": "Usuário criado com sucesso",
+      "edit": "Usuário editado com sucesso",
+      "delete_success": "Usuário deletado com sucesso",
+      "delete_fail": "Um erro ocorreu ao deletar usuário"
+    }
+  },
+  "features": {
+    "modal": {
+      "create_title": "Criar Nova Caracteristica",
+      "edit_title": "Editar Caracteristica",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar caracteristica {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Caracteristica criado com sucesso",
+      "edit": "Caracteristica editado com sucesso",
+      "delete_success": "Caracteristica deletado com sucesso",
+      "delete_fail": "Erro ao deletar Caracteristica",
+      "create_fail": "Caracteristica com código já existente"
+    }
+  },
+  "articles": {
+    "modal": {
+      "create_title": "Criar Novo Artigo",
+      "edit_title": "Editar Artigo",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Artigo {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Artigo criado com sucesso",
+      "edit": "Artigoeditado com sucesso",
+      "delete_success": "Artigo deletado com sucesso",
+      "delete_fail": "Erro ao deletar Artigo",
+      "create_fail": "Artigo com código já existente"
+    }
+  },
+  "unit_of_measure": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Nova Unidade de Medida",
+      "edit_title": "EditarUnidade de Medida",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Unidade de Medida {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Unidade de Medida criado com sucesso",
+      "edit": "Unidade de Medida editado com sucesso",
+      "create_fail": "Unidade de Medida com código já existente",
+      "delete_success": "Unidade de Medida deletado com sucesso",
+      "delete_fail": "Erro ao deletar Unidade de Medida"
+    }
+  },
+  "configuration": {
+    "save": "Salvar",
+    "quantity1": "Quantidade 1",
+    "quantity2": "Quantidade 2",
+    "isKg": "Unidade de Medida é em Kg",
+    "validation": {
+      "create_success": "Configuração salva com sucesso",
+      "create_fail": "Configuração não pode ser salva"
+    }
+  },
+  "colors": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Nova Cor",
+      "edit_title": "Editar Cor",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Cor {{name}}",
+      "warning": "Aviso"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Permitido apenas digitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Cor criado com sucesso",
+      "edit": "Cor editado com sucesso",
+      "create_fail": "Cor com código já existente",
+      "delete_success": "Cor deletado com sucesso",
+      "delete_fail": "Erro ao deletar Cor"
+    }
+  },
+  "selections": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Nova Classe",
+      "edit_title": "Editar Classe",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Classe {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Permitido apenas digitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Classe criada com sucesso",
+      "edit": "Classe editada com sucesso",
+      "create_fail": "Classe com código já existente",
+      "delete_success": "Classe deletado com sucesso",
+      "delete_fail": "Erro ao deletar Classe"
+    }
+  },
+  "holidays": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Feriado",
+      "edit_title": "Editar Feriado",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Feriado {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "holidayDate": "Data Feriado",
+      "datePlaceholder": "Selecionar Data",
+      "name": "Nome",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "duplicate": "Estes valores já existem",
+      "invalidDate": "Formato de Data Inválida",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Feriado criado com sucesso",
+      "edit": "Feriado editado com sucesso",
+      "create_fail": "Feriado com esta data já existe",
+      "delete_success": "Feriado deletado com sucesso",
+      "delete_fail": "Erro ao deletar Ferido"
+    }
+  },
+  "thickness": {
+    "modal": {
+      "create_title": "Criar Nova Espessura",
+      "edit_title": "Edita Espessura",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Espessura {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Espessura criada com sucesso",
+      "edit": "Espessura editada com sucesso",
+      "delete_success": "Espessura deletada com sucesso",
+      "delete_fail": "Erro ao deletar Espessura",
+      "create_fail": "Espessura com código já existente"
+    }
+  },
+  "production_order_types": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Tipo Ordem Produção",
+      "edit_title": "Editar Tipo Ordem Produção",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Tipo Ordem Produção {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Tipo Ordem Produção criado com sucesso",
+      "edit": "Tipo Ordem Produçãoe ditado com sucesso",
+      "create_fail": "Tipo Ordem Produção com está código já existe",
+      "delete_success": "Tipo Ordem Produção deletado com sucesso",
+      "delete_fail": "Erro ao deletar Tipo Ordem Produção"
+    }
+  },
+  "size_ranges": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Grupo de Tamanho",
+      "edit_title": "Editar Grupo de Tamanho",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Grupo de Tamanho {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Grupo de Tamanho criado com sucesso",
+      "edit": "Grupo de Tamanho editado com sucesso",
+      "create_fail": "Grupo de Tamanho com este código já existe",
+      "delete_success": "Grupo de Tamanho deletado com sucesso",
+      "delete_fail": "Erro ao deletar Grupo de Tamanho"
+    }
+  },
+  "material_groups": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Grupo Material",
+      "edit_title": "Editar Grupo Material",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Grupo Material {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Grupo Material criado com sucesso",
+      "edit": "Grupo Material editado com sucesso",
+      "create_fail": "Grupo Material com este código já existe",
+      "delete_success": "Grupo Material deletado com sucesso",
+      "delete_fail": "Erro ao deletar Grupo Material"
+    }
+  },
+  "order_types": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Tipo Pedido de Venda",
+      "edit_title": "Editar Tipo Pedido de Venda",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Tipo Pedido de Venda {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Este valor já existe"
+    },
+    "notification": {
+      "create": "Tipo Pedido de Venda criado com sucesso",
+      "edit": "Tipo Pedido de Venda editado com sucesso",
+      "create_fail": "Tipo Pedido de Venda com este código já existe",
+      "delete_success": "Tipo Pedido de Venda deletado com sucesso",
+      "delete_fail": "Erro ao deletar Tipo Pedido de Venda"
+    }
+  },
+  "customers": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Cliente",
+      "edit_title": "Editar Cliente",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Cliente {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "country": "País",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Permitido apenas digitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Cliente criado com sucesso",
+      "edit": "Cliente editado com sucesso",
+      "create_fail": "Cliente com código já existente",
+      "delete_success": "Cliente deletado com sucesso",
+      "delete_fail": "Erro ao deletar Cliente"
+    }
+  },
+  "parameters": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Parâmetro",
+      "edit_title": "Editar Parâmetro",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Parâmetro {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "country": "País",
+      "active": "Ativo",
+      "unit": "Unit"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Permitido apenas digitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Parâmetro criado com sucesso",
+      "edit": "Parâmetro editado com sucesso",
+      "create_fail": "Parâmetro com código já existente",
+      "delete_success": "Parâmetro deletado com sucesso",
+      "delete_fail": "Erro ao deletar Parâmetro"
+    }
+  },
+  "department": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Departamento",
+      "edit_title": "Editar Departamento",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Departamento {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "code": "Código",
+      "name": "Nome",
+      "country": "País",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Permitido apenas digitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Máx número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Departamento criado com sucesso",
+      "edit": "Departamento editado com sucesso",
+      "create_fail": "Departamento com código já existente",
+      "delete_success": "Departamento deletado com sucesso",
+      "delete_fail": "Erro ao deletar Departamento"
+    }
+  },
+  "positions": {
+    "table": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "modal": {
+      "create_title": "Criar Novo Cargo",
+      "edit_title": "Editar Cargo",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Cargo {{name}}?",
+      "warning": "Aviso"
+    },
+    "form": {
+      "name": "Nome",
+      "active": "Ativo"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "pass_min_character": "Necessário mínimo 6 caracteres",
+      "format": "Formato Incorreto",
+      "numeric": "Permitido apenas digitos",
+      "duplicate": "Estes valores já existem",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "create": "Cargo criado com sucesso",
+      "edit": "Cargo editado com sucesso",
+      "create_fail": "Cargo com código já existente",
+      "delete_success": "Cargo deletado com sucesso",
+      "delete_fail": "Erro ao deletar Cargo"
+    }
+  },
+  "operations": {
+    "title": "Operação",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "id": "Id",
+    "operation_Id": "Operação ID",
+    "name": "Nome Operação",
+    "interfaceCode": "Cód. Integração",
+    "interface": "Integração",
+    "departmentName": "Departamento",
+    "operationTime": "Tempo Padrão",
+    "operation_time": "Tempo Operação",
+    "waitingTime": "Tempo de Espera",
+    "setupTime": "Tempo Preparação",
+    "isActive": "Status",
+    "search": "Buscar",
+    "remark": "Observação",
+    "allocation_based": "Forma de Alocação",
+    "unit_of_measure_placeholder": "Unidade de Medida",
+    "unit_of_measure_label": "Unidade de Medida",
+    "interface_code": "Cód. Integração",
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Operação {{name}}?",
+      "warning": "Aviso"
+    },
+    "notification": {
+      "delete_success": "Operação deletada com sucesso",
+      "delete_fail": "Erro ao deletar Operação",
+      "create_success": "Operação criada com sucesso",
+      "edit_success": "Operação editada com sucesso",
+      "create_fail": "Operação com este nome já existe"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Estes valores já existem",
+      "positive": "Número deve ser positivo",
+      "create_success": "Operação criada com sucesso",
+      "edit_success": "Operação editada com sucesso",
+      "create_fail": "Operação com este nome já existe"
+    }
+  },
+  "allocation_labels": {
+    "Quantity 1": "Quantidade 1",
+    "Quantity 2": "Quantidade 2",
+    "Recipe": "Fórmula"
+  },
+  "page-header": {
+    "copy": "Copiar",
+    "save": "Salvar",
+    "delete": "Deletar"
+  },
+  "routings": {
+    "title": "Roteiro",
+    "name": "Nome Roteiro",
+    "isActive": "Status",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "search": "Buscar",
+    "routing_id": "Roteiro ID",
+    "routingInterfaceId": "Integração ID",
+    "createdOn": "Data Criação",
+    "createdBy": "Criado por",
+    "updatedBy": "Modificado por",
+    "materialName": "Material",
+    "customerName": "Cliente",
+    "lotStandardQuantity": "Qtd. Lote Padrão",
+    "unitOfMeasureId": "Unidade de Medida",
+    "materialId": "Material",
+    "customerId": "Cliente",
+    "remark": "Observação",
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Roteiro {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "DuplicateRoutingName": "Estes valores já existem",
+      "alphanumeric": "Valores devem ser alfanuméricos",
+      "max_length": "Máx. número de caracteres é {{value}}",
+      "max_digits": "Máx. número de digitos é{{value}}",
+      "min_value": "Valor Mínimo é {{value}}",
+      "edit_success": "Roteiro editado com sucesso",
+      "create_success": "Roteiro criado com sucesso",
+      "create_fail": "Roteiro com este nome já existe"
+    },
+    "notification": {
+      "delete_success": "Roteiro deletado com sucesso",
+      "delete_fail": "Erro ao deletar Roteiro"
+    },
+    "routes": {
+      "title": "Roteiros",
+      "subtitle": "Incluir os passos de produção para produzir o material.",
+      "add_operation": "Adicionar Operação",
+      "excel_button": "Exportar Excel",
+      "sequence": "Sequência",
+      "operationId": "Operação ID",
+      "operationName": "Operação",
+      "standardTime": "Tempo Padrão",
+      "setupTime": "Tempo Preparação",
+      "waitingTime": "Tempo de Espera",
+      "leadTime": "Lead Time",
+      "departmentName": "Departamento",
+      "planning": "Planejar",
+      "total_lead_time": "Total lead time",
+
+      "yes": "Sim",
+      "no": "Não",
+      "modal": {
+        "cancel": "Cancelar",
+        "save": "Salvar",
+        "add_operation": "Adicionar Operação",
+        "edit_Operação": "Editar Operação",
+        "search": "Buscar Operação",
+        "operation_id": "Operação ID",
+        "sequence": "Sequência",
+        "standardTime": "Tempo Padrão",
+        "setupTime": "Tempo Preparação",
+        "waitingTime": "Tempo de Espera",
+        "leadTime": "Lead Time",
+        "departmentName": "Departamento Name",
+        "planning": "Planejar",
+        "remark": "Observação"
+      },
+      "validation": {
+        "required": "Este campo é obrigatório",
+        "max_digits": "Máx. número de digitos é{{value}}",
+        "min_value": "Valor Mínimo é {{value}}",
+        "max_value": "Valor Máximo é {{value}}",
+        "must_be_number": "O valor deve ser um número",
+        "max_length": "Máx. número de caracteres é {{value}}"
+      }
+    }
+  },
+  "workCenters": {
+    "title": "Centro de Trabalho",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "id": "Centro de Trabalho ID",
+    "name": "Nome Centro de Trabalho",
+    "workcenter_name": "Nome Centro de Trabalho",
+    "interfaceCode": "Cód. Integração",
+    "departmentName": "Departamento",
+    "unitOfMeasureName": "Unidade de Medida",
+    "allocationBasedName": "Forma de Alocação",
+    "workCenter_Id": "Centro de Trabalho ID",
+    "weightCapacity": "Capacidade em Peso",
+    "isActive": "Status",
+    "remark": "Observação",
+    "search": "Buscar",
+    "workCenterInterfaceId": "Centro de Trabalho Integração ID",
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Centro de Trabalho {{name}}?",
+      "warning": "Aviso"
+    },
+    "radio_modal": {
+      "cancel": "Cancelar",
+      "ok_text": "Continuar",
+      "radio_modal_text": "Alterar Forma de Alocação irá limpar as operações já vinculadas"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "duplicate": "Estes valores já existem",
+      "positive": "Número deve ser positivo",
+      "exact": "Máx. 4 caracteres",
+      "create_success": "Centro de Trabalho criado com sucesso",
+      "edit_success": "Centro de Trabalho editado com sucesso",
+      "create_fail": "Centro de Trabalho com este nome já existe",
+      "max_value": "Valor Máximo é {{value}}",
+      "min_value": "Valor Mínimo é {{value}}"
+    },
+    "notification": {
+      "delete_success": "Centro de Trabalho deletado com sucesso",
+      "delete_fail": "Erro ao deletar Centro de Trabalho"
+    },
+    "maintain": {
+      "title": "Editar",
+      "work_capacities": "Capacidades",
+      "allowed_operations": "Operações Permitidas",
+      "add_operation": "Operações Vinculadas",
+      "excel_button": "Exportar Excel",
+      "weekDay": "Dia da Semana",
+      "date": "Data",
+      "start": "Inicio",
+      "break": "Intervalo",
+      "end": "Fim",
+      "minutes": "Minutos",
+      "availableMinutes": "Minutos Disponiveis",
+      "capacity": "Capacidade",
+      "efficiency": "Eficiência",
+      "operation": "Operação",
+      "code": "Operação ID",
+      "monday": "Segunda",
+      "tuesday": "Terça",
+      "wednesday": "Quarta",
+      "thursday": "Quinta",
+      "friday": "Sexta",
+      "saturday": "Sábado",
+      "sunday": "Domingo",
+      "dayOfWeek": "Dia Semana",
+      "save": "Salvar",
+      "cancel": "Cancelar",
+      "remark": "Observação"
+    },
+    "allowedOperationsModal": {
+      "title": "Adicionar Operação",
+      "add": "Adicionar",
+      "remove": "Remove",
+      "search": "Buscar",
+      "search_label": "Buscar Operação",
+      "cancel": "Cancelar"
+    }
+  },
+  "maintain-header": {
+    "save": "Salvar",
+    "delete": "Deletar",
+    "copy": "Copiar"
+  },
+  "redirect": {
+    "ok_text": "Continuar",
+    "cancel": "Cancelar",
+    "redirect_modal_text": "Você está prestes a sair da página, todas as alterações não salvas serão perdidas",
+    "copy_modal_text": "Você está prestes a criar uma cópia desta entrada"
+  },
+  "materials": {
+    "title": "Materiais",
+    "name": "Nome Material",
+    "materialId": "Material ID",
+    "materialGroupName": "Grupo Material",
+    "interfaceCode": "Cód. Integração",
+    "unitOfMeasure1Name": "Unidade de Medida 1",
+    "unitOfMeasure2Name": "Unidade de Medida 2",
+    "factorAreaToKG": "Fator Area-KG",
+    "factorAreaToPC": "Fator Area-Pc",
+    "createdOn": "Data Criação",
+    "articleName": "Artigo",
+    "colorName": "Cor",
+    "thicknessName": "Espessura",
+    "sizeRangeName": "Grupo de Tamanho",
+    "selectionName": "Classe",
+    "featureName": "Caracteristica",
+    "routingName": "Roteiro",
+    "isActive": "Status",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "search": "Buscar",
+    "materialGroupId": "Grupo Material",
+    "unitOfMeasure1Id": "Unidade de Medida 1",
+    "unitOfMeasure2Id": "Unidade de Medida 2",
+    "articleId": "Artigo",
+    "colorId": "Cor",
+    "thicknessId": "Espessura",
+    "sizeRangeId": "Grupo de Tamanho",
+    "selectionId": "Classe",
+    "feature_description": "Caracteristica",
+    "routingId": "Roteiro",
+    "id": "Material ID",
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "DuplicateMaterialName": "Estes valores já existem",
+      "create_success": "Material criado com sucesso",
+      "edit_success": "Material editado com sucesso",
+      "create_fail": "Material com este nome já existe",
+      "max_length": "Máx. número de caracteres é {{name}}"
+    },
+    "notification": {
+      "delete_success": "Material deletado com sucesso",
+      "delete_fail": "Erro ao deletar Material"
+    },
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Material {{name}}?",
+      "warning": "Aviso"
+    }
+  },
+  "salesOrder": {
+    "title": "Pedido Venda",
+    "isActive": "Status",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "search": "Buscar",
+    "materialId": "Material ID",
+    "orderNumber": "Nr Pedido",
+    "customerId": "Cliente",
+    "orderTypeId": "Tipo Pedido de Venda",
+    "createdOn": "Data Criação",
+    "customerOrderNumber": "Número Pedido Cliente",
+    "customerName": "Cliente",
+    "orderTypeName": "Tipo Ped. Venda",
+    "status": "Status",
+    "remark": "Observação",
+    "sequence": "Sequência",
+    "material": "Material",
+    "materialDescription": "Caracteristica",
+    "quantity1": "Quantidade 1",
+    "quantity2": "Quantidade 2",
+    "unitOfMeasure1": "Unidade de Medida 1",
+    "unitOfMeasure2": "Unidade de Medida 2",
+    "requestedDelivery": "Entrega Solicitada",
+    "tanneryDelivery": "Entrega Curtume",
+    "add_material": "Adicionar Material",
+    "materialName": "Nome Material",
+    "deliveryDate": "Data Entrega Solicitada",
+    "add_operation": "Adicionar material",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "open": "Aberto",
+    "closed": "Encerrado",
+    "canceled": "Cancelado",
+    "no_uom": "Sen Unidade de Medida para o material selecionado",
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "duplicate": "Estes valores já existem",
+      "alphanumeric": "Valores devem ser alfanuméricos",
+      "max_length": "Máx. número de caracteres é {{value}}",
+      "max_digits": "Máx. número de digitos é{{value}}",
+      "min_value": "Valor Mínimo é {{value}}",
+      "max_value": "Valor Máximo é {{value}}",
+      "edit_success": "Pedido Venda editado com sucesso",
+      "create_success": "Pedido Venda criado com sucesso",
+      "create_fail": "Pedido Venda com este nome já existe"
+    },
+    "notification": {
+      "delete_success": "Pedido Venda deletado com sucesso",
+      "delete_fail": "Erro ao deletar Pedido Venda"
+    },
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Pedido Venda número {{name}}?",
+      "warning": "Aviso"
+    }
+  },
+  "productionCalendar": {
+    "title": "Calendário Produção",
+    "workCenterName": "Centro de Trabalho",
+    "initialDate": "Data Inicial",
+    "finalDate": "Data Final",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "search": "Buscar",
+    "workCenterIds": "Centro de Trabalho",
+    "generate_calendar": "Gerar Calendário",
+    "holidays": "Feriados",
+    "results": "Resultados",
+    "January": "Janeiro",
+    "February": "Fevereiro",
+    "March": "Março",
+    "April": "Abril",
+    "May": "Maio",
+    "June": "Junho",
+    "July": "Julho",
+    "August": "Agosto",
+    "September": "Setembro",
+    "October": "Outubro",
+    "November": "Novembro",
+    "December": "Dezembro",
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "duplicate": "Estes valores já existem",
+      "min_length": "Pelo menos um Centro de Trabalho é necessário",
+      "edit_success": "Calendário Produção editado com sucesso",
+      "create_success": "Calendário Produção criado com sucesso",
+      "create_fail": "One or multiple work centers have a generated Calendário Produção"
+    },
+    "notification": {
+      "delete_success": "Calendário Produção deletado com sucesso",
+      "delete_fail": "Erro ao deletar Calendário Produção"
+    },
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Calendário Produção {{name}}?",
+      "warning": "Aviso",
+      "cancel": "Cancelar",
+      "save": "Salvar",
+      "create_title": "Criar Novo Feriado"
+    }
+  },
+  "productionOrder": {
+    "title": "Ordem Produção",
+    "material_details": "Detalhes Material",
+    "search": "Buscar",
+    "new_button": "Novo",
+    "excel_button": "Exportar Excel",
+    "plan_PO": "Planejar OP Selecionadas",
+    "unschedule": "Desprogramar",
+    "orderType": "Tipo OP",
+    "orderNumber": "Nr. OP",
+    "creationDate": "Data Criação",
+    "customerName": "Cliente",
+    "salesOrderNumber": "Nr Pedido Venda",
+    "salesOrderType": "Tipo Ped. Venda",
+    "materialName": "Material",
+    "materialId": "Material",
+    "articleName": "Artigo",
+    "colorName": "Cor",
+    "quantity1": "Quantidade 1",
+    "unitOfMeasure1": "Unidade de Medida 1",
+    "quantity2": "Quantidade 2",
+    "unitOfMeasure2": "Unidade de Medida 2",
+    "quantity3": "Quantidade 3",
+    "salesOrderDeliveryDate": "Data Entrega Pedido",
+    "initialPlanningDate": "Data Inicial Planejamento",
+    "POFinalDeliveryDate": "OP Data Entrega Final",
+    "POPosition": "OP Posição",
+    "workCenterName": "Centro de Trabalho",
+    "deliveryOfPosition": "Entrega da Posição",
+    "originPO": "Origem",
+    "situation": "Situação",
+    "all": "Todas",
+    "planned": "Planejadas",
+    "document": "Documento",
+    "id": "Ordem Id",
+    "productionOrderTypeId": "Tipo Pedido",
+    "salesOrderSequence": "Nr Pedido Venda",
+    "customerId": "Cliente",
+    "customerOrderNumber": "Número Pedido Cliente",
+    "statusOfPlanningEnum": "Status",
+    "situationEnum": "Situação",
+    "salesOrderId": "Pedido Venda Nr",
+    "salesOrderMaterialId": "Material",
+    "unitOfMeasure3": "Unidade de Medida 3",
+    "initialDate": "Data Inicial",
+    "salesOrderDelivery": "Pedido Venda Entrega",
+    "foreseenDelivery": "Data Entrega Prevista",
+    "foreseenDeliveryPOOrigin": "Data Entrega Prevista para OP Origem",
+    "finalDelivery": "Data Entrega Final",
+    "remark": "Observação",
+    "routingId": "Roteiro",
+    "not_planned": "Não Planejadas",
+    "cancel": "Cancelado",
+    "canceled": "Cancelado",
+    "executed": "Executadas",
+    "open": "Aberto",
+    "closed": "Encerrado",
+    "close": "Encerrar",
+    "origin": "OP Origem",
+    "materialGroupId": "Grupo Material",
+    "articleId": "Artigo",
+    "colorId": "Cor",
+    "thicknessId": "Espessura",
+    "selectionId": "Classe",
+    "change_routing_selection": "Alterar Roteiro ou campo materia irá reverter as operações padrão para este Material/Roteiro",
+    "notification": {
+      "delete_success": "Ordem Produção deletado com sucesso",
+      "delete_fail": "Erro ao deletar Ordem Produção"
+    },
+    "modal": {
+      "confirm": "Confirmar",
+      "decline": "Recusar",
+      "delete_text": "Você tem certeza que quer deletar Ordem Produção número {{name}}?",
+      "warning": "Aviso"
+    },
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "max_length": "Máx. número de caracteres é {{name}}",
+      "min_length": "Deve ser maior que 0",
+      "create_success": "Ordem Produção criado com sucesso",
+      "edit_success": "Ordem Produção editado com sucesso",
+      "create_fail": "Ordem Produção com este nome já existe",
+      "rejected_fail": "Ordens de Produção Planejadas não podem ser editadas",
+      "numeric": "Apenas digitos são aceitos"
+    },
+    "routes": {
+      "title": "",
+      "subtitle": "",
+      "add_operation": "Adicionar Operação",
+      "excel_button": "Exportar Excel",
+      "sequence": "Sequência",
+      "operationId": "Operação ID",
+      "operationName": "Operação",
+      "standardTime": "Tempo Padrão",
+      "setupTime": "Tempo Preparação",
+      "waitingTime": "Tempo de Espera",
+      "leadTime": "Lead Time",
+      "departmentName": "Departamento",
+      "planning": "Planejar",
+      "planningDate": "Data Prevista",
+      "pO_OperationStatusEnum": "Status",
+      "notPlanned": "Não Planejado",
+      "schedule": "Planejado",
+      "cancel": "Cancelado",
+      "canceled": "Cancelado",
+      "executed": "Executado",
+      "undefined": "-",
+      "yes": "Sim",
+      "no": "Não",
+      "total_lead_time": "Total lead time",
+      "modal": {
+        "cancel": "Cancelar",
+        "save": "Salvar",
+        "add_operation": "Adicionar Operação",
+        "search": "Buscar Operação",
+        "operation_id": "Operação ID",
+        "sequence": "Sequência",
+        "standardTime": "Tempo Padrão",
+        "setupTime": "Tempo Preparação",
+        "waitingTime": "Tempo de Espera",
+        "leadTime": "Lead Time",
+        "departmentName": "Nome Departamento",
+        "planning": "Planejar",
+        "planningDate": "Data Prevista",
+        "remark": "Observação",
+        "notPlanned": "Não Planejado",
+        "edit_operation": "Editar Operação"
+      },
+      "validation": {
+        "required": "Este campo é obrigatório",
+        "max_digits": "Máx. número de digitos é{{value}}",
+        "min_value": "Mínimo value is {{value}}",
+        "max_value": "Máximo value is {{value}}",
+        "must_be_number": "O valor deve ser um número",
+        "max_length": "Máx. número de caracteres é {{value}}"
+      }
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "work_center_heading": "Centro de Trabalho",
+    "finalDate": "Data Final",
+    "empty": "Tabela vazia",
+    "initialDate": "Data Inicial",
+    "orderType": "Tipo Ordem Produção",
+    "productionOrder": "Ordem Produção",
+    "workCenters": "Centro de Trabalhos",
+    "display_work_centers": "Apresentar Centros de Trabalhos",
+    "reallocation": "Realocação Planejamento",
+    "statistics": "Estatisticas",
+    "excel_button": "Exportar Excel",
+    "adjust_calendar": "Adjust Calendário Produção",
+    "orderNumber": "Ordem Número",
+    "customerName": "Cliente",
+    "salesOrderNumber": "Pedido Venda Nr",
+    "materialName": "Material",
+    "articleName": "Artigo",
+    "colorName": "Cor",
+    "operationName": "Operação",
+    "foreseenDeliveryDate": "Data Entrega Prevista",
+    "estimatedTime": "Estimated Time",
+    "setupTime": "Tempo Preparação",
+    "quantity1": "Quantidade 1",
+    "unitOfMeasure1": "Unidade de Medida 1",
+    "salesOrderDeliveryDate": "Pedido Venda Data de Entrega",
+    "PODelivery": " PO Delivery",
+    "POPosition": "Posição OP",
+    "calendarName": "Calendar",
+    "planningDate": "Data Prevista",
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "date_range": "O intervalo de datas precisa ser inferior a 2 semanas",
+      "min_length": "É necessário pelo menos um Centro de Trabalho",
+      "max_length": "Máx. número de Centros de Trabalho é 10",
+      "initial_date_lower": "Data Inicial deve ser menor que Data Final"
+    }
+  },
+  "orderReplacement": {
+    "title": "Substituição de Pedidos",
+    "outCustomer": "Nome Cliente",
+    "inCustomer": "Nome Clinete",
+    "outSalesOrderNumber": "Nr Pedido Saída",
+    "inSalesOrderNumber": "Nr Pedido Entrada",
+    "generate_data": "Gerar Dados",
+    "replace_orders": "Substituir Pedidos",
+    "confirmation_message": "Tem certeza de que deseja substituir as Ordens de Produção selecionadas?",
+    "cancel": "Cancelar",
+    "ok_text": "Continuar",
+    "create_success": "As Ordens de Produção foram substituídas com sucesso",
+    "create_fail": "Ocorreu um erro ao substituir Ordens de Produção",
+    "table": {
+      "out_production_orders_title": "Ordens de Produção Saída",
+      "in_production_orders_title": "Ordens de Produção Entrada",
+      "sequence": "Sequência",
+      "productionOrderNumber": "Ordem Produção No.",
+      "materialName": "Nome Material",
+      "quantity1": "Quantidade 1",
+      "unitOfMeasure1": "Unidade de Medida 1",
+      "quantity2": "Quantidade 2",
+      "unitOfMeasure2": "Unidade de Medida 2",
+      "foreseenDelivery": "Data Entrega Prevista"
+    },
+    "validation": {
+      "required": "Campo Obrigatório"
+    }
+  },
+  "statistics": {
+    "title": "Estatisticas",
+    "workCenters": "Centro de Trabalho",
+    "initialDate": "Data Inicial",
+    "finalDate": "Data Final",
+    "generate_statistics": "Gerar Estatisticas",
+    "general_overview": "Overview Geral",
+    "delayed_orders": "Exibir Pedidos Atrasados",
+    "workCenterId": "ID",
+    "workCenterName": "Centro de Trabalho",
+    "availableMinutes": "Minutos Disponíveis",
+    "allocatedMinutes": "Minutos Alocados",
+    "availability": "Disponibilidade",
+    "numberOfSalesOrders": "Nr Pedidos de Venda",
+    "delayedSalesOrders": "Pedidos Venda em Atraso",
+    "numberOfPO": "Nr. de Ordens de Produção",
+    "delayedPO": "Ordens de Produção em Atraso",
+    "occupancy": "Ocupação",
+    "setupMinutes": "Minutos Preparação",
+    "allocatedTime": "Tempo Alocado",
+    "salesOrderNumber": "Pedido Venda Nr.",
+    "customerName": "Cliente",
+    "materialName": "Material",
+    "quantity": "Quantity",
+    "foreseenDelivery": "Data Entrega Prevista",
+    "salesOrderDelivery": "Pedido Venda Entrega",
+    "sequence": "Sequência",
+    "delayed_orders_heading": "Pedidos Atrasados",
+    "setupTime": "Tempo Preparação",
+    "validation": {
+      "initial_date_lower": "Data Inicial deve ser menor que Data Final"
+    }
+  },
+  "simulation": {
+    "workCenterId": "ID",
+    "title": "Entrega Simulação",
+    "workCenterName": "Centro de Trabalho",
+    "totalAvailability": "Total Disponibilidade",
+    "allocatedTime": "Allocated Time",
+    "allocatedMinutes": "Minutos Alocados",
+    "setupTime": "Tempo Preparação",
+    "availableTime": "Tempo Disponível",
+    "simulatedAllocatedTime": "Tempo Alocado",
+    "simulatedSetupTime": "Tempo Preparação",
+    "simulatedAvailableTime": "Tempo Disponível",
+    "occupancy": "Ocupação",
+    "initialDate": "Data Inicial",
+    "finalDate": "Data Final",
+    "deliveryDate": "Data Entrega",
+    "generate_data": "Gerar Dados",
+    "routing_name": "Nome Roteiro",
+    "quantity": "Quantidade",
+    "numberOfPOs": "Nr de OP's",
+    "repeat": "Repetir",
+    "totalMinutes": "Total Minutes",
+    "minutes": "Minutes",
+    "availableMinutes": "Minutos Disponíveis",
+    "real_data_heading": "Dados Reais Overview",
+    "simulation_data_heading": "Simulação Dados Overview",
+    "real_data": "Dados Reaisa",
+    "simulation_data": "Simulação Dados",
+    "add_routing": "Adicionar Roteiro",
+    "routingInitialDate": "Data Inicial",
+    "routingDeliveryDate": "Data Entrega",
+    "routingId": "Roteiro",
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "initial_date_error": "Data Inicial Roteiro deve ser no periodo entre Data Entrega Initial e Final",
+      "final_date_error": "A data de entrega do roteamento não pode ser posterior a Data Final",
+      "max_length": "Máx. número de caracteres é {{value}}",
+      "initial_date_lower": "Data Inicial deve ser menor Data Final"
+    }
+  },
+  "productionOrderModal": {
+    "po_modal_title": "Criar Ordens Produção",
+    "productionOrderNumber": "Nr OP",
+    "numberOfProductionOrders": "Nr de OPs",
+    "productionOrderQuantity": "Ordem Produção Quantites",
+    "productionOrderTypeId": "Tipo Ordem Produção",
+    "pieces": "Pc",
+    "m2": "m2",
+    "routingId": "Roteiro",
+    "lot_size": "Tamanho Lote",
+    "create_button": "Criar",
+    "delivery": "Entrega",
+    "schedule": "Planejar",
+    "ok_text": "Salvar",
+    "cancel": "Cancelar",
+    "quantity1": "Quantidade 1",
+    "quantity2": "Quantidade 2",
+    "situation": "Situação",
+    "linkedProductionOrders": "Ordens de Produção Vinculadas",
+    "validation": {
+      "required": "Este campo é obrigatório",
+      "min_length": "Número Deve ser maior que 0",
+      "max_length": "Máximo número de digitos é{{value}}",
+      "create_success": "As Ordens de Produção foram criadas com sucesso",
+      "create_fail": "Ocorreu um erro ao criar Ordens de Produção"
+    }
+  },
+  "reallocationOfPlanning": {
+    "title": "Planejar Realocação",
+    "productionOrderNumber": "Número Ordem de Produção",
+    "productionOrderDelivery": "Entrega Ordem de Produção",
+    "salesOrderDelivery": "Pedido Venda Entrega",
+    "sequence": "Sequência",
+    "operationId": "ID",
+    "operationName": "Operação",
+    "status": "Status",
+    "operationTime": "Tempo (Minutos)",
+    "setupTime": "Preparação (Minutos)",
+    "leadTime": "Lead Time",
+    "workCenterId": "Centro de Trabalho",
+    "planningDate": "Data Prevista",
+    "executedDate": "Data Execução",
+    "cancel": "Encerrado",
+    "ok_text": "Salvar",
+    "schedule": "Planejar",
+    "unschedule": "Desprogramar",
+    "display_operations": "Apresentar Operações",
+    "validation": {
+      "reallocation_success": "Status do pedido de produção alterado com sucesso",
+      "reallocation_fail": "Ocorreu um erro ao alterar o status da ordem de produção"
+    }
+  },
+  "confirmation_modal": {
+    "confirmation_message": "Mude o status de todas as operações na ordem de produção selecionada?",
+    "cancel": "Encerrado",
+    "ok_text": "Continuar"
+  }
+}
