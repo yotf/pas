@@ -3,7 +3,7 @@
  */
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useEntityForm } from '../../settings/hooks/entity-form';
@@ -26,7 +26,10 @@ export type UseWorkCenterMaintainSetupReturn = {
  * Mentioned values are passed down to {@link UseEntityForm}.
  * @returns A form created by {@link UseEntityForm}.
  */
-export const useWorkCenterMaintainSetup = (copy: boolean): UseWorkCenterMaintainSetupReturn => {
+export const useWorkCenterMaintainSetup = (
+  copy: boolean,
+  isFormulaSelected: boolean,
+): UseWorkCenterMaintainSetupReturn => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const { entity, loading } = useAppSelector((state) => state.workCenter);
@@ -85,7 +88,7 @@ export const useWorkCenterMaintainSetup = (copy: boolean): UseWorkCenterMaintain
     setIsLoaded(!loading && !!workCenterForEdit);
   }, [loading, workCenterForEdit]);
 
-  const validationSchema = useWorkCenterSchema();
+  const validationSchema = useWorkCenterSchema(isFormulaSelected);
   const form = useEntityForm({ entity: workCenterForEdit!, validationSchema, isOpen: false });
   useWorkCenterFormErrors(form);
 
