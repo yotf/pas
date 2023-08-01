@@ -12,6 +12,7 @@ import { clearOperation } from '../../settings/redux/operations/slice';
 import { getOperation } from '../../settings/redux/operations/thunks';
 import { useOperationFormErrors } from './useOperationFormErrors';
 import { useOperationSchema } from './useOperationSchema';
+import { getConfiguration } from '../../settings/redux/configuration/thunks';
 
 export type UseOperationSetupReturn = {
   form: UseFormReturn<OperationFormData, any>;
@@ -33,6 +34,7 @@ export const useOperationMaintainSetup = (copy: boolean): UseOperationSetupRetur
 
   useEffect(() => {
     dispatch(getOperation(Number(id ?? 0)));
+    dispatch(getConfiguration());
   }, [dispatch, id]);
 
   useEffect(() => {

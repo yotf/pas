@@ -7,10 +7,11 @@ import CustomSwitch from '@/modules/shared/components/input/switch/switch.compon
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/lib/select';
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../../settings/consts/interfaces';
 import { AllocationBased, OperationFormData } from '../../settings/redux/operations/interfaces';
+import { AllocationBasedEnum } from '@/modules/shared/consts';
 
 export type OperationsFormType = {
   form: UseFormReturn<OperationFormData, any>;
@@ -23,6 +24,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   const {
     register,
     formState: { errors },
+    setValue,
   } = form;
   const { operation_Id: operationId } = form.watch();
 
@@ -30,6 +32,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   const { translate } = useTranslate({ ns: ns });
   const { translate: translateAllocation } = useTranslate({ ns: 'allocation_labels' });
   const { entity } = useAppSelector((state) => state.operation);
+  const { data: configuration } = useAppSelector((state) => state.configuration);
   const convertForDropdown = useCallback(
     (arr: (SettingsPageItem | AllocationBased)[] | undefined): DefaultOptionType[] => {
       if (arr === undefined) return [];
@@ -42,7 +45,10 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
 
   const { allocationBased } = form.watch();
 
-  const disableInput = allocationBased === 3;
+  const disableInput = useMemo(
+    () => allocationBased === AllocationBasedEnum.formula,
+    [allocationBased],
+  );
 
   useEffect(() => {
     if (allocationBased === 3) {
@@ -53,6 +59,31 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
       });
     }
   }, [allocationBased, form]);
+
+  const UoMOptions = useMemo(
+    () =>
+      allocationBased === AllocationBasedEnum.quantity1
+        ? convertForDropdown(
+            configuration.quantities1.map((q) => q.unitOfMeasure) as SettingsPageItem[],
+          )
+        : convertForDropdown(
+            configuration.defaultKg?.unitOfMeasure
+              ? [configuration.defaultKg?.unitOfMeasure]
+              : undefined,
+          ),
+    [allocationBased],
+  );
+
+  const UoMdisabled = useMemo(
+    () => allocationBased === AllocationBasedEnum.formula,
+    [allocationBased],
+  );
+
+  useEffect(() => {
+    allocationBased === AllocationBasedEnum.formula
+      ? setValue('unitOfMeasureId', UoMOptions?.[0]?.value as number)
+      : null;
+  }, [allocationBased]);
 
   return (
     <form
@@ -143,7 +174,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
                 placeholder={translate('unit_of_measure_placeholder')}
                 label={translate('unit_of_measure_label')}
                 register={register('unitOfMeasureId')}
-                options={convertForDropdown(entity?.unitOfMeasures)}
+                options={UoMOptions}
                 width='full-width'
                 disabled={disableInput}
                 isRequired={!disableInput}
