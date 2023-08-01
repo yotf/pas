@@ -15,7 +15,7 @@ test('should return required properties', () => {
     data: mockedOperation,
   }));
 
-  const { result } = renderHook(() => useWorkCenterMaintainSetup(false));
+  const { result } = renderHook(() => useWorkCenterMaintainSetup(false, false));
   expect(result.current).toHaveProperty('form');
   expect(result.current).toHaveProperty('workCenterForEdit');
   expect(result.current.isLoaded).toEqual(true);
