@@ -7,7 +7,7 @@ import CustomSwitch from '@/modules/shared/components/input/switch/switch.compon
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/lib/select';
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../../settings/consts/interfaces';
 import { AllocationBased, OperationFormData } from '../../settings/redux/operations/interfaces';
@@ -49,6 +49,12 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     () => allocationBased === AllocationBasedEnum.formula,
     [allocationBased],
   );
+
+  const limitNumberOfChars = (event:React.KeyboardEvent<HTMLInputElement>,maxLength:number): void => {
+    const value = event.currentTarget.value;
+    debugger;
+    if (value.length>=maxLength && event.key!="Backspace") event.preventDefault();
+  }
 
   useEffect(() => {
     if (allocationBased === 3) {
@@ -97,18 +103,14 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             <div className='operation-id'>
               {!!operationId && (
                 <div className='id-container'>
-                  <p>{translate('operation_Id')}</p>
+                {/* <p>{translate('operation_Id')}</p> */}
                   <p>{operationId || 'ㅤ'}</p>
                 </div>
               )}
               <CustomSwitch label={translate('active')} name={register('isActive').name} />
             </div>
           </div>
-          <div className='maintain-right'>
-            <div className='interface-container'>
-              <h2 className='mb-0'>{translate('interface')}</h2>
-            </div>
-          </div>
+      
         </div>
         <div className='maintain-left'>
           <CustomInput
@@ -119,6 +121,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             label={translate('name')}
             register={register('name')}
             width='full-width'
+            onKeyDownEvent={(e)=>limitNumberOfChars(e,30)}
           />
           <CustomInput
             error={errors.departmentId}
@@ -135,6 +138,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             label={translate('remark')}
             register={register('remark')}
             width='full-width'
+            onKeyDownEvent={(e)=>limitNumberOfChars(e,200)}
           />
         </div>
         <div className='maintain-right'>
@@ -145,6 +149,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             register={register('interfaceCode')}
             label={translate('interface_code')}
             width='full-width'
+            onKeyDownEvent={(e)=>limitNumberOfChars(e,20)}
           />
           <div>
             <h3>{translate('allocation_based')}</h3>
