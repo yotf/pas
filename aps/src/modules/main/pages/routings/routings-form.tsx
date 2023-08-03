@@ -6,7 +6,7 @@ import { FC, useContext } from 'react';
 import CustomInput from '../../../shared/components/input/input.component';
 import CustomSwitch from '../../../shared/components/input/switch/switch.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { dateFormatter, nameofFactory } from '../../../shared/utils/utils';
+import { dateFormatter, limitNumberOfChars, nameofFactory } from '../../../shared/utils/utils';
 import {
   MaintainContext,
   MaintainContextValue,
@@ -15,6 +15,7 @@ import { Routing, RoutingFormData, RoutingResponse } from '../settings/redux/rou
 import { useRoutingOptions } from './hooks/useRoutingOptions';
 import RoutesTable from './routes-table';
 import './routings-form.scss';
+import dayjs from 'dayjs';
 /**
  * @returns Materials Form component with {@link Input | inputs} connected to the form returned by {@link useRoutingForm} hook.
  */
@@ -35,41 +36,42 @@ const RoutingsForm: FC = () => {
 
   return (
     <form
-      className='routings-form'
+      className={'routings-form ' + (!entity?.id ? ' new' : '')}
       data-testid='routings-form'
       autoComplete='off'
       onSubmit={(e): void => e.preventDefault()}
     >
-      {!copying && !!entity?.id && (
-        <CustomInput type='readonly' label={translate('routing_id')} name={nameof('routing_Id')} />
-      )}
+      {(!copying && !!entity?.id && (
+        <div className='routingId'>
+          <CustomInput
+            type='readonly'
+            //  label={translate('routing_id')}
+            name={nameof('routing_Id')}
+          />
+        </div>
+      )) ||
+        ''}
+
+      <CustomInput
+        type='readonly'
+        label={translate('createdOn')}
+        value={
+          !copying && !!entity?.id
+            ? dateFormatter(entity.changeHistoryDto.createdOn)
+            : dateFormatter(dayjs().format())
+        }
+      />
+
+      <div className='active '>
+        <CustomSwitch label={translate('active')} name={nameof('isActive')} />
+      </div>
       <CustomInput
         type='text'
         label={translate('routingInterfaceId')}
         name={nameof('routingInterfaceId')}
+        onKeyDownEvent={(e) => limitNumberOfChars(e, 14)}
+        width='full-width'
       />
-      {!copying && !!entity?.id && (
-        <>
-          <CustomInput
-            type='readonly'
-            label={translate('createdOn')}
-            value={dateFormatter(entity.changeHistoryDto.createdOn)}
-          />
-          <CustomInput
-            type='readonly'
-            label={translate('createdBy')}
-            value={entity.changeHistoryDto.createdBy}
-          />
-          <CustomInput
-            type='readonly'
-            label={translate('updatedBy')}
-            value={entity.changeHistoryDto.updatedBy}
-          />
-        </>
-      )}
-      <div className='active break'>
-        <CustomSwitch label={translate('active')} name={nameof('isActive')} />
-      </div>
       <div className='routingName'>
         <CustomInput
           type='text'
@@ -77,28 +79,61 @@ const RoutingsForm: FC = () => {
           label={translate('name')}
           name={nameof('name')}
           width='full-width'
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
         />
       </div>
-      <CustomInput
-        type='select'
-        label={translate('materialId')}
-        name={nameof('materialId')}
-        options={materialOptions}
-      />
+
+      {!copying && !!entity?.id && (
+        <CustomInput
+          type='readonly'
+          label={translate('createdBy')}
+          value={entity.changeHistoryDto.createdBy}
+        />
+      )}
+      <div className='material'>
+        <CustomInput
+          type='select'
+          label={translate('materialId')}
+          name={nameof('materialId')}
+          options={materialOptions}
+          width='full-width'
+        />
+      </div>
       <CustomInput
         type='select'
         label={translate('customerId')}
         name={nameof('customerId')}
         options={customerOptions}
         isAutocomplete={true}
+        width='full-width'
       />
       <CustomInput
         type='number'
         isRequired={true}
         label={translate('lotStandardQuantity')}
         name={nameof('lotStandardQuantity')}
-        onKeyDownEvent={preventDecimal}
+        onKeyDownEvent={(e) => {
+          limitNumberOfChars(e, 5);
+          preventDecimal(e);
+        }}
+        width='full-width'
       />
+
+      <CustomInput
+        type='select'
+        label={translate('unitOfMeasureId')}
+        name={nameof('unitOfMeasureId')}
+        options={unitOptions}
+        width='full-width'
+      />
+
+      {!copying && !!entity?.id && (
+        <CustomInput
+          type='readonly'
+          label={translate('updatedBy')}
+          value={entity.changeHistoryDto.updatedBy}
+        />
+      )}
       <div className='remark'>
         <CustomInput
           type='textarea'
@@ -107,16 +142,10 @@ const RoutingsForm: FC = () => {
           width='full-width'
           height={'142px'}
           rows={5}
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
         />
       </div>
-      <div className='break'>
-        <CustomInput
-          type='select'
-          label={translate('unitOfMeasureId')}
-          name={nameof('unitOfMeasureId')}
-          options={unitOptions}
-        />
-      </div>
+
       <RoutesTable />
     </form>
   );

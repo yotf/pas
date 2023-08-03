@@ -1,7 +1,61 @@
+.routings-form.new {
+  grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+  .custom-input:first-child {
+    grid-column: span 1;
+  }
+
+  .routingName {
+    grid-column: span 2;
+  }
+
+  .material {
+    grid-column: span 2;
+    .custom-input {
+      max-width: unset;
+    }
+  }
+
+  .remark {
+    grid-column: span 5;
+  }
+}
+
 .routings-form {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+
+  grid-template-columns: 1fr 1fr 1fr 2fr 2fr 2fr;
   gap: 16px 32px;
+
+  .routingName {
+    grid-column: span 2;
+  }
+
+  .material {
+    grid-column: span 2;
+  }
+
+  .remark {
+    grid-column: span 4;
+  }
+
+  .routingId {
+    //  width: 35px;
+    align-self: center;
+    font-size: 28px;
+    line-height: 24px;
+    font-weight: 500;
+    padding-left: 5px;
+
+    @media screen and (width < 850px) {
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    @media screen and (width < 768px) {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
 
   .active {
     padding-top: 32px;
@@ -11,13 +65,13 @@
     grid-column-start: 1;
   }
 
-  .routingName {
-    grid-column: span 2;
-  }
+  // .routingName {
+  //   grid-column: span 2;
+  // }
 
   .remark {
     grid-row: span 2;
-    grid-column: span 4;
+    grid-column: span 5;
 
     & > .custom-input {
       height: 100%;
@@ -29,7 +83,7 @@
   }
 
   .routes {
-    grid-column: span 5;
+    grid-column: span 6;
   }
 
   .custom-switch {
@@ -39,52 +93,52 @@
     }
   }
 }
-.new {
-  .routings-form {
-    grid-template-columns: repeat(4, 1fr);
-    .break {
-      grid-column-start: revert;
-    }
-    .active.break {
-      order: 2;
-    }
-    .break:not(active) {
-      order: 7;
-    }
-    .routingName {
-      order: 3;
-      grid-column: span 3;
-      margin-right: 32px;
-    }
-    .remark {
-      order: 8;
-    }
-    .custom-input {
-      &:nth-child(1) {
-        order: 1;
-      }
-      &:nth-child(2) {
-        order: 4;
-      }
-      &:nth-child(3) {
-        order: 5;
-      }
-      &:nth-child(4) {
-        order: 4;
-      }
-      &:nth-child(5) {
-        order: 5;
-      }
-      &:nth-child(6) {
-        order: 6;
-      }
-    }
-    .routes {
-      order: 9;
-      padding-right: 32px;
-    }
-  }
-  .maintain-actions {
-    margin-right: 32px;
-  }
-}
+// .new {
+// .routings-form {
+//   grid-template-columns: repeat(5, 1fr);
+// // .break {
+// //   grid-column-start: revert;
+// // }
+
+// // .active.break {
+// //   order: 2;
+// // }
+// // .break:not(active) {
+// //   order: 7;
+// // }
+//   .routingName {
+//   //  grid-column: span 3;
+//     margin-right: 32px;
+//   }
+// // .remark {
+// //   order: 8;
+// // }
+// // .custom-input {
+// //   &:nth-child(1) {
+// //     order: 1;
+// //   }
+// //   &:nth-child(2) {
+// //     order: 4;
+// //   }
+// //   &:nth-child(3) {
+// //     order: 5;
+// //   }
+// //   &:nth-child(4) {
+// //     order: 4;
+// //   }
+// //   &:nth-child(5) {
+// //     order: 5;
+// //   }
+// //   &:nth-child(6) {
+// //     order: 6;
+// //   }
+// // }
+//   .routes {
+//     order: 9;
+//     padding-right: 32px;
+//   }
+// }
+// .maintain-actions {
+//   margin-right: 32px;
+// }
+// }

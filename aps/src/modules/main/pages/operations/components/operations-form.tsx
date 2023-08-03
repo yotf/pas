@@ -12,6 +12,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../../settings/consts/interfaces';
 import { AllocationBased, OperationFormData } from '../../settings/redux/operations/interfaces';
 import { AllocationBasedEnum } from '@/modules/shared/consts';
+import { limitNumberOfChars } from '@/modules/shared/utils/utils';
 
 export type OperationsFormType = {
   form: UseFormReturn<OperationFormData, any>;
@@ -50,11 +51,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
-  const limitNumberOfChars = (event:React.KeyboardEvent<HTMLInputElement>,maxLength:number): void => {
-    const value = event.currentTarget.value;
-    debugger;
-    if (value.length>=maxLength && event.key!="Backspace") event.preventDefault();
-  }
+
 
   useEffect(() => {
     if (allocationBased === 3) {
@@ -80,10 +77,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
-  const UoMdisabled = useMemo(
-    () => allocationBased === AllocationBasedEnum.formula,
-    [allocationBased],
-  );
 
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula

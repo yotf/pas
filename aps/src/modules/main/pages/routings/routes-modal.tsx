@@ -11,7 +11,7 @@ import { FormProvider } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import CustomSwitch from '../../../shared/components/input/switch/switch.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { mapDataToOptions, nameofFactory } from '../../../shared/utils/utils';
+import { limitNumberOfChars, mapDataToOptions, nameofFactory } from '../../../shared/utils/utils';
 import {
   MaintainContext,
   MaintainContextValue,
@@ -95,8 +95,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           name={nameof('sequence')}
           register={register('sequence')}
           isRequired={true}
-          // disabled={true}
-          // readOnly={true}
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 3)}
         />
         <CustomInput
           isRequired={true}

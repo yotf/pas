@@ -261,11 +261,15 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           onSubmit={(e): void => e.preventDefault()}
         >
           <div className='id-container'>
-            <CustomInput
-              type='readonly'
-              //   label={translate('orderNumber')}
-              name={nameof('orderNumber')}
-            />
+            {isEditing ? (
+              <CustomInput
+                type='readonly'
+                //   label={translate('orderNumber')}
+                name={nameof('orderNumber')}
+              />
+            ) : (
+              <div></div>
+            )}
             <CustomInput
               type='readonly'
               label={translate('creationDate')}

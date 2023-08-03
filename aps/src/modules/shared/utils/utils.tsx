@@ -17,6 +17,11 @@ export const dateFormatter = (date: string | undefined): string => {
   return dayjs(date).format(euDateFormat);
 };
 
+export const limitNumberOfChars = (event:React.KeyboardEvent<HTMLInputElement>,maxLength:number): void => {
+  const value = event.currentTarget.value;
+  if (value.length>=maxLength && event.key!="Backspace") event.preventDefault();
+}
+
 export const isValidDateFormat = (dateString: string) => {
   const formats = [
     'YYYY-MM-DD',
