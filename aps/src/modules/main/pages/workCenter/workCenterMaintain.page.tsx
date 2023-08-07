@@ -3,7 +3,7 @@
  */
 
 import { useAppSelector } from '@/store/hooks';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { MaintainContextProvider } from '@/modules/main/components/maintain/contexts/maintain.context';
 import MaintainHeader from '../../components/maintain/maintain-header';
@@ -26,9 +26,8 @@ export interface RoutingMaintainProps {
  * @returns A {@link MaintainHeader}, {@link WorkCenterForm} and {@link WorkCenterTable} component all wrapped in a {@link MaintainContext.MaintainContextProvider }
  */
 const WorkCenterMaintain: FC<RoutingMaintainProps> = ({ copy = false }) => {
-
   const [isFormulaSelected, setIsFormulaSelected] = useState<boolean>(false);
-  const { form, isLoaded } = useWorkCenterMaintainSetup(copy, isFormulaSelected); 
+  const { form, isLoaded } = useWorkCenterMaintainSetup(copy, isFormulaSelected);
 
   const sliceState = useAppSelector((state) => state.workCenter);
   const ns = 'workCenters';
@@ -36,11 +35,19 @@ const WorkCenterMaintain: FC<RoutingMaintainProps> = ({ copy = false }) => {
   const getName = useCallback((entity: WorkCenter): string => entity.name, []);
   const {
     formState: { isDirty },
+    trigger,
+    resetField,
   } = form;
 
   const formulaCallback = (formulaSelected: boolean) => {
+
     setIsFormulaSelected(formulaSelected);
   };
+
+  useEffect(() => {
+    trigger('weightCapacity');
+    resetField('weightCapacity');
+  }, [isFormulaSelected]);
   const { onDelete, modal: deleteModal } = useEntityDeleteModal({
     ns,
     deleteThunk,

@@ -112,6 +112,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           name={nameof('leadTime')}
           onKeyDownEvent={(event: React.KeyboardEvent<HTMLInputElement>): void => {
             if (event.key.includes('.')) event.preventDefault();
+            limitNumberOfChars(event, 2);
           }}
         />
         <CustomInput
@@ -126,6 +127,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
             label={translate('remark')}
             name={nameof('remark')}
             width='full-width'
+            onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
           />
         </div>
       </Modal>
