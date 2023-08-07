@@ -54,10 +54,8 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
   }, [start]);
 
   useEffect(() => {
-    if (minutes && minutes < 0) {
-      resetField('end');
-    }
-  }, [minutes]);
+    if (dayjs(start, 'HH:mm').isAfter(dayjs(end, 'HH:mm'))) resetField('end', { defaultValue: '' });
+  }, [start]);
 
   const {
     formState: { isValid, isDirty },
