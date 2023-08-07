@@ -6,13 +6,14 @@ import percent from '@/assets/icons/percent.svg';
 import { zeroHourPlaceholder } from '@/modules/shared/consts';
 import { DayOfWeek } from '@/modules/shared/utils/dayOfWeek.enum';
 import { Modal } from 'antd';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
 import { calculateMinutes, nameofFactory } from '../../../shared/utils/utils';
 import { WorkCapacityMapped } from '../settings/redux/workcenterCapacities/interfaces';
 import { useWorkCapacityForm } from './hooks/useWorkCapacityForm';
+import dayjs from 'dayjs';
 
 export type Props = {
   workCapacity?: WorkCapacityMapped;
@@ -28,11 +29,12 @@ export type Props = {
 const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
   const { translate } = useTranslate({ ns: 'workCenters', keyPrefix: 'maintain' });
   const { form, onSubmit } = useWorkCapacityForm({ workCapacity, onClose });
+  const [selectedStartTime, setSelectedStartTime] = useState<string | undefined>(undefined);
   const nameof = nameofFactory<WorkCapacityMapped>();
 
-  const { setValue, watch } = form;
+  const { setValue, watch, resetField } = form;
 
-  const { start, end, break: breakTime, efficiency, capacity } = watch();
+  const { start, end, break: breakTime, efficiency, capacity, minutes } = watch();
 
   useEffect(() => {
     const { minutes, availableMinutes } = calculateMinutes(breakTime, start, end, efficiency);
@@ -45,6 +47,17 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
     setValue('efficiency', efficiency);
     setValue('capacity', capacity);
   }, [breakTime, capacity, efficiency, end, setValue, start]);
+
+  useEffect(() => {
+    const t = start === zeroHourPlaceholder || start === '' ? undefined : start;
+    setSelectedStartTime(t);
+  }, [start]);
+
+  useEffect(() => {
+    if (minutes && minutes < 0) {
+      resetField('end');
+    }
+  }, [minutes]);
 
   const {
     formState: { isValid, isDirty },
@@ -71,10 +84,12 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
         />
         <CustomInput
           type='time'
+          key={new Date().getTime()}
           label={translate('end')}
           placeholder={zeroHourPlaceholder}
           name={nameof('end')}
           isRequired={true}
+          selectedStartTime={selectedStartTime ? dayjs(selectedStartTime, 'HH:mm') : undefined}
         />
         <CustomInput
           type='number'

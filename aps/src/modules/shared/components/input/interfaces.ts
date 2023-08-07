@@ -76,6 +76,7 @@ export interface Input {
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onTextChange?: (value: number | string) => void;
   listHeight?: number;
+  selectedStartTime?:Dayjs | undefined;
 }
 
 export interface SwitchInput {

@@ -34,7 +34,23 @@ export const useWorkCapacitiesSchema = (): OptionalObjectSchema<
       Yup.object<Shape<WorkCapacityMapped>>({
         id: Yup.number().notRequired(),
         start: requiredString,
-        end: requiredString,
+        end: Yup.string().required(translate('required')),
+        // .test({
+        //   name: 'is-after-start',
+        //   message: "HOHO",
+        //   test: (value, context) => {
+        //     debugger;
+        //     const { start } = context.parent;
+        //     if (!start || !value) return true;
+
+        //     const startTime = dayjs(start, 'HH:mm');
+        //     const endTime = dayjs(value, 'HH:mm');
+
+        //     const isAfter = endTime.isAfter(startTime);
+        //     debugger;
+        //     return endTime.isAfter(startTime);
+        //   },
+        //   }),
         break: requiredNumber.max(9999, translate('max_length', { name: '4' })),
         efficiency: requiredNumber
           .min(0, translate('min_value', { value: '0' }))

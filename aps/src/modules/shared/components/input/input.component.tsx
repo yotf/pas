@@ -47,6 +47,7 @@ const CustomInput: React.FC<Input> = ({
   onBlur,
   onTextChange,
   listHeight,
+  selectedStartTime,
 }) => {
   const {
     watch,
@@ -135,7 +136,9 @@ const CustomInput: React.FC<Input> = ({
       case 'readonly':
         return <div className='readonly'>{value || <>&nbsp;</>}</div>;
       case 'time':
-        return <CustomTimePicker {...props} name={fieldName} />;
+        return (
+          <CustomTimePicker {...props} name={fieldName} selectedStartTime={selectedStartTime} />
+        );
       default:
         return (
           <CustomTextInput

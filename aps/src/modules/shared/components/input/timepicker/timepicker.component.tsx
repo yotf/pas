@@ -11,6 +11,7 @@ import { PickerTimeProps } from 'antd/lib/date-picker/generatePicker';
 import { useTranslate } from '../../../hooks/translate.hook';
 import { timeFormat } from '../../../consts';
 import './timepicker.scss';
+import { DisabledTimes } from 'rc-picker/lib/interface';
 
 dayjs.extend(customParseFormat);
 
@@ -23,6 +24,8 @@ export interface TimePickerProps extends Omit<PickerTimeProps<Dayjs>, 'picker'> 
   readOnly?: boolean;
   /** Disables interactions and changes styling */
   disabled?: boolean;
+
+  selectedStartTime?: Dayjs | undefined;
 }
 
 const formatTime = (time: number): string => (time < 10 ? `0${time}` : `${time}`);
@@ -31,6 +34,7 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
   name,
   format = timeFormat,
   readOnly = false,
+  selectedStartTime,
   ...props
 }) => {
   const { translate } = useTranslate({
@@ -39,6 +43,21 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
   const { control } = useFormContext();
 
   const [open, setOpen] = useState(false);
+
+  const getDisabledTimes = (current: Dayjs): DisabledTimes => {
+    if (!selectedStartTime) {
+      return {}; // No disabled times if start time is not selected
+    }
+
+    const selectedStartHour = selectedStartTime.hour();
+
+    const disabledHours = Array.from({ length: selectedStartHour + 1 }, (_, index) => index);
+   // const disabledMinutes = Array.from({ length: selectedStartMinute }, (_, index) => index);
+
+    return {
+      disabledHours: () => disabledHours,
+    };
+  };
   return (
     <Controller
       defaultValue={undefined}
@@ -55,6 +74,7 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
             popupClassName='timepicker'
             showNow={false}
             disabled={readOnly}
+            disabledTime={getDisabledTimes}
             open={open}
             onOpenChange={(openDropdown: boolean): void => setOpen(openDropdown)}
             value={field.value ? dayjs(field.value, format) : undefined}
