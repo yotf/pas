@@ -5,7 +5,7 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useModalProps } from '@/modules/shared/hooks/useModalProps.hook';
-import { nameofFactory } from '@/modules/shared/utils/utils';
+import { limitNumberOfChars, nameofFactory } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import {
   ChangeEvent,
@@ -167,6 +167,7 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           onBlur={onQuantityBlur}
           disabled={quantitiesDisabled}
           onTextChange={onQ1change}
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 6)}
         />
         <CustomInput
           type='readonly'

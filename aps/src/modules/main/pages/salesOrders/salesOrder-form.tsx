@@ -9,7 +9,7 @@ import { FC, useContext, useEffect, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { dateFormatter, nameofFactory } from '../../../shared/utils/utils';
+import { dateFormatter, limitNumberOfChars, nameofFactory } from '../../../shared/utils/utils';
 import {
   MaintainContext,
   MaintainContextValue,
@@ -137,6 +137,7 @@ const SalesOrderForm: FC = () => {
             name={nameof('customerOrderNumber')}
             width='full-width'
             disabled={!isFormActive}
+            onKeyDownEvent={(e) => limitNumberOfChars(e, 20)}
           />
           <CustomInput
             type='select'
@@ -155,6 +156,7 @@ const SalesOrderForm: FC = () => {
               name={nameof('remark')}
               width='full-width'
               disabled={!isFormActive}
+              onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
             />
           </div>
         </form>
