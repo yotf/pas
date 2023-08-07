@@ -9,14 +9,17 @@ import { OptionalObjectSchema, TypeOfShape } from 'yup/lib/object';
 import { AnyObject } from 'yup/lib/types';
 import * as Yup from 'yup';
 import { WorkCenterFormData } from '../../settings/redux/workCenters/interfaces';
+import { AllocationBasedEnum } from '@/modules/shared/consts';
 
 type UserShape = Shape<WorkCenterFormData>;
 /**
  *  Schema used for Work center form. Validates user inputs and renders errors in case the values don't match the Schema rules
  */
-export const useWorkCenterSchema = (
-  formulaSelected: boolean,
-): OptionalObjectSchema<UserShape, AnyObject, TypeOfShape<UserShape>> => {
+export const useWorkCenterSchema = (): OptionalObjectSchema<
+  UserShape,
+  AnyObject,
+  TypeOfShape<UserShape>
+> => {
   const { translate } = useTranslate({
     ns: 'workCenters',
     keyPrefix: 'validation',
@@ -41,14 +44,21 @@ export const useWorkCenterSchema = (
           .transform((value) => (isNaN(value) ? undefined : value))
           .notRequired(),
         workCenterInterfaceId: Yup.string().max(15, translate('max_length', { name: '15' })),
-        weightCapacity: formulaSelected
-          ? Yup.number()
-              .max(99999, translate('max_length', { name: '5' }))
-              .required()
-              .transform((value) => (isNaN(value) ? undefined : value))
-          : undefined,
+        weightCapacity: Yup.number()
+          .transform((value) => (isNaN(value) ? undefined : value))
+          .max(99999, translate('max_length', { name: '5' }))
+          .test({
+            name: 'is-weight-capacity-required',
+            message: translate('required'),
+            test: (value, context) => {
+              const { allocationBased } = context.parent;
+              debugger;
+              if (allocationBased === AllocationBasedEnum.formula && !value) return false;
+              return true;
+            },
+          }),
       }),
-    [requiredNumber, requiredString, translate, formulaSelected],
+    [requiredNumber, requiredString, translate],
   );
   return schema;
 };

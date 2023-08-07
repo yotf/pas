@@ -17,10 +17,27 @@ export const dateFormatter = (date: string | undefined): string => {
   return dayjs(date).format(euDateFormat);
 };
 
-export const limitNumberOfChars = (event:React.KeyboardEvent<HTMLInputElement>,maxLength:number): void => {
+export const limitNumberOfChars = (
+  event: React.KeyboardEvent<HTMLInputElement>,
+  maxLength: number,
+): void => {
   const value = event.currentTarget.value;
-  if (value.length>=maxLength && event.key!="Backspace") event.preventDefault();
-}
+  if (value.length >= maxLength && event.key != 'Backspace') event.preventDefault();
+};
+
+export const limitToNumericKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const key = e.key;
+
+  // Allow control keys
+  if (e.ctrlKey || e.altKey || e.metaKey || key === 'Backspace') {
+    return;
+  }
+
+  // Allow digits
+  if (!/^\d+$/.test(key)) {
+    e.preventDefault();
+  }
+};
 
 export const isValidDateFormat = (dateString: string) => {
   const formats = [

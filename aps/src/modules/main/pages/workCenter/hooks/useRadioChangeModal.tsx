@@ -18,7 +18,6 @@ export type UseRadioChangeModalReturnType = {
 export type UseRadioChangeModalProps = {
   ns: string;
   form: UseFormReturn<WorkCenterFormData>;
-  formulaCallback: (f: boolean) => void;
 };
 /**
  *
@@ -27,7 +26,6 @@ export type UseRadioChangeModalProps = {
 export const useRadioChangeModal = ({
   ns,
   form,
-  formulaCallback,
 }: UseRadioChangeModalProps): UseRadioChangeModalReturnType => {
   const [isRadioChangeModalOpen, setIsRadioChangeModalOpen] = useState<boolean>(false);
   const callbackRef = useRef<() => void>();
@@ -49,7 +47,6 @@ export const useRadioChangeModal = ({
     callbackRef.current!();
     setValue('allowedOperations', []);
     const allocationBased = getValues('allocationBased');
-    formulaCallback(allocationBased === AllocationBasedEnum.formula);
     closeRedirectModal();
   }, [closeRedirectModal, setValue]);
 

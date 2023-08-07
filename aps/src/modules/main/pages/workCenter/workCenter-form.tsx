@@ -16,16 +16,16 @@ import { useRadioChangeModal } from './hooks/useRadioChangeModal';
 import { getConfig } from '@testing-library/react';
 import { getConfiguration } from '../settings/redux/configuration/thunks';
 import { AllocationBasedEnum } from '@/modules/shared/consts';
+import { limitNumberOfChars, limitToNumericKeyDown } from '@/modules/shared/utils/utils';
 
 export type WorkCenterFormType = {
   form: UseFormReturn<WorkCenterFormData, any>;
-  formulaCallback: (f: boolean) => void;
 };
 /**
  * @returns Work Center Form component with {@link Input | inputs} connected to the form returned by {@link useWorkCenterMaintainSetup} hook.
  * When allocationBased value is changed a modal returned from {@link useRadioChangeModal} hook opens, asking for user confirmation. Confirming the action clears all allowed operations.
  *  */
-const WorkCenterForm: FC<WorkCenterFormType> = ({ form, formulaCallback }) => {
+const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
   const { entity } = useAppSelector((state) => state.workCenter);
   const { quantities1, defaultKg } = useAppSelector((state) => state.configuration.data);
   const ns = 'workCenters';
@@ -37,6 +37,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form, formulaCallback }) => {
     formState: { errors },
     watch,
     setValue,
+    resetField,
   } = form;
 
   const { allocationBased } = watch();
@@ -77,8 +78,11 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form, formulaCallback }) => {
   const { openRadioChangeModal, radioChangeModal } = useRadioChangeModal({
     ns: ns,
     form: form,
-    formulaCallback,
   });
+
+  useEffect(() => {
+    resetField('weightCapacity');
+  }, [allocationBased]);
 
   return (
     <form
@@ -144,6 +148,10 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form, formulaCallback }) => {
               register={register('weightCapacity')}
               width='full-width'
               isRequired={UoMdisabled}
+              onKeyDownEvent={(e) => {
+                limitToNumericKeyDown(e);
+                limitNumberOfChars(e, 5);
+              }}
             />
           ) : null}
         </div>

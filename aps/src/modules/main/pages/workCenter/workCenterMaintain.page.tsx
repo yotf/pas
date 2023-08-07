@@ -26,8 +26,7 @@ export interface RoutingMaintainProps {
  * @returns A {@link MaintainHeader}, {@link WorkCenterForm} and {@link WorkCenterTable} component all wrapped in a {@link MaintainContext.MaintainContextProvider }
  */
 const WorkCenterMaintain: FC<RoutingMaintainProps> = ({ copy = false }) => {
-  const [isFormulaSelected, setIsFormulaSelected] = useState<boolean>(false);
-  const { form, isLoaded } = useWorkCenterMaintainSetup(copy, isFormulaSelected);
+  const { form, isLoaded } = useWorkCenterMaintainSetup(copy);
 
   const sliceState = useAppSelector((state) => state.workCenter);
   const ns = 'workCenters';
@@ -35,19 +34,9 @@ const WorkCenterMaintain: FC<RoutingMaintainProps> = ({ copy = false }) => {
   const getName = useCallback((entity: WorkCenter): string => entity.name, []);
   const {
     formState: { isDirty },
-    trigger,
-    resetField,
   } = form;
 
-  const formulaCallback = (formulaSelected: boolean) => {
 
-    setIsFormulaSelected(formulaSelected);
-  };
-
-  useEffect(() => {
-    trigger('weightCapacity');
-    resetField('weightCapacity');
-  }, [isFormulaSelected]);
   const { onDelete, modal: deleteModal } = useEntityDeleteModal({
     ns,
     deleteThunk,
@@ -75,7 +64,7 @@ const WorkCenterMaintain: FC<RoutingMaintainProps> = ({ copy = false }) => {
           data-testid='workcenters-maintain'
         >
           <MaintainHeader />
-          {isLoaded && <WorkCenterForm form={form} formulaCallback={formulaCallback} />}
+          {isLoaded && <WorkCenterForm form={form} />}
           {isLoaded && <WorkCenterMaintainTable form={form} />}
           {deleteModal}
           {redirectModal}

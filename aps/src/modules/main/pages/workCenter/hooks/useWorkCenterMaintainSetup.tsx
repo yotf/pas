@@ -27,8 +27,7 @@ export type UseWorkCenterMaintainSetupReturn = {
  * @returns A form created by {@link UseEntityForm}.
  */
 export const useWorkCenterMaintainSetup = (
-  copy: boolean,
-  isFormulaSelected: boolean,
+  copy: boolean
 ): UseWorkCenterMaintainSetupReturn => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -88,7 +87,7 @@ export const useWorkCenterMaintainSetup = (
     setIsLoaded(!loading && !!workCenterForEdit);
   }, [loading, workCenterForEdit]);
 
-  const validationSchema = useWorkCenterSchema(isFormulaSelected);
+  const validationSchema = useWorkCenterSchema();
   const form = useEntityForm({ entity: workCenterForEdit!, validationSchema, isOpen: false });
   useWorkCenterFormErrors(form);
 
