@@ -13,15 +13,14 @@ import { getAllMaterialGroups } from '../../settings/redux/materialGroups/thunks
 import { getAllMaterials } from '../../settings/redux/materials/thunks';
 import { getAllProductionOrderTypes } from '../../settings/redux/productionOrderTypes/thunks';
 import { getAllRoutings } from '../../settings/redux/routings/thunks';
-import { SalesOrder } from '../../settings/redux/salesOrders/interfaces';
-import { getAllSalesOrders } from '../../settings/redux/salesOrders/thunks';
 import { getAllSelections } from '../../settings/redux/selections/thunks';
 import { getAllThickness } from '../../settings/redux/thickness/thunks';
 import { getAllUnitsOfMeasure } from '../../settings/redux/unitOfMeasure/thunks';
 import { getSalesOrdersWithMaterials } from '../../settings/redux/salesOrders/salesOrdersWithMaterials/thunks';
-import { getAllProductionOrders } from '../../settings/redux/productionOrders/thunks';
 import { ProductionOrder } from '../../settings/redux/productionOrders/interfaces';
 import { getProductionOrderNumbers } from '../../settings/redux/productionOrders/productionOrderOrderNumbers/thunks';
+import { getConfiguration } from '../../settings/redux/configuration/thunks';
+import { SettingsPageItem } from '../../settings/consts/interfaces';
 
 export type UseProductionOrderOptions = {
   customerOptions: DefaultOptionType[];
@@ -37,6 +36,7 @@ export type UseProductionOrderOptions = {
   selectionOptions: DefaultOptionType[];
   salesOrderSequenceOptions: DefaultOptionType[];
   originPOOptions: DefaultOptionType[];
+  defaultKg: SettingsPageItem | undefined;
 };
 /**
  * Fetches and converts data to options usable by select and radio inputs.
@@ -59,6 +59,7 @@ export const useProductionOrderOptions = (
     dispatch(getAllSelections());
     dispatch(getSalesOrdersWithMaterials());
     dispatch(getProductionOrderNumbers());
+    dispatch(getConfiguration());
   }, [dispatch]);
 
   const {
@@ -74,6 +75,7 @@ export const useProductionOrderOptions = (
     thickness,
     selections,
     productionOrderNumbers,
+    configuration,
   } = useAppSelector((state) => ({
     customers: state.customers.data,
     productionOrderTypes: state.productionOrderTypes.data,
@@ -87,6 +89,7 @@ export const useProductionOrderOptions = (
     thickness: state.thickness.data,
     selections: state.selections.data,
     productionOrderNumbers: state.productionOrderNumbers.data,
+    configuration: state.configuration.data,
   }));
 
   const customerOptions: DefaultOptionType[] = useMemo(
@@ -103,6 +106,8 @@ export const useProductionOrderOptions = (
     () => mapDataToOptions(materials),
     [materials],
   );
+
+  const defaultKg = useMemo(() => configuration.defaultKg?.unitOfMeasure, [configuration]);
 
   const routingOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(routings), [routings]);
 
@@ -180,5 +185,6 @@ export const useProductionOrderOptions = (
     selectionOptions,
     salesOrderSequenceOptions,
     originPOOptions,
+    defaultKg,
   };
 };

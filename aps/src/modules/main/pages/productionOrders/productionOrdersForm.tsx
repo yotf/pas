@@ -82,6 +82,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     thicknessOptions,
     salesOrderSequenceOptions,
     originPOOptions,
+    defaultKg,
   } = useProductionOrderOptions(entity);
 
   const form = useFormContext<ProductionOrderFormData>();
@@ -132,7 +133,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   useEffect(() => {
     setValue('unitOfMeasure1Id', materialMeasures?.unitOfMeasure1?.id || undefined);
     setValue('unitOfMeasure2Id', materialMeasures?.unitOfMeasure2?.id || undefined);
-    setValue('unitOfMeasure3Id', materialMeasures?.unitOfMeasure1?.id || undefined); //TODO use default value from configurator
+    setValue('unitOfMeasure3Id', defaultKg?.id || undefined); //TODO use default value from configurator
   }, [materialMeasures, setValue]);
 
   useEffect(() => {
