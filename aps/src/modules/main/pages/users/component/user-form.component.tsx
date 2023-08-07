@@ -29,7 +29,7 @@ const UserForm: FC = () => {
 
   const { options: positionOptions } = useUserPositions(userPosition);
 
-  const preventEmptySpace = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+  const preventEmptySpace = (event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>): void => {
     if (event.key.includes(' ')) event.preventDefault();
   };
 

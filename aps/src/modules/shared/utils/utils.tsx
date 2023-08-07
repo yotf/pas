@@ -206,6 +206,8 @@ export const availabilityStyling = (value: number): string => {
  * @param event Input event
  * Prevents dots from being inputed in number type inputs
  */
-export const onKeydownEvent = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+export const onKeydownEvent = (
+  event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+): void => {
   if (event.key.includes('.')) event.preventDefault();
 };
