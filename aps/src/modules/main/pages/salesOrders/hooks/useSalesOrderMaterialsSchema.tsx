@@ -38,7 +38,7 @@ export const useSalesOrderMaterialsSchema = (
           .max(999999, translate('max_digits', { value: '6' }))
           .transform((val) => val || undefined)
           .required(translate('required')),
-        quantity2: Yup.number(),
+        quantity2: Yup.number().transform((val) => val || undefined),
         requestedDelivery: Yup.string().transform((value) => value || undefined),
         salesOrderId: Yup.number(),
         tanneryDelivery: Yup.string().transform((val) => val || undefined),
