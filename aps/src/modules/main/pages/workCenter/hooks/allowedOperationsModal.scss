@@ -10,6 +10,10 @@
   .custom-input-container {
     padding: 10px 0;
   }
+  .operations {
+    max-height: 470px;
+    overflow: auto;
+  }
 
   .modal-item {
     display: flex;

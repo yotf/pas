@@ -150,36 +150,40 @@ export const useAllowedOperationsModal = ({
             register={register('search')}
             width={'full-width'}
           />
-          {dataByAllocation &&
-            searchOperations(dataByAllocation).map((operation: Operation) => {
-              return (
-                <div className='modal-item' key={operation.id}>
-                  <div className='modal-info'>
-                    <p>{operation.id}</p>
-                    <p>{operation.name}</p>
-                  </div>
-                  <p>
-                    {!usedOperationIds.has(operation.id) ? (
-                      <span
-                        className='add'
-                        role={'presentation'}
-                        onClick={(): void => addAllowedOperation(operation.id)}
-                      >
-                        {translate('add')}
-                      </span>
-                    ) : (
-                      <span
-                        className='remove'
-                        role={'presentation'}
-                        onClick={(): void => removeAllowedOperation(operation.id)}
-                      >
-                        {translate('remove')}
-                      </span>
-                    )}{' '}
-                  </p>
-                </div>
-              );
-            })}
+          <div className='operations'>
+            {dataByAllocation &&
+              searchOperations(dataByAllocation)
+                .sort((a, b) => a.operation_Id - b.operation_Id)
+                .map((operation: Operation) => {
+                  return (
+                    <div className='modal-item' key={operation.id}>
+                      <div className='modal-info'>
+                        <p>{operation.id}</p>
+                        <p>{operation.name}</p>
+                      </div>
+                      <p>
+                        {!usedOperationIds.has(operation.id) ? (
+                          <span
+                            className='add'
+                            role={'presentation'}
+                            onClick={(): void => addAllowedOperation(operation.id)}
+                          >
+                            {translate('add')}
+                          </span>
+                        ) : (
+                          <span
+                            className='remove'
+                            role={'presentation'}
+                            onClick={(): void => removeAllowedOperation(operation.id)}
+                          >
+                            {translate('remove')}
+                          </span>
+                        )}{' '}
+                      </p>
+                    </div>
+                  );
+                })}
+          </div>
         </div>
       </Modal>
     </FormProvider>
