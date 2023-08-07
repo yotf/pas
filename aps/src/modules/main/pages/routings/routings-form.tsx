@@ -30,7 +30,9 @@ const RoutingsForm: FC = () => {
   const nameof = nameofFactory<RoutingFormData>();
   const { customerOptions, materialOptions, unitOptions } = useRoutingOptions();
 
-  const preventDecimal = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+  const preventDecimal = (
+    event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+  ): void => {
     if (event.key === '.' || event.key.toLowerCase() === 'e') event.preventDefault();
   };
 

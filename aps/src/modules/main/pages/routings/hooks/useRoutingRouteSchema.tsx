@@ -45,17 +45,23 @@ export const useRoutingRouteSchema = (
         id: Yup.number().notRequired(),
         standardTime: Yup.number()
           .required(translate('required'))
-          .test(timeValidator)
+          // .test(timeValidator)
           .typeError(translate('required'))
-          .transform((val) => Number(val) || 0),
+          .transform((val) => Number(val) || 0)
+          .min(0.011, translate('min_value', { value: '0.011' }))
+          .max(2880, translate('max_value', { value: '2880' })),
         setupTime: Yup.number()
           .notRequired()
-          .test(timeValidator)
-          .transform((val) => Number(val) || 0),
+          //.test(timeValidator)
+          .transform((val) => Number(val) || 0)
+          .min(0.011, translate('min_value', { value: '0.011' }))
+          .max(2880, translate('max_value', { value: '2880' })),
         waitingTime: Yup.number()
           .notRequired()
-          .test(timeValidator)
-          .transform((val) => Number(val) || 0),
+          //.test(timeValidator)
+          .transform((val) => Number(val) || 0)
+          .min(0.011, translate('min_value', { value: '0.011' }))
+          .max(2880, translate('max_value', { value: '2880' })),
         leadTime: Yup.number()
           .required(translate('required'))
           .min(0, translate('min_value', { value: '0' }))

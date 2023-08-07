@@ -11,7 +11,12 @@ import { FormProvider } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import CustomSwitch from '../../../shared/components/input/switch/switch.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { limitNumberOfChars, mapDataToOptions, nameofFactory } from '../../../shared/utils/utils';
+import {
+  handleTimeFormatKeyDown,
+  limitNumberOfChars,
+  mapDataToOptions,
+  nameofFactory,
+} from '../../../shared/utils/utils';
 import {
   MaintainContext,
   MaintainContextValue,
@@ -99,18 +104,29 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
         />
         <CustomInput
           isRequired={true}
-          type='number'
+          type='text'
           label={translate('standardTime')}
           name={nameof('standardTime')}
+          onKeyDownEvent={handleTimeFormatKeyDown}
         />
-        <CustomInput type='number' label={translate('setupTime')} name={nameof('setupTime')} />
-        <CustomInput type='number' label={translate('waitingTime')} name={nameof('waitingTime')} />
+        <CustomInput
+          type='text'
+          label={translate('setupTime')}
+          name={nameof('setupTime')}
+          onKeyDownEvent={handleTimeFormatKeyDown}
+        />
+        <CustomInput
+          type='text'
+          label={translate('waitingTime')}
+          name={nameof('waitingTime')}
+          onKeyDownEvent={handleTimeFormatKeyDown}
+        />
         <CustomInput
           isRequired={true}
           type='number'
           label={translate('leadTime')}
           name={nameof('leadTime')}
-          onKeyDownEvent={(event: React.KeyboardEvent<HTMLInputElement>): void => {
+          onKeyDownEvent={(event): void => {
             if (event.key.includes('.')) event.preventDefault();
             limitNumberOfChars(event, 2);
           }}
