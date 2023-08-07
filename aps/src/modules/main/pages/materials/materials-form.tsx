@@ -5,7 +5,7 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import CustomSwitch from '@/modules/shared/components/input/switch/switch.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { dateFormatter, nameofFactory } from '@/modules/shared/utils/utils';
+import { dateFormatter, limitNumberOfChars, nameofFactory } from '@/modules/shared/utils/utils';
 import { FC, useContext } from 'react';
 import {
   MaintainContext,
@@ -74,6 +74,7 @@ const MaterialsForm: FC = () => {
           label={translate('interfaceCode')}
           name={nameof('interfaceCode')}
           width='full-width'
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 25)}
         />
       </div>
       <div className='start stretch'>
@@ -83,6 +84,7 @@ const MaterialsForm: FC = () => {
           isRequired={true}
           name={nameof('name')}
           width='full-width'
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
         />
       </div>
       <div className='stretch'>
