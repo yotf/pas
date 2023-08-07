@@ -107,7 +107,14 @@ const CustomInput: React.FC<Input> = ({
         );
 
       case 'textarea':
-        return <CustomTextArea {...props} {...textareaProps} name={fieldName} />;
+        return (
+          <CustomTextArea
+            {...props}
+            {...textareaProps}
+            name={fieldName}
+            onKeyDownEvent={onKeyDownEvent}
+          />
+        );
       case 'select':
         return (
           <CustomSelect

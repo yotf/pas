@@ -10,7 +10,7 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { calculateMinutes, nameofFactory } from '../../../shared/utils/utils';
+import { calculateMinutes, limitNumberOfChars, nameofFactory } from '../../../shared/utils/utils';
 import { WorkCapacityMapped } from '../settings/redux/workcenterCapacities/interfaces';
 import { useWorkCapacityForm } from './hooks/useWorkCapacityForm';
 import dayjs from 'dayjs';
@@ -95,6 +95,7 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
           placeholder={translate('break')}
           name={nameof('break')}
           isRequired={true}
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 2)}
         />
         <CustomInput
           type='number'
@@ -104,12 +105,14 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
           isRequired={true}
           icon={percent}
           iconRight
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 3)}
         />
         <CustomInput
           type='number'
           label={translate('capacity')}
           placeholder={translate('capacity')}
           name={nameof('capacity')}
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 4)}
         />
         <br />
         <CustomInput

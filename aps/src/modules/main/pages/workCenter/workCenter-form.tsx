@@ -107,6 +107,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           label={translate('workcenter_name')}
           register={register('name')}
           width='full-width'
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
         />
         <CustomInput
           error={errors.workCenterInterfaceId}
@@ -115,6 +116,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           label={translate('workCenterInterfaceId')}
           register={register('workCenterInterfaceId')}
           width='full-width'
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 15)}
         />
         <CustomSwitch label={translate('active')} name={register('isActive').name} />
         <CustomInput
@@ -172,6 +174,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           label={translate('remark')}
           register={register('remark')}
           width='full-width'
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
         />
       </div>
       {radioChangeModal}

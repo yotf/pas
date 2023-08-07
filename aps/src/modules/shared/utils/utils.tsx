@@ -18,14 +18,16 @@ export const dateFormatter = (date: string | undefined): string => {
 };
 
 export const limitNumberOfChars = (
-  event: React.KeyboardEvent<HTMLInputElement>,
+  event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
   maxLength: number,
 ): void => {
   const value = event.currentTarget.value;
   if (value.length >= maxLength && event.key != 'Backspace') event.preventDefault();
 };
 
-export const limitToNumericKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+export const limitToNumericKeyDown = (
+  e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+) => {
   const key = e.key;
 
   // Allow control keys
@@ -36,6 +38,48 @@ export const limitToNumericKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) 
   // Allow digits
   if (!/^\d+$/.test(key)) {
     e.preventDefault();
+  }
+};
+
+export const handleTimeFormatKeyDown = (
+  event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+) => {
+  const inputValue = (event.target as HTMLInputElement).value;
+  const key = event.key;
+
+  const cursorPosition = (event.target as HTMLInputElement).selectionStart;
+
+  // Allow control keys
+  if (event.ctrlKey || event.altKey || event.metaKey || key === 'Backspace') {
+    return;
+  }
+
+  debugger;
+
+  // Validate the key press
+  if (!/^\d$/.test(key) && key !== '.' && key !== 'Tab') {
+    event.preventDefault();
+  }
+
+  // Prevent entering more than one decimal point
+  if (key === '.' && inputValue.includes('.')) {
+    event.preventDefault();
+  }
+
+  const s = inputValue.split('.')[0];
+
+  // Limit to 4 leading and 4 trailing digits
+  if (inputValue.includes('.') && inputValue.split('.')[1]?.length >= 3) {
+    event.preventDefault();
+  }
+
+  if (
+    key !== '.' &&
+    inputValue.split('.')[0].length >= 4 &&
+    cursorPosition &&
+    cursorPosition <= 4
+  ) {
+    event.preventDefault();
   }
 };
 

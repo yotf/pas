@@ -18,11 +18,13 @@ export type TextAreaProps = {
   cols?: number;
   /** Number of rows of textarea */
   rows?: number;
+
+  onKeyDownEvent?: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 };
 /**
  * @returns A customizable textarea input
  */
-const CustomTextArea: React.FC<TextAreaProps> = ({ name, ...props }) => {
+const CustomTextArea: React.FC<TextAreaProps> = ({ name, onKeyDownEvent, ...props }) => {
   const { control } = useFormContext();
   return (
     <Controller
@@ -36,6 +38,7 @@ const CustomTextArea: React.FC<TextAreaProps> = ({ name, ...props }) => {
           {...props}
           className='textarea-input'
           autoSize={{ minRows: 6, maxRows: 18 }}
+          onKeyDown={onKeyDownEvent}
           onChange={({ target: { value } }): void => {
             onChange(name === 'password' ? value : trimInput(value));
           }}
