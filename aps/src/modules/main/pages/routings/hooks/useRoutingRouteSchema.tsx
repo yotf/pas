@@ -47,27 +47,30 @@ export const useRoutingRouteSchema = (
           .required(translate('required'))
           // .test(timeValidator)
           .typeError(translate('required'))
-          .transform((val) => Number(val) || 0)
+
           .min(0.011, translate('min_value', { value: '0.011' }))
-          .max(2880, translate('max_value', { value: '2880' })),
+          .max(2880, translate('max_value', { value: '2880' }))
+          .transform((value) => (isNaN(value) ? undefined : value)),
         setupTime: Yup.number()
           .notRequired()
           //.test(timeValidator)
-          .transform((val) => Number(val) || 0)
+
           .min(0.011, translate('min_value', { value: '0.011' }))
-          .max(2880, translate('max_value', { value: '2880' })),
+          .max(2880, translate('max_value', { value: '2880' }))
+          .transform((value) => (isNaN(value) ? undefined : value)),
         waitingTime: Yup.number()
           .notRequired()
           //.test(timeValidator)
-          .transform((val) => Number(val) || 0)
+
           .min(0.011, translate('min_value', { value: '0.011' }))
-          .max(2880, translate('max_value', { value: '2880' })),
+          .max(2880, translate('max_value', { value: '2880' }))
+          .transform((value) => (isNaN(value) ? undefined : value)),
         leadTime: Yup.number()
           .required(translate('required'))
           .min(0, translate('min_value', { value: '0' }))
           .max(99, translate('max_digits', { value: '2' }))
           .typeError(translate('required'))
-          .transform((val) => Number(val) || 0),
+          .transform((value) => (isNaN(value) ? undefined : value)),
         planning: Yup.boolean().required(),
         remark: Yup.string()
           .notRequired()
