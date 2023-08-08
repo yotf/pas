@@ -7,6 +7,7 @@
     "start": "vite",
     "start:test": "env-cmd -f .env.test npm run-script start",
     "start:production": "env-cmd -f .env.production npm run-script start",
+    "start:viposa": "env-cmd -f .env.viposa npm run-script start",
     "build": "tsc && vite build",
     "build:test": "tsc && NODE_ENV=production vite build --mode test",
     "build:production": "tsc && vite build --mode production",
