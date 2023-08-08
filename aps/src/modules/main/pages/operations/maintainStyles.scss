@@ -18,7 +18,7 @@
   .maintain-main {
     display: flex;
     flex-wrap: wrap;
-   // margin-top: 2em;
+    // margin-top: 2em;
 
     &__inner {
       display: flex;
@@ -47,10 +47,10 @@
           display: flex;
           flex-direction: column;
           gap: 1px;
-          width:35px;
+          width: 35px;
           align-items: center;
           justify-content: flex-end;
-          align-self:end;
+          align-self: end;
           p {
             font-size: 28px;
             line-height: 24px;
@@ -69,15 +69,15 @@
               line-height: 24px;
             }
           }
-      // & p:first-child {
-      //   font-size: 12px;
-      //   line-height: 18px;
-      //   font-family: $manrope, sans-serif;
-      //   font-weight: 500;
-      //   letter-spacing: 0.02rem;
-      //   color: $navy-100;
-      //   white-space: nowrap;
-      // }
+          // & p:first-child {
+          //   font-size: 12px;
+          //   line-height: 18px;
+          //   font-family: $manrope, sans-serif;
+          //   font-weight: 500;
+          //   letter-spacing: 0.02rem;
+          //   color: $navy-100;
+          //   white-space: nowrap;
+          // }
         }
 
         & .custom-switch {

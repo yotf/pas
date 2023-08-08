@@ -3,6 +3,13 @@
 
 .table-wrapper {
   .ant-table {
+    // .ant-table-column-title {
+    //   color: black;
+    //   font-weight: 800;
+    // }
+    // .ant-table-column-sorter {
+    //   color: black;
+    // }
     &-thead > tr > th {
       white-space: nowrap;
       @include table-cell($orange-color, $white-color);
