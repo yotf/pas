@@ -1174,6 +1174,7 @@
     "adjust_calendar": "Adjust Production Calendar",
     "orderNumber": "Order Number",
     "customerName": "Customer",
+    "select_all_work_centers": "Select All",
     "salesOrderNumber": "Sales Order Number",
     "materialName": "Material",
     "articleName": "Article",

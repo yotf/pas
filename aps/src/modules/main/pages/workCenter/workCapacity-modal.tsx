@@ -54,7 +54,9 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
   }, [start]);
 
   useEffect(() => {
-    if (dayjs(start, 'HH:mm').isAfter(dayjs(end, 'HH:mm'))) resetField('end', { defaultValue: '' });
+    if (dayjs(start, 'HH:mm').isAfter(dayjs(end, 'HH:mm'))) {
+      resetField('end', { defaultValue: '' });
+    }
   }, [start, end]);
 
   const {
@@ -82,7 +84,6 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
         />
         <CustomInput
           type='time'
-          key={new Date().getTime()}
           label={translate('end')}
           placeholder={zeroHourPlaceholder}
           name={nameof('end')}

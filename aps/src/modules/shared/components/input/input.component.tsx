@@ -181,6 +181,7 @@ const CustomInput: React.FC<Input> = ({
     autoWidth,
     maxLength,
     onKeyDownEvent,
+    selectedStartTime,
   ]);
   return (
     <div className={`custom-input ${width}`}>
