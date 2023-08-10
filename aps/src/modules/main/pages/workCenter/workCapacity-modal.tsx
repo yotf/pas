@@ -32,7 +32,7 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
   const [selectedStartTime, setSelectedStartTime] = useState<string | undefined>(undefined);
   const nameof = nameofFactory<WorkCapacityMapped>();
 
-  const { setValue, watch, resetField } = form;
+  const { trigger, setValue, watch, resetField } = form;
 
   const { start, end, break: breakTime, efficiency, capacity, minutes } = watch();
 
@@ -58,6 +58,10 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
       resetField('end', { defaultValue: '' });
     }
   }, [start, end]);
+
+  useEffect(() => {
+    trigger('break');
+  }, [minutes]);
 
   const {
     formState: { isValid, isDirty },

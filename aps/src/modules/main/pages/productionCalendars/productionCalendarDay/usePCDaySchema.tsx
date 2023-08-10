@@ -40,7 +40,15 @@ export const usePCDaySchema = (
         end: isBeforeToday ? notRequiredString : requiredString,
         break: isBeforeToday
           ? notRequiredNumber
-          : requiredNumber.max(9999, translate('max_length', { name: '4' })),
+          : requiredNumber.max(60, translate('max_value', { value: '60' })).test({
+              name: 'breakTest',
+              message: translate('break_exceed'),
+              test: (value, context) => {
+                const minutes = context.parent.minutes;
+                if (minutes < 0) return false;
+                return true;
+              },
+            }),
         efficiency: isBeforeToday
           ? notRequiredNumber
           : requiredNumber
@@ -48,6 +56,7 @@ export const usePCDaySchema = (
               .max(100, translate('max_value', { value: '100' })),
         minutes: Yup.number()
           .notRequired()
+          .min(0, translate(''))
           .transform((value) => (isNaN(value) ? undefined : value)),
         availableMinutes: Yup.number()
           .notRequired()
