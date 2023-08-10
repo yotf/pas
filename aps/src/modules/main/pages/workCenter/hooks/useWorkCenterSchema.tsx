@@ -52,7 +52,6 @@ export const useWorkCenterSchema = (): OptionalObjectSchema<
             message: translate('required'),
             test: (value, context) => {
               const { allocationBased } = context.parent;
-              debugger;
               if (allocationBased === AllocationBasedEnum.formula && !value) return false;
               return true;
             },

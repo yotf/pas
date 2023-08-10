@@ -94,21 +94,11 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
         {!!form.getValues('workCenter_Id') && (
           <div className='workcenter-id'>
             <div className='id-container'>
-              <p>{translate('id')}</p>
               <p>{form.getValues('workCenter_Id') || 'ㅤ'}</p>
             </div>
           </div>
         )}
-        <CustomInput
-          error={errors.name}
-          placeholder={translate('workcenter_name')}
-          type='text'
-          isRequired={true}
-          label={translate('workcenter_name')}
-          register={register('name')}
-          width='full-width'
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
-        />
+        <CustomSwitch label={translate('active')} name={register('isActive').name} />
         <CustomInput
           error={errors.workCenterInterfaceId}
           placeholder={translate('workCenterInterfaceId')}
@@ -118,44 +108,17 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           width='full-width'
           onKeyDownEvent={(e) => limitNumberOfChars(e, 15)}
         />
-        <CustomSwitch label={translate('active')} name={register('isActive').name} />
-        <CustomInput
-          error={errors.departmentId}
-          type='select'
-          placeholder={translate('departmentName')}
-          label={translate('departmentName')}
-          register={register('departmentId')}
-          options={convertForDropdown(entity?.departments)}
-          width='full-width'
-          isRequired={true}
-        />
-        <div>
+        <div className='wc-name'>
           <CustomInput
-            error={errors.unitOfMeasureId}
-            type='select'
-            placeholder={translate('unitOfMeasureName')}
-            label={translate('unitOfMeasureName')}
-            register={register('unitOfMeasureId')}
-            options={UoMs}
+            error={errors.name}
+            placeholder={translate('workcenter_name')}
+            type='text'
+            isRequired={true}
+            label={translate('workcenter_name')}
+            register={register('name')}
             width='full-width'
-            disabled={UoMdisabled}
-            readOnly={UoMdisabled}
+            onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
           />
-
-          {UoMdisabled ? (
-            <CustomInput
-              type='text'
-              placeholder={translate('weightCapacity')}
-              label={translate('weightCapacity')}
-              register={register('weightCapacity')}
-              width='full-width'
-              isRequired={UoMdisabled}
-              onKeyDownEvent={(e) => {
-                limitToNumericKeyDown(e);
-                limitNumberOfChars(e, 5);
-              }}
-            />
-          ) : null}
         </div>
         <div className='grid-start'>
           <h3>{translate('allocationBasedName')}</h3>
@@ -168,6 +131,46 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
             customChangeEvent={openRadioChangeModal}
           />
         </div>
+
+        <CustomInput
+          error={errors.departmentId}
+          type='select'
+          placeholder={translate('departmentName')}
+          label={translate('departmentName')}
+          register={register('departmentId')}
+          options={convertForDropdown(entity?.departments)}
+          width='full-width'
+          isRequired={true}
+        />
+        <div className={UoMdisabled ? 'formula-uom' : 'q1-uom'}>
+          <CustomInput
+            error={errors.unitOfMeasureId}
+            type='select'
+            placeholder={translate('unitOfMeasureName')}
+            label={translate('unitOfMeasureName')}
+            register={register('unitOfMeasureId')}
+            options={UoMs}
+            width='full-width'
+            disabled={UoMdisabled}
+            readOnly={UoMdisabled}
+          />
+        </div>
+
+        {UoMdisabled ? (
+          <CustomInput
+            type='text'
+            placeholder={translate('weightCapacity')}
+            label={translate('weightCapacity')}
+            register={register('weightCapacity')}
+            width='full-width'
+            isRequired={UoMdisabled}
+            onKeyDownEvent={(e) => {
+              limitToNumericKeyDown(e);
+              limitNumberOfChars(e, 5);
+            }}
+          />
+        ) : null}
+
         <CustomInput
           type='textarea'
           placeholder=''
