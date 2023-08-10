@@ -146,8 +146,10 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           <CustomInput
             error={errors.unitOfMeasureId}
             type='select'
-            placeholder={translate('unitOfMeasureName')}
-            label={translate('unitOfMeasureName')}
+            placeholder={
+              UoMdisabled ? translate('unitOfMeasureName') : translate('unitOfQuantityName')
+            }
+            label={UoMdisabled ? translate('unitOfMeasureName') : translate('unitOfQuantityName')}
             register={register('unitOfMeasureId')}
             options={UoMs}
             width='full-width'
