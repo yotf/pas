@@ -644,7 +644,7 @@
     "remark": "Remark",
     "allocation_based": "Allocation Based",
     "unit_of_measure_placeholder": "Unit of Measure",
-    "unit_of_measure_label": "Unit of Measure",
+    "unit_of_measure_label": "Unit of Quantity 1",
     "interface_code": "Interface Code",
     "modal": {
       "confirm": "Confirm",
@@ -776,7 +776,7 @@
     "workcenter_name": "Work center Name",
     "interfaceCode": "Interface Code",
     "departmentName": "Department",
-    "unitOfMeasureName": "Unit of Measure",
+    "unitOfMeasureName": "Unit of Quantity 1",
     "allocationBasedName": "Allocation Based",
     "workCenter_Id": "Work Center ID",
     "weightCapacity": "Weight Capacity",
