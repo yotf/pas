@@ -9,7 +9,7 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { calculateMinutes, nameofFactory } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { ProductionCalendarDayMapped } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
 import { usePCDayForm } from './usePCDayForm';
@@ -29,10 +29,11 @@ export type Props = {
 const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose }) => {
   const { translate } = useTranslate({ ns: 'workCenters', keyPrefix: 'maintain' });
   const { form, onSubmit } = usePCDayForm({ productionCalendarDay, onClose });
+  const [selectedStartTime, setSelectedStartTime] = useState<string | undefined>(undefined);
   const nameof = nameofFactory<ProductionCalendarDayMapped>();
-  const { watch, setValue } = form;
+  const { watch, setValue, resetField, trigger } = form;
 
-  const { start, end, break: breakTime, efficiency } = watch();
+  const { start, end, break: breakTime, efficiency, minutes } = watch();
 
   useProductionCalendarDayAutofill(form, productionCalendarDay!);
 
@@ -53,6 +54,21 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
   const {
     formState: { isValid, isDirty },
   } = form;
+
+  useEffect(() => {
+    const t = start === zeroHourPlaceholder || start === '' ? undefined : start;
+    setSelectedStartTime(t);
+  }, [start]);
+
+  useEffect(() => {
+    if (dayjs(start, 'HH:mm').isAfter(dayjs(end, 'HH:mm'))) {
+      resetField('end', { defaultValue: '' });
+    }
+  }, [start, end]);
+
+  useEffect(() => {
+    trigger('break');
+  }, [minutes]);
 
   return (
     <FormProvider {...form}>
@@ -83,6 +99,7 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
           name={nameof('end')}
           isRequired={true}
           readOnly={readOnlyFields}
+          selectedStartTime={selectedStartTime ? dayjs(selectedStartTime, 'HH:mm') : undefined}
         />
         <CustomInput
           type='number'

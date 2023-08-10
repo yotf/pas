@@ -2,7 +2,7 @@
  * @module TimePicker
  */
 
-import React, { ReactElement, ReactNode, useState } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import dayjs, { Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -40,9 +40,15 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
   const { translate } = useTranslate({
     ns: 'timePicker',
   });
-  const { control } = useFormContext();
+  const { control, getValues } = useFormContext();
+
+  const fieldValue = getValues(name);
 
   const [open, setOpen] = useState(false);
+  const [timeValue, setTimeValue] = useState<Dayjs>();
+  useEffect(() => {
+    setTimeValue(fieldValue);
+  }, [fieldValue]);
 
   const getDisabledTimes = (current: Dayjs): DisabledTimes => {
     if (!selectedStartTime) {
@@ -50,12 +56,19 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
     }
 
     const selectedStartHour = selectedStartTime.hour();
+    const selectedStartMinute = selectedStartTime.minute();
 
-    const disabledHours = Array.from({ length: selectedStartHour + 1 }, (_, index) => index);
-   // const disabledMinutes = Array.from({ length: selectedStartMinute }, (_, index) => index);
+    const disabledHours = Array.from({ length: selectedStartHour }, (_, index) => index);
+    const disabledMinutes = Array.from({ length: selectedStartMinute }, (_, index) => index);
 
     return {
       disabledHours: () => disabledHours,
+      disabledMinutes: (hour: number) => {
+        if (hour === disabledHours[disabledHours.length - 1] + 1) {
+          return disabledMinutes;
+        }
+        return [];
+      },
     };
   };
   return (
@@ -76,13 +89,23 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
             disabled={readOnly}
             disabledTime={getDisabledTimes}
             open={open}
-            onOpenChange={(openDropdown: boolean): void => setOpen(openDropdown)}
-            value={field.value ? dayjs(field.value, format) : undefined}
+            onOpenChange={(openDropdown: boolean): void => {
+              if (!openDropdown && timeValue) {
+                field.onChange(
+                  `${formatTime(dayjs(timeValue).get('hour'))}:${formatTime(
+                    dayjs(timeValue).get('minute'),
+                  )}`,
+                );
+              }
+              setOpen(openDropdown);
+            }}
+            value={timeValue && dayjs(timeValue, format)}
             format={format}
             onSelect={(value): void => {
-              field.onChange(
-                `${formatTime(dayjs(value).get('hour'))}:${formatTime(dayjs(value).get('minute'))}`,
-              );
+              setTimeValue(value);
+              // field.onChange(
+              //   `${formatTime(dayjs(value).get('hour'))}:${formatTime(dayjs(value).get('minute'))}`,
+              // );
             }}
             onChange={(value): void => {
               field.onChange(
@@ -98,7 +121,14 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
                 size='small'
                 type='primary'
                 className='confirm-time'
-                onClick={(): void => setOpen(false)}
+                onClick={(): void => {
+                  field.onChange(
+                    `${formatTime(dayjs(timeValue).get('hour'))}:${formatTime(
+                      dayjs(timeValue).get('minute'),
+                    )}`,
+                  );
+                  setOpen(false);
+                }}
               >
                 {translate('ok')}
               </Button>

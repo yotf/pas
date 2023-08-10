@@ -805,7 +805,8 @@
       "edit_success": "Work Center has been successfully edited",
       "create_fail": "Work Center with that name already exists",
       "max_value": "Maximum value is {{value}}",
-      "min_value": "Minimum value is {{value}}"
+      "min_value": "Minimum value is {{value}}",
+      "break_exceed": "Break exceeds the operating time"
     },
     "notification": {
       "delete_success": "Work Center has been successfully deleted",
@@ -1004,7 +1005,8 @@
       "min_length": "At least one Work Center is required",
       "edit_success": "Production Calendar has been successfully edited",
       "create_success": "Production Calendar has been successfully created",
-      "create_fail": "One or multiple work centers have a generated production calendar"
+      "create_fail": "One or multiple work centers have a generated production calendar",
+      "break_exceed": "Break exceeds the operating time"
     },
     "notification": {
       "delete_success": "Production Calendar has been successfully deleted",
