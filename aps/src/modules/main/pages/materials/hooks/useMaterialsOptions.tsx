@@ -15,6 +15,7 @@ import { getAllSelections } from '../../settings/redux/selections/thunks';
 import { getAllSizeRanges } from '../../settings/redux/sizeRanges/thunks';
 import { getAllThickness } from '../../settings/redux/thickness/thunks';
 import { getAllUnitsOfMeasure } from '../../settings/redux/unitOfMeasure/thunks';
+import { getConfiguration } from '../../settings/redux/configuration/thunks';
 
 export type UseRoutingSetupReturnType = {
   unit1Options: DefaultOptionType[];
@@ -44,6 +45,7 @@ export const useMaterialsOptions = (): UseRoutingSetupReturnType => {
     dispatch(getAllSelections());
     dispatch(getAllRoutings());
     dispatch(getAllFeatures());
+    dispatch(getConfiguration());
   }, [dispatch]);
 
   const {
