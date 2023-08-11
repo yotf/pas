@@ -45,9 +45,9 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
   const fieldValue = getValues(name);
 
   const [open, setOpen] = useState(false);
-  const [timeValue, setTimeValue] = useState<Dayjs>();
+  const [timeValue, setTimeValue] = useState<Dayjs | null>();
   useEffect(() => {
-    setTimeValue(fieldValue);
+    dayjs(fieldValue, 'HH:mm', true).isValid() ? setTimeValue(fieldValue) : setTimeValue(undefined);
   }, [fieldValue]);
 
   const getDisabledTimes = (current: Dayjs): DisabledTimes => {
@@ -90,11 +90,14 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
             disabledTime={getDisabledTimes}
             open={open}
             onOpenChange={(openDropdown: boolean): void => {
+              debugger;
               if (!openDropdown && timeValue) {
                 field.onChange(
-                  `${formatTime(dayjs(timeValue).get('hour'))}:${formatTime(
-                    dayjs(timeValue).get('minute'),
-                  )}`,
+                  !timeValue
+                    ? undefined
+                    : `${formatTime(dayjs(timeValue).get('hour'))}:${formatTime(
+                        dayjs(timeValue).get('minute'),
+                      )}`,
                 );
               }
               setOpen(openDropdown);
@@ -108,13 +111,14 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
               // );
             }}
             onChange={(value): void => {
-              field.onChange(
-                value == null
-                  ? undefined
-                  : `${formatTime(dayjs(value).get('hour'))}:${formatTime(
-                      dayjs(value).get('minute'),
-                    )}`,
-              );
+              setTimeValue(value);
+              // field.onChange(
+              //   !value
+              //     ? undefined
+              //     : `${formatTime(dayjs(value).get('hour'))}:${formatTime(
+              //         dayjs(value).get('minute'),
+              //       )}`,
+              // );
             }}
             renderExtraFooter={(): ReactNode => (
               <Button
@@ -122,10 +126,13 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
                 type='primary'
                 className='confirm-time'
                 onClick={(): void => {
+                  debugger;
                   field.onChange(
-                    `${formatTime(dayjs(timeValue).get('hour'))}:${formatTime(
-                      dayjs(timeValue).get('minute'),
-                    )}`,
+                    !timeValue
+                      ? undefined
+                      : `${formatTime(dayjs(timeValue).get('hour'))}:${formatTime(
+                          dayjs(timeValue).get('minute'),
+                        )}`,
                   );
                   setOpen(false);
                 }}
