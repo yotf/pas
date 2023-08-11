@@ -339,6 +339,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('salesOrderSequence')}
               options={salesOrderSequenceOptions}
               isAutocomplete={true}
+              isRequired={true}
               readOnly={isPlanned}
               disabled={isPlanned}
             />
@@ -387,7 +388,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               label={translate('quantity2')}
               name={nameof('quantity2')}
               readOnly
-              disabled={true}
+              //  disabled={true}
             />
 
             <div className='uom-label'>

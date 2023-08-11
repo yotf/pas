@@ -51,7 +51,7 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         customerId: numberRequired,
         customerOrderNumber: stringNotRequired,
         salesOrderId: numberRequired,
-        salesOrderSequence: Yup.string().required(),
+        salesOrderSequence: Yup.string().required(translate('required')),
         productionOrderNumber: numberNotRequired,
         materialId: numberRequired,
         routingId: numberNotRequired,
@@ -81,11 +81,9 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         selectionId: numberNotRequired,
         statusOfPlanningBoolean: Yup.boolean().notRequired(),
         routingAddAndUpdateOperations: Yup.array(Yup.object()) as unknown as Yup.AnyObjectSchema,
-        pO_RoutingOperationAddAndUpdateDtos: Yup.array(
-          Yup.object(),
-        ) as unknown as Yup.AnyObjectSchema,
-        // .required()
-        // .min(1) as unknown as Yup.AnyObjectSchema
+        pO_RoutingOperationAddAndUpdateDtos: Yup.array(Yup.object())
+          .required()
+          .min(1) as unknown as Yup.AnyObjectSchema,
       }),
     [numberNotRequired, numberRequired, stringNotRequired, translate],
   );
