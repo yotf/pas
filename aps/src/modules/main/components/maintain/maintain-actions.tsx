@@ -78,7 +78,7 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
           customClass='action-button'
           color='red'
           type='button'
-          isDisabled={entity?.isActive || !shouldDelete || isPlannedProductionOrder}
+          isDisabled={entity?.isActive || !shouldDelete || isPlannedProductionOrder || copying}
           onClick={onDeleteClick}
         >
           <div className='button-children'>
