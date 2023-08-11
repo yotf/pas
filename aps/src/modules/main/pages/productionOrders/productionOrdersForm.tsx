@@ -87,7 +87,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   const form = useFormContext<ProductionOrderFormData>();
 
-  const { watch, setValue, getValues } = form;
+  const { watch, setValue, getValues, trigger } = form;
 
   const {
     quantity1,
@@ -156,6 +156,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   useEffect(() => {
     setValue('routingId', materialMeasures?.routingId ?? undefined);
+    trigger('routingId');
   }, [JSON.stringify(materialMeasures), setValue]);
 
   useEffect(() => {
