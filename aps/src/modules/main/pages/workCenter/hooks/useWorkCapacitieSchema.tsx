@@ -51,7 +51,7 @@ export const useWorkCapacitiesSchema = (): OptionalObjectSchema<
         //     return endTime.isAfter(startTime);
         //   },
         //   }),
-        break: requiredNumber.max(60, translate('max_value', { value: '60' })).test({
+        break: requiredNumber.max(1440, translate('max_value', { value: '1440' })).test({
           name: 'breakTest',
           message: translate('break_exceed'),
           test: (value, context) => {
