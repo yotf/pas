@@ -40,7 +40,7 @@ export const usePCDaySchema = (
         end: isBeforeToday ? notRequiredString : requiredString,
         break: isBeforeToday
           ? notRequiredNumber
-          : requiredNumber.max(1440, translate('max_value', { value: '60' })).test({
+          : requiredNumber.test({
               name: 'breakTest',
               message: translate('break_exceed'),
               test: (value, context) => {
