@@ -10,8 +10,17 @@
   //  gap: 24px;
   padding-bottom: 15px;
 
+  .holidays-generate {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .table-wrapper {
     margin-top: 0;
+    .ant-table-cell.ant-table-cell-scrollbar {
+      background-color: #dfa523;
+      box-shadow: none;
+    }
   }
 }
 
@@ -19,6 +28,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  justify-content: space-between;
+  flex-grow: 1;
 
   > div {
     max-width: 30%;
@@ -36,8 +47,20 @@
     flex-direction: row;
     justify-content: space-between;
 
+    .heading {
+      align-self: end;
+      margin-left: 8px;
+      padding-bottom: 10px;
+      border-bottom: 1px lightgray solid;
+    }
+
     h3 {
       margin-bottom: 0;
+      display: inline;
+    }
+    p {
+      display: inline;
+      padding-left: 1em;
     }
 
     .button {
@@ -48,7 +71,8 @@
   .holidays-list {
     display: flex;
     flex-direction: column;
-    @include box-shadow-bottomright;
+    margin-bottom: 1em;
+    // @include box-shadow-bottomright;
 
     .holiday {
       display: flex;
@@ -84,6 +108,7 @@
     overflow-y: scroll;
   }
 }
+
 .button:last-child {
   align-self: flex-start;
 

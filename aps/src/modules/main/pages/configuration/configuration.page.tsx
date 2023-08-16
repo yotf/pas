@@ -34,7 +34,6 @@ const Configuration: FC = () => {
     const q1values = sliceState.quantities1.map((uom) => uom.unitOfMeasureId);
     const q2values = sliceState.quantities2.map((uom) => uom.unitOfMeasureId);
     const uomInKg = sliceState.defaultKg?.unitOfMeasureId;
-    debugger;
     setValue('quantities1', q1values);
     setValue('quantities2', q2values);
     setValue('defaultKg', uomInKg);
@@ -69,7 +68,6 @@ const Configuration: FC = () => {
     );
   };
 
-  // const onSubmit = useMemo(() => null, []); //TODO
 
   useConfigurationValidation({ form, ns });
 

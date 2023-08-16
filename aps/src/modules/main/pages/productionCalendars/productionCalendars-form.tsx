@@ -23,6 +23,7 @@ import { useHolidaysList } from './hooks/useHolidaysList';
 import { useProductionCalendarValidationChecks } from './hooks/useProductionCalendarValidationChecks';
 import { useWorkCapacitiesTable } from './hooks/useWorkCapacitiesTable';
 import './productionCalendar-form.scss';
+import { ScheduleOutlined } from '@ant-design/icons';
 /**
  *
  * @returns Form used in {@link ProductionCalendarsMaintain } page. When a work center is selected, renders a {@link useWorkCapacitiesTable | Work Capacities table} with selected work centers capacities.
@@ -67,12 +68,20 @@ const ProductionCalendarForm: FC = (): JSX.Element => {
     >
       <ProductionCalendarInputs checking={false} ns={ns} />
       {table}
-      {holidaysList}
-      <CustomButton type='button' color='blue' onClick={onSubmit} isDisabled={!isValid || !isDirty}>
-        <div className='button-children'>
-          <span>{translate('generate_calendar')}</span>
-        </div>
-      </CustomButton>
+      <div className='holidays-generate'>
+        {holidaysList}
+        <CustomButton
+          type='button'
+          color='blue'
+          onClick={onSubmit}
+          isDisabled={!isValid || !isDirty}
+        >
+          <div className='button-children'>
+            <ScheduleOutlined style={{ fontSize: '20px' }} />
+            <span>{translate('generate_calendar')}</span>
+          </div>
+        </CustomButton>
+      </div>
     </form>
   );
 };

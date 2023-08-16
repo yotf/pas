@@ -37,7 +37,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
   const { initialDate, finalDate } = form.watch();
 
   return (
-    <div className='top-section'>
+    <div className={'top-section' + (!checking ? ' new' : '')}>
       <div className='page-inputs'>
         <CustomInput
           isAutocomplete={true}

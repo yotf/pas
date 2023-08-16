@@ -22,7 +22,8 @@ export const limitNumberOfChars = (
   maxLength: number,
 ): void => {
   const value = event.currentTarget.value;
-  if (value.length >= maxLength && event.key != 'Backspace') event.preventDefault();
+  if (value.length >= maxLength && event.key != 'Backspace' && !isTextSelected(event))
+    event.preventDefault();
 };
 
 export const limitToNumericKeyDown = (
@@ -41,11 +42,23 @@ export const limitToNumericKeyDown = (
   }
 };
 
+export const isTextSelected = (
+  event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+) => {
+  const selectionStart = (event.target as HTMLInputElement).selectionStart;
+  const selectionEnd = (event.target as HTMLInputElement).selectionEnd;
+  if ((!selectionStart && selectionStart !== 0) || (!selectionEnd && selectionEnd !== 0))
+    return false;
+
+  return selectionEnd > selectionStart;
+};
+
 export const handleTimeFormatKeyDown = (
   event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
 ) => {
   const inputValue = (event.target as HTMLInputElement).value;
   const key = event.key;
+  if (isTextSelected(event)) return;
 
   const cursorPosition = (event.target as HTMLInputElement).selectionStart;
 
@@ -53,8 +66,6 @@ export const handleTimeFormatKeyDown = (
   if (event.ctrlKey || event.altKey || event.metaKey || key === 'Backspace') {
     return;
   }
-
-  debugger;
 
   // Validate the key press
   if (!/^\d$/.test(key) && key !== '.' && key !== 'Tab') {
@@ -76,7 +87,7 @@ export const handleTimeFormatKeyDown = (
   if (
     key !== '.' &&
     inputValue.split('.')[0].length >= 4 &&
-    cursorPosition &&
+    (cursorPosition || cursorPosition === 0) &&
     cursorPosition <= 4
   ) {
     event.preventDefault();
