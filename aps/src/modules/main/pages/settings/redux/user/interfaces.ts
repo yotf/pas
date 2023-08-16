@@ -31,6 +31,7 @@ export interface UserFormData {
   isActive: boolean;
   roleId?: string;
   positionId?: number;
+  language?: string;
 }
 
 export interface UserMapped {
@@ -41,6 +42,7 @@ export interface UserMapped {
   positionName?: string;
   roleName?: string;
   isActive: boolean;
+  language?: string;
 }
 
 export interface UsersResponse extends BaseResponse {

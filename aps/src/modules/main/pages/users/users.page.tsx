@@ -45,6 +45,7 @@ const Users: FC = () => {
           positionId: undefined,
           roleId: undefined,
           userName: '',
+          language: '',
         },
       );
       setIsModalOpen(true);

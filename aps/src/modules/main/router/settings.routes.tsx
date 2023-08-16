@@ -33,6 +33,7 @@ import {
   HOLIDAYS,
   ARTICLES,
   CONFIGURATION,
+  COLUMN_CONFIG,
 } from '../pages/settings/consts/pageRoutes';
 import SizeRanges from '../pages/sizeRanges/sizeRanges.page';
 import Thickness from '../pages/thickness/thickness.page';
@@ -40,6 +41,7 @@ import UnitsOfMeasure from '../pages/unitOfMeasure/unitOfMeasure.page';
 import Users from '../pages/users/users.page';
 import { Route } from './route.type';
 import Configuration from '../pages/configuration/configuration.page';
+import ColumnsConfig from '../pages/columns/columns.page';
 
 export const sharedRoutes: Route[] = [
   {
@@ -54,6 +56,7 @@ export const sharedRoutes: Route[] = [
     name: UNITS_OF_MEASURE,
   },
   { element: <Configuration />, path: CONFIGURATION, name: CONFIGURATION },
+  { element: <ColumnsConfig />, path: COLUMN_CONFIG, name: COLUMN_CONFIG },
   { element: <Departments />, path: DEPARTMENT, name: DEPARTMENT },
   { element: <Parameters />, path: PARAMETERS, name: PARAMETERS },
   { element: <Features />, path: FEATURES, name: FEATURES },

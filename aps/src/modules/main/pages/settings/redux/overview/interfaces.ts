@@ -25,6 +25,7 @@ export interface OverviewFormData {
   workCenters: number[];
   orderType: number;
   productionOrder: number;
+  pendingDays:number;
 }
 /**
  * One table row shown in one overview work center table

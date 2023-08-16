@@ -76,10 +76,10 @@ import { ConfigurationResponse } from '@/modules/main/pages/settings/redux/confi
 import { linkedProductionOrderReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersLinkedOrders/slice';
 import { LinkedPOInitialStateResponse } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersLinkedOrders/states';
 import { salesOrdersWithMaterialsReducer } from '@/modules/main/pages/settings/redux/salesOrders/salesOrdersWithMaterials/slice';
-import {
-  ProductionOrderNumberInitialStateResponse,
-} from '@/modules/main/pages/settings/redux/productionOrders/productionOrderOrderNumbers/states';
+import { ProductionOrderNumberInitialStateResponse } from '@/modules/main/pages/settings/redux/productionOrders/productionOrderOrderNumbers/states';
 import { productionOrderNumbersReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrderOrderNumbers/slice';
+import { columnConfigReducer } from '@/modules/main/pages/settings/redux/columns/slice';
+import { ColumnConfigResponse } from '@/modules/main/pages/settings/redux/columns/states';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -126,6 +126,7 @@ export const rootReducer = combineReducers<StoreType>({
   overview: overviewReducer,
   orderReplacement: orderReplacementReducer,
   configuration: configurationReducer,
+  columnConfig: columnConfigReducer,
 });
 /**Type used for settings page slices */
 export type SettingsType = {
@@ -171,6 +172,7 @@ export type StoreType = CombinedState<
     overview: OverviewResponse;
     orderReplacement: OrderReplacementResponse;
     configuration: ConfigurationResponse;
+    columnConfig: ColumnConfigResponse;
     productionOrderNumbers: ProductionOrderNumberInitialStateResponse;
   } & SettingsType
 >;

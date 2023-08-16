@@ -48,6 +48,7 @@ export const useHolidaysList = (ns: string): JSX.Element => {
   const { workCenterIds, initialDate, finalDate } = watch();
 
   const handlePCFilterChange = useCallback((): void => {
+    if (!workCenterIds || workCenterIds.length === 0) return;
     const queries: ProductionCalendarWorkCapacitiesQueries = {
       id: workCenterIds && workCenterIds[0],
       initialDate: initialDate,

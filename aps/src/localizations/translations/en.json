@@ -133,7 +133,10 @@
       "role": "Role",
       "position": "Position",
       "phone": "Phone",
-      "active": "Active"
+      "active": "Active",
+      "language": "Language",
+      "en": "English",
+      "de": "German"
     },
     "notification": {
       "create": "User has been successfully created",

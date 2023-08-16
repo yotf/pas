@@ -81,8 +81,9 @@ export const useOverviewSchema = (): OptionalObjectSchema<
 
         workCenters: Yup.array(Yup.number())
           .required(translate('required'))
-          .min(1, translate('min_length'))
-          .max(10, translate('max_length')) as unknown as Yup.AnyObjectSchema,
+          .min(1, translate('min_length')) as unknown as Yup.AnyObjectSchema,
+        //    .max(10, translate('max_length')) as unknown as Yup.AnyObjectSchema,
+        pendingDays: numberNotRequired,
         orderType: numberNotRequired,
         productionOrder: numberNotRequired,
       }),

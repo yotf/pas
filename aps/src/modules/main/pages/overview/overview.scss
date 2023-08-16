@@ -22,10 +22,27 @@
       grid-column: 4/5;
     }
     .workCenters {
-      grid-column: span 5;
+      grid-column: span 3;
     }
     .overview-actions {
       grid-column: span 5;
+    }
+
+    .select-all-button {
+      padding-top: 22px;
+    }
+
+    .right-side {
+      display: flex;
+      justify-content: space-between;
+      grid-column: span 2;
+    }
+    .pending-days {
+      // grid-column: span 1/2;
+    }
+
+    .po {
+      grid-column: span 2;
     }
     @media screen and (width < 890px) {
       grid-template-columns: repeat(2, 1fr);

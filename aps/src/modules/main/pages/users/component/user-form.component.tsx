@@ -10,6 +10,7 @@ import { useTranslate } from '../../../../shared/hooks/translate.hook';
 import { UserFormData } from '../../settings/redux/user/interfaces';
 import { useUserPositions } from '../hooks/positions';
 import { useRoles } from '../hooks/roles';
+import { availableLanguages } from '@/localizations/i18n';
 /**
  *
  * @returns Form rendered inside the {@link UserModal}
@@ -29,7 +30,14 @@ const UserForm: FC = () => {
 
   const { options: positionOptions } = useUserPositions(userPosition);
 
-  const preventEmptySpace = (event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>): void => {
+  const languageOptions = availableLanguages.map((lang) => ({
+    label: translate(lang),
+    value: lang,
+  }));
+
+  const preventEmptySpace = (
+    event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+  ): void => {
     if (event.key.includes(' ')) event.preventDefault();
   };
 
@@ -106,7 +114,16 @@ const UserForm: FC = () => {
         register={register('positionId')}
         options={positionOptions}
       />
+
       <CustomSwitch label={translate('active')} name={register('isActive').name} />
+      <CustomInput
+        error={errors.language}
+        type='select'
+        label={translate('language')}
+        placeholder={translate('language')}
+        register={register('language')}
+        options={languageOptions}
+      />
     </form>
   );
 };

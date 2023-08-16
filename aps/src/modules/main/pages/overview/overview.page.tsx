@@ -32,6 +32,7 @@ import { useMappedOverviewTables } from './hooks/useMappedOverviews';
 import { useOverviewOptions } from './hooks/useOverviewOptions';
 import { useOverviewSchema } from './hooks/useOverviewSchema';
 import './overview.scss';
+import { overviewTableColumns } from '@/modules/shared/consts';
 /**
  *
  * @returns Overview tables and form. Uses {@link useMappedOverviews} hook to split the data from the API and render it. Defines overview form and inputs and
@@ -39,6 +40,13 @@ import './overview.scss';
  */
 const Overview: FC = () => {
   const { data } = useAppSelector((state) => state.overview);
+
+// //useEffect(()=>dispatch(getColumnsOrder()),[dispatch])
+// const columnsOrderForTable = useCallback(() => {
+//   //TODO
+
+//   return overviewTableColumns;
+// }, []);
 
   const columnsOrder = useCallback(
     (): (keyof OverviewProductionOrderOperationMapped)[] => [
@@ -82,6 +90,7 @@ const Overview: FC = () => {
     trigger,
     formState: { isDirty, isValid },
     getValues,
+    setValue,
   } = form;
 
   const { initialDate, finalDate, workCenters } = watch();
@@ -140,6 +149,13 @@ const Overview: FC = () => {
     });
   }, [columnsOrder, mappedTables, translate]);
 
+  const selectAllWorkCenters = (e: any) => {
+    setValue(
+      'workCenters',
+      workCenterOptions.map((wc) => Number(wc.value)),
+    );
+  };
+
   return (
     <FormProvider {...form}>
       <OverviewContextProvider value={{ ns: ns, overviewFormData: getValues() }}>
@@ -171,7 +187,7 @@ const Overview: FC = () => {
                 isAutocomplete={true}
               />
             </div>
-            <div className='second-row'>
+            <div className='po'>
               <CustomInput
                 type='number'
                 label={translate('productionOrder')}
@@ -195,6 +211,23 @@ const Overview: FC = () => {
                 allowClear={true}
               />
             </div>
+            <div className='right-side'>
+              <div className='select-all-button'>
+                <CustomButton type='button' color='blue' onClick={selectAllWorkCenters}>
+                  <div className='button-children'>
+                    <span>{translate('select_all_work_centers')}</span>
+                  </div>
+                </CustomButton>
+              </div>
+              <div className='pending-days'>
+                <CustomInput
+                  type='number'
+                  label={translate('show-pending')}
+                  name={nameof('pendingDays')}
+                />
+              </div>
+            </div>
+
             <div className='overview-actions'>
               <CustomButton
                 type='button'
