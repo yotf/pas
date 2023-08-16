@@ -86,18 +86,15 @@ const SalesOrderForm: FC = () => {
     <div className='sales-order-container'>
       <div className='form-container'>
         <form
-          className='salesOrder-form'
+          className={'salesOrder-form ' + (!entity?.id ? ' new' : '')}
           data-testid='salesOrder-form'
           autoComplete='off'
           onSubmit={(e): void => e.preventDefault()}
         >
           {!!entity?.orderNumber && (
-            <CustomInput
-              type='readonly'
-              label={translate('orderNumber')}
-              name={nameof('orderNumber')}
-              width='full-width'
-            />
+            <div className='orderNumber'>
+              <CustomInput type='readonly' name={nameof('orderNumber')} width='full-width' />
+            </div>
           )}
           <CustomInput
             type='select'
@@ -109,17 +106,6 @@ const SalesOrderForm: FC = () => {
             disabled={!isFormActive}
           />
 
-          {!!entity?.id && (
-            <>
-              <CustomInput
-                type='readonly'
-                label={translate('createdOn')}
-                value={dateFormatter(entity.changeHistoryDto.createdOn)}
-                width='full-width'
-              />
-            </>
-          )}
-
           <CustomInput
             type='select'
             label={translate('customerId')}
@@ -130,6 +116,16 @@ const SalesOrderForm: FC = () => {
             isRequired={true}
             isAutocomplete={true}
           />
+          {!!entity?.id && (
+            <>
+              <CustomInput
+                type='readonly'
+                label={translate('createdOn')}
+                value={dateFormatter(entity.changeHistoryDto.createdOn)}
+                width='full-width'
+              />
+            </>
+          )}
           {!!entity?.id || <br />}
           <CustomInput
             type='text'

@@ -8,11 +8,21 @@
 
     .salesOrder-form {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 2fr 2fr;
+
       gap: 32px;
       width: 100%;
       @media screen and (width < 900px) {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      &.new {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .orderNumber {
+        font-size: 36px;
+        padding-left: 10px;
+        align-self: center;
       }
 
       .remark {

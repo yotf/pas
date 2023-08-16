@@ -52,22 +52,24 @@ const MaterialsForm: FC = () => {
       onSubmit={(e): void => e.preventDefault()}
     >
       <div className='material-id'>
-        <div>
-          {!!entity?.id && (
-            <CustomInput type='readonly' label={translate('id')} name={nameof('id')} />
-          )}
-        </div>
+        {!!entity?.id && (
+          <div className='id-field'>
+            <CustomInput type='readonly' name={nameof('id')} />
+          </div>
+        )}
+
         <CustomSwitch label={translate('active')} name={nameof('isActive')} />
+        {!copying && !!entity?.id && (
+          <div className='createdOn'>
+            <CustomInput
+              type='readonly'
+              label={translate('createdOn')}
+              value={dateFormatter(entity?.changeHistoryDto?.createdOn ?? String(new Date()))}
+            />
+          </div>
+        )}
       </div>
-      {!copying && !!entity?.id && (
-        <>
-          <CustomInput
-            type='readonly'
-            label={translate('createdOn')}
-            value={dateFormatter(entity?.changeHistoryDto?.createdOn ?? String(new Date()))}
-          />
-        </>
-      )}
+
       <div className='end'>
         <CustomInput
           type='text'
@@ -87,7 +89,7 @@ const MaterialsForm: FC = () => {
           onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
         />
       </div>
-      <div className='stretch'>
+      <div className=''>
         <CustomInput
           type='select'
           label={translate('materialGroupId')}
@@ -128,6 +130,8 @@ const MaterialsForm: FC = () => {
         name={nameof('factorAreaToPc')}
         width='full-width'
       />
+
+      <div className='row-separator'></div>
 
       <CustomInput
         type='select'
@@ -177,7 +181,7 @@ const MaterialsForm: FC = () => {
         options={featureOptions}
         isAutocomplete={true}
       />
-      <div className='stretch'>
+      <div className=''>
         <CustomInput
           type='select'
           label={translate('routingId')}
