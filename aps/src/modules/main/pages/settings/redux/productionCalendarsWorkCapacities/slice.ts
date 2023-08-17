@@ -15,7 +15,7 @@ const productionCalendarsWorkCapacitiesSlice = createSlice({
       state.workCapacities = [];
       state.holidays = [];
       state.error = undefined;
-      state.loading = true;
+      state.loading = false;
     },
   },
   extraReducers: (builder) => {
@@ -26,7 +26,7 @@ const productionCalendarsWorkCapacitiesSlice = createSlice({
       state.error = undefined;
     });
     builder.addCase(getProductionCalendarWorkCapacities.pending, (state) => {
-      state.loading = true;
+      //state.loading = true;
     });
     builder.addCase(getProductionCalendarWorkCapacities.rejected, (state, action) => {
       state.loading = false;
@@ -35,7 +35,9 @@ const productionCalendarsWorkCapacitiesSlice = createSlice({
     builder.addCase(generateProductionCalendar.fulfilled, (state, action) => {
       state.loading = false;
       state.error = undefined;
-      state.productionCalendarIds = action.payload.map((prod:ProductionCalendarPostResponse) => prod.productionCalendarBaseInfoDto.id);
+      state.productionCalendarIds = action.payload.map(
+        (prod: ProductionCalendarPostResponse) => prod.productionCalendarBaseInfoDto.id,
+      );
     });
     builder.addCase(generateProductionCalendar.rejected, (state, action) => {
       state.loading = false;

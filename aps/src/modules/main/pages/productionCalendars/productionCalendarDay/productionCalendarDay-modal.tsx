@@ -6,7 +6,7 @@ import percent from '@/assets/icons/percent.svg';
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { zeroHourPlaceholder } from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { calculateMinutes, nameofFactory } from '@/modules/shared/utils/utils';
+import { calculateMinutes, limitNumberOfChars, nameofFactory } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -108,6 +108,7 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
           name={nameof('break')}
           isRequired={true}
           readOnly={readOnlyFields}
+          onKeyDownEvent={(event) => limitNumberOfChars.bind(this, event, 4)}
         />
         <CustomInput
           type='number'

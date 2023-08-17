@@ -19,7 +19,7 @@ import { clearState } from '../../settings/redux/productionCalendarsWorkCapaciti
  * @param ns Localization Namespace
  * @returns List of holidays which are inside the time period selected by the user. Also returns the {@link useHolidaysModal | holidays modal } component.
  */
-export const useHolidaysList = (ns: string): JSX.Element => {
+export const useHolidaysList = (ns: string, loading: boolean | undefined): JSX.Element => {
   const { holidays } = useAppSelector((state) => state.productionCalendarsWorkCapacities);
   const { translate } = useTranslate({ ns });
   const dispatch = useAppDispatch();
@@ -73,7 +73,7 @@ export const useHolidaysList = (ns: string): JSX.Element => {
               {holidays.length} {translate('results')}
             </p>
           </div>
-          <CustomButton type='button' color='blue' onClick={showHolidaysModal}>
+          <CustomButton type='button' color='blue' onClick={showHolidaysModal} isDisabled={loading}>
             <div className='button-children'>
               <img src={plus} alt='' />
               <span>{translate('new_button')}</span>

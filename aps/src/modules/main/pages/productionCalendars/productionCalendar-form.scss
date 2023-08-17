@@ -14,3 +14,8 @@ p {
 .span-full {
   grid-column: span 2;
 }
+
+.grayed-out-table {
+  opacity: 0.6; /* Adjust the opacity to control the level of grayed-out effect */
+  pointer-events: none; /* Prevent interaction with the table */
+}

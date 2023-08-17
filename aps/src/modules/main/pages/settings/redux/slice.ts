@@ -19,9 +19,18 @@ export type StateSelector<Entity, SingleEntity> = (
   state: CombinedState<StoreType>,
 ) => State<Entity, SingleEntity>;
 
+export interface AxiosErrorFormat {
+  config: object; 
+  data: string;
+  headers: object; 
+  request: XMLHttpRequest;
+  status: number;
+  statusText: string;
+}
+
 export type State<Entity = any, SingleEntity = any> = {
   loading: boolean;
-  error?: string;
+  error?: string | AxiosErrorFormat;
   data: Entity[];
   filtered: Entity[];
   entity?: SingleEntity;
@@ -76,9 +85,8 @@ export const createEntitySlice = <
         state.filtered = state.data.filter((entity) =>
           searchFields(entity as Entity).some((value) => {
             const valueToSearch = value && isValidDateFormat(value) ? dateFormatter(value) : value;
-            return valueToSearch?.toString().toLowerCase().includes(searchCriteria)
-          },
-          ),
+            return valueToSearch?.toString().toLowerCase().includes(searchCriteria);
+          }),
         );
       },
     },
@@ -138,8 +146,10 @@ export const createEntitySlice = <
         state.filtered = state.data;
       });
       builder.addCase(thunks.deleteThunk.rejected, (state, action: any) => {
+        debugger;
         state.loading = false;
-        state.error = action.error.message;
+        // state.error = action.error.message;
+        state.error = action.payload;
       });
     },
   });

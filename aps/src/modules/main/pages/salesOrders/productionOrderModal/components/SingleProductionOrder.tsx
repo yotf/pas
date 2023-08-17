@@ -10,6 +10,7 @@ import { FC, useEffect } from 'react';
 import { useFormContext, UseFormReturn } from 'react-hook-form';
 import { UseFieldArrayRemove } from 'react-hook-form/dist/types';
 import { ProductionOrderModalForm } from '../../../settings/redux/productionOrders/productionOrdersModal/interfaces';
+import { limitToNumericKeyDown } from '@/modules/shared/utils/utils';
 
 export type SingleProductionOrderProps = {
   index: number;
@@ -56,6 +57,7 @@ const SingleProductionOrder: FC<SingleProductionOrderProps> = ({
               maxLength={6}
               type={'text'}
               name={`productionOrders[${index}].quantity1`}
+              onKeyDownEvent={limitToNumericKeyDown}
             />
           </span>
           <p>{translate('pieces')}- </p>

@@ -16,6 +16,7 @@ import {
 } from '../../../../shared/services/notification.service';
 import { IdentifiableEntity, IdType } from '../redux/thunks';
 import './entity-delete-modal.component.scss';
+import { AxiosErrorFormat } from '../redux/slice';
 
 export type EntityDeleteModalProps<E extends IdentifiableEntity, T extends BaseResponse> = {
   isOpen: boolean;
@@ -76,7 +77,10 @@ const EntityDeleteModal = <E extends IdentifiableEntity, T extends BaseResponse>
       setIsDeleting(false);
       onClose();
       if (error) {
-        notificationFail(notificationTranslate('delete_fail'));
+        debugger;
+        notificationFail(
+          (error as unknown as AxiosErrorFormat).data ?? notificationTranslate('delete_fail'),
+        );
       } else {
         notificationSuccess(notificationTranslate('delete_success'));
         if (location.pathname.includes('edit')) navigate(-1);
