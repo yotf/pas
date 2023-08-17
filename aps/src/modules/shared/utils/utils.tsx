@@ -22,6 +22,7 @@ export const limitNumberOfChars = (
   maxLength: number,
 ): void => {
   const value = event.currentTarget.value;
+  if (isTextSelected(event)) return;
   if (value.length >= maxLength && event.key != 'Backspace' && !isTextSelected(event))
     event.preventDefault();
 };
