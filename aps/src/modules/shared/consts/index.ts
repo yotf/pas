@@ -2,6 +2,7 @@
  * @module SharedInterfaces
  */
 
+import { OverviewProductionOrderOperationMapped } from '@/modules/main/pages/settings/redux/overview/interfaces';
 import { DefaultOptionType } from 'antd/lib/select';
 /** Default date format used for datepickers */
 export const euDateFormat = 'DD.MM.YYYY';
@@ -30,6 +31,32 @@ export enum AllocationBasedEnum {
   'quantity1' = 1,
   'formula' = 2,
 }
+
+
+type OverviewTableColumns = keyof OverviewProductionOrderOperationMapped;
+
+export const overviewTableColumns: OverviewTableColumns[] =[
+  'orderNumber',
+  'orderType',
+  'customerName',
+  'salesOrderNumber',
+  'materialName',
+  'articleName',
+  'colorName',
+  'operationName',
+  'foreseenDeliveryDate',
+  'estimatedTime',
+  'setupTime',
+  'quantity1',
+  'unitOfMeasure1',
+  'salesOrderDeliveryDate',
+  'PODelivery',
+  'POPosition',
+  'operationTime',
+  'planningDate',
+  'executedDate',
+];
+
 /** Situation enum used in {@link ProductionOrderMaintain} */
 
 export enum SituationStatus {
