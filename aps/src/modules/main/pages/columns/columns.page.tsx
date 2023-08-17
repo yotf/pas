@@ -17,8 +17,6 @@ const ColumnsConfig: FC = () => {
   const form = useForm<OverviewColumnsForm>();
   const dispatch = useAppDispatch();
 
- 
-
   const { register, handleSubmit, control } = form;
 
   const { translate } = useTranslate({ ns: ns });
@@ -40,7 +38,7 @@ const ColumnsConfig: FC = () => {
           data-testid='columns-form'
           onSubmit={(e) => e.preventDefault()}
         >
-          {overviewTableColumns.map((otc, i) => (
+          {overviewTableColumns.map((otc) => (
             <div>
               <label>
                 <Controller
