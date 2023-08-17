@@ -20,9 +20,9 @@ export type StateSelector<Entity, SingleEntity> = (
 ) => State<Entity, SingleEntity>;
 
 export interface AxiosErrorFormat {
-  config: object; 
+  config: object;
   data: string;
-  headers: object; 
+  headers: object;
   request: XMLHttpRequest;
   status: number;
   statusText: string;
@@ -30,7 +30,7 @@ export interface AxiosErrorFormat {
 
 export type State<Entity = any, SingleEntity = any> = {
   loading: boolean;
-  error?: string | AxiosErrorFormat;
+  error?: any;
   data: Entity[];
   filtered: Entity[];
   entity?: SingleEntity;

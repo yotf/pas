@@ -16,7 +16,7 @@ export type UseEntityDeleteModalReturnType<EntityMapped> = {
 export type UseEntityDeleteModalProps<Entity, EntityMapped, SingleEntity> = {
   ns: string;
   deleteThunk: AsyncThunk<IdType, IdType, Record<string, unknown>>;
-  state: EntityState<Entity, SingleEntity>;
+  state: any;
   getName: (entity: EntityMapped) => string;
 };
 

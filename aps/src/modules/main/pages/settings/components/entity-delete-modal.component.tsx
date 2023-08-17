@@ -77,7 +77,6 @@ const EntityDeleteModal = <E extends IdentifiableEntity, T extends BaseResponse>
       setIsDeleting(false);
       onClose();
       if (error) {
-        debugger;
         notificationFail(
           (error as unknown as AxiosErrorFormat).data ?? notificationTranslate('delete_fail'),
         );
