@@ -3,16 +3,17 @@
  */
 import { createColumns } from '@/modules/shared/hooks/table/table.columns';
 import '@/modules/shared/hooks/table/table.scss';
-import { useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { BranchesOutlined } from '@ant-design/icons';
 import { Empty, Space, Table } from 'antd';
-import { FC, ReactNode, useMemo, useState } from 'react';
+import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
 import { MappedOverviewTable } from '../hooks/useMappedOverviews';
 import { useReallocationOfPlanningModal } from '../reallocationOfPlanning/useReallocationOfPlanningModal';
 import TableCalendar from './TableCalendar';
-import { zeroHourPlaceholder } from '@/modules/shared/consts';
+import { overviewTableColumns, zeroHourPlaceholder } from '@/modules/shared/consts';
 import { dateFormatter } from '@/modules/shared/utils/utils';
+import { getOverviewColumns } from '../../settings/redux/overview/thunks';
 
 export type OverviewTableProps = {
   overviewTableData: MappedOverviewTable;
@@ -26,6 +27,12 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   overviewTableData,
   translate,
 }: OverviewTableProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getOverviewColumns());
+  }, [dispatch]);
+
+  const overviewColumnsVisibility = useAppSelector((state) => state.columnConfig.data);
   const { workCenterName, tableData } = overviewTableData;
 
   const { data } = useAppSelector((state) => state.overview);
@@ -33,30 +40,33 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   const [toggleCalendar, setToggleCalendar] = useState(false);
 
   const { openReallocationModal, reallocationModal } = useReallocationOfPlanningModal();
-  const columnsOrder: (keyof OverviewProductionOrderOperationMapped)[] = useMemo(
-    () => [
-      'orderNumber',
-      'orderType',
-      'customerName',
-      'salesOrderNumber',
-      'materialName',
-      'articleName',
-      'colorName',
-      'operationName',
-      'foreseenDeliveryDate',
-      'estimatedTime',
-      'setupTime',
-      'quantity1',
-      'unitOfMeasure1',
-      'salesOrderDeliveryDate',
-      'PODelivery',
-      'POPosition',
-      'operationTime',
-      'planningDate',
-      'executedDate',
-    ],
-    [],
-  );
+
+  const columnsOrder = overviewTableColumns.filter((col, i) => overviewColumnsVisibility[i]);
+  debugger;
+  // const columnsOrder: (keyof OverviewProductionOrderOperationMapped)[] = useMemo(
+  //   () => [
+  //     'orderNumber',
+  //     'orderType',
+  //     'customerName',
+  //     'salesOrderNumber',
+  //     'materialName',
+  //     'articleName',
+  //     'colorName',
+  //     'operationName',
+  //     'foreseenDeliveryDate',
+  //     'estimatedTime',
+  //     'setupTime',
+  //     'quantity1',
+  //     'unitOfMeasure1',
+  //     'salesOrderDeliveryDate',
+  //     'PODelivery',
+  //     'POPosition',
+  //     'operationTime',
+  //     'planningDate',
+  //     'executedDate',
+  //   ],
+  //   [],
+  // );
 
   const customColumns: Partial<
     Record<keyof OverviewProductionOrderOperationMapped, (value: any) => ReactNode>
