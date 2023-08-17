@@ -100,7 +100,7 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
           placeholder={translate('break')}
           name={nameof('break')}
           isRequired={true}
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 2)}
+          onKeyDownEvent={(e) => limitNumberOfChars(e, 4)}
         />
         <CustomInput
           type='number'
