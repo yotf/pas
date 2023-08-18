@@ -69,14 +69,17 @@ export interface Input {
   /**Input maximum length */
   maxLength?: number;
   /**Used for checking user value before letting it get to form */
-  onKeyDownEvent?: (event: React.KeyboardEvent<HTMLInputElement>| React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  onKeyDownEvent?: (
+    event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => void;
   /** Passed for select element to handle selection change */
   handleSelectionChange?: (value: any, option: any) => void;
   dropDownStyle?: object;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onTextChange?: (value: number | string) => void;
   listHeight?: number;
-  selectedStartTime?:Dayjs | undefined;
+  selectedStartTime?: Dayjs | undefined;
+  pattern?: string;
 }
 
 export interface SwitchInput {

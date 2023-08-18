@@ -95,12 +95,14 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           name={nameof('operationId')}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('sequence')}
           name={nameof('sequence')}
           register={register('sequence')}
           isRequired={true}
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 3)}
+          maxLength={3}
+          //onKeyDownEvent={limitNumberOfChars3}
         />
         <CustomInput
           isRequired={true}

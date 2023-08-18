@@ -48,6 +48,7 @@ const CustomInput: React.FC<Input> = ({
   onTextChange,
   listHeight,
   selectedStartTime,
+  pattern,
 }) => {
   const {
     watch,
@@ -158,6 +159,7 @@ const CustomInput: React.FC<Input> = ({
             maxLength={maxLength}
             onBlur={onBlur}
             onTextChange={onTextChange}
+            pattern={pattern}
           />
         );
     }
@@ -182,6 +184,7 @@ const CustomInput: React.FC<Input> = ({
     maxLength,
     onKeyDownEvent,
     selectedStartTime,
+    onTextChange,
   ]);
   return (
     <div className={`custom-input ${width}`}>

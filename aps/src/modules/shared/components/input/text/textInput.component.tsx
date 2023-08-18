@@ -27,6 +27,8 @@ export type TextInputProps = {
 
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onTextChange?: (value: number | string) => void;
+
+  pattern?: string;
 };
 /**
  *
@@ -42,6 +44,7 @@ const CustomTextInput: React.FC<TextInputProps> = ({
   maxLength,
   onBlur,
   onTextChange,
+  pattern,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -68,11 +71,13 @@ const CustomTextInput: React.FC<TextInputProps> = ({
           autoComplete='off'
           maxLength={maxLength}
           type={type}
+          pattern={pattern}
           {...props}
           disabled={disabled}
           {...(icon && { style: { backgroundImage: `url(${icon})` } })}
           {...(autoWidth && { style: { width: calculatedWidth } })}
           onChange={({ target: { value } }): void => {
+            debugger;
             if (onTextChange) onTextChange(value);
             calcWidth(value.length);
             onChange(name === 'password' ? trimInputPassword(value) : trimInput(value));
