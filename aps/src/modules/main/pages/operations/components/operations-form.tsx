@@ -51,8 +51,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
-
-
   useEffect(() => {
     if (allocationBased === 3) {
       form.setValue('unitOfMeasureId', undefined, {
@@ -77,7 +75,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
-
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
       ? setValue('unitOfMeasureId', UoMOptions?.[0]?.value as number)
@@ -96,14 +93,13 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             <div className='operation-id'>
               {!!operationId && (
                 <div className='id-container'>
-                {/* <p>{translate('operation_Id')}</p> */}
+                  {/* <p>{translate('operation_Id')}</p> */}
                   <p>{operationId || 'ㅤ'}</p>
                 </div>
               )}
               <CustomSwitch label={translate('active')} name={register('isActive').name} />
             </div>
           </div>
-      
         </div>
         <div className='maintain-left'>
           <CustomInput
@@ -114,7 +110,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             label={translate('name')}
             register={register('name')}
             width='full-width'
-            onKeyDownEvent={(e)=>limitNumberOfChars(e,30)}
+            maxLength={30}
           />
           <CustomInput
             error={errors.departmentId}
@@ -142,7 +138,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             register={register('interfaceCode')}
             label={translate('interface_code')}
             width='full-width'
-            onKeyDownEvent={(e)=>limitNumberOfChars(e,20)}
+            maxLength={20}
           />
           <div>
             <h3>{translate('allocation_based')}</h3>

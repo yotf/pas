@@ -71,7 +71,7 @@ const RoutingsForm: FC = () => {
         type='text'
         label={translate('routingInterfaceId')}
         name={nameof('routingInterfaceId')}
-        onKeyDownEvent={(e) => limitNumberOfChars(e, 14)}
+        maxLength={14}
         width='full-width'
       />
       <div className='routingName'>
@@ -81,7 +81,7 @@ const RoutingsForm: FC = () => {
           label={translate('name')}
           name={nameof('name')}
           width='full-width'
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
+          maxLength={30}
         />
       </div>
 

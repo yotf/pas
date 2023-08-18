@@ -106,7 +106,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           label={translate('workCenterInterfaceId')}
           register={register('workCenterInterfaceId')}
           width='full-width'
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 15)}
+          maxLength={15}
         />
         <div className='wc-name'>
           <CustomInput
@@ -117,7 +117,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
             label={translate('workcenter_name')}
             register={register('name')}
             width='full-width'
-            onKeyDownEvent={(e) => limitNumberOfChars(e, 30)}
+            maxLength={30}
           />
         </div>
         <div className='grid-start'>
@@ -166,9 +166,9 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
             register={register('weightCapacity')}
             width='full-width'
             isRequired={UoMdisabled}
+            maxLength={5}
             onKeyDownEvent={(e) => {
               limitToNumericKeyDown(e);
-              limitNumberOfChars(e, 5);
             }}
           />
         ) : null}

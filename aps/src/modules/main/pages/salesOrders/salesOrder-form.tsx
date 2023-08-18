@@ -133,7 +133,7 @@ const SalesOrderForm: FC = () => {
             name={nameof('customerOrderNumber')}
             width='full-width'
             disabled={!isFormActive}
-            onKeyDownEvent={(e) => limitNumberOfChars(e, 20)}
+            maxLength={20}
           />
           <CustomInput
             type='select'

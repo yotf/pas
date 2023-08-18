@@ -108,7 +108,7 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
           name={nameof('break')}
           isRequired={true}
           readOnly={readOnlyFields}
-          onKeyDownEvent={(event) => limitNumberOfChars.bind(this, event, 4)}
+          onKeyDownEvent={(event) => limitNumberOfChars(event, 4)}
         />
         <CustomInput
           type='number'

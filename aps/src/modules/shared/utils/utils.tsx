@@ -22,9 +22,10 @@ export const limitNumberOfChars = (
   maxLength: number,
 ): void => {
   const value = event.currentTarget.value;
-  if (isTextSelected(event)) return;
-  if (value.length >= maxLength && event.key != 'Backspace' && !isTextSelected(event))
+  const allowedKeys = ['Tab', 'Backspace', 'Enter', 'ArrowLeft', 'ArrowRight'];
+  if (!allowedKeys.includes(event.key) && value.length >= maxLength && !isTextSelected(event)) {
     event.preventDefault();
+  }
 };
 
 export const limitToNumericKeyDown = (
