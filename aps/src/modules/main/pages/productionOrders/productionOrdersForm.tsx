@@ -10,7 +10,11 @@ import {
   statusDropdownOptions,
 } from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/utils';
+import {
+  limitNumberOfChars,
+  limitToNumericKeyDown,
+  nameofFactory,
+} from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/es/cascader';
 import dayjs from 'dayjs';
@@ -333,6 +337,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('customerOrderNumber')}
               readOnly={isPlanned}
               disabled={isPlanned}
+              maxLength={50}
             />
             <CustomInput
               type='select'
@@ -502,6 +507,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
                 width={'full-width'}
                 disabled={isPlanned}
                 readOnly={isPlanned}
+                onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
               />
             </div>
           </div>
