@@ -6,7 +6,11 @@ import percent from '@/assets/icons/percent.svg';
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { zeroHourPlaceholder } from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { calculateMinutes, limitNumberOfChars, nameofFactory } from '@/modules/shared/utils/utils';
+import {
+  calculateMinutes,
+  limitToNumericKeyDown,
+  nameofFactory,
+} from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -33,15 +37,16 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
   const nameof = nameofFactory<ProductionCalendarDayMapped>();
   const { watch, setValue, resetField, trigger } = form;
 
-  const { start, end, break: breakTime, efficiency, minutes } = watch();
+  const { start, end, break: breakTime, efficiency, minutes, availableMinutes } = watch();
 
   useProductionCalendarDayAutofill(form, productionCalendarDay!);
 
   useEffect(() => {
     const { minutes, availableMinutes } = calculateMinutes(breakTime, start, end, efficiency);
     setValue(nameof('minutes'), minutes);
-    setValue(nameof('availableMinutes'), availableMinutes);
-  }, [start, end, breakTime, efficiency]);
+    if (!availableMinutes && availableMinutes !== 0)
+      setValue(nameof('availableMinutes'), availableMinutes);
+  }, [start, end, breakTime, efficiency, availableMinutes]);
 
   const readOnlyFields = useMemo(() => {
     if (!productionCalendarDay?.date) return false;
@@ -102,16 +107,20 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
           selectedStartTime={selectedStartTime ? dayjs(selectedStartTime, 'HH:mm') : undefined}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('break')}
           placeholder={translate('break')}
           name={nameof('break')}
           isRequired={true}
           readOnly={readOnlyFields}
-          onKeyDownEvent={(event) => limitNumberOfChars(event, 4)}
+          maxLength={4}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
+          onKeyDownEvent={limitToNumericKeyDown}
           label={translate('efficiency')}
           placeholder={translate('efficiency')}
           name={nameof('efficiency')}
@@ -119,13 +128,17 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
           icon={percent}
           iconRight
           readOnly={readOnlyFields}
+          maxLength={3}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('capacity')}
           placeholder={translate('capacity')}
           name={nameof('capacity')}
           readOnly={readOnlyFields}
+          maxLength={4}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
         <br />
         <CustomInput
