@@ -37,8 +37,8 @@ export const useWorkCapacitiesTable = (): JSX.Element => {
     return workCapacities.map((obj): WorkCapacityMapped => {
       const minutes =
         dayjs(obj.end, timeFormat).diff(dayjs(obj.start, timeFormat), 'minute') - obj.break;
-      const availableMinutes = minutes * (obj.efficiency / 100);
-      const availableMinutesRounded = Math.round(availableMinutes);
+      // const availableMinutes = minutes * (obj.efficiency / 100);
+      // const availableMinutesRounded = Math.round(availableMinutes);
       return {
         id: obj.id,
         dayOfWeek: obj.dayOfWeek,
@@ -46,7 +46,7 @@ export const useWorkCapacitiesTable = (): JSX.Element => {
         break: obj.break,
         end: obj.end || '',
         minutes: minutes || 0,
-        availableMinutes: availableMinutesRounded || 0,
+        availableMinutes: obj.availableMinutes || 0,
         capacity: obj.capacity,
         efficiency: obj.efficiency,
         guid: uuid(),

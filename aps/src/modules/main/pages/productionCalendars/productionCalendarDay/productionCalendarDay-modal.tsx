@@ -13,7 +13,7 @@ import {
 } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import dayjs from 'dayjs';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { ProductionCalendarDayMapped } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
 import { usePCDayForm } from './usePCDayForm';
@@ -34,6 +34,7 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
   const { translate } = useTranslate({ ns: 'workCenters', keyPrefix: 'maintain' });
   const { form, onSubmit } = usePCDayForm({ productionCalendarDay, onClose });
   const [selectedStartTime, setSelectedStartTime] = useState<string | undefined>(undefined);
+  const isFirstReset = useRef(true);
   const nameof = nameofFactory<ProductionCalendarDayMapped>();
   const { watch, setValue, resetField, trigger } = form;
 
@@ -42,10 +43,17 @@ const ProductionCalendarDayModal: FC<Props> = ({ productionCalendarDay, onClose 
   useProductionCalendarDayAutofill(form, productionCalendarDay!);
 
   useEffect(() => {
-    const { minutes, availableMinutes } = calculateMinutes(breakTime, start, end, efficiency);
+    const { minutes, availableMinutes: availableMinutesCalculated } = calculateMinutes(
+      breakTime,
+      start,
+      end,
+      efficiency,
+    );
+
+    if (minutes === productionCalendarDay?.minutes) return;
+
     setValue(nameof('minutes'), minutes);
-    if (!availableMinutes && availableMinutes !== 0)
-      setValue(nameof('availableMinutes'), availableMinutes);
+    setValue(nameof('availableMinutes'), availableMinutesCalculated);
   }, [start, end, breakTime, efficiency, availableMinutes]);
 
   const readOnlyFields = useMemo(() => {

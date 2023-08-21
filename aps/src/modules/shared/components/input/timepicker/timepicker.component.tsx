@@ -90,7 +90,6 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
             disabledTime={getDisabledTimes}
             open={open}
             onOpenChange={(openDropdown: boolean): void => {
-              debugger;
               if (!openDropdown && timeValue) {
                 field.onChange(
                   !timeValue
@@ -126,7 +125,6 @@ const CustomTimePicker: React.FC<TimePickerProps> = ({
                 type='primary'
                 className='confirm-time'
                 onClick={(): void => {
-                  debugger;
                   field.onChange(
                     !timeValue
                       ? undefined

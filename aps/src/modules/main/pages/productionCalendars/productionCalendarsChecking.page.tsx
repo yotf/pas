@@ -75,7 +75,6 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
   };
   const onEdit = (modalData: ProductionCalendarDayMapped): void => {
     setSelectedPCDay(modalData);
-    
   };
 
   const { translate: translateTable } = useTranslate({ ns: 'workCenters', keyPrefix: 'maintain' });
@@ -85,8 +84,8 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
     return activeTableData.map((obj): ProductionCalendarDayMapped => {
       const minutes =
         dayjs(obj.end, timeFormat).diff(dayjs(obj.start, timeFormat), 'minute') - obj.break;
-      const availableMinutes = minutes * (obj.efficiency / 100);
-      const availableMinutesRounded = Math.round(availableMinutes);
+      // const availableMinutes = minutes * (obj.efficiency / 100);
+      // const availableMinutesRounded = Math.round(availableMinutes);
       return {
         id: obj.id,
         date: obj.weekDay,
@@ -94,7 +93,7 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
         break: obj.break,
         end: obj.end || '',
         minutes: minutes || 0,
-        availableMinutes: availableMinutesRounded || 0,
+        availableMinutes: obj.availableMinutes || 0,
         efficiency: obj.efficiency,
         remark: obj.remark,
         capacity: obj.capacity,
