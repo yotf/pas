@@ -669,7 +669,8 @@
       "positive": "Number must be positive",
       "create_success": "Operation has been successfully created",
       "edit_success": "Operation has been successfully edited",
-      "create_fail": "Operation with that name already exists"
+      "create_fail": "Operation with that name already exists",
+      "time_format": "The allowed format is {{name}}"
     }
   },
   "allocation_labels": {

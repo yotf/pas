@@ -3,16 +3,18 @@
 
 .table-wrapper {
   .ant-table {
-    // .ant-table-column-title {
-    //   color: black;
-    //   font-weight: 800;
-    // }
-    // .ant-table-column-sorter {
-    //   color: black;
-    // }
+    .ant-table-column-title {
+      color: black;
+      font-weight: 800;
+    }
+    .ant-table-column-sorter {
+      color: black;
+      opacity: 50%;
+    }
     &-thead > tr > th {
       white-space: nowrap;
-      @include table-cell($orange-color, $white-color);
+      // @include table-cell($orange-color, $white-color);
+      @include table-cell($orange-color, black);
 
       text-transform: capitalize;
       &:hover {
@@ -66,11 +68,15 @@
   }
 
   .ant-table-thead th.ant-table-column-has-sorters:hover {
-    background: $orange-color;
+    // background: $orange-color;
+    background: #fdcc36;
+    background: #f8b400;
   }
 
   .ant-table-thead th.ant-table-cell {
-    background-color: $orange-color;
+    //background-color: $orange-color;
+    background: #fdcc36;
+    background: #f8b400;
   }
 
   .ant-tooltip-open {

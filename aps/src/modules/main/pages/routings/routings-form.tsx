@@ -6,7 +6,12 @@ import { FC, useContext } from 'react';
 import CustomInput from '../../../shared/components/input/input.component';
 import CustomSwitch from '../../../shared/components/input/switch/switch.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { dateFormatter, limitNumberOfChars, nameofFactory } from '../../../shared/utils/utils';
+import {
+  dateFormatter,
+  limitNumberOfChars,
+  limitToNumericKeyDown,
+  nameofFactory,
+} from '../../../shared/utils/utils';
 import {
   MaintainContext,
   MaintainContextValue,
@@ -110,14 +115,13 @@ const RoutingsForm: FC = () => {
         width='full-width'
       />
       <CustomInput
-        type='number'
+        type='tel'
+        pattern='[0-9]*'
         isRequired={true}
         label={translate('lotStandardQuantity')}
         name={nameof('lotStandardQuantity')}
-        onKeyDownEvent={(e) => {
-          limitNumberOfChars(e, 5);
-          preventDecimal(e);
-        }}
+        maxLength={5}
+        onKeyDownEvent={limitToNumericKeyDown}
         width='full-width'
       />
 

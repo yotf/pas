@@ -14,6 +14,7 @@ import { useTranslate } from '../../../shared/hooks/translate.hook';
 import {
   handleTimeFormatKeyDown,
   limitNumberOfChars,
+  limitToNumericKeyDown,
   mapDataToOptions,
   nameofFactory,
 } from '../../../shared/utils/utils';
@@ -102,36 +103,35 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           register={register('sequence')}
           isRequired={true}
           maxLength={3}
-          //onKeyDownEvent={limitNumberOfChars3}
         />
         <CustomInput
           isRequired={true}
-          type='text'
+          type='tel'
           label={translate('standardTime')}
           name={nameof('standardTime')}
           onKeyDownEvent={handleTimeFormatKeyDown}
         />
         <CustomInput
-          type='text'
+          type='tel'
           label={translate('setupTime')}
           name={nameof('setupTime')}
           onKeyDownEvent={handleTimeFormatKeyDown}
         />
         <CustomInput
-          type='text'
+          type='tel'
           label={translate('waitingTime')}
           name={nameof('waitingTime')}
           onKeyDownEvent={handleTimeFormatKeyDown}
         />
         <CustomInput
           isRequired={true}
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('leadTime')}
           name={nameof('leadTime')}
-          onKeyDownEvent={(event): void => {
-            if (event.key.includes('.')) event.preventDefault();
-            limitNumberOfChars(event, 2);
-          }}
+          maxLength={2}
+          onKeyDownEvent={limitToNumericKeyDown}
+
         />
         <CustomInput
           type='readonly'

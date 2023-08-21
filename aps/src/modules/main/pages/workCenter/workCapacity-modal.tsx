@@ -6,11 +6,11 @@ import percent from '@/assets/icons/percent.svg';
 import { zeroHourPlaceholder } from '@/modules/shared/consts';
 import { DayOfWeek } from '@/modules/shared/utils/dayOfWeek.enum';
 import { Modal } from 'antd';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import CustomInput from '../../../shared/components/input/input.component';
 import { useTranslate } from '../../../shared/hooks/translate.hook';
-import { calculateMinutes, limitNumberOfChars, nameofFactory } from '../../../shared/utils/utils';
+import { calculateMinutes, limitToNumericKeyDown, nameofFactory } from '../../../shared/utils/utils';
 import { WorkCapacityMapped } from '../settings/redux/workcenterCapacities/interfaces';
 import { useWorkCapacityForm } from './hooks/useWorkCapacityForm';
 import dayjs from 'dayjs';
@@ -95,29 +95,35 @@ const WorkCapacityModal: FC<Props> = ({ workCapacity, onClose }) => {
           selectedStartTime={selectedStartTime ? dayjs(selectedStartTime, 'HH:mm') : undefined}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('break')}
           placeholder={translate('break')}
           name={nameof('break')}
           isRequired={true}
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 4)}
+          maxLength={4}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('efficiency')}
           placeholder={translate('efficiency')}
           name={nameof('efficiency')}
           isRequired={true}
           icon={percent}
           iconRight
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 3)}
+          maxLength={3}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('capacity')}
           placeholder={translate('capacity')}
           name={nameof('capacity')}
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 4)}
+          maxLength={4}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
         <br />
         <CustomInput

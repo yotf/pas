@@ -5,7 +5,13 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import CustomSwitch from '@/modules/shared/components/input/switch/switch.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { dateFormatter, limitNumberOfChars, nameofFactory } from '@/modules/shared/utils/utils';
+import {
+  dateFormatter,
+  limitNumberOfChars,
+  limitToFloat,
+  limitToNumericKeyDown,
+  nameofFactory,
+} from '@/modules/shared/utils/utils';
 import { FC, useContext } from 'react';
 import {
   MaintainContext,
@@ -119,16 +125,22 @@ const MaterialsForm: FC = () => {
         isAutocomplete={true}
       />
       <CustomInput
-        type='number'
+        type='tel'
+        pattern='[0-9]*\.?[0-9]*'
+        maxLength={6}
         label={translate('factorAreaToKG')}
         name={nameof('factorAreaToKG')}
         width='full-width'
+        onKeyDownEvent={limitToFloat}
       />
       <CustomInput
-        type='number'
+        type='tel'
+        pattern='[0-9]*\.?[0-9]*'
+        maxLength={6}
         label={translate('factorAreaToPC')}
         name={nameof('factorAreaToPc')}
         width='full-width'
+        onKeyDownEvent={limitToFloat}
       />
 
       <div className='row-separator'></div>

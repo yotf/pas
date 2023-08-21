@@ -5,7 +5,7 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useModalProps } from '@/modules/shared/hooks/useModalProps.hook';
-import { limitNumberOfChars, nameofFactory } from '@/modules/shared/utils/utils';
+import { limitNumberOfChars, limitToFloat, limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import {
   ChangeEvent,
@@ -141,12 +141,13 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
         }}
       >
         <CustomInput
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('sequence')}
           name={nameof('sequence')}
           width='full-width'
-          // readOnly={true}
-          // disabled={true}
+          maxLength={3}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
 
         <CustomInput
@@ -160,14 +161,16 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
 
         <CustomInput
           isRequired={true}
-          type='number'
+          type='tel'
+          pattern='[0-9]*'
           label={translate('quantity1')}
           name={nameof('quantity1')}
           register={register('quantity1')}
           onBlur={onQuantityBlur}
           disabled={quantitiesDisabled}
           onTextChange={onQ1change}
-          onKeyDownEvent={(e) => limitNumberOfChars(e, 6)}
+          maxLength={6}
+          onKeyDownEvent={limitToNumericKeyDown}
         />
         <CustomInput
           type='readonly'
@@ -175,7 +178,9 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           name={nameof('unitOfMeasure1')}
         />
         <CustomInput
-          type='number'
+        
+          type='tel'
+          pattern='[0-9]*\.?[0-9]*'
           label={translate('quantity2')}
           name={nameof('quantity2')}
           onBlur={onQuantityBlur}
@@ -183,6 +188,7 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           register={register('quantity2')}
           onTextChange={onQ2change}
           disabled={quantitiesDisabled}
+          onKeyDownEvent={limitToFloat}
         />
         <CustomInput
           type='readonly'

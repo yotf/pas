@@ -12,7 +12,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../../settings/consts/interfaces';
 import { AllocationBased, OperationFormData } from '../../settings/redux/operations/interfaces';
 import { AllocationBasedEnum } from '@/modules/shared/consts';
-import { limitNumberOfChars } from '@/modules/shared/utils/utils';
+import { handleTimeFormatKeyDown, limitNumberOfChars } from '@/modules/shared/utils/utils';
 
 export type OperationsFormType = {
   form: UseFormReturn<OperationFormData, any>;
@@ -127,7 +127,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             label={translate('remark')}
             register={register('remark')}
             width='full-width'
-            onKeyDownEvent={(e)=>limitNumberOfChars(e,200)}
+            onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
           />
         </div>
         <div className='maintain-right'>
@@ -155,12 +155,14 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             <div className='times-grid'>
               <CustomInput
                 error={errors.operationTime}
-                type='number'
+                type='tel'
+                pattern='[0-9]*\.?[0-9]*'
                 placeholder=''
                 register={register('operationTime')}
                 label={translate('operationTime')}
                 isRequired={true}
                 width='full-width'
+                onKeyDownEvent={handleTimeFormatKeyDown}
               />
               <CustomInput
                 error={errors.unitOfMeasureId}
@@ -175,19 +177,25 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
               />
               <CustomInput
                 error={errors.waitingTime}
-                type='number'
+                type='tel'
+                pattern='[0-9]*\.?[0-9]*'
+                onKeyDownEvent={handleTimeFormatKeyDown}
                 placeholder=''
                 register={register('waitingTime')}
                 label={translate('waitingTime')}
                 width='full-width'
+            
               />
               <CustomInput
                 error={errors.setupTime}
-                type='number'
+                type='tel'
+                pattern='[0-9]*\.?[0-9]*'
+                onKeyDownEvent={handleTimeFormatKeyDown}
                 placeholder=''
                 register={register('setupTime')}
                 label={translate('setupTime')}
                 width='full-width'
+          
               />
             </div>
           </div>

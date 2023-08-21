@@ -41,7 +41,7 @@ export const useOperationSchema = (): OptionalObjectSchema<
       originalValue: number | undefined;
     };
     const convert = String(originalValue);
-    if (convert) return convert.replace('.', '').length <= 4;
+    if (convert) return convert.replace('.', '').length <= 7;
     return convert.length <= 4;
   };
 
@@ -52,7 +52,7 @@ export const useOperationSchema = (): OptionalObjectSchema<
   } = useMemo(
     () => ({
       name: 'length',
-      message: translate('max_length', { name: '4' }),
+      message: translate('time_format', { name: '{xxxx,xxx}' }),
       test: testTimeValidator,
     }),
     [translate],
@@ -64,7 +64,7 @@ export const useOperationSchema = (): OptionalObjectSchema<
   } = useMemo(
     () => ({
       name: 'length',
-      message: translate('max_length', { name: '4' }),
+      message: translate('time_format', { name: '{xxxx,xxx}' }),
       test: testTimeValidator,
     }),
     [translate],

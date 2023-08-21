@@ -11,7 +11,7 @@ import {
   getDataForExcel,
   Sheet,
 } from '@/modules/shared/utils/exportToExcel.utils';
-import { nameofFactory } from '@/modules/shared/utils/utils';
+import { limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import dayjs from 'dayjs';
@@ -41,12 +41,12 @@ import { overviewTableColumns } from '@/modules/shared/consts';
 const Overview: FC = () => {
   const { data } = useAppSelector((state) => state.overview);
 
-// //useEffect(()=>dispatch(getColumnsOrder()),[dispatch])
-// const columnsOrderForTable = useCallback(() => {
-//   //TODO
+  // //useEffect(()=>dispatch(getColumnsOrder()),[dispatch])
+  // const columnsOrderForTable = useCallback(() => {
+  //   //TODO
 
-//   return overviewTableColumns;
-// }, []);
+  //   return overviewTableColumns;
+  // }, []);
 
   const columnsOrder = useCallback(
     (): (keyof OverviewProductionOrderOperationMapped)[] => [
@@ -221,9 +221,12 @@ const Overview: FC = () => {
               </div>
               <div className='pending-days'>
                 <CustomInput
-                  type='number'
+                  type='tel'
+                  pattern='[0-9]*'
+                  maxLength={2}
                   label={translate('show-pending')}
                   name={nameof('pendingDays')}
+                  onKeyDownEvent={limitToNumericKeyDown}
                 />
               </div>
             </div>

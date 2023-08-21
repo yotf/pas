@@ -34,12 +34,25 @@ export const limitToNumericKeyDown = (
   const key = e.key;
 
   // Allow control keys
-  if (e.ctrlKey || e.altKey || e.metaKey || key === 'Backspace') {
+  if (e.ctrlKey || e.altKey || e.metaKey || key === 'Backspace' || key === 'Tab') {
     return;
   }
 
   // Allow digits
   if (!/^\d+$/.test(key)) {
+    e.preventDefault();
+  }
+};
+
+export const limitToFloat = (
+  e: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+) => {
+  const key = e.key;
+  if (e.ctrlKey || e.altKey || e.metaKey || key === 'Backspace' || key === 'Tab') {
+    return;
+  }
+
+  if (!/^[0-9.]$/.test(key)) {
     e.preventDefault();
   }
 };
@@ -60,12 +73,9 @@ export const handleTimeFormatKeyDown = (
 ) => {
   const inputValue = (event.target as HTMLInputElement).value;
   const key = event.key;
-  if (isTextSelected(event)) return;
-
-  const cursorPosition = (event.target as HTMLInputElement).selectionStart;
 
   // Allow control keys
-  if (event.ctrlKey || event.altKey || event.metaKey || key === 'Backspace') {
+  if (event.ctrlKey || event.altKey || event.metaKey || key === 'Backspace' || key === 'Tab') {
     return;
   }
 
@@ -74,6 +84,10 @@ export const handleTimeFormatKeyDown = (
     event.preventDefault();
   }
 
+  const cursorPosition = (event.target as HTMLInputElement).selectionStart;
+
+  if (isTextSelected(event)) return;
+
   // Prevent entering more than one decimal point
   if (key === '.' && inputValue.includes('.')) {
     event.preventDefault();
@@ -81,10 +95,17 @@ export const handleTimeFormatKeyDown = (
 
   const s = inputValue.split('.')[0];
 
-  // Limit to 4 leading and 4 trailing digits
-  if (inputValue.includes('.') && inputValue.split('.')[1]?.length >= 3) {
+  // Limit to 3 trailing digits
+  if (
+    inputValue.includes('.') &&
+    inputValue.split('.')[1]?.length >= 3 &&
+    cursorPosition &&
+    cursorPosition > inputValue.indexOf('.')
+  ) {
     event.preventDefault();
   }
+
+  //limit to 4 leading digits
 
   if (
     key !== '.' &&

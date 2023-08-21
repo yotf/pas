@@ -10,7 +10,7 @@ import {
   statusDropdownOptions,
 } from '@/modules/shared/consts';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { nameofFactory } from '@/modules/shared/utils/utils';
+import { limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/utils';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/es/cascader';
 import dayjs from 'dayjs';
@@ -372,12 +372,15 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               disabled={isPlanned}
             />
             <CustomInput
-              type='text'
+              type='tel'
+              pattern='[0-9]*'
               label={translate('quantity1')}
               name={nameof('quantity1')}
               isRequired={true}
               readOnly={isPlanned}
               disabled={isPlanned}
+              maxLength={5}
+              onKeyDownEvent={limitToNumericKeyDown}
             />
 
             <div className='uom-label'>
