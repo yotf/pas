@@ -8,8 +8,7 @@ import CustomInput from '../../../../shared/components/input/input.component';
 import CustomSwitch from '../../../../shared/components/input/switch/switch.component';
 import { useTranslate } from '../../../../shared/hooks/translate.hook';
 import { UserFormData } from '../../settings/redux/user/interfaces';
-import { useUserPositions } from '../hooks/positions';
-import { useRoles } from '../hooks/roles';
+import { useUserOptions } from '../hooks/positions';
 import { availableLanguages } from '@/localizations/i18n';
 /**
  *
@@ -25,10 +24,10 @@ const UserForm: FC = () => {
     formState: { errors },
     getValues,
   } = useFormContext<UserFormData>();
-  const { options: roleOptions } = useRoles();
-  const userPosition = getValues('positionId');
+  //const { options: roleOptions } = useRoles();
+  // const userPosition = getValues('positionId');
 
-  const { options: positionOptions } = useUserPositions(userPosition);
+  const { positionOptions, roleOptions } = useUserOptions();
 
   const languageOptions = availableLanguages.map((lang) => ({
     label: translate(lang),
