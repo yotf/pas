@@ -13,7 +13,7 @@ import { useReallocationOfPlanningModal } from '../reallocationOfPlanning/useRea
 import TableCalendar from './TableCalendar';
 import { overviewTableColumns, zeroHourPlaceholder } from '@/modules/shared/consts';
 import { dateFormatter } from '@/modules/shared/utils/utils';
-import { getOverviewColumns } from '../../settings/redux/overview/thunks';
+import { getOverviewColumns } from '../../settings/redux/columns/thunks';
 
 export type OverviewTableProps = {
   overviewTableData: MappedOverviewTable;
@@ -41,7 +41,9 @@ export const OverviewTable: FC<OverviewTableProps> = ({
 
   const { openReallocationModal, reallocationModal } = useReallocationOfPlanningModal();
 
-  const columnsOrder = overviewTableColumns.filter((col, i) => overviewColumnsVisibility[i]);
+  const columnsOrder = overviewTableColumns.filter(
+    (col, i) => overviewColumnsVisibility?.[i]?.isVisible,
+  );
   debugger;
   // const columnsOrder: (keyof OverviewProductionOrderOperationMapped)[] = useMemo(
   //   () => [

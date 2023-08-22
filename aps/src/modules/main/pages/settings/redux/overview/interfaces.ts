@@ -4,7 +4,11 @@
 
 import BaseResponse from '@/modules/shared/services/interfaces';
 import { ProductionCalendarPostResponse } from '../productionCalendarsWorkCapacities/interfaces';
-import { OverviewPORoutingOperationAddAndUpdate, PORoutingOperations, ProductionOrder } from '../productionOrders/interfaces';
+import {
+  OverviewPORoutingOperationAddAndUpdate,
+  PORoutingOperations,
+  ProductionOrder,
+} from '../productionOrders/interfaces';
 import { WorkCenter } from '../workCenters/interfaces';
 
 export interface WorkCenterExpanded extends WorkCenter {
@@ -14,8 +18,8 @@ export interface WorkCenterExpanded extends WorkCenter {
 /** Represents one work center table shown in {@link OverviewPage} */
 export interface OverviewWorkCenter {
   workCenter: WorkCenterExpanded;
-  pO_RoutingOperations:  OverviewPORoutingOperationAddAndUpdate[];
- // productionOrders: ProductionOrder[];
+  pO_RoutingOperations: OverviewPORoutingOperationAddAndUpdate[];
+  // productionOrders: ProductionOrder[];
   productionCalendars: ProductionCalendarPostResponse;
 }
 
@@ -25,7 +29,7 @@ export interface OverviewFormData {
   workCenters: number[];
   orderType: number;
   productionOrder: number;
-  pendingDays:number;
+  pendingDays: number;
 }
 /**
  * One table row shown in one overview work center table
@@ -59,4 +63,8 @@ export interface OverviewProductionOrderOperationMapped {
 
 export interface OverviewResponse extends BaseResponse {
   data: OverviewWorkCenter[];
+}
+
+export interface OverviewColumnResponse extends BaseResponse {
+  data: OverviewFormData[];
 }

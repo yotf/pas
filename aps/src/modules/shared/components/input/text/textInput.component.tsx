@@ -77,7 +77,6 @@ const CustomTextInput: React.FC<TextInputProps> = ({
           {...(icon && { style: { backgroundImage: `url(${icon})` } })}
           {...(autoWidth && { style: { width: calculatedWidth } })}
           onChange={({ target: { value } }): void => {
-            debugger;
             if (onTextChange) onTextChange(value);
             calcWidth(value.length);
             onChange(name === 'password' ? trimInputPassword(value) : trimInput(value));

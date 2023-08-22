@@ -4,7 +4,7 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_OVERVIEW_API, GET_VISIBLE_COLUMNS_API } from '../../consts/apiUrl';
-import { OverviewFormData, OverviewWorkCenter } from './interfaces';
+import { OverviewColumnResponse, OverviewFormData, OverviewWorkCenter } from './interfaces';
 import ApiService from '@/modules/shared/services/api.service';
 /** Gets overview data */
 export const getAllOverviewCenters = createAsyncThunk(
@@ -20,15 +20,4 @@ export const getAllOverviewCenters = createAsyncThunk(
   },
 );
 
-export const getOverviewColumns = createAsyncThunk(
-  GET_VISIBLE_COLUMNS_API,
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await ApiService.get(GET_VISIBLE_COLUMNS_API);
-      const { data } = response;
-      return data;
-    } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
-    }
-  },
-);
+
