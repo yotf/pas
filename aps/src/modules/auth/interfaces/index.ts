@@ -11,4 +11,6 @@ export interface JwtDecode {
    * name - User's Name extracted from the JWT token
    */
   name: string;
+
+  Language: string;
 }

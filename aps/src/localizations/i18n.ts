@@ -2,26 +2,29 @@
  * @module Internationalization
  */
 
-import { setLang } from '@/modules/shared/services/localization.service';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import de from './translations/de.json';
-import en from './translations/en.json';
+import enTranslations from './translations/en.json';
+import ptTranslations from './translations/pt.json';
+import deTranslations from './translations/de.json';
 
 const resources = {
-  en,
-  de,
+  en: enTranslations,
+  pt: ptTranslations,
+  de: deTranslations,
 };
 
 export const availableLanguages = Object.keys(resources);
 
-export const setLanguage = (lang: string): void => {
-  i18n.use(initReactI18next).init({
-    resources,
-    fallbackLng: lang,
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-  setLang(lang);
-};
+i18n.use(initReactI18next).init({
+  lng: 'en',
+  fallbackLng: 'en',
+  debug: true,
+  interpolation: {
+    escapeValue: false,
+  },
+  resources,
+  // ns: ['productionOrders', 'routings'],
+});
+
+export default i18n;

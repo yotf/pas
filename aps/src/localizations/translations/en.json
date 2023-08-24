@@ -136,7 +136,8 @@
       "active": "Active",
       "language": "Language",
       "en": "English",
-      "de": "German"
+      "de": "German",
+      "pt": "Portuguese"
     },
     "notification": {
       "create": "User has been successfully created",

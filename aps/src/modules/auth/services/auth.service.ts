@@ -6,6 +6,8 @@ import { AUTHORIZATION_KEY, NAME_KEY, ROLE_KEY } from '../redux/consts';
 import { LoginResponse } from '../redux/interfaces';
 import jwt_decode from 'jwt-decode';
 import { JwtDecode } from '../interfaces';
+import { LANGUAGE_KEY } from '@/modules/shared/services/localization.service';
+import i18n from '@/localizations/i18n';
 
 /**
  * Controls users authorization credentials
@@ -41,6 +43,12 @@ export const setAuth = (auth: LoginResponse): void => {
   }
   if (jwtDecoded.name) {
     localStorage.setItem(NAME_KEY, jwtDecoded.name);
+  }
+
+  if (jwtDecoded.Language) {
+    localStorage.setItem(LANGUAGE_KEY, jwtDecoded.Language);
+    i18n.changeLanguage(jwtDecoded.Language);
+    //i18n.reloadResources();
   }
 };
 /**
