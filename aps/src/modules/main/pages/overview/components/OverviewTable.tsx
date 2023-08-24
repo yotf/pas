@@ -44,7 +44,7 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   const columnsOrder = overviewTableColumns.filter(
     (col, i) => overviewColumnsVisibility?.[i]?.isVisible,
   );
-  debugger;
+
   // const columnsOrder: (keyof OverviewProductionOrderOperationMapped)[] = useMemo(
   //   () => [
   //     'orderNumber',
@@ -112,10 +112,10 @@ export const OverviewTable: FC<OverviewTableProps> = ({
               pagination={false}
               key={new Date().getTime()}
             />
-            <div className={`calendar ${toggleCalendar ? 'calendar-open' : ''}`}>
-              <button onClick={(): void => setToggleCalendar(!toggleCalendar)}>
-                {toggleCalendar ? '>' : '<'}
-              </button>
+            <div className={`calendar calendar-open`}>
+              {/* <button onClick={(): void => setToggleCalendar(!toggleCalendar)}>
+              {toggleCalendar ? '>' : '<'}
+            </button> */}
               <div className='calendar-table'>
                 <TableCalendar calendarData={calendarData} />
               </div>

@@ -14,36 +14,36 @@
 
   .overview-inputs {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 2fr) min-content;
     gap: 14px 28px;
-    padding-right: 1.5em;
+    padding-right: 3em;
 
     .break {
       grid-column: 4/5;
     }
     .workCenters {
-      grid-column: span 3;
+      grid-column: span 5;
+      display: flex;
+      gap: 1em;
+      .workcenterField {
+        flex-grow: 1;
+      }
+      .select-all-button {
+        align-self: flex-end;
+        justify-self: flex-end;
+      }
     }
     .overview-actions {
       grid-column: span 5;
     }
 
-    .select-all-button {
-      padding-top: 22px;
-    }
-
     .right-side {
       display: flex;
-      justify-content: space-between;
-      grid-column: span 2;
-    }
-    .pending-days {
-      // grid-column: span 1/2;
+      margin-left: auto;
+      //justify-content: space-between;
+      // grid-column: span 2;
     }
 
-    .po {
-      grid-column: span 2;
-    }
     @media screen and (width < 890px) {
       grid-template-columns: repeat(2, 1fr);
       gap: 14px;
@@ -71,7 +71,8 @@
     display: flex;
     margin-top: 28px;
     justify-content: space-between;
-    padding-right: 1.5em;
+
+    // padding-right: 1.5em;
 
     .buttons-right {
       display: flex;
@@ -94,15 +95,18 @@
 
       .calendar {
         display: flex;
-        transition: all 0.5s ease-in-out;
+        //    transition: all 0.5s ease-in-out;
         z-index: 100;
-        position: absolute;
-        top: 0;
-        right: -50vw;
-        bottom: 20px;
-        @media screen and (width < 769px) {
-          right: -60vw;
-        }
+        max-width: 225px;
+
+        overflow-x: scroll;
+        // position: absolute;
+        // top: 0;
+        // right: -50vw;
+        // bottom: 20px;
+        // @media screen and (width < 769px) {
+        //   right: -60vw;
+        // }
 
         button {
           height: 48px;
@@ -123,27 +127,21 @@
 
         .calendar-table {
           display: table;
-          width: 100%;
           background-color: white;
           border-radius: 10px;
           margin-bottom: 20px;
           pointer-events: none;
-          width: 50vw;
 
           table {
-            width: 100%;
             height: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            width: 50vw;
 
             @media screen and (width < 630px) {
-              width: 60vw;
               font-size: 14px;
             }
 
             @media screen and (width < 780px) {
-              width: 60vw;
             }
 
             th:first-of-type {
@@ -175,7 +173,7 @@
               background-color: $yellow-light;
 
               th {
-                width: 14%;
+                min-width: 45px;
                 height: 41px;
 
                 span:first-child {

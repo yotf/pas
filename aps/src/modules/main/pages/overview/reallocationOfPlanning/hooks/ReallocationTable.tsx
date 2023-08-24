@@ -43,7 +43,7 @@ export const ReallocationTable: FC = (): JSX.Element => {
       'operationId',
       'operationName',
       'workCenterId',
-      'status',
+      //   'status',
       'operationTime',
       'setupTime',
       'leadTime',

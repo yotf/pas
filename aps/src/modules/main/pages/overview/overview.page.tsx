@@ -196,22 +196,33 @@ const Overview: FC = () => {
                 disableDatesAfter={dayjs()}
               />
             </div>
+            <div className='pending-days'>
+              <CustomInput
+                type='tel'
+                pattern='[0-9]*'
+                maxLength={2}
+                label={translate('show-pending')}
+                name={nameof('pendingDays')}
+                onKeyDownEvent={limitToNumericKeyDown}
+                width='full-width'
+              />
+            </div>
 
             <div className='break'></div>
             <div className='workCenters'>
-              <CustomInput
-                isAutocomplete={true}
-                type={'select'}
-                label={translate('workCenters')}
-                name={nameof('workCenters')}
-                width='full-width'
-                mode='multiple'
-                options={workCenterOptions}
-                isRequired={true}
-                allowClear={true}
-              />
-            </div>
-            <div className='right-side'>
+              <div className='workcenterField'>
+                <CustomInput
+                  isAutocomplete={true}
+                  type={'select'}
+                  label={translate('workCenters')}
+                  name={nameof('workCenters')}
+                  width='full-width'
+                  mode='multiple'
+                  options={workCenterOptions}
+                  isRequired={true}
+                  allowClear={true}
+                />
+              </div>
               <div className='select-all-button'>
                 <CustomButton type='button' color='blue' onClick={selectAllWorkCenters}>
                   <div className='button-children'>
@@ -219,17 +230,8 @@ const Overview: FC = () => {
                   </div>
                 </CustomButton>
               </div>
-              <div className='pending-days'>
-                <CustomInput
-                  type='tel'
-                  pattern='[0-9]*'
-                  maxLength={2}
-                  label={translate('show-pending')}
-                  name={nameof('pendingDays')}
-                  onKeyDownEvent={limitToNumericKeyDown}
-                />
-              </div>
             </div>
+            <div className='right-side'></div>
 
             <div className='overview-actions'>
               <CustomButton
