@@ -49,11 +49,11 @@ export const deleteMaterialGroups = createAsyncThunk(
       dispatch(getAllMaterialGroups());
       return payload;
     } catch (err: any) {
-      const errors = err.response?.data;
-      if (errors) {
-        return rejectWithValue(errors);
-      }
-      return rejectWithValue(err.response ? err.response.status : err.message);
+    // const errors = err.response?.data;
+    // if (errors) {
+    //   return rejectWithValue(errors);
+    // }
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

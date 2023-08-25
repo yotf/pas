@@ -59,7 +59,7 @@ const thicknessSlice = createSlice({
     });
     builder.addCase(deleteThicknessThunk.rejected, (state, action: any) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
   },
 });

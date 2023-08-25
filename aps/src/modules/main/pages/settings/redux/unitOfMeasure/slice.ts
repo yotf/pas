@@ -59,7 +59,7 @@ const unitOfMeasureSlice = createSlice({
     });
     builder.addCase(deleteUnitOfMeasureThunk.rejected, (state, action: any) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
   },
 });

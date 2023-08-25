@@ -66,7 +66,7 @@ const customersSlice = createSlice({
     });
     builder.addCase(deleteCustomersThunk.rejected, (state, action: any) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
   },
 });

@@ -50,7 +50,7 @@ export const deleteColorsThunk = createAsyncThunk(
       await ApiService.delete<SettingsPageItem>(BASE_COLORS_API, payload);
       return payload;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

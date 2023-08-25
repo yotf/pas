@@ -60,7 +60,7 @@ const featuresSlice = createSlice({
     });
     builder.addCase(deleteFeatureThunk.rejected, (state, action: any) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
   },
 });

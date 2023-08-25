@@ -49,7 +49,7 @@ export const deleteFeatureThunk = createAsyncThunk(
       dispatch(getAllFeatures());
       return payload;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

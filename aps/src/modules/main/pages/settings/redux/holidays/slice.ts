@@ -15,7 +15,9 @@ const holidaysSlice = createSlice({
     filterHolidays: (state, action: PayloadAction<string>) => {
       state.filtered = state.data.filter((uom: SettingsPageItem) => {
         const searchCriteria = action.payload?.toLowerCase();
-        const holidayDateDottedFormat = uom.holidayDate? dateFormatter(uom.holidayDate) :undefined;
+        const holidayDateDottedFormat = uom.holidayDate
+          ? dateFormatter(uom.holidayDate)
+          : undefined;
         return (
           uom.code?.toLowerCase().includes(searchCriteria) ||
           uom.name.toLowerCase().includes(searchCriteria) ||
@@ -62,7 +64,7 @@ const holidaysSlice = createSlice({
     });
     builder.addCase(deleteHolidayThunk.rejected, (state, action: any) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
   },
 });
