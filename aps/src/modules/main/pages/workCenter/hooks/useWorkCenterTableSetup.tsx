@@ -114,7 +114,7 @@ export const useWorkCenterTableSetup = ({
     index: number | undefined,
     event: React.MouseEvent<HTMLElement>,
   ) => {
-    onEdit ? onEdit(record) : null;
+    onEdit && activeGroup ? onEdit(record) : null;
   };
 
   const isWorkCapacity = activeGroup === true;

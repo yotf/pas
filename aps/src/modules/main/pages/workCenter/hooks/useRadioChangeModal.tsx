@@ -46,7 +46,7 @@ export const useRadioChangeModal = ({
   const handleOk = useCallback((): void => {
     callbackRef.current!();
     setValue('allowedOperations', []);
-    const allocationBased = getValues('allocationBased');
+    setValue('unitOfMeasureId', undefined);
     closeRedirectModal();
   }, [closeRedirectModal, setValue]);
 

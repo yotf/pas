@@ -78,7 +78,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
       ? setValue('unitOfMeasureId', UoMOptions?.[0]?.value as number)
-      : null;
+      : setValue('unitOfMeasureId', undefined);
   }, [allocationBased]);
 
   return (
@@ -184,7 +184,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
                 register={register('waitingTime')}
                 label={translate('waitingTime')}
                 width='full-width'
-            
               />
               <CustomInput
                 error={errors.setupTime}
@@ -195,7 +194,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
                 register={register('setupTime')}
                 label={translate('setupTime')}
                 width='full-width'
-          
               />
             </div>
           </div>
