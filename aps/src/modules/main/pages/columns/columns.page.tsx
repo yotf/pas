@@ -10,6 +10,7 @@ import { OverviewProductionOrderOperationMapped } from '../settings/redux/overvi
 import { ColumnVisible, OverviewColumnsForm } from './interfaces';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getOverviewColumns, postColumnsConfigThunk } from '../settings/redux/columns/thunks';
+import './columns.scss';
 
 const ColumnsConfig: FC = () => {
   const ns = 'columnConfig';
@@ -53,7 +54,6 @@ const ColumnsConfig: FC = () => {
                   control={control}
                   name={otc}
                   render={({ field }) => {
-                    debugger;
                     return (
                       <Checkbox
                         checked={

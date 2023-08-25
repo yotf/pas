@@ -125,7 +125,14 @@
     "salesOrderDeliveryDate": "SO Delivery Date",
     "initialPlanningDate": "Initial Planning Date",
     "POFinalDeliveryDate": "PO Final Delivery Date",
-    "POPosition": "PO Position"
+    "POPosition": "PO Position",
+    "operationName": "Operation",
+    "foreseenDeliveryDate": "Foreseen Delivery Date",
+    "estimatedTime": "Estimated Time",
+    "operationTime": "Standard Time",
+    "planningDate": "Foreseen Date",
+    "executedDate": "Execution Date",
+    "setupTime": "Setup Time"
   },
   "users": {
     "new": "New",
@@ -252,9 +259,9 @@
   },
   "configuration": {
     "save": "Save",
-    "quantity1": "Quantity 1",
-    "quantity2": "Quantity 2",
-    "isKg": "Unit of Measure That is in Kg",
+    "quantity1": "Units Of Quantity 1",
+    "quantity2": "Units Of Quantity 2",
+    "isKg": "Unit of Measure in KG",
     "validation": {
       "create_success": "Configuration has been successfully saved",
       "create_fail": "Configuration could not be saved"

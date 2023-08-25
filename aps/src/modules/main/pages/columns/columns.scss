@@ -1,0 +1,23 @@
+.columns-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 10px;
+
+  div label {
+    display: flex;
+    gap: 5px;
+  }
+}
+
+.columns-container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 2em;
+  margin-top: 2em;
+  margin-right: 2em;
+
+  .action-button {
+    max-width: 100px;
+  }
+}
