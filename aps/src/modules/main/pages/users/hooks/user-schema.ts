@@ -44,6 +44,7 @@ export const useUserSchema = (
           .matches(/^[+]?(\s*|\d+)$/, translate('numeric'))
           .max(maxLength, maxLengthTranslate),
         roleId: requiredString,
+        language: requiredString,
         positionId: Yup.number()
           .notRequired()
           .transform((value, originalValue) => (isNaN(value) ? undefined : originalValue)),

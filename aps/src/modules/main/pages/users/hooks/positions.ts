@@ -57,6 +57,5 @@ export const useUserOptions = (): UsePositionsReturnType => {
     () => roles.map((entity) => ({ label: entity.name, value: entity.id })) ?? [],
     [roles],
   );
-  debugger;
   return { positionOptions, roleOptions };
 };

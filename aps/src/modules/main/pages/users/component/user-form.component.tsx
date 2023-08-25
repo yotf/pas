@@ -2,7 +2,7 @@
  * @module UserForm
  */
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CustomInput from '../../../../shared/components/input/input.component';
 import CustomSwitch from '../../../../shared/components/input/switch/switch.component';
@@ -22,8 +22,11 @@ const UserForm: FC = () => {
   const {
     register,
     formState: { errors },
+    setValue,
     getValues,
+    watch,
   } = useFormContext<UserFormData>();
+  const { language } = watch();
   //const { options: roleOptions } = useRoles();
   // const userPosition = getValues('positionId');
 
@@ -39,6 +42,10 @@ const UserForm: FC = () => {
   ): void => {
     if (event.key.includes(' ')) event.preventDefault();
   };
+
+  useEffect(() => {
+    if (!language) setValue('language', languageOptions?.[0]?.value);
+  }, [language]);
 
   return (
     <form
@@ -122,6 +129,7 @@ const UserForm: FC = () => {
         placeholder={translate('language')}
         register={register('language')}
         options={languageOptions}
+        isRequired={true}
       />
     </form>
   );
