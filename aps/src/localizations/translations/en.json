@@ -132,7 +132,8 @@
     "operationTime": "Standard Time",
     "planningDate": "Foreseen Date",
     "executedDate": "Execution Date",
-    "setupTime": "Setup Time"
+    "setupTime": "Setup Time",
+    "overview": "Overview"
   },
   "users": {
     "new": "New",

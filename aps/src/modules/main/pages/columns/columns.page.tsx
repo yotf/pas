@@ -43,7 +43,7 @@ const ColumnsConfig: FC = () => {
     <FormProvider {...form}>
       <div className='columns-container'>
         <div className='overview'>
-          <h2>Overview</h2>
+          <h2>{translate('overview')}</h2>
           <form
             className='columns-form'
             data-testid='columns-form'
