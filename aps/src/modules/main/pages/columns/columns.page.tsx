@@ -42,33 +42,38 @@ const ColumnsConfig: FC = () => {
   return (
     <FormProvider {...form}>
       <div className='columns-container'>
-        <form
-          className='columns-form'
-          data-testid='columns-form'
-          onSubmit={(e) => e.preventDefault()}
-        >
-          {overviewTableColumns.map((otc, i) => (
-            <div>
-              <label>
-                <Controller
-                  control={control}
-                  name={otc}
-                  render={({ field }) => {
-                    return (
-                      <Checkbox
-                        checked={
-                          field.value !== undefined ? field.value : overViewColumns?.[i]?.isVisible
-                        }
-                        {...field}
-                      />
-                    );
-                  }}
-                ></Controller>
-                {translate(otc)}
-              </label>
-            </div>
-          ))}
-        </form>
+        <div className='overview'>
+          <h2>Overview</h2>
+          <form
+            className='columns-form'
+            data-testid='columns-form'
+            onSubmit={(e) => e.preventDefault()}
+          >
+            {overviewTableColumns.map((otc, i) => (
+              <div>
+                <label>
+                  <Controller
+                    control={control}
+                    name={otc}
+                    render={({ field }) => {
+                      return (
+                        <Checkbox
+                          checked={
+                            field.value !== undefined
+                              ? field.value
+                              : overViewColumns?.[i]?.isVisible
+                          }
+                          {...field}
+                        />
+                      );
+                    }}
+                  ></Controller>
+                  {translate(otc)}
+                </label>
+              </div>
+            ))}
+          </form>
+        </div>
 
         <CustomButton
           customClass='action-button'
