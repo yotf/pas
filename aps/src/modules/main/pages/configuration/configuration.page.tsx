@@ -25,7 +25,12 @@ const Configuration: FC = () => {
   const sliceState = useAppSelector((state) => state.configuration.data);
 
   const form = useForm<ConfigurationFormData>();
-  const { register, handleSubmit, setValue } = form;
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { isDirty },
+  } = form;
 
   const { quantities1, quantities2, defaultKg } = form.watch();
   const { translate } = useTranslate({ ns: ns });
@@ -42,7 +47,7 @@ const Configuration: FC = () => {
   const nameof = nameofFactory<ConfigurationFormData>();
 
   const isSaveDisabled = useMemo(
-    () => !quantities1?.length || !quantities2?.length || !defaultKg,
+    () => !quantities1?.length || !quantities2?.length || !defaultKg || !isDirty,
     [quantities1, quantities2, defaultKg],
   );
 
@@ -67,7 +72,6 @@ const Configuration: FC = () => {
       }),
     );
   };
-
 
   useConfigurationValidation({ form, ns });
 
