@@ -78,6 +78,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
   const { openRadioChangeModal, radioChangeModal } = useRadioChangeModal({
     ns: ns,
     form: form,
+    usedInPlanning: entity?.usedInPlanning!,
   });
 
   useEffect(() => {

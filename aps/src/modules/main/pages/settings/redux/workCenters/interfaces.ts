@@ -26,6 +26,7 @@ export interface WorkCenter {
   unitOfMeasures: SettingsPageItem[];
   workCenterAddAndUpdateDto?: WorkCapacity[];
   weightCapacity?: number;
+  usedInPlanning?: boolean;
 }
 
 export interface WorkCenterFormData {

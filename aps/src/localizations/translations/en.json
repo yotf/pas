@@ -830,7 +830,8 @@
     "radio_modal": {
       "cancel": "Cancel",
       "ok_text": "Proceed",
-      "radio_modal_text": "Changing the allocation based will clear all assigned operations"
+      "radio_modal_text": "Changing the allocation based will clear all assigned operations",
+      "radio_cant_change_text": "Can't change Allocation Based because work center has scheduled operations"
     },
     "validation": {
       "required": "This field is required",

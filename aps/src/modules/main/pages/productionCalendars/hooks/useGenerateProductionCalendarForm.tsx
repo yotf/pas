@@ -9,13 +9,11 @@ import { Path, UseFormReturn } from 'react-hook-form';
 import { useMaintainForm } from '../../../components/maintain/hooks/useMaintainForm';
 import {
   GenerateProductionCalendarFormData,
-  ProductionCalendarResponse,
   ProductionCalendarsResponse
 } from '../../settings/redux/productionCalendars/interfaces';
 import { ProductionCalendarPostResponse } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
 import { clearProductionCalendars } from '../../settings/redux/productionCalendars/slices';
 import { getProductionCalendar } from '../../settings/redux/productionCalendars/thunks';
-import { WorkCenter } from '../../settings/redux/workCenters/interfaces';
 import { useGenerateProductionCalendarSchema } from './useGenerateProductionCalendarSchema';
 
 export type UseProductionCalendarsFormType = {
