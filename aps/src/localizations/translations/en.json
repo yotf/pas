@@ -1190,7 +1190,9 @@
         "planningDate": "Foreseen Date",
         "remark": "Remark",
         "notPlanned": "Not Planned",
-        "edit_operation": "Edit Operation"
+        "edit_operation": "Edit Operation",
+        "executionDate": "Execution Date",
+        "execute": "Execute Operation"
       },
       "validation": {
         "required": "This field is required",

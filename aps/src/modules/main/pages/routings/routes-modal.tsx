@@ -31,11 +31,18 @@ import {
 } from '../settings/redux/routings/interfaces';
 import { useRoutingRouteForm } from './hooks/useRoutingRouteForm';
 import './routes-modal.scss';
+import dayjs from 'dayjs';
+import {
+  ProductionOrder,
+  ProductionOrderFormData,
+  ProductionOrderResponse,
+} from '../settings/redux/productionOrders/interfaces';
 
 export type Props = {
   route?: RoutingRouteFormData;
   onClose: () => void;
-  option?: 'create' | 'edit';
+  option?: 'create' | 'edit' | 'execute';
+  linkedPOId?: number;
 };
 /**
  *
@@ -44,16 +51,26 @@ export type Props = {
  * @param onClose Clears selected routing route and closes the modal
  * @returns A modal for deleting and editing routing routes. The onOk function will change routing routes which are defined in the main form
  */
-const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
-  const { ns } =
-    useContext<MaintainContextValue<Routing, RoutingResponse, RoutingFormData>>(MaintainContext);
+const RoutesModal: FC<Props> = ({ route, onClose, option, linkedPOId }) => {
+  const {
+    ns,
+    state: { entity },
+  } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes.modal' });
-  const { form, onSubmit } = useRoutingRouteForm({ route, onClose, option });
+  const { form, onSubmit } = useRoutingRouteForm({ route, onClose, option, linkedPOId });
   const buttonProps = useModalProps<RoutingRouteFormData>(form);
   const nameof = nameofFactory<RoutingRouteFormData>();
   const { data: operations } = useAppSelector((state) => state.operation);
   const { register } = form;
   const dispatch = useAppDispatch();
+
+  const previousExecutedDate = useMemo(
+    () =>
+      (entity as unknown as ProductionOrderResponse)?.pO_RoutingOperations?.find(
+        (op) => op.sequence === route?.sequence! - 1,
+      )?.executedDate,
+    [route, entity],
+  );
   useEffect(() => {
     if (!operations.length) {
       dispatch(getAllOperations());
@@ -72,7 +89,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
         centered
         open={!!route}
         title={option == 'edit' ? translate('edit_operation') : translate('add_operation')}
-        okText={translate('save')}
+        okText={option === 'execute' ? translate('execute') : translate('save')}
         onOk={onSubmit}
         cancelText={translate('cancel')}
         onCancel={onClose}
@@ -88,6 +105,8 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
             isAutocomplete={true}
             isRequired={true}
             allowClear={true}
+            disabled={option === 'execute'}
+            readOnly={option === 'execute'}
           />
         </div>
         <CustomInput
@@ -103,6 +122,8 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           register={register('sequence')}
           isRequired={true}
           maxLength={3}
+          disabled={option === 'execute'}
+          readOnly={option === 'execute'}
         />
         <CustomInput
           isRequired={true}
@@ -110,18 +131,24 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           label={translate('standardTime')}
           name={nameof('standardTime')}
           onKeyDownEvent={handleTimeFormatKeyDown}
+          disabled={option === 'execute'}
+          readOnly={option === 'execute'}
         />
         <CustomInput
           type='tel'
           label={translate('setupTime')}
           name={nameof('setupTime')}
           onKeyDownEvent={handleTimeFormatKeyDown}
+          disabled={option === 'execute'}
+          readOnly={option === 'execute'}
         />
         <CustomInput
           type='tel'
           label={translate('waitingTime')}
           name={nameof('waitingTime')}
           onKeyDownEvent={handleTimeFormatKeyDown}
+          disabled={option === 'execute'}
+          readOnly={option === 'execute'}
         />
         <CustomInput
           isRequired={true}
@@ -131,7 +158,8 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           name={nameof('leadTime')}
           maxLength={2}
           onKeyDownEvent={limitToNumericKeyDown}
-
+          disabled={option === 'execute'}
+          readOnly={option === 'execute'}
         />
         <CustomInput
           type='readonly'
@@ -139,6 +167,29 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
           name={nameof('departmentName')}
         />
         <CustomSwitch label={translate('planning')} name={nameof('planning')} />
+        {option === 'execute' && (
+          <>
+            <CustomInput
+              type='date'
+              label={translate('planningDate')}
+              name={nameof('planningDate')}
+              disabled
+              readOnly
+            />
+            <CustomInput
+              type='date'
+              label={translate('executionDate')}
+              name={nameof('executedDate')}
+              // disableDatesAfter={dayjs()}
+              disableDatesFrom={
+                previousExecutedDate
+                  ? dayjs(previousExecutedDate)
+                  : dayjs((entity as unknown as ProductionOrderResponse).initialDate)
+              }
+              //  disableDatesAfter={}
+            />
+          </>
+        )}
         <div className='colspan'>
           <CustomInput
             type='textarea'
@@ -146,6 +197,8 @@ const RoutesModal: FC<Props> = ({ route, onClose, option }) => {
             name={nameof('remark')}
             width='full-width'
             onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
+            disabled={option === 'execute'}
+            readOnly={option === 'execute'}
           />
         </div>
       </Modal>

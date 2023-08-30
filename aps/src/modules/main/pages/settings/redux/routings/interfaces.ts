@@ -35,6 +35,7 @@ export interface RoutingRouteFormData {
   departmentName?: string;
   sequence?: number;
   guid?: string;
+  skipped?: boolean;
 
   workCenterId?: number;
   planningDate?: string;

@@ -40,7 +40,6 @@ export interface ProductionOrderTypeDto {
   name: string;
 }
 
-
 export interface PORoutingOperations extends PORoutingOperationAddAndUpdate {
   workCenter: WorkCenter;
   workCenters: WorkCenter[];
@@ -106,6 +105,7 @@ export interface ProductionOrder {
   situation: StatusSituation;
   pO_RoutingOperations: PORoutingOperations[];
   productionOrderTypeDto: ProductionOrderTypeDto;
+  remark: string;
 }
 
 export interface ProductionOrderMapped {

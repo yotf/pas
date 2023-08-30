@@ -3,6 +3,7 @@
  */
 
 import { OverviewProductionOrderOperationMapped } from '@/modules/main/pages/settings/redux/overview/interfaces';
+import { AxiosErrorFormat } from '@/modules/main/pages/settings/redux/slice';
 import { DefaultOptionType } from 'antd/lib/select';
 /** Default date format used for datepickers */
 export const euDateFormat = 'DD.MM.YYYY';
@@ -32,10 +33,9 @@ export enum AllocationBasedEnum {
   'formula' = 2,
 }
 
-
 type OverviewTableColumns = keyof OverviewProductionOrderOperationMapped;
 
-export const overviewTableColumns: OverviewTableColumns[] =[
+export const overviewTableColumns: OverviewTableColumns[] = [
   'orderNumber',
   'orderType',
   'customerName',
@@ -56,6 +56,11 @@ export const overviewTableColumns: OverviewTableColumns[] =[
   'planningDate',
   'executedDate',
 ];
+
+export interface CustomError {
+  message: string;
+  response: AxiosErrorFormat;
+}
 
 /** Situation enum used in {@link ProductionOrderMaintain} */
 

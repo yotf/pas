@@ -1,5 +1,4 @@
 import { UseFormReturn } from 'react-hook-form';
-import { usePOModalValidation } from '../../salesOrders/productionOrderModal/usePOModalValidation';
 import { ConfigurationFormData } from '../interfaces';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useAppSelector } from '@/store/hooks';

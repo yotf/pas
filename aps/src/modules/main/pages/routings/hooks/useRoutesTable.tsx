@@ -15,6 +15,8 @@ export type Props = {
   onEdit: (entity: RoutingRouteFormData) => void;
   onDelete: (entity: RoutingRouteFormData) => void;
   useActions?: boolean;
+  isPlannedPO?: boolean;
+
 };
 /**
  *
@@ -22,7 +24,12 @@ export type Props = {
  * @param onDelete Created in {@link RoutesTable} component. Defines what happens when user tries to delete a route (a table row).
  * @returns A table component created by {@link TableHook } hook from routing operations. The routing operation are extracted from the main form.
  */
-export const useRoutesTable = ({ onDelete, onEdit, useActions }: Props): JSX.Element => {
+export const useRoutesTable = ({
+  onDelete,
+  onEdit,
+  useActions,
+  isPlannedPO,
+}: Props): JSX.Element => {
   const { ns } = useContext(MaintainContext);
   const { watch } = useFormContext<RoutingFormData>();
   const { routingAddAndUpdateOperations: routingOperations } = watch();
@@ -62,6 +69,7 @@ export const useRoutesTable = ({ onDelete, onEdit, useActions }: Props): JSX.Ele
     height: 250,
     rowKey: nameof('guid'),
     useActions,
+    isPlannedPO,
   });
   return table;
 };

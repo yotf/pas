@@ -36,6 +36,7 @@ import { getRouting } from '../settings/redux/routings/thunks';
 import { useProductionOrderOptions } from './hooks/useProductionOrderOptions';
 import './productionOrdersForm.scss';
 import { Modal } from 'antd';
+//import { getProductionOrder } from '../settings/redux/productionOrders/thunks';
 
 /**
  * The form reuses {@link RoutesTable} logic. The useEffect hooks are used to modifiy form values which are dependent on one another (for example when material changes so does routing and that changes the routing table operations).
@@ -66,6 +67,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: salesOrders } = useAppSelector((state) => state.salesOrders);
   const { entity: selectedRouting } = useAppSelector((state) => state.routings);
+  // const { entity: selectedOrigin } = useAppSelector((state) => state.productionOrders);
+  // const { data: selectedOrigin } = useAppSelector((state) => state.singleProductionOrder);
 
   const [discardOperationModalVisible, setDiscardOperationModalVisible] = useState<boolean>(false);
   const [pendingValue, setPendingValue] = useState<pendingFieldType>();
@@ -106,6 +109,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     unitOfMeasure1Id,
     unitOfMeasure2Id,
     unitOfMeasure3Id,
+    origin,
   } = watch();
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
@@ -171,8 +175,12 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
   // useEffect(() => {
-  //   setValue('materialId', materialId);
-  // }, [materialId, setValue]);
+  //   //  if (origin) dispatch(getProductionOrder(origin));
+  // }, [origin]);
+  // useEffect(() => {
+  //   debugger;
+  //   if (selectedOrigin) setValue('foreseenDeliveryPOOrigin', selectedOrigin.foreseenDelivery);
+  // }, [selectedOrigin]);
 
   useEffect(() => {
     setValue('pO_RoutingOperationAddAndUpdateDtos', routingAddAndUpdateOperations, {
@@ -257,6 +265,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     setPendingValue({ id: undefined, value: undefined });
     setDiscardOperationModalVisible(false);
   };
+
   return (
     <div className='production-order-container'>
       <div className='form-container'>
@@ -475,14 +484,15 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               disabled={isPlanned}
               readOnly={isPlanned}
             />
-
-            <CustomInput
-              type='date'
-              label={translate('foreseenDeliveryPOOrigin')}
-              name={nameof('foreseenDeliveryPOOrigin')}
-              readOnly
-              disabled={true}
-            />
+            <div className='label-wider'>
+              <CustomInput
+                type='date'
+                label={translate('foreseenDeliveryPOOrigin')}
+                name={nameof('foreseenDeliveryPOOrigin')}
+                readOnly
+                disabled={true}
+              />
+            </div>
             <CustomInput
               type='date'
               label={translate('foreseenDelivery')}
@@ -543,7 +553,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           }
         />
         <FormProvider {...form}>
-          <RoutesTable useActions={!isPlanned} />
+          <RoutesTable useActions={!isPlanned} isPlannedPO={isPlanned} linkedPOId={entity?.id} />
         </FormProvider>
       </div>
     </div>

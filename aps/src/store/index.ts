@@ -81,6 +81,7 @@ import { productionOrderNumbersReducer } from '@/modules/main/pages/settings/red
 import { columnConfigReducer } from '@/modules/main/pages/settings/redux/columns/slice';
 import { ColumnConfigResponse } from '@/modules/main/pages/settings/redux/columns/states';
 import { productionOrderStatusReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersStatus/slice';
+import { productionOrderExecutionReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrderExecute/slice';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -122,6 +123,7 @@ export const rootReducer = combineReducers<StoreType>({
   productionOrderNumbers: productionOrderNumbersReducer,
   productionOrdersModal: productionOrdersModalReducer,
   productionOrderStatus: productionOrderStatusReducer,
+  productionOrderExecution: productionOrderExecutionReducer,
   statistics: statisticsReducer,
   simulation: simulationReducer,
   reallocationOfPlanning: reallocationReducer,
@@ -177,6 +179,7 @@ export type StoreType = CombinedState<
     columnConfig: ColumnConfigResponse;
     productionOrderNumbers: ProductionOrderNumberInitialStateResponse;
     productionOrderStatus: BaseResponse;
+    productionOrderExecution: BaseResponse;
   } & SettingsType
 >;
 /**

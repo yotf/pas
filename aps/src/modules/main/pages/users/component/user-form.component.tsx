@@ -21,7 +21,7 @@ const UserForm: FC = () => {
   });
   const {
     register,
-    formState: { errors },
+    formState: { errors, isDirty },
     setValue,
     getValues,
     watch,
@@ -46,6 +46,8 @@ const UserForm: FC = () => {
   useEffect(() => {
     if (!language) setValue('language', languageOptions?.[0]?.value);
   }, [language]);
+
+  debugger;
 
   return (
     <form

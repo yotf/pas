@@ -9,11 +9,14 @@ import { UseFormReturn, useForm, useFormContext } from 'react-hook-form';
 import { RoutingFormData, RoutingRouteFormData } from '../../settings/redux/routings/interfaces';
 import { useFormAutofill } from './useFormAutofill';
 import { useRoutingRouteSchema } from './useRoutingRouteSchema';
+import { executeProductionOrderOperation } from '../../settings/redux/productionOrders/productionOrderExecute/thunks';
+import { useAppDispatch } from '@/store/hooks';
 
 export type Props = {
   route?: RoutingRouteFormData;
   onClose: () => void;
-  option?: 'create' | 'edit';
+  option?: 'create' | 'edit' | 'execute';
+  linkedPOId?: number;
 };
 
 export type Return = {
@@ -27,7 +30,7 @@ export type Return = {
  * @param onClose Clears selected routing route and closes the modal
  * @returns Routing Route form used in {@link RoutesModal}. The form recalculates routes from the main form and their sequences. When on submit is triggered the main form gets updated.
  */
-export const useRoutingRouteForm = ({ route, onClose, option }: Props): Return => {
+export const useRoutingRouteForm = ({ route, onClose, option, linkedPOId }: Props): Return => {
   const { watch, setValue, getValues } = useFormContext<RoutingFormData>();
   const { routingAddAndUpdateOperations } = watch();
   const setMaxSequence =
@@ -41,6 +44,8 @@ export const useRoutingRouteForm = ({ route, onClose, option }: Props): Return =
   });
   useFormAutofill(form);
   useGeneratedSequence(route!, form, 'routingAddAndUpdateOperations');
+
+  const dispatch = useAppDispatch();
 
   const recalculateOperations = useCallback(
     (data: RoutingRouteFormData): RoutingRouteFormData[] => {
@@ -63,10 +68,9 @@ export const useRoutingRouteForm = ({ route, onClose, option }: Props): Return =
   );
 
   const { handleSubmit } = form;
-  const onSubmit = useMemo(
+  const onSubmitSave = useMemo(
     () =>
       handleSubmit((data: RoutingRouteFormData) => {
-        // debugger;
         const routingOperations = recalculateOperations(data);
         setValue('routingAddAndUpdateOperations', routingOperations, {
           shouldDirty: true,
@@ -77,6 +81,25 @@ export const useRoutingRouteForm = ({ route, onClose, option }: Props): Return =
       }),
     [handleSubmit, onClose, recalculateOperations, setValue],
   );
+
+  const onSubmitExecute = useMemo(
+    () =>
+      handleSubmit((data: RoutingRouteFormData) => {
+        debugger;
+        dispatch(
+          executeProductionOrderOperation({
+            id: data.id!,
+            linkedPOId,
+            executionDate: data.executedDate!,
+            skipped: data.skipped!,
+          }),
+        );
+        onClose();
+      }),
+    [handleSubmit, onClose, recalculateOperations, setValue, linkedPOId],
+  );
+
+  const onSubmit = option === 'execute' ? onSubmitExecute : onSubmitSave;
 
   return { form, onSubmit };
 };

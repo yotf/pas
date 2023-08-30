@@ -73,6 +73,7 @@ const MaintainActions = ({ copy }: MaintainActionProps): JSX.Element => {
           <span>{translate('save')}</span>
         </div>
       </CustomButton>
+
       {!!entity?.id && (
         <CustomButton
           customClass='action-button'

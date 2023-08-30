@@ -5,13 +5,19 @@
 import { ExportToExcelContext } from '@/modules/main/components/maintain/contexts/exportToExcel.context';
 import { setPagination } from '@/modules/main/pages/settings/redux/sharedTableState/slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { CodeSandboxOutlined, DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import {
+  CheckSquareOutlined,
+  CodeSandboxOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  EyeOutlined,
+} from '@ant-design/icons';
 import { Empty, PaginationProps, Space } from 'antd';
 import { SorterResult } from 'antd/es/table/interface';
 import Table, { ColumnsType } from 'antd/lib/table';
 import Tooltip from 'antd/lib/tooltip';
 import dayjs from 'dayjs';
-import { ReactNode, useCallback, useContext, useEffect } from 'react';
+import { ReactNode, useCallback, useContext, useEffect, useMemo } from 'react';
 import { useTranslate } from '../translate.hook';
 import { createColumns } from './table.columns';
 import './table.scss';
@@ -25,6 +31,8 @@ import {
   SalesOrderFormData,
   SalesMaterialFormData,
 } from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
+import { POFormStatus } from '../../consts';
+import { ProductionOrder } from '@/modules/main/pages/settings/redux/productionOrders/interfaces';
 /**
  * @template T Type of objects to be rendered in the table. Each object represents one table row.
  */
@@ -75,6 +83,8 @@ export type UseTableProps<T> = {
     index: number | undefined,
     event: React.MouseEvent<HTMLElement>,
   ) => void;
+
+  isPlannedPO?: boolean;
 };
 /**
  *
@@ -100,15 +110,16 @@ export const useTable = <T extends object>({
   rowSelection,
   pageSize,
   handleRowDoubleClick,
+  isPlannedPO,
 }: UseTableProps<T>): JSX.Element => {
   const { setUiData, setSort } = useContext(ExportToExcelContext);
   const {
+    ns,
     state: { entity },
     copying,
-  } =
-    useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
-      MaintainContext,
-    );
+  } = useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
+    MaintainContext,
+  );
 
   useEffect(() => {
     setUiData(dataSource);
@@ -116,8 +127,21 @@ export const useTable = <T extends object>({
   const { translate } = useTranslate({
     ns: 'table',
   });
+
+  // const isPlannedProductionOrder = useMemo(
+  //   () =>
+  //     ns === 'productionOrder' &&
+  //     !!entity?.id &&
+  //     //     (entity?.statusOfPlanningEnum === POFormStatus.planned &&
+  //     (entity as unknown as ProductionOrder)?.statusOfPlanningEnum === POFormStatus.planned,
+  //   [(entity?.id, (entity as unknown as ProductionOrder)?.statusOfPlanningEnum)],
+  // );
+
+  // debugger;
+
   const doEdit = useCallback((value: T) => () => onEdit?.(value), [onEdit]);
   const doDelete = useCallback((value: T) => () => onDelete?.(value), [onDelete]);
+
   const doProductionModal = useCallback(
     (value: T) => () => openProductionModal?.(value),
     [openProductionModal],
@@ -163,6 +187,17 @@ export const useTable = <T extends object>({
           </Space>
         );
       },
+    });
+  else if (isPlannedPO)
+    columns.push({
+      title: translate('execute'),
+      key: 'action',
+      width: 100,
+      render: (value: T & { date: string }, record: T) => (
+        <Space size='middle' className='action-container'>
+          <CheckSquareOutlined style={{ color: 'blue' }} onClick={doEdit(value)} />
+        </Space>
+      ),
     });
   const table =
     dataSource?.length && dataSource[0] ? (

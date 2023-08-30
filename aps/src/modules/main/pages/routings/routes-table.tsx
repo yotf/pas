@@ -21,15 +21,17 @@ import './routes-table.scss';
 
 export interface Props {
   useActions?: boolean;
+  isPlannedPO?: boolean;
+  linkedPOId?: number;
 }
 
-const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
+const RoutesTable: React.FC<Props> = ({ useActions = true, isPlannedPO, linkedPOId }) => {
   const { ns } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes' });
   const { getValues, setValue, watch } = useFormContext<RoutingFormData>();
   const [route, setRoute] = useState<RoutingRouteFormData>();
   const onClose = useCallback(() => setRoute(undefined), []);
-  const [option, setOption] = useState<'create' | 'edit'>();
+  const [option, setOption] = useState<'create' | 'edit' | 'execute'>();
   const { routingAddAndUpdateOperations } = watch();
   const onAddOperation = useCallback(() => {
     setRoute({
@@ -41,10 +43,13 @@ const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
     });
     setOption('create');
   }, []);
-  const onEditOperation = useCallback((selectedRoute: RoutingRouteFormData) => {
-    setRoute(selectedRoute);
-    setOption('edit');
-  }, []);
+  const onEditOperation = useCallback(
+    (selectedRoute: RoutingRouteFormData) => {
+      setRoute(selectedRoute);
+      isPlannedPO ? setOption('execute') : setOption('edit');
+    },
+    [isPlannedPO],
+  );
 
   const totalLeadTime = useMemo(
     () =>
@@ -70,6 +75,7 @@ const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
     onEdit: onEditOperation,
     onDelete: onDeleteOperation,
     useActions,
+    isPlannedPO,
   });
 
   return (
@@ -101,7 +107,7 @@ const RoutesTable: React.FC<Props> = ({ useActions = true }) => {
         </div>
       </div>
       {table}
-      <RoutesModal onClose={onClose} route={route} option={option} />
+      <RoutesModal onClose={onClose} route={route} option={option} linkedPOId={linkedPOId} />
     </div>
   );
 };
