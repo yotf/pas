@@ -146,7 +146,6 @@ export const createEntitySlice = <
         state.filtered = state.data;
       });
       builder.addCase(thunks.deleteThunk.rejected, (state, action: any) => {
-        debugger;
         state.loading = false;
         // state.error = action.error.message;
         state.error = action.payload;

@@ -18,7 +18,7 @@ export const updateProductionOrderStatus = createAsyncThunk(
       const { data: newData } = response;
       return newData;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

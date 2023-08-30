@@ -41,6 +41,12 @@ import {
 } from '../settings/redux/productionOrders/thunks';
 import { IdentifiableEntity } from '../settings/redux/thunks';
 import './productionOrders.scss';
+import {
+  notificationFail,
+  notificationSuccess,
+} from '@/modules/shared/services/notification.service';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * Adds additional filters and checkbox row selection to the table which is specific for this page.
@@ -115,6 +121,7 @@ const ProductionOrdersTable: FC = () => {
     (state: CombinedState<StoreType>) => state.productionOrders,
     [],
   );
+
   const dispatch = useAppDispatch();
   const [selectedRowKeys, setSelectedRowKeys] = useState<Key[]>();
 
@@ -131,12 +138,29 @@ const ProductionOrdersTable: FC = () => {
       productionOrders: selectedRowKeys!,
       statusOfPlanningEnum: status - 1,
     };
-
     dispatch(updateProductionOrderStatus(putData));
+    setSituationChangeRequested(true);
   };
+
+  const { loading, error } = useAppSelector((state) => state.productionOrderStatus);
 
   const [statusValue, setStatusValue] = useState<number>(1);
   const [situationValue, setSituationValue] = useState<number>(0);
+  const [situationChangeRequested, setSituationChangeRequested] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!situationChangeRequested || loading) return;
+
+    const newStatus = POFormStatus[statusValue - 1];
+    if (error) {
+      notificationFail(error);
+    } else {
+      notificationSuccess(
+        newStatus === 'document' ? translate('unschedule_success') : translate('schedule_success'),
+      );
+    }
+    setSituationChangeRequested(false);
+  }, [situationChangeRequested, loading, error]);
 
   useEffect(() => {
     onSelectionChange();
@@ -175,6 +199,16 @@ const ProductionOrdersTable: FC = () => {
   const ns = 'productionOrder';
 
   const { translate } = useTranslate({ ns: ns });
+
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 20,
+        color: 'white',
+      }}
+      spin
+    />
+  );
 
   const actionButtons = (
     <>
@@ -262,6 +296,11 @@ const ProductionOrdersTable: FC = () => {
 
   return (
     <ExportToExcelProvider value={contextValue}>
+      {loading && situationChangeRequested && (
+        <div className='spinner-overlay'>
+          <Spin size='large' />
+        </div>
+      )}
       <PageTable
         ns={ns}
         columnsOrder={columnsOrder}

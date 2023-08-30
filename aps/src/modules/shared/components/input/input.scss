@@ -98,9 +98,12 @@
     inset-inline-end: unset !important;
   }
 
-  .custom-input-container.readonly .ant-select .ant-select-selector {
-    background-color: $navy-10;
-    color: $navy-100;
+  .custom-input-container.readonly {
+    .ant-select .ant-select-selector,
+    .ant-input {
+      background-color: $navy-10;
+      color: $navy-100;
+    }
   }
 
   > * > input,

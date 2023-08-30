@@ -66,7 +66,6 @@ const articlesSlice = createSlice({
     });
     builder.addCase(deleteArticleThunk.rejected, (state, action: any) => {
       state.loading = false;
-      debugger;
       state.error = action.payload;
     });
   },

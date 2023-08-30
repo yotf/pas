@@ -14,11 +14,7 @@ export const postColumnsConfigThunk = createAsyncThunk(
       const response = await ApiService.post<ColumnVisible[]>(SAVE_VISIBLE_COLUMNS_API, payload);
       return response.data;
     } catch (err: any) {
-      const errors: { description: string }[] = err?.response?.data ?? [];
-      if (errors.length) {
-        return rejectWithValue({ type: 'validationErrors', errors });
-      }
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

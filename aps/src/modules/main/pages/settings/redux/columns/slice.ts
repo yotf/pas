@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialColumnsConfigState } from './states';
 import { getOverviewColumns, postColumnsConfigThunk } from './thunks';
+import { AxiosErrorFormat } from '../slice';
 
 const columnsConfigSlice = createSlice({
   name: 'columnsConfigSlice',
@@ -13,16 +14,16 @@ const columnsConfigSlice = createSlice({
     });
     builder.addCase(postColumnsConfigThunk.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = (action.payload as AxiosErrorFormat).data;
     });
     builder.addCase(postColumnsConfigThunk.fulfilled, (state, action) => {
       state.loading = false;
       state.error = undefined;
-      state.data = action.payload;
     });
 
     builder.addCase(getOverviewColumns.fulfilled, (state, action) => {
       state.loading = false;
+      debugger;
       state.data = action.payload;
       state.error = undefined;
     });

@@ -11,18 +11,31 @@ import { ColumnVisible, OverviewColumnsForm } from './interfaces';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getOverviewColumns, postColumnsConfigThunk } from '../settings/redux/columns/thunks';
 import './columns.scss';
+import {
+  notificationFail,
+  notificationSuccess,
+} from '@/modules/shared/services/notification.service';
 
 const ColumnsConfig: FC = () => {
   const ns = 'columnConfig';
-  const form = useForm<OverviewColumnsForm>();
+
   const dispatch = useAppDispatch();
-  const overViewColumns = useAppSelector((state) => state.columnConfig.data);
+  const { data: overViewColumns, error, loading } = useAppSelector((state) => state.columnConfig);
+
+  const form = useForm<OverviewColumnsForm>();
 
   const {
     handleSubmit,
     control,
-    formState: { isDirty },
+    formState: { isDirty, isSubmitted },
+    setValue,
   } = form;
+
+  useEffect(() => {
+    overviewTableColumns.forEach((columnName, i) => {
+      setValue(columnName, overViewColumns?.find((oc) => oc.overviewColumnEnum === i)?.isVisible);
+    });
+  }, [overViewColumns]);
 
   const { translate } = useTranslate({ ns: ns });
 
@@ -30,7 +43,17 @@ const ColumnsConfig: FC = () => {
     dispatch(getOverviewColumns());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!isSubmitted || loading) return;
+    if (error) {
+      notificationFail(error);
+      return;
+    }
+    notificationSuccess(translate('edit_success'));
+  }, [error, loading, isSubmitted, translate]);
+
   const onSubmit = (data: OverviewColumnsForm) => {
+    debugger;
     const visibilityList: ColumnVisible[] = Object.entries(data).map(([key, isVisible], index) => ({
       overviewColumnEnum: index,
       isVisible: isVisible || false,
@@ -59,9 +82,10 @@ const ColumnsConfig: FC = () => {
                       return (
                         <Checkbox
                           checked={
-                            field.value !== undefined
-                              ? field.value
-                              : overViewColumns?.[i]?.isVisible
+                            field.value
+                            // field.value !== undefined
+                            //   ? field.value
+                            //   : overViewColumns?.[i]?.isVisible
                           }
                           {...field}
                         />
