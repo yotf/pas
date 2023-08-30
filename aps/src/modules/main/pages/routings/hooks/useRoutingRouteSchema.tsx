@@ -91,6 +91,7 @@ export const useRoutingRouteSchema = (
         operationTime: Yup.number().notRequired(),
         pO_OperationStatusEnum: Yup.number().notRequired(),
         workCenterId: Yup.number().notRequired(),
+        skipped: Yup.boolean().notRequired(),
       }),
     [maxSequence, timeValidator, translate],
   );
