@@ -243,6 +243,8 @@ $tablet-breakpoint: 920px;
       //   }
       // }
 
+     
+
       .label {
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -255,6 +257,11 @@ $tablet-breakpoint: 920px;
 
         @media screen and (width < 830px) {
           max-width: 100px;
+        }
+      }
+      .label-wider {
+        .label {
+          max-width: 250px;
         }
       }
     }

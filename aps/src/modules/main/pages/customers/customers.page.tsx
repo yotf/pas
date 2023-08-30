@@ -61,6 +61,7 @@ const Customers: FC = () => {
     ): Partial<Shape<SettingsPageItem>> => {
       return {
         country: requiredStringCallback.max(50, translateMaxLengthMessage(50, translateCallback)),
+        name: requiredStringCallback.max(50, translateMaxLengthMessage(50, translateCallback)),
       };
     },
     [],

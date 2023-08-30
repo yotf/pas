@@ -64,7 +64,8 @@ export const usePCDaySchema = (
         date: Yup.string().notRequired(),
         remark: Yup.string()
           .notRequired()
-          .transform((value) => value || ''),
+          .transform((value) => value || '')
+          .max(200, translate('max_length', { name: '200' })),
         capacity: Yup.number()
           .transform((value) => (isNaN(value) ? undefined : value))
           .notRequired()

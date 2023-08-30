@@ -17,7 +17,7 @@ export type ProductionCalendarInputsProps = {
   checking: boolean;
   ns: string;
   exportToExcel?: () => void;
-  loading?: boolean | undefined;
+
 };
 /**
  *
@@ -28,7 +28,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
   checking,
   ns,
   exportToExcel,
-  loading,
+
 }: ProductionCalendarInputsProps) => {
   const nameof = nameofFactory<GenerateProductionCalendarFormData>();
 
@@ -49,7 +49,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           width='full-width'
           mode='multiple'
           options={workCenterOptions}
-          disabled={checking || loading}
+          disabled={checking }
           isRequired={!checking}
           allowClear={true}
           listHeight={320}
@@ -63,7 +63,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           width='full-width'
           noPastDates={true}
           disableDatesAfter={finalDate}
-          disabled={checking || loading}
+          disabled={checking }
         />
 
         <CustomInput
@@ -73,10 +73,10 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           name={nameof('finalDate')}
           width='full-width'
           disableDatesFrom={initialDate}
-          disabled={checking || loading}
+          disabled={checking }
         />
       </div>
-      <CustomButton type='button' color='green' onClick={exportToExcel} isDisabled={loading}>
+      <CustomButton type='button' color='green' onClick={exportToExcel} >
         <div className='button-children'>
           <img src={copy} alt='' />
           <span>{translate('excel_button')}</span>

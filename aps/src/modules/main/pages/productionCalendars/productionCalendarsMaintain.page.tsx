@@ -33,6 +33,7 @@ const columnsOrder: (keyof ProductionCalendarDayMapped)[] = [
   'efficiency',
   'availableMinutes',
   'capacity',
+  'remark',
 ];
 /**
  * @param copy If copy is true values are copied from an already created Material and placed inside the form

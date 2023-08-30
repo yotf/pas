@@ -42,6 +42,7 @@ const CustomersForm: FC = () => {
         label={translate('name')}
         placeholder={translate('name')}
         register={register('name')}
+        maxLength={50}
         isRequired={true}
       />
       <CustomInput
@@ -50,6 +51,7 @@ const CustomersForm: FC = () => {
         label={translate('country')}
         placeholder={translate('country')}
         register={register('country')}
+        maxLength={50}
         isRequired={true}
       />
       <CustomSwitch label={translate('active')} name={register('isActive').name} />

@@ -22,6 +22,11 @@
       background-color: #f8b400;
       box-shadow: none;
     }
+    .ant-table-cell {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

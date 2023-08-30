@@ -53,7 +53,7 @@ const ProductionCalendarForm: FC = (): JSX.Element => {
   const form = useFormContext();
   const {
     handleSubmit,
-    formState: { isValid, isDirty },
+    formState: { isValid, isDirty, isSubmitting },
   } = form;
   const dispatch = useAppDispatch();
   useProductionCalendarValidationChecks(ns);
@@ -82,8 +82,13 @@ const ProductionCalendarForm: FC = (): JSX.Element => {
       autoComplete='off'
       onSubmit={(e): void => e.preventDefault()}
     >
-      <ProductionCalendarInputs checking={false} ns={ns} loading={loading} />
-      <div className={loading ? 'grayed-out-table' : ''}>{table}</div>
+      {loading && (
+        <div className='spinner-overlay'>
+          <Spin size='large' />
+        </div>
+      )}
+      <ProductionCalendarInputs checking={false} ns={ns} />
+      {table}
       <div className='holidays-generate'>
         {holidaysList}
         <CustomButton
