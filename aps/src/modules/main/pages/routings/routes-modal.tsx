@@ -89,7 +89,7 @@ const RoutesModal: FC<Props> = ({ route, onClose, option, linkedPOId }) => {
         centered
         open={!!route}
         title={option == 'edit' ? translate('edit_operation') : translate('add_operation')}
-        okText={option === 'execute' ? translate('execute') : translate('save')}
+        okText={translate('save')}
         onOk={onSubmit}
         cancelText={translate('cancel')}
         onCancel={onClose}

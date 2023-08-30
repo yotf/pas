@@ -195,7 +195,7 @@ export const useTable = <T extends object>({
       width: 100,
       render: (value: T & { date: string }, record: T) => (
         <Space size='middle' className='action-container'>
-          <CheckSquareOutlined style={{ color: 'blue' }} onClick={doEdit(value)} />
+          <CheckSquareOutlined style={{ color: 'black' }} onClick={doEdit(value)} />
         </Space>
       ),
     });
