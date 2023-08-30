@@ -126,7 +126,7 @@ export const useProductionOrderForm = ({
               unitOfMeasure3Id: entity.unitOfMeasure3Id,
               creationDate: dateFormatter(entity?.changeHistoryDto?.createdOn),
               salesOrderDelivery: entity.salesOrderDto?.salesOrderDelivery || undefined,
-              remark: '',
+              remark: entity.remark,
               materialGroupId: entity.salesOrderMaterialDto?.material?.materialGroupId,
               articleId: entity.salesOrderMaterialDto?.material?.articleId,
               colorId: entity.salesOrderMaterialDto?.material?.colorId,
