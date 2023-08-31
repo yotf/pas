@@ -17,6 +17,7 @@ import { useProductionOrderModal } from '../productionOrderModal/useProductionOr
 export type Props = {
   onEdit?: (entity: SalesMaterialFormData) => void;
   onDelete?: (entity: SalesMaterialFormData) => void;
+  isFormActive?: boolean;
 };
 /**
  *
@@ -24,7 +25,11 @@ export type Props = {
  * @param onDelete Created in {@link SalesOrderMaterialsTable } component. Defines what happens when user tries to delete a material (a table row).
  * @returns A table component created by {@link TableHook} hook from sales order materials. The sales order materials are extracted from the main form.
  */
-export const useSalesOrderMaterialsTable = ({ onDelete, onEdit }: Props): JSX.Element => {
+export const useSalesOrderMaterialsTable = ({
+  onDelete,
+  onEdit,
+  isFormActive,
+}: Props): JSX.Element => {
   const { ns } = useContext(MaintainContext);
   const { watch } = useFormContext<SalesOrderFormData>();
   const { salesOrderMaterialsAddAndUpdate: salesOrderMaterials } = watch();
@@ -59,6 +64,8 @@ export const useSalesOrderMaterialsTable = ({ onDelete, onEdit }: Props): JSX.El
     usePaging: false,
     rowKey: nameof('guid'),
     customColumns: customColumns,
+    useActions: isFormActive,
+    
   });
   return (
     <>

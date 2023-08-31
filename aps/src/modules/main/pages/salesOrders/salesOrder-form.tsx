@@ -39,18 +39,16 @@ const SalesOrderForm: FC = () => {
   const { translate } = useTranslate({ ns });
 
   const nameof = nameofFactory<SalesOrderFormData>();
-
-  const { customerOptions, orderTypeOptions } = useSalesOrderOptions();
-
-  const { tableAndModal, onAddMaterial } = useSalesOrderMaterialsModal();
-
   const { watch, setValue } = useFormContext();
 
   const { status, salesOrderMaterialsAddAndUpdate } = watch();
 
+  const { customerOptions, orderTypeOptions } = useSalesOrderOptions();
   const isFormActive = useMemo(() => {
     return status === 1;
   }, [status]);
+
+  const { tableAndModal, onAddMaterial } = useSalesOrderMaterialsModal({ isFormActive });
 
   const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
 
@@ -104,6 +102,7 @@ const SalesOrderForm: FC = () => {
             width='full-width'
             options={orderTypeOptions}
             disabled={!isFormActive}
+            readOnly={!isFormActive}
           />
 
           <CustomInput
@@ -113,6 +112,7 @@ const SalesOrderForm: FC = () => {
             options={customerOptions}
             width='full-width'
             disabled={!isFormActive}
+            readOnly={!isFormActive}
             isRequired={true}
             isAutocomplete={true}
           />
@@ -133,6 +133,7 @@ const SalesOrderForm: FC = () => {
             name={nameof('customerOrderNumber')}
             width='full-width'
             disabled={!isFormActive}
+            readOnly={!isFormActive}
             maxLength={20}
           />
           <CustomInput
@@ -152,6 +153,7 @@ const SalesOrderForm: FC = () => {
               name={nameof('remark')}
               width='full-width'
               disabled={!isFormActive}
+              readOnly={!isFormActive}
               onKeyDownEvent={(e) => limitNumberOfChars(e, 200)}
             />
           </div>
@@ -162,6 +164,7 @@ const SalesOrderForm: FC = () => {
             color='blue'
             type='button'
             onClick={(): void => onAddMaterial()}
+            isDisabled={!isFormActive}
           >
             <div className='button-children'>
               <span>{translate('add_material')}</span>

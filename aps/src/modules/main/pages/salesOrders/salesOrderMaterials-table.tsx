@@ -21,7 +21,11 @@ export type UseSalesOrderMaterialModalReturn = {
  * @returns Table rendered by {@link useSalesOrderMaterialsTable} hook. The onEdit function chooses a material which opens {@link SalesOrderModal | Sales order modal} for editing
  * materials of the sales order. The on delete function remove a material from the array which is contained in the main form (form from {@link useSalesOrderForm}).
  */
-export const useSalesOrderMaterialsModal = (): UseSalesOrderMaterialModalReturn => {
+export const useSalesOrderMaterialsModal = ({
+  isFormActive,
+}: {
+  isFormActive: boolean;
+}): UseSalesOrderMaterialModalReturn => {
   const { getValues, setValue } = useFormContext<SalesOrderFormData>();
   const [material, setMaterial] = useState<SalesMaterialFormData>();
   const [option, setOption] = useState<'create' | 'edit'>();
@@ -62,6 +66,7 @@ export const useSalesOrderMaterialsModal = (): UseSalesOrderMaterialModalReturn 
   const table = useSalesOrderMaterialsTable({
     onEdit: onEditOperation,
     onDelete: onDeleteOperation,
+    isFormActive,
   });
 
   const tableAndModal = (
