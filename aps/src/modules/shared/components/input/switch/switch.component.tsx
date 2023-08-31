@@ -11,7 +11,7 @@ import './switch.scss';
  *
  * @returns A switch component
  */
-const CustomSwitch: FC<SwitchInput> = ({ label, name }) => {
+const CustomSwitch: FC<SwitchInput> = ({ label, name,disabled }) => {
   const { control } = useFormContext();
   const { field } = useController({ name, control });
 
@@ -20,7 +20,7 @@ const CustomSwitch: FC<SwitchInput> = ({ label, name }) => {
       <label data-testid='input-label' className={'label'}>
         {label}
       </label>
-      <Switch {...field} checked={field.value}></Switch>
+      <Switch {...field} checked={field.value} disabled ></Switch>
     </div>
   );
 };

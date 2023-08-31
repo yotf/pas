@@ -87,4 +87,5 @@ export interface SwitchInput {
   label: string;
   /**Used for registering to React Hook Form */
   name: string;
+  disabled?: boolean;
 }

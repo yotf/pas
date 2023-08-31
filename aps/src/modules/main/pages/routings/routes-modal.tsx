@@ -178,7 +178,11 @@ const RoutesModal: FC<Props> = ({
           label={translate('departmentName')}
           name={nameof('departmentName')}
         />
-        <CustomSwitch label={translate('planning')} name={nameof('planning')} />
+        <CustomSwitch
+          label={translate('planning')}
+          name={nameof('planning')}
+          disabled={option === 'execute'}
+        />
         {option === 'execute' && (
           <>
             <CustomInput
