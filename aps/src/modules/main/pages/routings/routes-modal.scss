@@ -8,4 +8,15 @@
       grid-column: span 2;
     }
   }
+
+  .execute {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .custom-checkbox {
+      margin-top: 20px;
+      padding-right: 5px;
+    }
+  }
 }

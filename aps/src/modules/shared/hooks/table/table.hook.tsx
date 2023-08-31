@@ -6,6 +6,7 @@ import { ExportToExcelContext } from '@/modules/main/components/maintain/context
 import { setPagination } from '@/modules/main/pages/settings/redux/sharedTableState/slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import {
+  CheckCircleOutlined,
   CheckSquareOutlined,
   CodeSandboxOutlined,
   DeleteOutlined,
@@ -190,12 +191,12 @@ export const useTable = <T extends object>({
     });
   else if (isPlannedPO)
     columns.push({
-      title: translate('execute'),
+      title: translate('action'),
       key: 'action',
       width: 100,
       render: (value: T & { date: string }, record: T) => (
         <Space size='middle' className='action-container'>
-          <CheckSquareOutlined style={{ color: 'black' }} onClick={doEdit(value)} />
+          <CheckCircleOutlined style={{ color: 'black' }} onClick={doEdit(value)} />
         </Space>
       ),
     });

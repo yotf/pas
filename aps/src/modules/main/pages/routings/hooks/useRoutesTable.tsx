@@ -16,7 +16,6 @@ export type Props = {
   onDelete: (entity: RoutingRouteFormData) => void;
   useActions?: boolean;
   isPlannedPO?: boolean;
-
 };
 /**
  *
@@ -53,10 +52,13 @@ export const useRoutesTable = ({
   ns === 'productionOrder' ? columns.push('planningDate') : null;
   ns === 'productionOrder' ? columns.push('pO_OperationStatusEnum') : null;
   ns === 'productionOrder' ? columns.push('executedDate') : null;
+  ns === 'productionOrder' ? columns.push('skipped') : null;
   const customColumns: Partial<Record<keyof RoutingRouteFormData, (value: any) => ReactNode>> = {
     planning: (value) => <span>{value ? translate('yes') : translate('no')}</span>,
     planningDate: (value) => dateFormatter(value),
     pO_OperationStatusEnum: (value) => translate(PORoutingOperationStatus[value]),
+    executedDate: (value) => dateFormatter(value),
+    skipped: (value) => <span>{value ? translate('yes') : translate('no')}</span>,
   };
   const table = useTable({
     dataSource: memoOperations,

@@ -20,6 +20,8 @@ export interface RoutingRoute {
   changeHistoryDto: ChangeHistoryDto;
   operation: Operation;
   sequence: number;
+  skipped?: boolean;
+  executedDate?: string;
 }
 /** Form data used for editing routing routes */
 export interface RoutingRouteFormData {

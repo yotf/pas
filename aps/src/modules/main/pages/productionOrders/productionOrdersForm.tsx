@@ -36,6 +36,12 @@ import { getRouting } from '../settings/redux/routings/thunks';
 import { useProductionOrderOptions } from './hooks/useProductionOrderOptions';
 import './productionOrdersForm.scss';
 import { Modal } from 'antd';
+import { executeProductionOrderOperation } from '../settings/redux/productionOrders/productionOrderExecute/thunks';
+import {
+  notificationFail,
+  notificationSuccess,
+} from '@/modules/shared/services/notification.service';
+import { getProductionOrder } from '../settings/redux/productionOrders/thunks';
 //import { getProductionOrder } from '../settings/redux/productionOrders/thunks';
 
 /**
@@ -67,8 +73,30 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: salesOrders } = useAppSelector((state) => state.salesOrders);
   const { entity: selectedRouting } = useAppSelector((state) => state.routings);
+  const { loading, error: executionError } = useAppSelector(
+    (state) => state.productionOrderExecution,
+  );
   // const { entity: selectedOrigin } = useAppSelector((state) => state.productionOrders);
   // const { data: selectedOrigin } = useAppSelector((state) => state.singleProductionOrder);
+
+  const [executionSubmitted, setExecutionSubmitted] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!executionSubmitted || loading) return;
+    if (executionError) {
+      const errorMessage =
+        typeof executionError === 'string' ? executionError : translate('execute_fail');
+      notificationFail(errorMessage);
+    } else {
+      notificationSuccess(translate('execute_success'));
+      dispatch(getProductionOrder(entity?.id));
+    }
+    setExecutionSubmitted(false);
+  }, [executionError, loading, executionSubmitted, translate]);
+
+  const executeOperationCallback = () => {
+    setExecutionSubmitted(true);
+  };
 
   const [discardOperationModalVisible, setDiscardOperationModalVisible] = useState<boolean>(false);
   const [pendingValue, setPendingValue] = useState<pendingFieldType>();
@@ -206,7 +234,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
     return (
-      arr.map(({ operation, leadTime, sequence, ...rest }, i) => ({
+      arr.map(({ operation, leadTime, sequence, skipped, executedDate, ...rest }, i) => ({
         ...rest,
         operationName: operation?.name,
         departmentName: operation?.department?.name ?? '',
@@ -214,9 +242,10 @@ const ProductionOrderForm: FC<POProps> = (props) => {
         sequence: sequence,
         workCenterId: undefined,
         planningDate: undefined,
-        executedDate: undefined,
+        executedDate: executedDate,
         operationTime: operation.operationTime ?? undefined,
         leadTime,
+        skipped: skipped,
       })) ?? []
     );
   };
@@ -553,7 +582,12 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           }
         />
         <FormProvider {...form}>
-          <RoutesTable useActions={!isPlanned} isPlannedPO={isPlanned} linkedPOId={entity?.id} />
+          <RoutesTable
+            useActions={!isPlanned}
+            isPlannedPO={isPlanned}
+            linkedPOId={entity?.id}
+            executeOperationCallback={executeOperationCallback}
+          />
         </FormProvider>
       </div>
     </div>

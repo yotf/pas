@@ -17,6 +17,7 @@ export type Props = {
   onClose: () => void;
   option?: 'create' | 'edit' | 'execute';
   linkedPOId?: number;
+  executeOperationCallback?: () => void;
 };
 
 export type Return = {
@@ -30,7 +31,13 @@ export type Return = {
  * @param onClose Clears selected routing route and closes the modal
  * @returns Routing Route form used in {@link RoutesModal}. The form recalculates routes from the main form and their sequences. When on submit is triggered the main form gets updated.
  */
-export const useRoutingRouteForm = ({ route, onClose, option, linkedPOId }: Props): Return => {
+export const useRoutingRouteForm = ({
+  route,
+  onClose,
+  option,
+  linkedPOId,
+  executeOperationCallback,
+}: Props): Return => {
   const { watch, setValue, getValues } = useFormContext<RoutingFormData>();
   const { routingAddAndUpdateOperations } = watch();
   const setMaxSequence =
@@ -94,6 +101,7 @@ export const useRoutingRouteForm = ({ route, onClose, option, linkedPOId }: Prop
             skipped: data.skipped!,
           }),
         );
+        if (executeOperationCallback) executeOperationCallback();
         onClose();
       }),
     [handleSubmit, onClose, recalculateOperations, setValue, linkedPOId],

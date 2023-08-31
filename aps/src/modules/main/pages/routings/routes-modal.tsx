@@ -18,31 +18,21 @@ import {
   mapDataToOptions,
   nameofFactory,
 } from '../../../shared/utils/utils';
-import {
-  MaintainContext,
-  MaintainContextValue,
-} from '../../components/maintain/contexts/maintain.context';
+import { MaintainContext } from '../../components/maintain/contexts/maintain.context';
 import { getAllOperations } from '../settings/redux/operations/thunks';
-import {
-  Routing,
-  RoutingFormData,
-  RoutingResponse,
-  RoutingRouteFormData,
-} from '../settings/redux/routings/interfaces';
+import { RoutingRouteFormData } from '../settings/redux/routings/interfaces';
 import { useRoutingRouteForm } from './hooks/useRoutingRouteForm';
 import './routes-modal.scss';
 import dayjs from 'dayjs';
-import {
-  ProductionOrder,
-  ProductionOrderFormData,
-  ProductionOrderResponse,
-} from '../settings/redux/productionOrders/interfaces';
+import { ProductionOrderResponse } from '../settings/redux/productionOrders/interfaces';
+import CustomCheckBox from '@/modules/shared/components/input/checkbox/checkbox.component';
 
 export type Props = {
   route?: RoutingRouteFormData;
   onClose: () => void;
   option?: 'create' | 'edit' | 'execute';
   linkedPOId?: number;
+  executeOperationCallback?: () => void;
 };
 /**
  *
@@ -51,18 +41,32 @@ export type Props = {
  * @param onClose Clears selected routing route and closes the modal
  * @returns A modal for deleting and editing routing routes. The onOk function will change routing routes which are defined in the main form
  */
-const RoutesModal: FC<Props> = ({ route, onClose, option, linkedPOId }) => {
+const RoutesModal: FC<Props> = ({
+  route,
+  onClose,
+  option,
+  linkedPOId,
+  executeOperationCallback,
+}) => {
   const {
     ns,
     state: { entity },
   } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes.modal' });
-  const { form, onSubmit } = useRoutingRouteForm({ route, onClose, option, linkedPOId });
+  const { form, onSubmit } = useRoutingRouteForm({
+    route,
+    onClose,
+    option,
+    linkedPOId,
+    executeOperationCallback,
+  });
   const buttonProps = useModalProps<RoutingRouteFormData>(form);
   const nameof = nameofFactory<RoutingRouteFormData>();
   const { data: operations } = useAppSelector((state) => state.operation);
-  const { register } = form;
+  const { register, watch, resetField, setValue } = form;
   const dispatch = useAppDispatch();
+
+  const { skipped } = watch();
 
   const previousExecutedDate = useMemo(
     () =>
@@ -80,6 +84,14 @@ const RoutesModal: FC<Props> = ({ route, onClose, option, linkedPOId }) => {
     () => mapDataToOptions(operations),
     [operations],
   );
+
+  // useEffect(() => {
+  //   debugger;
+
+  //   if (skipped) resetField('executedDate', { defaultValue: '' });
+  // }, [skipped]);
+
+  // const isExecutedDateDisabled = useMemo(() => skipped, [skipped]);
 
   return (
     <FormProvider {...form}>
@@ -176,18 +188,23 @@ const RoutesModal: FC<Props> = ({ route, onClose, option, linkedPOId }) => {
               disabled
               readOnly
             />
-            <CustomInput
-              type='date'
-              label={translate('executionDate')}
-              name={nameof('executedDate')}
-              // disableDatesAfter={dayjs()}
-              disableDatesFrom={
-                previousExecutedDate
-                  ? dayjs(previousExecutedDate)
-                  : dayjs((entity as unknown as ProductionOrderResponse).initialDate)
-              }
-              //  disableDatesAfter={}
-            />
+            <div className='execute'>
+              <CustomInput
+                type='date'
+                label={translate('executionDate')}
+                name={nameof('executedDate')}
+                // disabled={isExecutedDateDisabled}
+                // readOnly={isExecutedDateDisabled}
+                // disableDatesAfter={dayjs()}
+                disableDatesFrom={
+                  previousExecutedDate
+                    ? dayjs(previousExecutedDate)
+                    : dayjs((entity as unknown as ProductionOrderResponse).initialDate)
+                }
+                //  disableDatesAfter={}
+              />
+              <CustomCheckBox label={translate('skipped')} name={nameof('skipped')} />
+            </div>
           </>
         )}
         <div className='colspan'>

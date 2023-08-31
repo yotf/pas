@@ -23,9 +23,15 @@ export interface Props {
   useActions?: boolean;
   isPlannedPO?: boolean;
   linkedPOId?: number;
+  executeOperationCallback?: () => void;
 }
 
-const RoutesTable: React.FC<Props> = ({ useActions = true, isPlannedPO, linkedPOId }) => {
+const RoutesTable: React.FC<Props> = ({
+  useActions = true,
+  isPlannedPO,
+  linkedPOId,
+  executeOperationCallback,
+}) => {
   const { ns } = useContext(MaintainContext);
   const { translate } = useTranslate({ ns, keyPrefix: 'routes' });
   const { getValues, setValue, watch } = useFormContext<RoutingFormData>();
@@ -107,7 +113,13 @@ const RoutesTable: React.FC<Props> = ({ useActions = true, isPlannedPO, linkedPO
         </div>
       </div>
       {table}
-      <RoutesModal onClose={onClose} route={route} option={option} linkedPOId={linkedPOId} />
+      <RoutesModal
+        onClose={onClose}
+        route={route}
+        option={option}
+        linkedPOId={linkedPOId}
+        executeOperationCallback={executeOperationCallback}
+      />
     </div>
   );
 };

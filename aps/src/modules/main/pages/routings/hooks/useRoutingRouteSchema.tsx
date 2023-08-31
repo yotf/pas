@@ -86,7 +86,9 @@ export const useRoutingRouteSchema = (
               .transform((val) => Number(val) || 0)
           : Yup.number().required(),
         guid: Yup.string().notRequired(),
-        executedDate: Yup.string().notRequired(),
+        executedDate: Yup.string()
+          .notRequired()
+          .transform((val) => val || undefined),
         planningDate: Yup.string().notRequired(),
         operationTime: Yup.number().notRequired(),
         pO_OperationStatusEnum: Yup.number().notRequired(),
