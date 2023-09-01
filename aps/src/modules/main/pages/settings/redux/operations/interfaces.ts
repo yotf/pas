@@ -21,6 +21,7 @@ export interface Operation {
   departments: SettingsPageItem[];
   allocationBasedDtos: AllocationBased[];
   unitOfMeasures: SettingsPageItem[];
+  usedInPlanning: boolean;
 }
 
 export interface OperationFormData {
@@ -36,7 +37,7 @@ export interface OperationFormData {
   setupTime?: number | string;
   waitingTime?: number | string;
   interfaceCode: string;
-}
+  }
 export interface OperationMapped {
   id: number;
   operation_Id: number;

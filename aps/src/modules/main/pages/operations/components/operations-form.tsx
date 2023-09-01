@@ -7,12 +7,14 @@ import CustomSwitch from '@/modules/shared/components/input/switch/switch.compon
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/lib/select';
-import React, { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../../settings/consts/interfaces';
 import { AllocationBased, OperationFormData } from '../../settings/redux/operations/interfaces';
 import { AllocationBasedEnum } from '@/modules/shared/consts';
 import { handleTimeFormatKeyDown, limitNumberOfChars } from '@/modules/shared/utils/utils';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
 
 export type OperationsFormType = {
   form: UseFormReturn<OperationFormData, any>;
@@ -34,6 +36,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   const { translate: translateAllocation } = useTranslate({ ns: 'allocation_labels' });
   const { entity } = useAppSelector((state) => state.operation);
   const { data: configuration } = useAppSelector((state) => state.configuration);
+  const [allocationModelOpened, setIsAllocationModalOpened] = useState<boolean>(false);
   const convertForDropdown = useCallback(
     (arr: (SettingsPageItem | AllocationBased)[] | undefined): DefaultOptionType[] => {
       if (arr === undefined) return [];
@@ -75,6 +78,18 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
+  const handleAllocationBasedChange = (callback: () => void) => {
+    if (entity?.usedInPlanning) {
+      setIsAllocationModalOpened(true);
+    } else {
+      callback();
+    }
+  };
+
+  const closeAllocationModal = () => {
+    setIsAllocationModalOpened(false);
+  };
+
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
       ? setValue('unitOfMeasureId', UoMOptions?.[0]?.value as number)
@@ -88,6 +103,19 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
       onSubmit={(e): void => e.preventDefault()}
     >
       <div className='maintain-main'>
+        <Modal
+          centered
+          okText='OK'
+          open={allocationModelOpened}
+          closable={true}
+          footer={null}
+          onCancel={closeAllocationModal}
+        >
+          <div className='confirm-modal-content info'>
+            <InfoCircleOutlined style={{ color: '#749efa', fontSize: '16px' }} />
+            <span>{translate('radio_cant_change_text')}</span>
+          </div>
+        </Modal>
         <div className='maintain-main__inner centered'>
           <div className='maintain-left'>
             <div className='operation-id'>
@@ -148,6 +176,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
               register={register('allocationBased')}
               options={convertForDropdown(entity?.allocationBasedDtos)}
               width='full-width'
+              customChangeEvent={handleAllocationBasedChange}
             />
           </div>
           <div className='operations-container'>

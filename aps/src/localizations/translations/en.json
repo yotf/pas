@@ -682,6 +682,7 @@
     "unit_of_measure_placeholder": "Unit of Measure",
     "unit_of_measure_label": "Unit of Quantity 1",
     "interface_code": "Interface Code",
+    "radio_cant_change_text": "Can't change Allocation Based because Operation is scheduled",
     "modal": {
       "confirm": "Confirm",
       "decline": "Decline",
