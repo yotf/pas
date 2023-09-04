@@ -54,16 +54,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
-  useEffect(() => {
-    if (allocationBased === 3) {
-      form.setValue('unitOfMeasureId', undefined, {
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-      });
-    }
-  }, [allocationBased, form]);
-
   const UoMOptions = useMemo(
     () =>
       allocationBased === AllocationBasedEnum.quantity1
@@ -93,7 +83,12 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
       ? setValue('unitOfMeasureId', UoMOptions?.[0]?.value as number)
-      : setValue('unitOfMeasureId', undefined);
+      : form.resetField('unitOfMeasureId');
+    // : setValue('unitOfMeasureId', undefined, {
+    //     shouldValidate: true,
+    //     shouldDirty: true,
+    //     shouldTouch: true,
+    //   });
   }, [allocationBased]);
 
   return (
@@ -202,7 +197,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
                 options={UoMOptions}
                 width='full-width'
                 disabled={disableInput}
-                isRequired={!disableInput}
+                isRequired={true}
               />
               <CustomInput
                 error={errors.waitingTime}

@@ -90,7 +90,7 @@ export const useOperationSchema = (): OptionalObjectSchema<
         isActive: Yup.boolean().default(true),
         remark: Yup.string().max(200, translate('max_length', { name: '200' })),
         unitOfMeasureId: nonRequiredNumber.when(allocationBasedName, {
-          is: 3,
+          is: 2,
           then: (unitSchema) => unitSchema.notRequired(),
           otherwise: (unitSchema) => unitSchema.required(translate('required')),
         }),
