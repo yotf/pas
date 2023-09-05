@@ -24,7 +24,9 @@ import { RoutingRouteFormData } from '../settings/redux/routings/interfaces';
 import { useRoutingRouteForm } from './hooks/useRoutingRouteForm';
 import './routes-modal.scss';
 import dayjs from 'dayjs';
-import { ProductionOrderResponse } from '../settings/redux/productionOrders/interfaces';
+import {
+  ProductionOrderResponse,
+} from '../settings/redux/productionOrders/interfaces';
 import CustomCheckBox from '@/modules/shared/components/input/checkbox/checkbox.component';
 
 export type Props = {
@@ -68,13 +70,27 @@ const RoutesModal: FC<Props> = ({
 
   const { skipped } = watch();
 
+  const sortedOperations = useMemo(
+    () =>
+      (entity as unknown as ProductionOrderResponse)?.pO_RoutingOperations
+        ?.slice()
+        .sort((a, b) => a.sequence! - b.sequence!),
+    [entity, route],
+  );
+
   const previousExecutedDate = useMemo(
     () =>
-      (entity as unknown as ProductionOrderResponse)?.pO_RoutingOperations?.find(
-        (op) => op.sequence === route?.sequence! - 1,
-      )?.executedDate,
-    [route, entity],
+      sortedOperations?.findLast((op) => !op.skipped && op.sequence! < route?.sequence!)
+        ?.executedDate,
+    [sortedOperations],
   );
+
+  const followingExecutedDate = useMemo(
+    () =>
+      sortedOperations?.find((op) => !op.skipped && op.sequence! > route?.sequence!)?.executedDate,
+    [sortedOperations],
+  );
+  debugger;
   useEffect(() => {
     if (!operations.length) {
       dispatch(getAllOperations());
@@ -85,13 +101,12 @@ const RoutesModal: FC<Props> = ({
     [operations],
   );
 
-  // useEffect(() => {
-  //   debugger;
+  useEffect(() => {
 
-  //   if (skipped) resetField('executedDate', { defaultValue: '' });
-  // }, [skipped]);
+    if (skipped) resetField('executedDate', { defaultValue: '' });
+  }, [skipped]);
 
-  // const isExecutedDateDisabled = useMemo(() => skipped, [skipped]);
+  const isExecutedDateDisabled = useMemo(() => skipped, [skipped]);
 
   return (
     <FormProvider {...form}>
@@ -197,15 +212,18 @@ const RoutesModal: FC<Props> = ({
                 type='date'
                 label={translate('executionDate')}
                 name={nameof('executedDate')}
-                // disabled={isExecutedDateDisabled}
-                // readOnly={isExecutedDateDisabled}
-                // disableDatesAfter={dayjs()}
+                disabled={isExecutedDateDisabled}
+                readOnly={isExecutedDateDisabled}
                 disableDatesFrom={
                   previousExecutedDate
                     ? dayjs(previousExecutedDate)
                     : dayjs((entity as unknown as ProductionOrderResponse).initialDate)
                 }
-                //  disableDatesAfter={}
+                disableDatesAfter={
+                  followingExecutedDate
+                    ? dayjs(followingExecutedDate).add(1, 'day').startOf('day')
+                    : dayjs().add(1, 'day').startOf('day')
+                }
               />
               <CustomCheckBox label={translate('skipped')} name={nameof('skipped')} />
             </div>

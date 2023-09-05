@@ -23,6 +23,7 @@ export interface PORoutingOperationAddAndUpdate {
   operationTime?: number | string;
   planningDate: string;
   executedDate: string;
+  skipped: boolean;
 }
 
 export interface OverviewPORoutingOperationAddAndUpdate extends PORoutingOperationAddAndUpdate {
