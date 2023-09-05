@@ -682,7 +682,8 @@
     "unit_of_measure_placeholder": "Unit of Measure",
     "unit_of_measure_label": "Unit of Quantity 1",
     "interface_code": "Interface Code",
-    "radio_cant_change_text": "Can't change Allocation Based because Operation is scheduled",
+    "radio_cant_change_text": "Unable to change Allocation Based because Operation is scheduled",
+    "allowed_in_work_center": "Unable to change Allocation Based. This operation is currently assigned to one or more work centers. Please remove it from all work centers before making changes.",
     "modal": {
       "confirm": "Confirm",
       "decline": "Decline",

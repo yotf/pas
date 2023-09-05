@@ -69,7 +69,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   );
 
   const handleAllocationBasedChange = (callback: () => void) => {
-    if (entity?.usedInPlanning) {
+    if (entity?.usedInPlanning || entity?.usedInWorkCenter) {
       setIsAllocationModalOpened(true);
     } else {
       callback();
@@ -108,7 +108,11 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
         >
           <div className='confirm-modal-content info'>
             <InfoCircleOutlined style={{ color: '#749efa', fontSize: '16px' }} />
-            <span>{translate('radio_cant_change_text')}</span>
+            <span>
+              {entity?.usedInWorkCenter
+                ? translate('allowed_in_work_center')
+                : translate('radio_cant_change_text')}
+            </span>
           </div>
         </Modal>
         <div className='maintain-main__inner centered'>

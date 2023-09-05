@@ -22,6 +22,7 @@ export interface Operation {
   allocationBasedDtos: AllocationBased[];
   unitOfMeasures: SettingsPageItem[];
   usedInPlanning: boolean;
+  usedInWorkCenter: boolean;
 }
 
 export interface OperationFormData {
@@ -37,7 +38,7 @@ export interface OperationFormData {
   setupTime?: number | string;
   waitingTime?: number | string;
   interfaceCode: string;
-  }
+}
 export interface OperationMapped {
   id: number;
   operation_Id: number;
