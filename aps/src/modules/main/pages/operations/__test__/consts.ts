@@ -48,6 +48,8 @@ export const mockedOperation: Operation = {
   interfaceCode: 'INTERFACE_CODE',
   id: 4,
   name: 'asdf',
+  usedInPlanning: false,
+  usedInWorkCenter: true,
 };
 
 export const mockedOperationsData: Operation[] = [

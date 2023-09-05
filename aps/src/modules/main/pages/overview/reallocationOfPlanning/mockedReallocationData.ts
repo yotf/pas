@@ -18,6 +18,7 @@ export const mockedPOOperation: PORoutingOperations = {
   changeHistoryDto: { createdBy: '', createdOn: '' },
   workCenter: {} as WorkCenter,
   workCenters: [],
+  skipped: false,
   operation: {
     id: 1,
     name: 'Operacija 1',
@@ -36,6 +37,8 @@ export const mockedPOOperation: PORoutingOperations = {
     departments: [{ name: 'spi' }],
     allocationBasedDtos: [{ name: 'spi', id: 1 }],
     unitOfMeasures: [{ name: 'spi' }],
+    usedInPlanning: true,
+    usedInWorkCenter: true,
   },
 };
 

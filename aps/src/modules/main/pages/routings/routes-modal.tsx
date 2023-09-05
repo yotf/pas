@@ -24,9 +24,7 @@ import { RoutingRouteFormData } from '../settings/redux/routings/interfaces';
 import { useRoutingRouteForm } from './hooks/useRoutingRouteForm';
 import './routes-modal.scss';
 import dayjs from 'dayjs';
-import {
-  ProductionOrderResponse,
-} from '../settings/redux/productionOrders/interfaces';
+import { ProductionOrderResponse } from '../settings/redux/productionOrders/interfaces';
 import CustomCheckBox from '@/modules/shared/components/input/checkbox/checkbox.component';
 
 export type Props = {
@@ -80,7 +78,7 @@ const RoutesModal: FC<Props> = ({
 
   const previousExecutedDate = useMemo(
     () =>
-      sortedOperations?.findLast((op) => !op.skipped && op.sequence! < route?.sequence!)
+      sortedOperations?.reverse().find((op) => !op.skipped && op.sequence! < route?.sequence!)
         ?.executedDate,
     [sortedOperations],
   );
@@ -102,7 +100,6 @@ const RoutesModal: FC<Props> = ({
   );
 
   useEffect(() => {
-
     if (skipped) resetField('executedDate', { defaultValue: '' });
   }, [skipped]);
 
