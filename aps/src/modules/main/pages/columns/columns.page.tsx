@@ -53,7 +53,7 @@ const ColumnsConfig: FC = () => {
   }, [error, loading, isSubmitted, translate]);
 
   const onSubmit = (data: OverviewColumnsForm) => {
-    debugger;
+
     const visibilityList: ColumnVisible[] = Object.entries(data).map(([key, isVisible], index) => ({
       overviewColumnEnum: index,
       isVisible: isVisible || false,

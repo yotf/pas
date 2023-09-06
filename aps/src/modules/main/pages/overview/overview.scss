@@ -197,12 +197,12 @@
 
                 td {
                   padding: 2px 5px;
-                  max-width: 40px;
+                  max-width: 54px;
                   min-width: 25px;
                   border: 1px solid $gray-light;
                   font-weight: 600;
                   font-size: 15px;
-                  color: $navy-100;
+                  color: $navy-100 !important;
                 }
               }
             }

@@ -92,8 +92,7 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
   const nameof = nameofFactory<ReallocationOfPlanningForm>();
 
   useEffect(() => {
-    debugger;
-    setValue('productionOrderNumber', selectedProductionOrder?.id ?? 0);
+    setValue('productionOrderNumber', selectedProductionOrder?.productionOrder_Id ?? 0);
     setValue('productionOrderDelivery', selectedProductionOrder?.foreseenDelivery || '');
     setValue('salesOrderDelivery', selectedProductionOrder?.salesOrderDto.salesOrderDelivery || '');
     setValue('reallocationOperations', entity?.pO_RoutingOperations);
