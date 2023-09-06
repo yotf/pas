@@ -44,12 +44,10 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
   const { control } = useFormContext();
 
   const disabledFrom: RangePickerProps['disabledDate'] = (current) => {
- 
     return current < dayjs(disableDatesFrom);
   };
 
   const disabledAfter: RangePickerProps['disabledDate'] = (current) => {
-
     return (
       (!!disableDatesAfter && current > dayjs(disableDatesAfter)) ||
       (!!noPastDates && current < dayjs().startOf('day'))
@@ -57,10 +55,10 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
   };
 
   const disableDates: RangePickerProps['disabledDate'] = (current) => {
-    const enabled =
-      (disableDatesFrom ? disabledFrom(current) : true) ||
-      (disableDatesAfter ? disabledAfter(current) : true);
-    return enabled;
+    const disabled =
+      (!!disableDatesFrom ? disabledFrom(current) : false) ||
+      (!!disableDatesAfter || !!noPastDates ? disabledAfter(current) : false);
+    return disabled;
   };
 
   return (

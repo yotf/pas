@@ -109,9 +109,9 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
           <div className='confirm-modal-content info'>
             <InfoCircleOutlined style={{ color: '#749efa', fontSize: '16px' }} />
             <span>
-              {entity?.usedInWorkCenter
-                ? translate('allowed_in_work_center')
-                : translate('radio_cant_change_text')}
+              {entity?.usedInPlanning
+                ? translate('radio_cant_change_text')
+                : translate('allowed_in_work_center')}
             </span>
           </div>
         </Modal>
