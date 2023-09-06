@@ -36,8 +36,16 @@ const RoutesTable: React.FC<Props> = ({
   const { translate } = useTranslate({ ns, keyPrefix: 'routes' });
   const { getValues, setValue, watch } = useFormContext<RoutingFormData>();
   const [route, setRoute] = useState<RoutingRouteFormData>();
-  const onClose = useCallback(() => setRoute(undefined), []);
   const [option, setOption] = useState<'create' | 'edit' | 'execute'>();
+  const [prevExecutedDate, setPrevExecutedDate] = useState<string>('');
+  const onClose = useCallback(() => {
+    if (option === 'execute') {
+      debugger;
+      route!.executedDate! = prevExecutedDate;
+    }
+    setRoute(undefined);
+  }, [option, linkedPOId, route]);
+
   const { routingAddAndUpdateOperations } = watch();
   const onAddOperation = useCallback(() => {
     setRoute({
@@ -52,6 +60,7 @@ const RoutesTable: React.FC<Props> = ({
   const onEditOperation = useCallback(
     (selectedRoute: RoutingRouteFormData) => {
       setRoute(selectedRoute);
+      setPrevExecutedDate(selectedRoute.executedDate!);
       isPlannedPO ? setOption('execute') : setOption('edit');
     },
     [isPlannedPO],
