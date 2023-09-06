@@ -36,7 +36,9 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
                     day.isWorkingDay
                   } ${poOperation.isDelayed}`}
                 >
-                  {poOperation.operationTime}
+                  {Number.isInteger(poOperation.operationTime)
+                    ? poOperation.operationTime
+                    : (poOperation.operationTime as number).toFixed(3)}
                 </td>
               ) : (
                 <td className={day.isWorkingDay}>{day.isWorkingDay ? 0 : '/'}</td>
