@@ -111,6 +111,10 @@ export const OverviewTable: FC<OverviewTableProps> = ({
               rowKey={'id'}
               pagination={false}
               key={new Date().getTime()}
+              onRow={(record, index) => ({
+                onDoubleClick: (event: React.MouseEvent<HTMLElement>) =>
+                  openReallocationModal(record),
+              })}
             />
             <div className={`calendar calendar-open`}>
               {/* <button onClick={(): void => setToggleCalendar(!toggleCalendar)}>
