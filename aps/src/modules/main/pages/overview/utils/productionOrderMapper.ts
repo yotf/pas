@@ -4,14 +4,17 @@
 
 import { dateFormatter } from '@/modules/shared/utils/utils';
 import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
-import { OverviewPORoutingOperationAddAndUpdate, ProductionOrder } from '../../settings/redux/productionOrders/interfaces';
+import {
+  OverviewPORoutingOperationAddAndUpdate,
+  ProductionOrder,
+} from '../../settings/redux/productionOrders/interfaces';
 
 export const productionOrderMapper = (
   productionOrderOperation: OverviewPORoutingOperationAddAndUpdate,
 ): OverviewProductionOrderOperationMapped => {
-
   const productionOrder = productionOrderOperation.productionOrder;
- return ({
+
+  return {
     id: productionOrder?.id,
     orderNumber: productionOrder?.productionOrder_Id,
     orderType: productionOrder?.productionOrderTypeDto.name,
@@ -22,36 +25,39 @@ export const productionOrderMapper = (
     colorName: productionOrder.materialDto?.color?.name,
     foreseenDeliveryDate: dateFormatter(productionOrder.foreseenDelivery),
     quantity1: productionOrder.quantity1,
-    unitOfMeasure1: productionOrder.materialDto?.unitOfMeasure1?.name,
+    unitOfMeasure1: productionOrder?.unitOfMeasure1?.name,
     salesOrderDeliveryDate: dateFormatter(productionOrder.salesOrderDto.salesOrderDelivery),
     operationName: productionOrderOperation.operation.name,
     operationId: productionOrderOperation.operation.operation_Id,
     estimatedTime: productionOrder.quantity1 * Number(productionOrderOperation.operationTime),
     setupTime: Number(productionOrderOperation.setupTime) || 1,
-    PODelivery: productionOrderOperation?.executedDate ? "" : dateFormatter(productionOrderOperation.planningDate), //TODO check
-    POPosition: productionOrderOperation.executedDate === '' ? dateFormatter(productionOrderOperation.executedDate) : '',
+    PODelivery: productionOrderOperation?.executedDate
+      ? ''
+      : dateFormatter(productionOrderOperation.planningDate), //TODO check
+    POPosition: productionOrderOperation.executedDate
+      ? dateFormatter(productionOrderOperation.executedDate)
+      : '',
     operationTime: productionOrderOperation.operationTime,
     calendarName: 'Calendar',
     planningDate: productionOrderOperation.planningDate,
-   executedDate: productionOrderOperation?.executedDate,
-  });
+    executedDate: productionOrderOperation?.executedDate,
+  };
 
+  // const productionOrderOperations = productionOrder.pO_RoutingOperations.map((el, _, arr) => ({
+  //   operationName: el.operation?.name,
+  //   operationId: el.operationId,
+  //   estimatedTime: productionOrder.quantity1 * Number(el.operationTime),
+  //   setupTime: Number(el.setupTime) || 1,
+  //   PODelivery: arr[arr.length - 1]?.executedDate
+  //     ? ''
+  //     : dateFormatter(arr[arr.length - 1].planningDate),
+  //   POPosition: dateFormatter(arr.find((op) => op.executedDate === '')?.planningDate) ?? '',
+  //   calendarName: 'Calendar',
+  // }));
 
-// const productionOrderOperations = productionOrder.pO_RoutingOperations.map((el, _, arr) => ({
-//   operationName: el.operation?.name,
-//   operationId: el.operationId,
-//   estimatedTime: productionOrder.quantity1 * Number(el.operationTime),
-//   setupTime: Number(el.setupTime) || 1,
-//   PODelivery: arr[arr.length - 1]?.executedDate
-//     ? ''
-//     : dateFormatter(arr[arr.length - 1].planningDate),
-//   POPosition: dateFormatter(arr.find((op) => op.executedDate === '')?.planningDate) ?? '',
-//   calendarName: 'Calendar',
-// }));
-
-// const mappedWorkCenters = productionOrderOperations.map((workCenterOperation) => ({
-//   ...productionOrderRepeatedProperties,
-//   ...workCenterOperation,
-// }));
-// return mappedWorkCenters;
+  // const mappedWorkCenters = productionOrderOperations.map((workCenterOperation) => ({
+  //   ...productionOrderRepeatedProperties,
+  //   ...workCenterOperation,
+  // }));
+  // return mappedWorkCenters;
 };
