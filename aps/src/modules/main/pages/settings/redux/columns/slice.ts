@@ -23,7 +23,7 @@ const columnsConfigSlice = createSlice({
 
     builder.addCase(getOverviewColumns.fulfilled, (state, action) => {
       state.loading = false;
-      debugger;
+     
       state.data = action.payload;
       state.error = undefined;
     });
