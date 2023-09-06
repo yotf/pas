@@ -16,6 +16,7 @@ type EntityShape = Shape<RoutingRouteFormData>;
  */
 export const useRoutingRouteSchema = (
   maxSequence?: number,
+  isPlannedPO?: boolean,
 ): OptionalObjectSchema<EntityShape, AnyObject, TypeOfShape<EntityShape>> => {
   if (maxSequence !== undefined) {
     maxSequence++;
@@ -86,24 +87,20 @@ export const useRoutingRouteSchema = (
               .transform((val) => Number(val) || 0)
           : Yup.number().required(),
         guid: Yup.string().notRequired(),
-        executedDate: Yup.string().notRequired(), 
+        executedDate: Yup.string().notRequired(),
         planningDate: Yup.string().notRequired(),
         operationTime: Yup.number().notRequired(),
         pO_OperationStatusEnum: Yup.number().notRequired(),
         workCenterId: Yup.number().notRequired(),
         skipped: Yup.boolean().notRequired(),
-      }).test(
-        'skipped-or-executedDate',
-        translate('skipped_or_executedDate_required'),
-        (value)=> {
-          const { skipped, executedDate } = value;
-          if (!skipped && !executedDate) {
-            return false; // Either skipped or executedDate must be provided
-          }
-          return true;
-        },
-      ),
-    [maxSequence, timeValidator, translate],
+      }).test('skipped-or-executedDate', translate('skipped_or_executedDate_required'), (value) => {
+        const { skipped, executedDate } = value;
+        if (!skipped && !executedDate && isPlannedPO) {
+          return false; // Either skipped or executedDate must be provided
+        }
+        return true;
+      }),
+    [maxSequence, timeValidator, translate, isPlannedPO],
   );
   return schema;
 };

@@ -88,7 +88,7 @@ const RoutesModal: FC<Props> = ({
       sortedOperations?.find((op) => !op.skipped && op.sequence! > route?.sequence!)?.executedDate,
     [sortedOperations],
   );
-  debugger;
+
   useEffect(() => {
     if (!operations.length) {
       dispatch(getAllOperations());

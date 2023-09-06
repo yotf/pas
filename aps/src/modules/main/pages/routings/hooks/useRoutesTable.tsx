@@ -52,7 +52,7 @@ export const useRoutesTable = ({
   ns === 'productionOrder' ? columns.push('planningDate') : null;
   ns === 'productionOrder' ? columns.push('pO_OperationStatusEnum') : null;
   ns === 'productionOrder' ? columns.push('executedDate') : null;
-  ns === 'productionOrder' ? columns.push('skipped') : null;
+  ns === 'productionOrder' && isPlannedPO ? columns.push('skipped') : null;
   const customColumns: Partial<Record<keyof RoutingRouteFormData, (value: any) => ReactNode>> = {
     planning: (value) => <span>{value ? translate('yes') : translate('no')}</span>,
     planningDate: (value) => dateFormatter(value),

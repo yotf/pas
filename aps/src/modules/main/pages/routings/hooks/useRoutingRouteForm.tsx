@@ -44,7 +44,8 @@ export const useRoutingRouteForm = ({
     !!routingAddAndUpdateOperations && option === 'edit'
       ? routingAddAndUpdateOperations.length - 1
       : routingAddAndUpdateOperations?.length;
-  const validationSchema = useRoutingRouteSchema(setMaxSequence ?? 0);
+  const isPlannedPO = option === 'execute';
+  const validationSchema = useRoutingRouteSchema(setMaxSequence ?? 0, isPlannedPO);
   const form = useForm<RoutingRouteFormData>({
     resolver: yupResolver(validationSchema),
     mode: 'onBlur',
