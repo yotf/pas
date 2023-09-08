@@ -20,6 +20,7 @@ import {
   getAllDepartments,
   upsertDepartmentThunk,
 } from '../settings/redux/departments/thunks';
+import DepartmentForm from './department.form.component';
 
 /**
  * Settings pages reuse the same logic. The difference is in used thunks (eg upsertArticleThunk, deleteArticleThunk) and data (passed down to hooks via stateSelector const).
@@ -71,7 +72,9 @@ const Departments: FC = () => {
           nameSpace={ns}
           selector={stateSelector}
           upsertThunk={upsertDepartmentThunk}
-        />
+        >
+          <DepartmentForm />
+        </SettingsModal>
         <SettingsDeleteModal
           isOpen={isDeleteModalOpen}
           onClose={closeDeleteModal}

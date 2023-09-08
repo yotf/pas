@@ -45,7 +45,7 @@ const SalesOrderForm: FC = () => {
 
   const { customerOptions, orderTypeOptions } = useSalesOrderOptions();
   const isFormActive = useMemo(() => {
-    return status === 1;
+    return entity?.status === 1;
   }, [status]);
 
   const { tableAndModal, onAddMaterial } = useSalesOrderMaterialsModal({ isFormActive });
