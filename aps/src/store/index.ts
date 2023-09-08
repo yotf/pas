@@ -82,6 +82,7 @@ import { columnConfigReducer } from '@/modules/main/pages/settings/redux/columns
 import { ColumnConfigResponse } from '@/modules/main/pages/settings/redux/columns/states';
 import { productionOrderStatusReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersStatus/slice';
 import { productionOrderExecutionReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrderExecute/slice';
+import { workCentersWithOperationsReducer } from '@/modules/main/pages/settings/redux/workCenters copy/slice';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -110,6 +111,7 @@ export const rootReducer = combineReducers<StoreType>({
   tableState: sharedTableReducer,
   operation: operationsReducer,
   workCenter: workCentersReducer,
+  workCenterWithOperations: workCentersWithOperationsReducer,
   routings: routingsReducer,
   materials: materialsReducer,
   salesOrders: salesOrdersReducer,
@@ -160,6 +162,7 @@ export type StoreType = CombinedState<
     operation: OperationsResponse;
     routings: RoutingsResponse;
     workCenter: WorkCentersResponse;
+    workCenterWithOperations: WorkCentersResponse;
     materials: MaterialsResponse;
     salesOrders: SalesOrdersResponse;
     workCenterCapacities: WorkCapacitesResponse;

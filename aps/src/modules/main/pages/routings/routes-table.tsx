@@ -40,7 +40,6 @@ const RoutesTable: React.FC<Props> = ({
   const [prevExecutedDate, setPrevExecutedDate] = useState<string>('');
   const onClose = useCallback(() => {
     if (option === 'execute') {
-      debugger;
       route!.executedDate! = prevExecutedDate;
     }
     setRoute(undefined);

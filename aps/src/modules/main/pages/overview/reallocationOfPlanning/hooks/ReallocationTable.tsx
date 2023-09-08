@@ -5,17 +5,18 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTable } from '@/modules/shared/hooks/table/table.hook';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { dateFormatter } from '@/modules/shared/utils/utils';
-import { FC, ReactNode, useMemo } from 'react';
+import { dateFormatter, mapDataToOptions } from '@/modules/shared/utils/utils';
+import { FC, ReactNode, useEffect, useMemo } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { PORoutingOperations } from '../../../settings/redux/productionOrders/interfaces';
 import {
   ReallocationOfPlanningForm,
   ReallocationOperationMapped,
 } from '../../../settings/redux/reallocationOfPlanning/interfaces';
-import { useStatisticsOptions } from '../../../statistics/hooks/useStatisticsOptions';
 import { mockedProductionOrder } from '../mockedReallocationData';
 import { useReallocationMappedData } from './useReallocationMappedData';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { getAllWorkCentersWithOperations } from '../../../settings/redux/workCenters copy/thunks';
 
 /**
  *
@@ -23,7 +24,13 @@ import { useReallocationMappedData } from './useReallocationMappedData';
  */
 export const ReallocationTable: FC = (): JSX.Element => {
   const { translate } = useTranslate({ ns: 'reallocationOfPlanning' });
-  const { workCenterOptions } = useStatisticsOptions();
+  // const { workCenterOptions } = useStatisticsOptions();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getAllWorkCentersWithOperations());
+  }, [dispatch]);
+
+  const workCentersWithOperations = useAppSelector((state) => state.workCenterWithOperations.data);
 
   const form = useFormContext<ReallocationOfPlanningForm>();
 
@@ -43,7 +50,6 @@ export const ReallocationTable: FC = (): JSX.Element => {
       'operationId',
       'operationName',
       'workCenterId',
-      //   'status',
       'operationTime',
       'setupTime',
       'leadTime',
@@ -57,10 +63,17 @@ export const ReallocationTable: FC = (): JSX.Element => {
     Record<keyof PORoutingOperations, (value: any, record: any, index: number) => ReactNode>
   > = {
     workCenterId: (_value, record, index) => {
+      const options = mapDataToOptions(
+        workCentersWithOperations.filter((wc) =>
+          wc.allowedOperations.find((op) => op.operationId === record.operationId),
+        ),
+      );
+      debugger;
+
       return (
         <CustomInput
           type={'select'}
-          options={workCenterOptions}
+          options={options}
           width={'full-width'}
           name={`reallocationOperations[${index}].workCenterId`}
           isAutocomplete={true}

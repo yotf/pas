@@ -19,4 +19,5 @@ export interface ReallocationOperationMapped {
   leadTime?: number | string;
   planningDate: string;
   executedDate: string;
+  pO_RoutingOperationId: number;
 }

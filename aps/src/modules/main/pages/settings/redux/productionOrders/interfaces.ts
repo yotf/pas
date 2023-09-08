@@ -107,6 +107,7 @@ export interface ProductionOrder {
   pO_RoutingOperations: PORoutingOperations[];
   productionOrderTypeDto: ProductionOrderTypeDto;
   remark: string;
+  poPosition?: number;
 }
 
 export interface ProductionOrderMapped {

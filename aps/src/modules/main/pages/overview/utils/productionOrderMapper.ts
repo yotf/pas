@@ -13,7 +13,6 @@ export const productionOrderMapper = (
   productionOrderOperation: OverviewPORoutingOperationAddAndUpdate,
 ): OverviewProductionOrderOperationMapped => {
   const productionOrder = productionOrderOperation.productionOrder;
-
   return {
     id: productionOrder?.id,
     orderNumber: productionOrder?.productionOrder_Id,
@@ -34,9 +33,7 @@ export const productionOrderMapper = (
     PODelivery: productionOrderOperation?.executedDate
       ? ''
       : dateFormatter(productionOrderOperation.planningDate), //TODO check
-    POPosition: productionOrderOperation.executedDate
-      ? dateFormatter(productionOrderOperation.executedDate)
-      : '',
+    POPosition: productionOrder.poPosition?.toString() || '', // poPos?.toString() || '',
     operationTime: productionOrderOperation.operationTime,
     calendarName: 'Calendar',
     planningDate: productionOrderOperation.planningDate,

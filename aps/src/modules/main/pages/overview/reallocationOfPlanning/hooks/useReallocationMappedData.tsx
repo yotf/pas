@@ -12,10 +12,12 @@ import { ReallocationOperationMapped } from '../../../settings/redux/reallocatio
 export const useReallocationMappedData = (
   data: PORoutingOperations[],
 ): ReallocationOperationMapped[] => {
-  const mappedData = data.map(
-    (operation: PORoutingOperations, i): ReallocationOperationMapped => ({
+  const mappedData = data.map((operation: PORoutingOperations, i): ReallocationOperationMapped => {
+    debugger;
+    return {
       sequence: operation.sequence || i + 1,
-      operationId: operation.id,
+      operationId: operation.operationId,
+      pO_RoutingOperationId: operation.id,
       workCenterId: operation.workCenterId,
       executedDate: operation.executedDate,
       planningDate: operation.planningDate,
@@ -24,7 +26,7 @@ export const useReallocationMappedData = (
       operationTime: operation.standardTime,
       setupTime: operation.setupTime,
       status: operation.pO_OperationStatusEnum,
-    }),
-  );
+    };
+  });
   return mappedData;
 };

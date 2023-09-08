@@ -47,6 +47,7 @@ export const WORK_CENTER_GET_CAPACITIES_API = `${BASE_WORK_CENTERS_API}/getAllWo
 export const WORK_CENTER_GET_ALLOWED_OPERATIONS_BY_WORK_CENTER_API = `${BASE_WORK_CENTERS_API}/getAllAllowedOperationsByWorkCenter`;
 export const WORK_CENTER_GET_ACTIVE_OPERATIONS_BY_ALLOCATION_API = `${BASE_WORK_CENTERS_API}/getAllActiveOperationsByAllocationBased`;
 export const WORK_CENTER_DELETE_ALLOWED_OPERATION = `${BASE_WORK_CENTERS_API}/deleteAllowedOperation`;
+export const WORK_CENTERS_WITH_OPERATIONS_API = `${BASE_WORK_CENTERS_API}/getWorkCentersWithAllowedOperations`;
 export const STATISTICS_DELAYED_ORDERS_API = `${BASE_STATISTICS_API}/getDelayedOrders`;
 export const STATISTICS_GENERATE_DATA_API = `${BASE_STATISTICS_API}/generateData`;
 export const BASE_CONFIGURATION_API = 'Configurations';

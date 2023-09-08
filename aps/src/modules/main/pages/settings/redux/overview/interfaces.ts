@@ -6,8 +6,6 @@ import BaseResponse from '@/modules/shared/services/interfaces';
 import { ProductionCalendarPostResponse } from '../productionCalendarsWorkCapacities/interfaces';
 import {
   OverviewPORoutingOperationAddAndUpdate,
-  PORoutingOperations,
-  ProductionOrder,
 } from '../productionOrders/interfaces';
 import { WorkCenter } from '../workCenters/interfaces';
 
