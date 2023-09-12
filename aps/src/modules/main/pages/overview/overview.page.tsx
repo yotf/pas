@@ -152,8 +152,13 @@ const Overview: FC = () => {
   const selectAllWorkCenters = (e: any) => {
     setValue(
       'workCenters',
-      workCenterOptions.map((wc) => Number(wc.value)),
+      workCenterOptions.map((wc) => Number(wc.value), {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      }),
     );
+    form.trigger();
   };
 
   return (
