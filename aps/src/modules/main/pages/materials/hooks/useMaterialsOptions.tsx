@@ -16,6 +16,7 @@ import { getAllSizeRanges } from '../../settings/redux/sizeRanges/thunks';
 import { getAllThickness } from '../../settings/redux/thickness/thunks';
 import { getAllUnitsOfMeasure } from '../../settings/redux/unitOfMeasure/thunks';
 import { getConfiguration } from '../../settings/redux/configuration/thunks';
+import { Material } from '../../settings/redux/materials/interfaces';
 
 export type UseRoutingSetupReturnType = {
   unit1Options: DefaultOptionType[];
@@ -33,7 +34,7 @@ export type UseRoutingSetupReturnType = {
  * Fetches and converts data to options usable by select and radio inputs.
  * @returns An object containing arrays of objects with values and labels.
  */
-export const useMaterialsOptions = (): UseRoutingSetupReturnType => {
+export const useMaterialsOptions = (entity?: Material): UseRoutingSetupReturnType => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllUnitsOfMeasure());
@@ -74,42 +75,104 @@ export const useMaterialsOptions = (): UseRoutingSetupReturnType => {
   }));
 
   const unit1Options: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(configuration.quantities1.map((q) => q.unitOfMeasure!)),
-    [unitOfMeasures],
+    () =>
+      mapDataToOptions(
+        configuration.quantities1.map((q) => q.unitOfMeasure!),
+        entity?.unitOfMeasure1
+          ? { label: entity.unitOfMeasure1.name, value: entity.unitOfMeasure1.id! }
+          : undefined,
+      ),
+    [unitOfMeasures, entity?.unitOfMeasure1],
   );
 
   const unit2Options: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(configuration.quantities2.map((q) => q.unitOfMeasure!)),
-    [unitOfMeasures],
+    () =>
+      mapDataToOptions(
+        configuration.quantities2.map((q) => q.unitOfMeasure!),
+        entity?.unitOfMeasure2
+          ? { label: entity.unitOfMeasure2.name, value: entity.unitOfMeasure2.id! }
+          : undefined,
+      ),
+    [unitOfMeasures, entity?.unitOfMeasure2],
   );
 
   const materialGroupOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(materialGroups),
-    [materialGroups],
+    () =>
+      mapDataToOptions(
+        materialGroups,
+        entity?.materialGroup
+          ? { label: entity.materialGroup.name, value: entity.materialGroup.id! }
+          : undefined,
+      ),
+    [materialGroups, entity?.materialGroup],
   );
 
-  const articleOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(articles), [articles]);
+  const articleOptions: DefaultOptionType[] = useMemo(
+    () =>
+      mapDataToOptions(
+        articles,
+        entity?.article ? { label: entity.article.name, value: entity.article.id! } : undefined,
+      ),
+    [articles, entity?.article],
+  );
 
-  const colorOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(colors), [colors]);
+  const colorOptions: DefaultOptionType[] = useMemo(
+    () =>
+      mapDataToOptions(
+        colors,
+        entity?.color ? { label: entity.color.name, value: entity.color.id! } : undefined,
+      ),
+    [colors, entity?.color],
+  );
 
   const thicknessOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(thickness),
-    [thickness],
+    () =>
+      mapDataToOptions(
+        thickness,
+        entity?.thickness
+          ? { label: entity.thickness.name, value: entity.thickness.id! }
+          : undefined,
+      ),
+    [thickness, entity?.thickness],
   );
 
   const sizeRangeOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(sizeRanges),
-    [sizeRanges],
+    () =>
+      mapDataToOptions(
+        sizeRanges,
+        entity?.sizeRange
+          ? { label: entity.sizeRange.name, value: entity.sizeRange.id! }
+          : undefined,
+      ),
+    [sizeRanges, entity?.sizeRange],
   );
 
   const selectionOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(selections),
-    [selections],
+    () =>
+      mapDataToOptions(
+        selections,
+        entity ? { label: entity.selection.name, value: entity.selection.id! } : undefined,
+      ),
+    [selections, entity?.selection],
   );
 
-  const featureOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(features), [features]);
+  const featureOptions: DefaultOptionType[] = useMemo(
+    () =>
+      mapDataToOptions(
+        features,
+        entity?.features ? { label: entity.features.name, value: entity.features.id! } : undefined,
+      ),
+    [features, entity?.features],
+  );
 
-  const routingOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(routings), [routings]);
+  const routingOptions: DefaultOptionType[] = useMemo(
+    () =>
+      mapDataToOptions(
+        routings,
+        entity?.routing ? { label: entity.routing.name, value: entity.routing.id! } : undefined,
+      ),
+    [routings, entity?.routing],
+  );
 
   return {
     unit1Options,

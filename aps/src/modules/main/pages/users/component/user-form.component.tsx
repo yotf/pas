@@ -14,7 +14,10 @@ import { availableLanguages } from '@/localizations/i18n';
  *
  * @returns Form rendered inside the {@link UserModal}
  */
-const UserForm: FC = () => {
+interface UserProps {
+  user: UserFormData;
+}
+const UserForm: FC<UserProps> = ({ user }) => {
   const { translate } = useTranslate({
     ns: 'users',
     keyPrefix: 'form',
@@ -30,7 +33,7 @@ const UserForm: FC = () => {
   //const { options: roleOptions } = useRoles();
   // const userPosition = getValues('positionId');
 
-  const { positionOptions, roleOptions } = useUserOptions();
+  const { positionOptions, roleOptions } = useUserOptions(user);
 
   const languageOptions = availableLanguages.map((lang) => ({
     label: translate(lang),
@@ -46,8 +49,6 @@ const UserForm: FC = () => {
   useEffect(() => {
     if (!language) setValue('language', languageOptions?.[0]?.value);
   }, [language]);
-
-
 
   return (
     <form

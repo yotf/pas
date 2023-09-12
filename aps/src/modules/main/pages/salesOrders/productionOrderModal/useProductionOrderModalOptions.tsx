@@ -8,6 +8,7 @@ import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { getAllProductionOrderTypes } from '../../settings/redux/productionOrderTypes/thunks';
 import { getAllRoutings } from '../../settings/redux/routings/thunks';
+import { ProductionOrderFormData } from '../../settings/redux/productionOrders/interfaces';
 
 export type UseProductionOrderModalOptionsReturn = {
   orderTypeOptions: DefaultOptionType[];
@@ -17,7 +18,9 @@ export type UseProductionOrderModalOptionsReturn = {
  * Fetches and converts data to options usable by select and radio inputs.
  * @returns An object containing arrays of objects with values and labels
  */
-export const useProductionOrderModalOptions = (): UseProductionOrderModalOptionsReturn => {
+export const useProductionOrderModalOptions = (
+  productionOrderInitial?: ProductionOrderFormData,
+): UseProductionOrderModalOptionsReturn => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllProductionOrderTypes());
@@ -30,11 +33,34 @@ export const useProductionOrderModalOptions = (): UseProductionOrderModalOptions
   }));
 
   const orderTypeOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(productionOrderTypes),
-    [productionOrderTypes],
+    () =>
+      mapDataToOptions(
+        productionOrderTypes,
+        productionOrderInitial?.productionOrderTypeId
+          ? {
+              label: productionOrderTypes.find(
+                (pot) => pot.id === productionOrderInitial.productionOrderTypeId,
+              )?.name!,
+              value: productionOrderInitial.productionOrderTypeId!,
+            }
+          : undefined,
+      ),
+    [productionOrderTypes, productionOrderInitial],
   );
 
-  const routingOptions: DefaultOptionType[] = useMemo(() => mapDataToOptions(routings), [routings]);
+  const routingOptions: DefaultOptionType[] = useMemo(
+    () =>
+      mapDataToOptions(
+        routings,
+        productionOrderInitial?.routingId
+          ? {
+              value: productionOrderInitial.routingId,
+              label: routings.find((r) => r.id === productionOrderInitial.routingId)?.name!,
+            }
+          : undefined,
+      ),
+    [routings, productionOrderInitial],
+  );
 
   return { orderTypeOptions, routingOptions };
 };

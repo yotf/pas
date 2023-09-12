@@ -43,7 +43,7 @@ const SalesOrderForm: FC = () => {
 
   const { status, salesOrderMaterialsAddAndUpdate } = watch();
 
-  const { customerOptions, orderTypeOptions } = useSalesOrderOptions();
+  const { customerOptions, orderTypeOptions } = useSalesOrderOptions(entity);
   const isFormActive = useMemo(() => {
     return entity?.status === 1;
   }, [status]);

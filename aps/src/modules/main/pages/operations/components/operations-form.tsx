@@ -12,7 +12,11 @@ import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../../settings/consts/interfaces';
 import { AllocationBased, OperationFormData } from '../../settings/redux/operations/interfaces';
 import { AllocationBasedEnum } from '@/modules/shared/consts';
-import { handleTimeFormatKeyDown, limitNumberOfChars } from '@/modules/shared/utils/utils';
+import {
+  handleTimeFormatKeyDown,
+  limitNumberOfChars,
+  mapDataToOptions,
+} from '@/modules/shared/utils/utils';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 
@@ -57,15 +61,27 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   const UoMOptions = useMemo(
     () =>
       allocationBased === AllocationBasedEnum.quantity1
-        ? convertForDropdown(
+        ? mapDataToOptions(
             configuration.quantities1.map((q) => q.unitOfMeasure) as SettingsPageItem[],
+            entity?.unitOfMeasure
+              ? { label: entity?.unitOfMeasure.name, value: entity.unitOfMeasure.id! }
+              : undefined,
           )
-        : convertForDropdown(
+        : mapDataToOptions(
             configuration.defaultKg?.unitOfMeasure
               ? [configuration.defaultKg?.unitOfMeasure]
               : undefined,
+            entity?.unitOfMeasure
+              ? { value: entity?.unitOfMeasure.id!, label: entity?.unitOfMeasure.name }
+              : undefined,
           ),
-    [allocationBased],
+    [
+      allocationBased,
+      entity?.unitOfMeasure,
+      configuration.quantities1,
+      configuration.quantities2,
+      configuration.defaultKg,
+    ],
   );
 
   const handleAllocationBasedChange = (callback: () => void) => {
@@ -145,7 +161,12 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
             placeholder={translate('departmentName')}
             label={translate('departmentName')}
             register={register('departmentId')}
-            options={convertForDropdown(entity?.departments)}
+            options={mapDataToOptions(
+              entity?.departments,
+              entity?.department
+                ? { value: entity.department.id!, label: entity.department.name }
+                : undefined,
+            )}
             width='full-width'
           />
           <CustomInput

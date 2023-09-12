@@ -94,10 +94,18 @@ const RoutesModal: FC<Props> = ({
       dispatch(getAllOperations());
     }
   }, [dispatch, operations.length]);
-  const operationOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(operations),
-    [operations],
-  );
+
+  const operationOptions: DefaultOptionType[] = useMemo(() => {
+    return mapDataToOptions(
+      operations,
+      route?.operationId
+        ? {
+            value: route.operationId,
+            label: route.operationName!,
+          }
+        : undefined,
+    );
+  }, [operations, ns, route]);
 
   useEffect(() => {
     if (skipped) resetField('executedDate', { defaultValue: '' });

@@ -9,17 +9,17 @@ import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { getAllCustomers } from '../../settings/redux/customers/thunks';
 import { getAllMaterials } from '../../settings/redux/materials/thunks';
 import { getAllOrderTypes } from '../../settings/redux/orderTypes/thunks';
+import { SalesOrder } from '../../settings/redux/salesOrders/interfaces';
 
 export type UseSalesOrderOptionsType = {
   customerOptions: DefaultOptionType[];
   orderTypeOptions: DefaultOptionType[];
-  materialOptions: DefaultOptionType[];
 };
 /**
  * Fetches and converts data to options usable by select and radio inputs.
  * @returns An object containing arrays of objects with values and labels
  */
-export const useSalesOrderOptions = (): UseSalesOrderOptionsType => {
+export const useSalesOrderOptions = (entity?: SalesOrder): UseSalesOrderOptionsType => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllCustomers());
@@ -34,19 +34,26 @@ export const useSalesOrderOptions = (): UseSalesOrderOptionsType => {
   }));
 
   const customerOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(customers),
-    [customers],
+    () =>
+      mapDataToOptions(
+        customers,
+        entity?.customer ? { label: entity.customer.name, value: entity.customer.id! } : undefined,
+      ),
+    [customers, entity?.customer],
   );
 
   const orderTypeOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(orderTypes),
-    [orderTypes],
+    () =>
+      mapDataToOptions(
+        orderTypes,
+        entity?.orderType
+          ? { value: entity.orderType.id!, label: entity.orderType.name }
+          : undefined,
+      ),
+    [orderTypes, entity?.orderType],
   );
 
-  const materialOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(materials),
-    [materials],
-  );
 
-  return { customerOptions, orderTypeOptions, materialOptions };
+
+  return { customerOptions, orderTypeOptions };
 };

@@ -13,10 +13,13 @@ import { SettingsPageItem } from '../settings/consts/interfaces';
 import { AllocationBased } from '../settings/redux/operations/interfaces';
 import { WorkCenterFormData } from '../settings/redux/workCenters/interfaces';
 import { useRadioChangeModal } from './hooks/useRadioChangeModal';
-import { getConfig } from '@testing-library/react';
 import { getConfiguration } from '../settings/redux/configuration/thunks';
 import { AllocationBasedEnum } from '@/modules/shared/consts';
-import { limitNumberOfChars, limitToNumericKeyDown } from '@/modules/shared/utils/utils';
+import {
+  limitNumberOfChars,
+  limitToNumericKeyDown,
+  mapDataToOptions,
+} from '@/modules/shared/utils/utils';
 
 export type WorkCenterFormType = {
   form: UseFormReturn<WorkCenterFormData, any>;
@@ -60,9 +63,19 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
     const unitOfMeasures = quantities1.map((q1) => q1.unitOfMeasure);
     const kgMeasure = defaultKg?.unitOfMeasure;
     return allocationBased === AllocationBasedEnum.quantity1
-      ? convertForDropdown(unitOfMeasures as SettingsPageItem[])
-      : convertForDropdown(kgMeasure ? [kgMeasure] : undefined);
-  }, [allocationBased, quantities1]);
+      ? mapDataToOptions(
+          unitOfMeasures as SettingsPageItem[],
+          entity?.unitOfMeasure
+            ? { value: entity.unitOfMeasure.id!, label: entity.unitOfMeasure.name }
+            : undefined,
+        )
+      : mapDataToOptions(
+          kgMeasure ? [kgMeasure] : undefined,
+          entity?.unitOfMeasure
+            ? { value: entity?.unitOfMeasure.id!, label: entity?.unitOfMeasure.name }
+            : undefined,
+        );
+  }, [allocationBased, quantities1, entity?.unitOfMeasure,defaultKg]);
 
   const UoMdisabled = useMemo(
     () => allocationBased === AllocationBasedEnum.formula,
@@ -139,7 +152,12 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
           placeholder={translate('departmentName')}
           label={translate('departmentName')}
           register={register('departmentId')}
-          options={convertForDropdown(entity?.departments)}
+          options={mapDataToOptions(
+            entity?.departments,
+            entity?.department
+              ? { value: entity.department.id!, label: entity.department.name }
+              : undefined,
+          )}
           width='full-width'
           isRequired={true}
         />

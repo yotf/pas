@@ -41,7 +41,7 @@ const UserModal: FC<UserModalProps> = ({ isOpen, onClose, user }: UserModalProps
         validationSchema={validationSchema}
         entity={user}
       >
-        <UserForm />
+        <UserForm user={user} />
       </EntityModal>
     </FormProvider>
   );

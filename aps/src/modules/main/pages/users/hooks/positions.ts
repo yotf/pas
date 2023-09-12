@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { useEffect, useMemo } from 'react';
 import { mapDataToOptions } from '@/modules/shared/utils/utils';
 import { rolesThunk } from '../../settings/redux/user/thunks';
+import { UserFormData } from '../../settings/redux/user/interfaces';
 
 export type UsePositionsReturnType = {
   positionOptions: DefaultOptionType[];
@@ -39,7 +40,7 @@ export type UsePositionsReturnType = {
 // return { positions, options };
 // };
 
-export const useUserOptions = (): UsePositionsReturnType => {
+export const useUserOptions = (user: UserFormData): UsePositionsReturnType => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllPositions());
@@ -48,8 +49,17 @@ export const useUserOptions = (): UsePositionsReturnType => {
 
   const positions = useAppSelector((state) => state.positions.data);
   const positionOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(positions),
-    [positions],
+    () =>
+      mapDataToOptions(
+        positions,
+        user.positionId
+          ? {
+              value: user.positionId,
+              label: positions.find((p) => p.id === user.positionId)?.name!,
+            }
+          : undefined,
+      ),
+    [positions, user.positionId],
   );
   const roles = useAppSelector((state) => state.users.roles);
 

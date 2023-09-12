@@ -1,10 +1,9 @@
 /** @module ProductionOrderIntefaces */
-import { POFormStatus } from '@/modules/shared/consts';
 import { SettingsPageItem } from '../../consts/interfaces';
 import { ChangeHistoryDto } from '../change-history.dto';
 import { Material } from '../materials/interfaces';
 import { Operation } from '../operations/interfaces';
-import { RoutingRouteFormData } from '../routings/interfaces';
+import { Routing, RoutingRouteFormData } from '../routings/interfaces';
 import { SalesMaterial, SalesOrder } from '../salesOrders/interfaces';
 import { State } from '../slice';
 import { WorkCenter } from '../workCenters/interfaces';
@@ -72,6 +71,7 @@ export type StatusSituation = {
   name: string;
 };
 export interface ProductionOrder {
+  routingDto: Routing;
   id: number;
   statusOfPlanningEnum: number;
   situationEnum: number;

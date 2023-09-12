@@ -5,7 +5,12 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useModalProps } from '@/modules/shared/hooks/useModalProps.hook';
-import { limitNumberOfChars, limitToFloat, limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/utils';
+import {
+  limitNumberOfChars,
+  limitToFloat,
+  limitToNumericKeyDown,
+  nameofFactory,
+} from '@/modules/shared/utils/utils';
 import { Modal } from 'antd';
 import {
   ChangeEvent,
@@ -36,6 +41,7 @@ import './salesOrder-modal.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getAllMaterials } from '../settings/redux/materials/thunks';
 import { flushSync } from 'react-dom';
+import { useSalesOrderMaterialOptions } from './hooks/useSalesOrderMaterialOptions';
 
 export type Props = {
   material?: SalesMaterialFormData;
@@ -64,7 +70,7 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
   const { materialId } = watch();
   const buttonProps = useModalProps(form);
   const nameof = nameofFactory<SalesMaterialFormData>();
-  const { materialOptions } = useSalesOrderOptions();
+  const { materialOptions } = useSalesOrderMaterialOptions(material);
 
   const [quantityExited, setQuantityExited] = useState<boolean>(false);
   const quantityExitedRef = useRef(quantityExited);
@@ -178,7 +184,6 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
           name={nameof('unitOfMeasure1')}
         />
         <CustomInput
-        
           type='tel'
           pattern='[0-9]*\.?[0-9]*'
           label={translate('quantity2')}

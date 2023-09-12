@@ -33,7 +33,7 @@ const RoutingsForm: FC = () => {
   const { translate } = useTranslate({ ns });
 
   const nameof = nameofFactory<RoutingFormData>();
-  const { customerOptions, materialOptions, unitOptions } = useRoutingOptions();
+  const { customerOptions, materialOptions, unitOptions } = useRoutingOptions(entity);
 
   const preventDecimal = (
     event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,

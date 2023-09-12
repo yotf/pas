@@ -51,7 +51,7 @@ const Configuration: FC = () => {
     [quantities1, quantities2, defaultKg],
   );
 
-  const quantityOptions = useConfigurationOptions();
+  const { quantity1Options, quantity2Options, uomOptions } = useConfigurationOptions(sliceState);
 
   const onSubmit = (data: ConfigurationFormData) => {
     const { quantities1: quantity1, quantities2: quantity2, defaultKg } = data;
@@ -91,7 +91,7 @@ const Configuration: FC = () => {
             name={nameof('quantities1')}
             width='full-width'
             mode='multiple'
-            options={quantityOptions}
+            options={quantity1Options}
             isRequired={true}
             allowClear={true}
           />
@@ -101,7 +101,7 @@ const Configuration: FC = () => {
             label={translate('isKg')}
             name={nameof('defaultKg')}
             register={register('defaultKg')}
-            options={quantityOptions}
+            options={uomOptions}
           />
           {/* ))} */}
           <CustomInput
@@ -111,7 +111,7 @@ const Configuration: FC = () => {
             name={nameof('quantities2')}
             width='full-width'
             mode='multiple'
-            options={quantityOptions}
+            options={quantity2Options}
             isRequired={true}
             allowClear={true}
           />

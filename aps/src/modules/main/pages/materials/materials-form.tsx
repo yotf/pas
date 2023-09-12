@@ -48,7 +48,7 @@ const MaterialsForm: FC = () => {
     sizeRangeOptions,
     thicknessOptions,
     featureOptions,
-  } = useMaterialsOptions();
+  } = useMaterialsOptions(entity);
 
   return (
     <form

@@ -24,7 +24,8 @@ export type POModalInputsProps = {
  */
 const POModalInputs: FC<POModalInputsProps> = ({ ns, productionOrderInitial }) => {
   const { translate } = useTranslate({ ns: ns });
-  const { orderTypeOptions, routingOptions } = useProductionOrderModalOptions();
+  const { orderTypeOptions, routingOptions } =
+    useProductionOrderModalOptions(productionOrderInitial);
 
   const nameof = nameofFactory<ProductionOrderModalForm>();
 

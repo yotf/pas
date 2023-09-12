@@ -110,11 +110,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     materialOptions,
     routingOptions,
     unitOfMeasureOptions,
-    materialGroupOptions,
-    colorOptions,
-    articleOptions,
-    selectionOptions,
-    thicknessOptions,
+
     salesOrderSequenceOptions,
     originPOOptions,
     defaultKg,
@@ -137,11 +133,10 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     unitOfMeasure1Id,
     unitOfMeasure2Id,
     unitOfMeasure3Id,
-    origin,
   } = watch();
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
-  const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
+  const isEditing = useMemo(() => !!entity?.id && !copy, [entity?.id, copy]);
   const isPlanned = useMemo(
     () => !!entity?.id && statusOfPlanningEnum == POFormStatus.planned,
     [entity?.id, entity?.statusOfPlanningEnum, statusOfPlanningEnum],
@@ -169,8 +164,41 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   useEffect(() => {
     setValue('unitOfMeasure1Id', materialMeasures?.unitOfMeasure1?.id || undefined);
     setValue('unitOfMeasure2Id', materialMeasures?.unitOfMeasure2?.id || undefined);
-    setValue('unitOfMeasure3Id', defaultKg?.id || undefined); //TODO use default value from configurator
+    setValue('unitOfMeasure3Id', defaultKg?.id || undefined);
   }, [materialMeasures, setValue]);
+
+  const materialOptionsAll = useMemo(() => {
+    return {
+      unitOfMeasure1Id: {
+        label: materialMeasures?.unitOfMeasure1.name,
+        value: materialMeasures?.unitOfMeasure1.id!,
+      },
+      unitOfMeasure2Id: {
+        label: materialMeasures?.unitOfMeasure2.name,
+        value: materialMeasures?.unitOfMeasure2.id!,
+      },
+      materialGroupId: {
+        label: materialMeasures?.materialGroup.name,
+        value: materialMeasures?.materialGroup.id!,
+      },
+      articleId: {
+        label: materialMeasures?.article.name,
+        value: materialMeasures?.article.id!,
+      },
+      colorId: {
+        label: materialMeasures?.color.name,
+        value: materialMeasures?.color.id!,
+      },
+      thicknessId: {
+        label: materialMeasures?.thickness.name,
+        value: materialMeasures?.thickness.id!,
+      },
+      selectionId: {
+        label: materialMeasures?.selection.name,
+        value: materialMeasures?.selection.id!,
+      },
+    };
+  }, [materialMeasures]);
 
   useEffect(() => {
     setValue('materialGroupId', materialMeasures?.materialGroupId);
@@ -407,7 +435,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               options={materialOptions}
               isAutocomplete={true}
               handleSelectionChange={
-                isEditing && !discardOperations
+                (isEditing || copy) && !discardOperations
                   ? (value, option) => handleRoutingChange(value, option, 'materialId')
                   : undefined
               }
@@ -459,7 +487,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('materialGroupId')}
               readOnly
               disabled={true}
-              options={materialGroupOptions}
+              // options={materialGroupOptions}
+              options={[materialOptionsAll.materialGroupId]}
             />
             <CustomInput
               type='select'
@@ -467,7 +496,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('articleId')}
               readOnly
               disabled={true}
-              options={articleOptions}
+              // options={articleOptions}
+              options={[materialOptionsAll.articleId]}
             />
             <CustomInput
               type='select'
@@ -475,7 +505,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('colorId')}
               readOnly
               disabled={true}
-              options={colorOptions}
+              //   options={colorOptions}
+              options={[materialOptionsAll.colorId]}
             />
             <CustomInput
               type='select'
@@ -483,7 +514,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('thicknessId')}
               readOnly
               disabled={true}
-              options={thicknessOptions}
+              //options={thicknessOptions}
+              options={[materialOptionsAll.thicknessId]}
             />
             <CustomInput
               type='select'
@@ -491,7 +523,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('selectionId')}
               readOnly
               disabled={true}
-              options={selectionOptions}
+              //options={selectionOptions}
+              options={[materialOptionsAll.selectionId]}
             />
           </div>
 
@@ -576,7 +609,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
           readOnly={isPlanned}
           disabled={isPlanned}
           handleSelectionChange={
-            isEditing && !discardOperations
+            (isEditing || copy) && !discardOperations
               ? (value, option) => handleRoutingChange(value, option, 'routingId')
               : undefined
           }

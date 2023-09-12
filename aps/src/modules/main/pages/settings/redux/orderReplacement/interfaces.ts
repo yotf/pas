@@ -7,7 +7,13 @@ import { SettingsPageItem } from '../../consts/interfaces';
 import { ChangeHistoryDto } from '../change-history.dto';
 import { SalesMaterial } from '../salesOrders/interfaces';
 import { Material } from '../materials/interfaces';
-import { PORoutingOperations, SalesOrderMaterialDto, StatusSituation, ProductionOrderTypeDto } from '../productionOrders/interfaces';
+import {
+  PORoutingOperations,
+  SalesOrderMaterialDto,
+  StatusSituation,
+  ProductionOrderTypeDto,
+} from '../productionOrders/interfaces';
+import { Routing } from '../routings/interfaces';
 
 export type SalesOrderTypes = 'in' | 'out';
 
@@ -27,7 +33,6 @@ export interface OrderReplacementResponse extends BaseResponse {
   };
   form: SalesOrderReplacement[];
 }
-
 
 export interface ProductionOrderReplacementResponse {
   outProductionOrders: ProductionOrderResponse[];
@@ -85,6 +90,7 @@ export interface ProductionOrderResponse {
   situation: StatusSituation;
   pO_RoutingOperations: PORoutingOperations[];
   productionOrderTypeDto: ProductionOrderTypeDto;
+  routingDto: Routing;
 }
 
 export interface SalesOrder {
@@ -109,10 +115,7 @@ export interface SalesOrdersResponse {
   salesOrderMaterials?: SalesMaterial[];
   changeHistoryDto: ChangeHistoryDto;
   salesOrderDelivery: string;
-  
-
 }
-
 
 export interface SalesOrderReplacement {
   id: number;
