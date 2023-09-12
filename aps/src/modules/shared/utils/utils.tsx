@@ -157,10 +157,21 @@ export const nameofFactory =
   (name: keyof T): keyof T =>
     name;
 /** Creates options for selects and dropdowns from an array of values */
-export const mapDataToOptions = (data?: IdentifiableEntity[]): DefaultOptionType[] =>
-  data
-    ?.filter((entity) => entity.isActive)
-    .map((entity) => ({ label: entity.name, value: entity.id })) ?? [];
+export const mapDataToOptions = (
+  data?: IdentifiableEntity[],
+  alreadySelected?: { value: number; label: string },
+): DefaultOptionType[] => {
+  const mapped =
+    data
+      ?.filter((entity) => entity.isActive)
+      .map((entity) => ({ label: entity.name, value: entity.id })) ?? [];
+
+  alreadySelected && !mapped?.find((opt) => opt.value === alreadySelected.value)
+    ? mapped.push(alreadySelected)
+    : null;
+
+  return mapped;
+};
 /** Calculates minutes for modals ({@link WorkCapacityModal } and {@link ProductionCalendarDayModal})*/
 export const calculateMinutes = (
   breakTimeParam: number | undefined,
