@@ -137,14 +137,15 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
 
   const handleConfirm = async (data: ProductionOrderModalForm) => {
     const withoutZero = data.productionOrders.filter((po) => po.quantity1 && po.quantity1 > 0);
-    dispatch(
-      createProductionOrdersFromSalesOrder(
-        withoutZero?.map((po) => ({
-          ...po,
-          statusOfPlanningEnum: po.statusOfPlanningBoolean ? 2 : 1,
-        })),
-      ),
-    );
+    // withoutZero?.map((po) => ({
+    //   ...po,
+    //   statusOfPlanningEnum: po.statusOfPlanningBoolean ? 2 : 1,
+    // })),
+    const withSchedule = withoutZero.map((po) => ({
+      productionOrder: po,
+      schedule: po.statusOfPlanningBoolean,
+    }));
+    dispatch(createProductionOrdersFromSalesOrder(withSchedule));
     flushSync(() => setIsConfirmationOpen(false));
 
     closePOModal();

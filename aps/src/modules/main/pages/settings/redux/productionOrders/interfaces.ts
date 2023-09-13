@@ -178,6 +178,11 @@ export interface ProductionOrderFormData {
   routingAddAndUpdateOperations?: RoutingRouteFormData[];
 }
 
+export interface CreateProductionOrderFromSalesOrderFormData {
+  productionOrder: ProductionOrderFormData;
+  schedule?: boolean;
+}
+
 export type ProductionOrderResponse = ProductionOrder;
 
 export type ProductionOrdersResponse = State<ProductionOrder, ProductionOrderResponse>;
