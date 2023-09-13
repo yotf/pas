@@ -126,7 +126,12 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
 
   return (
     <div className='production-calendar-form'>
-      <ProductionCalendarInputs checking={checking} ns={ns} exportToExcel={exportToExcel} />
+      <ProductionCalendarInputs
+        checking={checking}
+        ns={ns}
+        exportToExcel={exportToExcel}
+        entity={entity}
+      />
       {tabsArray && (
         <Tabs
           items={tabsArray.map((month: [string, ProductionCalendarDay[]]) => ({

@@ -12,12 +12,13 @@ import { useFormContext } from 'react-hook-form';
 import { GenerateProductionCalendarFormData } from '../../../settings/redux/productionCalendars/interfaces';
 import { useProductionCalendarOptions } from '../../hooks/useProductionCalendarOptions';
 import './productionCalendar-inputs.scss';
+import { ProductionCalendarPostResponse } from '../../../settings/redux/productionCalendarsWorkCapacities/interfaces';
 
 export type ProductionCalendarInputsProps = {
   checking: boolean;
   ns: string;
   exportToExcel?: () => void;
-
+  entity?: ProductionCalendarPostResponse[];
 };
 /**
  *
@@ -28,13 +29,13 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
   checking,
   ns,
   exportToExcel,
-
+  entity,
 }: ProductionCalendarInputsProps) => {
   const nameof = nameofFactory<GenerateProductionCalendarFormData>();
 
   const { translate } = useTranslate({ ns });
 
-  const { workCenterOptions } = useProductionCalendarOptions();
+  const { workCenterOptions } = useProductionCalendarOptions(entity);
   const form = useFormContext();
   const { initialDate, finalDate } = form.watch();
 
@@ -49,7 +50,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           width='full-width'
           mode='multiple'
           options={workCenterOptions}
-          disabled={checking }
+          disabled={checking}
           isRequired={!checking}
           allowClear={true}
           listHeight={320}
@@ -63,7 +64,7 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           width='full-width'
           noPastDates={true}
           disableDatesAfter={finalDate}
-          disabled={checking }
+          disabled={checking}
         />
 
         <CustomInput
@@ -73,10 +74,10 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           name={nameof('finalDate')}
           width='full-width'
           disableDatesFrom={initialDate}
-          disabled={checking }
+          disabled={checking}
         />
       </div>
-      <CustomButton type='button' color='green' onClick={exportToExcel} >
+      <CustomButton type='button' color='green' onClick={exportToExcel}>
         <div className='button-children'>
           <img src={copy} alt='' />
           <span>{translate('excel_button')}</span>

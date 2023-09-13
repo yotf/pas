@@ -8,6 +8,8 @@ import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { getAllWorkCenters } from '../../settings/redux/workCenters/thunks';
 
+import { ProductionCalendarPostResponse } from '../../settings/redux/productionCalendarsWorkCapacities/interfaces';
+
 export type UseProductionCalendarOptionsReturn = {
   workCenterOptions: DefaultOptionType[];
 };
@@ -15,7 +17,9 @@ export type UseProductionCalendarOptionsReturn = {
  * Fetches and converts data to options usable by select and radio inputs.
  * @returns An object containing arrays of objects with values and labels
  */
-export const useProductionCalendarOptions = (): UseProductionCalendarOptionsReturn => {
+export const useProductionCalendarOptions = (
+  entity?: ProductionCalendarPostResponse[],
+): UseProductionCalendarOptionsReturn => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getAllWorkCenters());
@@ -25,9 +29,14 @@ export const useProductionCalendarOptions = (): UseProductionCalendarOptionsRetu
     workCenters: state.workCenter.data,
   }));
 
+  const alreadySelected = entity?.[0].productionCalendarBaseInfoDto.workCenter;
+
   const workCenterOptions: DefaultOptionType[] = useMemo(
     () =>
-      mapDataToOptions(workCenters).sort((a, b) => {
+      mapDataToOptions(
+        workCenters,
+        alreadySelected ? { value: alreadySelected.id, label: alreadySelected.name } : undefined,
+      ).sort((a, b) => {
         if (!(a?.label && b?.label)) return 0;
         if (a.label < b.label) {
           return -1;
@@ -37,7 +46,7 @@ export const useProductionCalendarOptions = (): UseProductionCalendarOptionsRetu
         }
         return 0;
       }),
-    [workCenters],
+    [workCenters, alreadySelected],
   );
 
   return { workCenterOptions };
