@@ -28,7 +28,7 @@ export type UseProductionOrderOptions = {
   materialOptions: DefaultOptionType[];
   //salesOrderOptions: DefaultOptionType[];
   routingOptions: DefaultOptionType[];
-  unitOfMeasureOptions: DefaultOptionType[];
+  // unitOfMeasureOptions: DefaultOptionType[];
   salesOrderSequenceOptions: DefaultOptionType[];
   originPOOptions: DefaultOptionType[];
   defaultKg: SettingsPageItem | undefined;
@@ -63,7 +63,7 @@ export const useProductionOrderOptions = (
     materials,
     salesOrders,
     routings,
-    unitsOfMeasure,
+    // unitsOfMeasure,
     productionOrderNumbers,
     configuration,
   } = useAppSelector((state) => ({
@@ -72,7 +72,7 @@ export const useProductionOrderOptions = (
     materials: state.materials.data,
     salesOrders: state.salesOrdersWithMaterials.data,
     routings: state.routings.data,
-    unitsOfMeasure: state.unitOfMeasure.data,
+    //   unitsOfMeasure: state.unitOfMeasure.data,
     productionOrderNumbers: state.productionOrderNumbers.data,
     configuration: state.configuration.data,
   }));
@@ -126,10 +126,10 @@ export const useProductionOrderOptions = (
     [routings, entity?.routingDto],
   );
 
-  const unitOfMeasureOptions: DefaultOptionType[] = useMemo(
-    () => mapDataToOptions(unitsOfMeasure),
-    [unitsOfMeasure],
-  );
+  // const unitOfMeasureOptions: DefaultOptionType[] = useMemo(
+  //   () => mapDataToOptions(unitsOfMeasure),
+  //   [unitsOfMeasure],
+  // );
 
   const originPOOptions: DefaultOptionType[] = useMemo(() => {
     return (
@@ -162,7 +162,6 @@ export const useProductionOrderOptions = (
     orderTypeOptions,
     materialOptions,
     routingOptions,
-    unitOfMeasureOptions,
     salesOrderSequenceOptions,
     originPOOptions,
     defaultKg,
