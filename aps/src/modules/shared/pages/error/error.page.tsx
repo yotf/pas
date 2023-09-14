@@ -3,7 +3,7 @@
  */
 import { MAIN_LAYOUT } from '@/modules/main/consts/pageRouter';
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CustomButton from '../../components/button/button.component';
 import { useTranslate } from '../../hooks/translate.hook';
 import './error.page.scss';
@@ -14,6 +14,8 @@ export interface ErrorPageProps {
 /** @returns Page rendered in case of error by {@link PageGuard} component*/
 const ErrorPage: FC<ErrorPageProps> = ({ resetErrorBoundary }) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const { translate } = useTranslate({
     ns: 'error-page',
   });
@@ -21,7 +23,10 @@ const ErrorPage: FC<ErrorPageProps> = ({ resetErrorBoundary }) => {
     resetErrorBoundary();
   };
   const redirection = (): void => {
-    navigate(MAIN_LAYOUT);
+    const match = pathname.match(/\/([^/]+\/)/);
+    const to: any = match && match?.length > 1 ? match[1] : MAIN_LAYOUT;
+
+    navigate(to);
   };
 
   return (
