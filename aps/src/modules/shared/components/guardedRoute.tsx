@@ -6,6 +6,10 @@ import { getRole } from '@/modules/auth/services/auth.service';
 import { useAppSelector } from '@/store/hooks';
 import { FC } from 'react';
 import NotFoundPage from '../pages/notFound/notFound.page';
+import LoginPage from '@/modules/auth/pages/login/login.page';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { LOGIN_API } from '@/modules/auth/consts/apiUrl';
+import { LOGIN_PAGE } from '@/modules/auth/consts/pageRoutes';
 export interface GuardedRouteProps {
   children: JSX.Element;
   allowedRoles: string[];
@@ -18,8 +22,13 @@ export interface GuardedRouteProps {
  */
 const GuardedRoute: FC<GuardedRouteProps> = ({ children, allowedRoles }) => {
   const { token } = useAppSelector((state) => state.auth);
+  if (!token) {
 
-  return token && allowedRoles.includes(getRole() as string) ? children : <NotFoundPage />;
+    return <Navigate to={LOGIN_PAGE} replace />
+
+  }
+
+  return allowedRoles.includes(getRole() as string) ? children : <NotFoundPage />;
 };
 
 export default GuardedRoute;

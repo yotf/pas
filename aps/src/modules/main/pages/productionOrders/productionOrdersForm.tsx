@@ -128,7 +128,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     salesOrderDelivery,
     routingAddAndUpdateOperations,
     statusOfPlanningEnum,
-    salesOrderSequence
+    salesOrderSequence,
   } = watch();
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
