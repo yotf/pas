@@ -44,13 +44,14 @@ const SalesOrderForm: FC = () => {
   const { status, salesOrderMaterialsAddAndUpdate } = watch();
 
   const { customerOptions, orderTypeOptions } = useSalesOrderOptions(entity);
-  const isFormActive = useMemo(() => {
-    return entity?.status === 1;
-  }, [status]);
-
-  const { tableAndModal, onAddMaterial } = useSalesOrderMaterialsModal({ isFormActive });
 
   const isEditing = useMemo(() => !!entity?.id, [entity?.id]);
+
+  const isFormActive = useMemo(() => {
+    return entity?.status === 1 || !isEditing;
+  }, [entity?.status, isEditing]);
+
+  const { tableAndModal, onAddMaterial } = useSalesOrderMaterialsModal({ isFormActive });
 
   const statusOptionsTranslate = useMemo(
     () =>

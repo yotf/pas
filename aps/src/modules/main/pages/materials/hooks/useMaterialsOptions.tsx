@@ -147,14 +147,13 @@ export const useMaterialsOptions = (entity?: Material): UseRoutingSetupReturnTyp
     [sizeRanges, entity?.sizeRange],
   );
 
-  const selectionOptions: DefaultOptionType[] = useMemo(
-    () =>
-      mapDataToOptions(
-        selections,
-        entity ? { label: entity.selection.name, value: entity.selection.id! } : undefined,
-      ),
-    [selections, entity?.selection],
-  );
+  const selectionOptions: DefaultOptionType[] = useMemo(() => {
+    debugger;
+    return mapDataToOptions(
+      selections,
+      entity?.selection ? { label: entity.selection.name, value: entity.selection.id! } : undefined,
+    );
+  }, [selections, entity?.selection]);
 
   const featureOptions: DefaultOptionType[] = useMemo(
     () =>

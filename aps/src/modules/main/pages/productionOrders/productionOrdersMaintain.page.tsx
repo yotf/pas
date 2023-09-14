@@ -32,7 +32,7 @@ const ProductionOrderMaintain: FC<ProductionOrderMaintainType> = ({
   const { loading } = sliceState;
   const form = useProductionOrderForm({ state: sliceState, copy });
   const getName = useCallback(
-    (entity: ProductionOrder): string => String(entity.salesOrderDto?.orderNumber ?? ''),
+    (entity: ProductionOrder): string => String(entity.productionOrder_Id ?? ''),
     [],
   );
   const { deleteThunk } = productionOrderThunks;
