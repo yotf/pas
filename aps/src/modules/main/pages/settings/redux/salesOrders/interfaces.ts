@@ -43,6 +43,7 @@ export interface SalesOrderMapped {
   customerName: string;
   customerOrderNumber: string;
   status: number;
+  salesOrderDelivery: string;
 }
 /**
  * One material in {@link SalesOrderMaterialsTable}

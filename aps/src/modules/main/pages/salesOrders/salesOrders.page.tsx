@@ -30,6 +30,7 @@ const SalesOrdersTable: FC = () => {
       'customerName',
       'customerOrderNumber',
       'status',
+      'salesOrderDelivery',
     ],
     [],
   );
@@ -42,6 +43,7 @@ const SalesOrdersTable: FC = () => {
       customerOrderNumber: obj.customerOrderNumber,
       status: obj.status,
       createdOn: dateFormatter(obj.changeHistoryDto?.createdOn),
+      salesOrderDelivery: dateFormatter(obj.salesOrderDelivery),
     }),
     [],
   );

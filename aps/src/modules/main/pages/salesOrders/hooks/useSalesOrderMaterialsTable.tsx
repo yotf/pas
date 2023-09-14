@@ -46,7 +46,7 @@ export const useSalesOrderMaterialsTable = ({
     'quantity2',
     'unitOfMeasure2',
     'requestedDelivery',
-    //'tanneryDelivery',
+    'tanneryDelivery',
   ];
 
   const { openPOModal, modal } = useProductionOrderModal();

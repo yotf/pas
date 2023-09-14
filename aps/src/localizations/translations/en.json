@@ -970,6 +970,7 @@
     "orderTypeId": "Order Type",
     "createdOn": "Creation Date",
     "customerOrderNumber": "Customer Order Number",
+    "salesOrderDelivery": "Sales Order Delivery",
     "customerName": "Customer",
     "orderTypeName": "SO Type",
     "status": "Status",
