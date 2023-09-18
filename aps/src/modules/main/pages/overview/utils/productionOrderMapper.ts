@@ -30,9 +30,7 @@ export const productionOrderMapper = (
     operationId: productionOrderOperation.operation.operation_Id,
     estimatedTime: productionOrder.quantity1 * Number(productionOrderOperation.operationTime),
     setupTime: Number(productionOrderOperation.setupTime) || 1,
-    PODelivery: productionOrderOperation?.executedDate
-      ? ''
-      : dateFormatter(productionOrderOperation.planningDate), //TODO check
+    PODelivery: dateFormatter(productionOrderOperation.foreseenDeliveryDate), 
     POPosition: productionOrder.poPosition?.toString() || '', // poPos?.toString() || '',
     operationTime: productionOrderOperation.operationTime,
     calendarName: 'Calendar',
