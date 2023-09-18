@@ -161,6 +161,9 @@ const Overview: FC = () => {
     form.trigger();
   };
 
+  useEffect(() => {
+    form.setValue('backlog', 0);
+  }, []);
   return (
     <FormProvider {...form}>
       <OverviewContextProvider value={{ ns: ns, overviewFormData: getValues() }}>
@@ -207,7 +210,7 @@ const Overview: FC = () => {
                 pattern='[0-9]*'
                 maxLength={2}
                 label={translate('show-pending')}
-                name={nameof('pendingDays')}
+                name={nameof('backlog')}
                 onKeyDownEvent={limitToNumericKeyDown}
                 width='full-width'
               />
