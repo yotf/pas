@@ -9,6 +9,7 @@ import { ProductionCalendarDay } from '../../settings/redux/productionCalendarsW
 
 import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
 import { OverviewPORoutingOperationAddAndUpdate } from '../../settings/redux/productionOrders/interfaces';
+import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 
 export type CalendarHeaderProps = {
   activeWeek: dayjs.Dayjs[];
@@ -56,8 +57,13 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
     };
   });
 
+  const { translate } = useTranslate({ ns: 'overview' });
+
   const tableHeader = (
     <thead>
+      <th key={uuid()}>
+        <span>{translate('backlog')}</span>
+      </th>
       {currentWeekWithAvailableMinutes.map((day) => (
         <th key={uuid()} className={day.isWorkingDay}>
           <span>{day.date.format('DD/MM').replace('/', '.')}</span>

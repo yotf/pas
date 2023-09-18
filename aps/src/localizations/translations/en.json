@@ -1245,12 +1245,14 @@
     "calendarName": "Calendar",
     "planningDate": "Foreseen Date",
     "show-pending": "Backlog",
+    "backlog": "Backlog",
     "validation": {
       "required": "This field is required",
       "date_range": "Date Range needs to be shorter than 2 weeks",
       "min_length": "At least one Work Center is required",
       "max_length": "Max number of Work Centers is 10",
-      "initial_date_lower": "Initial date must be lower than Final date"
+      "initial_date_lower": "Initial date must be lower than Final date",
+      "max_value": "Maximum value is {{value}}"
     }
   },
   "orderReplacement": {

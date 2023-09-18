@@ -24,11 +24,13 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
   allProductionOrderOperations,
   weekWithWorkingDays,
 }): JSX.Element => {
+  const now = dayjs();
   const tableBody = (
     <tbody>
       {allProductionOrderOperations.map((poOperation) => {
         return (
           <tr key={uuid()}>
+            <td>{dayjs(poOperation.planningDate).isBefore(now)? poOperation.operationTime:'/'}</td>
             {weekWithWorkingDays.map((day) => {
               return dayjs(poOperation.planningDate).isSame(day.date, 'day') ? (
                 <td
