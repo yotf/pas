@@ -108,6 +108,7 @@ export interface ProductionOrder {
   productionOrderTypeDto: ProductionOrderTypeDto;
   remark: string;
   poPosition?: number;
+  positionDelivery?: string;
 }
 
 export interface ProductionOrderMapped {

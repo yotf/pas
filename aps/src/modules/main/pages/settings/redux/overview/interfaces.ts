@@ -4,9 +4,7 @@
 
 import BaseResponse from '@/modules/shared/services/interfaces';
 import { ProductionCalendarPostResponse } from '../productionCalendarsWorkCapacities/interfaces';
-import {
-  OverviewPORoutingOperationAddAndUpdate,
-} from '../productionOrders/interfaces';
+import { OverviewPORoutingOperationAddAndUpdate } from '../productionOrders/interfaces';
 import { WorkCenter } from '../workCenters/interfaces';
 
 export interface WorkCenterExpanded extends WorkCenter {
@@ -27,7 +25,7 @@ export interface OverviewFormData {
   workCenters: number[];
   orderType: number;
   productionOrder: number;
-  pendingDays: number;
+  backlog: number;
 }
 /**
  * One table row shown in one overview work center table

@@ -110,7 +110,7 @@ const ProductionOrdersTable: FC = () => {
       initialPlanningDate: dateFormatter(obj.initialDate),
       POFinalDeliveryDate: dateFormatter(obj.finalDelivery),
       POPosition: obj.poPosition?.toString() || '',
-      deliveryOfPosition: 'Added Later',
+      deliveryOfPosition: obj.positionDelivery ? dateFormatter(obj.positionDelivery) : '',
       originPO: obj.origin,
       situation: translate(POSituation[obj.situationEnum]),
     }),
