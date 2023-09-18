@@ -83,7 +83,7 @@ export const useOverviewSchema = (): OptionalObjectSchema<
           .required(translate('required'))
           .min(1, translate('min_length')) as unknown as Yup.AnyObjectSchema,
         //    .max(10, translate('max_length')) as unknown as Yup.AnyObjectSchema,
-        pendingDays: numberNotRequired,
+        backlog: numberNotRequired.max(30, translate('max_value', { value: '30' })),
         orderType: numberNotRequired,
         productionOrder: numberNotRequired,
       }),

@@ -37,7 +37,6 @@ export const OverviewTable: FC<OverviewTableProps> = ({
 
   const { data } = useAppSelector((state) => state.overview);
 
-  const [toggleCalendar, setToggleCalendar] = useState(false);
 
   const { openReallocationModal, reallocationModal } = useReallocationOfPlanningModal();
 
