@@ -8,7 +8,7 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { dateFormatter } from '@/modules/shared/utils/utils';
 import { Tabs } from 'antd';
 import dayjs from 'dayjs';
-import { FC, ReactNode, useContext, useMemo, useState } from 'react';
+import { FC, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { MaintainContext } from '../../components/maintain/contexts/maintain.context';
 import {
   ProductionCalendarDay,
@@ -17,6 +17,7 @@ import {
 import { ProductionCalendarInputs } from './components/productionCalendarInputs/productionCalendar-inputs';
 import './productionCalendar-form.scss';
 import ProductionCalendarDayModal from './productionCalendarDay/productionCalendarDay-modal';
+import { ExportToExcelContext } from '../../components/maintain/contexts/exportToExcel.context';
 
 export type ProductionCalendarsCheckingProps = {
   checking: boolean;
@@ -47,6 +48,10 @@ const ProductionCalendarsChecking: FC<ProductionCalendarsCheckingProps> = ({
     () => Object.entries(entity?.[0]?.productionCalendars || {}),
     [entity?.[0]?.productionCalendars],
   );
+
+  const { setUiData } = useContext(ExportToExcelContext);
+
+  useEffect(() => setUiData(tabsArray), [tabsArray]);
 
   const activeTableData = useMemo(() => {
     if (!entity) return [];

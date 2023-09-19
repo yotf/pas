@@ -118,13 +118,12 @@ export const useTable = <T extends object>({
     ns,
     state: { entity },
     copying,
-  } = useContext<MaintainContextValue<SalesOrder, SalesOrderResponse, SalesOrderFormData>>(
-    MaintainContext,
-  );
+    isProductionCalendarCheckingPage,
+  } = useContext(MaintainContext);
 
   useEffect(() => {
-    setUiData(dataSource);
-  }, [JSON.stringify(dataSource)]);
+    if (!isProductionCalendarCheckingPage) setUiData(dataSource);
+  }, [JSON.stringify(dataSource), isProductionCalendarCheckingPage]);
   const { translate } = useTranslate({
     ns: 'table',
   });

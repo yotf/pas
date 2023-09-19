@@ -30,6 +30,7 @@ export type MaintainContextValue<Entity, SingleEntity, FormData> = {
   openRedirectModal?: (callback: () => void, copyRedirect?: boolean) => void;
   /** By default all maintain pages have the same request validations. If useDifferentChecks is true, a different validation can be used */
   useDifferentChecks?: boolean;
+  isProductionCalendarCheckingPage?: boolean;
 };
 
 /**
@@ -51,6 +52,7 @@ export const MaintainContext = createContext<MaintainContextValue<any, any, any>
   onDelete: () => {},
   openRedirectModal: () => {},
   useDifferentChecks: false,
+  isProductionCalendarCheckingPage: false,
 });
 /**
  * Maintain Context Provider. Provides children inside the context with values of {@link MaintainContextValue} type .

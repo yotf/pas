@@ -13,7 +13,11 @@ import { MaintainContextProvider } from '../../components/maintain/contexts/main
 import MaintainHeader from '../../components/maintain/maintain-header';
 import { useRedirectModal } from '../operations/hooks/useRedirectModal';
 import { productionCalendarThunks } from '../settings/redux/productionCalendars/thunks';
-import { ProductionCalendarDayMapped } from '../settings/redux/productionCalendarsWorkCapacities/interfaces';
+import {
+  ProductionCalendarCheckingExportToExcelData,
+  ProductionCalendarDayMapped,
+  ProductionCalendarPostResponse,
+} from '../settings/redux/productionCalendarsWorkCapacities/interfaces';
 import { useProductionCalendarForm } from './hooks/useGenerateProductionCalendarForm';
 import ProductionCalendarForm from './productionCalendars-form';
 import ProductionCalendarsChecking from './productionCalendarsChecking.page';
@@ -64,6 +68,7 @@ const ProductionCalendarMaintain: FC<ProductionCalendarMaintainProps> = ({
       state: sliceState,
       openRedirectModal,
       useDifferentChecks: true,
+      isProductionCalendarCheckingPage: true,
     }),
     [openRedirectModal, sliceState],
   );
@@ -74,19 +79,28 @@ const ProductionCalendarMaintain: FC<ProductionCalendarMaintainProps> = ({
     contextValue: exportContext,
     uiData,
     sort,
-  } = useExportToExcel<ProductionCalendarDayMapped>();
+  } = useExportToExcel<ProductionCalendarCheckingExportToExcelData>();
 
   const exportToExcel = useCallback(() => {
     exportToExcelFile({
-      filename: translate('title'),
-      sheets: [
-        {
-          aoa_sheet_data: getDataForExcel(uiData, columnsOrder, translate, sort),
-          sheetname: translate('title'),
-        },
-      ],
+      filename:
+        translate('title') +
+        '_' +
+        (
+          sliceState.entity as unknown as ProductionCalendarPostResponse[]
+        )[0].productionCalendarBaseInfoDto.id.toString(),
+      sheets: uiData.map((month) => {
+        return {
+          aoa_sheet_data: getDataForExcel(
+            month[1].map((day) => ({ ...day, date: day.weekDay })),
+            columnsOrder,
+            translate,
+          ),
+          sheetname: translate(month[0]),
+        };
+      }),
     });
-  }, [sort, translate, uiData]);
+  }, [translate, uiData]);
 
   return (
     <FormProvider {...form}>

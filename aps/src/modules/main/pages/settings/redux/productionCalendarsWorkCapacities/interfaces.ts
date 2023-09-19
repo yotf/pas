@@ -42,6 +42,7 @@ export interface ProductionCalendarDay {
   remark: string;
   start: string;
   weekDay: string;
+  date?: string;
 }
 
 export interface ProductionCalendarDayMapped {
@@ -58,6 +59,8 @@ export interface ProductionCalendarDayMapped {
   dayOfWeek: number;
   isWorkingDay: boolean;
 }
+
+export type ProductionCalendarCheckingExportToExcelData = [string, ProductionCalendarDay[]];
 /**
  * Months of a production calendar
  */
