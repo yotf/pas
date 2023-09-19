@@ -46,6 +46,7 @@ const HolidayForm: FC = () => {
         placeholder={translate('name')}
         register={register('name')}
         isRequired={true}
+        maxLength={30}
       />
       <CustomSwitch label={translate('active')} name={register('isActive').name} />
     </form>

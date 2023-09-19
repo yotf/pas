@@ -35,6 +35,7 @@ const CustomersForm: FC = () => {
         placeholder={translate('code')}
         register={register('code')}
         isRequired={true}
+        maxLength={20}
       />
       <CustomInput
         error={errors.name}

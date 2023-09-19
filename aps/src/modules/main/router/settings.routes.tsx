@@ -58,7 +58,7 @@ export const sharedRoutes: Route[] = [
   { element: <Configuration />, path: CONFIGURATION, name: CONFIGURATION },
   { element: <ColumnsConfig />, path: COLUMN_CONFIG, name: COLUMN_CONFIG },
   { element: <Departments />, path: DEPARTMENT, name: DEPARTMENT },
-  { element: <Parameters />, path: PARAMETERS, name: PARAMETERS },
+  // { element: <Parameters />, path: PARAMETERS, name: PARAMETERS },
   { element: <Features />, path: FEATURES, name: FEATURES },
   { element: <Colors />, path: COLORS, name: COLORS },
   { element: <OrderTypes />, path: ORDER_TYPES, name: ORDER_TYPES },

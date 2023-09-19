@@ -2,7 +2,7 @@
  * @module UserForm
  */
 
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import CustomInput from '../../../../shared/components/input/input.component';
 import CustomSwitch from '../../../../shared/components/input/switch/switch.component';
@@ -10,6 +10,9 @@ import { useTranslate } from '../../../../shared/hooks/translate.hook';
 import { UserFormData } from '../../settings/redux/user/interfaces';
 import { useUserOptions } from '../hooks/positions';
 import { availableLanguages } from '@/localizations/i18n';
+import { limitNumberOfChars, limitToNumericKeyDown } from '@/modules/shared/utils/utils';
+import { MaskedInput } from 'antd-mask-input';
+import CustomMaskedInput from '@/modules/shared/components/input/maskedInput/maskedInput.component';
 /**
  *
  * @returns Form rendered inside the {@link UserModal}
@@ -29,7 +32,7 @@ const UserForm: FC<UserProps> = ({ user }) => {
     getValues,
     watch,
   } = useFormContext<UserFormData>();
-  const { language } = watch();
+  const { language, userName } = watch();
   //const { options: roleOptions } = useRoles();
   // const userPosition = getValues('positionId');
 
@@ -50,6 +53,8 @@ const UserForm: FC<UserProps> = ({ user }) => {
     if (!language) setValue('language', languageOptions?.[0]?.value);
   }, [language]);
 
+  const changingLanguageForSelf = useMemo(() => userName, [language]);
+
   return (
     <form
       className='settings-form'
@@ -64,6 +69,7 @@ const UserForm: FC<UserProps> = ({ user }) => {
         placeholder={translate('firstName')}
         register={register('firstName')}
         isRequired={true}
+        maxLength={20}
       />
       <CustomInput
         error={errors.lastName}
@@ -71,6 +77,7 @@ const UserForm: FC<UserProps> = ({ user }) => {
         label={translate('lastName')}
         placeholder={translate('lastName')}
         register={register('lastName')}
+        maxLength={20}
         isRequired={true}
       />
       <CustomInput
@@ -81,6 +88,7 @@ const UserForm: FC<UserProps> = ({ user }) => {
         register={register('userName')}
         isRequired={true}
         onKeyDownEvent={preventEmptySpace}
+        maxLength={20}
       />
       <CustomInput
         error={errors.password}
@@ -100,12 +108,15 @@ const UserForm: FC<UserProps> = ({ user }) => {
         onKeyDownEvent={preventEmptySpace}
       />
       <CustomInput
+        type='tel'
         error={errors.phoneNumber}
-        type='text'
         label={translate('phone')}
         placeholder={translate('phone')}
         register={register('phoneNumber')}
+        onKeyDownEvent={limitToNumericKeyDown}
+        maxLength={20}
       />
+
       <CustomInput
         error={errors.roleId}
         type='select'
@@ -123,7 +134,6 @@ const UserForm: FC<UserProps> = ({ user }) => {
         register={register('positionId')}
         options={positionOptions}
       />
-
       <CustomSwitch label={translate('active')} name={register('isActive').name} />
       <CustomInput
         error={errors.language}

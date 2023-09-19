@@ -37,6 +37,7 @@ const SettingsForm: FC = () => {
         placeholder={translate('code')}
         register={register('code')}
         isRequired={true}
+        maxLength={20}
       />
       <CustomInput
         error={errors.name}
@@ -45,6 +46,7 @@ const SettingsForm: FC = () => {
         placeholder={translate('name')}
         register={register('name')}
         isRequired={true}
+        maxLength={20}
       />
       <CustomSwitch label={translate('active')} name={register('isActive').name} />
     </form>
