@@ -169,7 +169,8 @@
       "language": "Language",
       "en": "English",
       "de": "German",
-      "pt": "Portuguese"
+      "pt": "Portuguese",
+      "language-change-message": "Language changes will be applied once user '{{username}}' logs out and logs back in."
     },
     "notification": {
       "create": "User has been successfully created",

@@ -1,0 +1,13 @@
+@import '@/styles/variables';
+.switch-n-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .lang-change-message {
+    display: inline-block;
+    max-width: 218px;
+    font-size: 12px;
+    color: $red-color;
+    //  margin-top: auto;
+  }
+}

@@ -10,9 +10,8 @@ import { useTranslate } from '../../../../shared/hooks/translate.hook';
 import { UserFormData } from '../../settings/redux/user/interfaces';
 import { useUserOptions } from '../hooks/positions';
 import { availableLanguages } from '@/localizations/i18n';
-import { limitNumberOfChars, limitToNumericKeyDown } from '@/modules/shared/utils/utils';
-import { MaskedInput } from 'antd-mask-input';
-import CustomMaskedInput from '@/modules/shared/components/input/maskedInput/maskedInput.component';
+import './user-form.component.scss';
+import { limitToNumericKeyDown } from '@/modules/shared/utils/utils';
 /**
  *
  * @returns Form rendered inside the {@link UserModal}
@@ -53,7 +52,10 @@ const UserForm: FC<UserProps> = ({ user }) => {
     if (!language) setValue('language', languageOptions?.[0]?.value);
   }, [language]);
 
-  const changingLanguageForSelf = useMemo(() => userName, [language]);
+  const languageChanged = useMemo(
+    () => user.language && user.language !== language,
+    [user, language],
+  );
 
   return (
     <form
@@ -134,7 +136,14 @@ const UserForm: FC<UserProps> = ({ user }) => {
         register={register('positionId')}
         options={positionOptions}
       />
-      <CustomSwitch label={translate('active')} name={register('isActive').name} />
+      <div className='switch-n-message'>
+        <CustomSwitch label={translate('active')} name={register('isActive').name} />
+        {languageChanged && (
+          <span className='lang-change-message'>
+            {translate('language-change-message', { username: user.userName })}
+          </span>
+        )}
+      </div>
       <CustomInput
         error={errors.language}
         type='select'
