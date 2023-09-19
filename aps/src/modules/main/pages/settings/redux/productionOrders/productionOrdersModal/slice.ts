@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { POModalInitialState } from './states';
 import { createProductionOrdersFromSalesOrder } from './thunks';
+import { AxiosErrorFormat } from '../../slice';
 
 const productionOrderModalSlice = createSlice({
   name: 'productionOrderModalSlice',
@@ -15,7 +16,7 @@ const productionOrderModalSlice = createSlice({
     });
     builder.addCase(createProductionOrdersFromSalesOrder.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = (action.payload as unknown as AxiosErrorFormat).data;
     });
     builder.addCase(createProductionOrdersFromSalesOrder.pending, (state) => {
       state.loading = true;

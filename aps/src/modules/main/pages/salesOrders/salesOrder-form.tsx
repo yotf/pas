@@ -25,6 +25,9 @@ import { useSalesOrderMaterialsModal } from './salesOrderMaterials-table';
 import dayjs from 'dayjs';
 import { SalesOrderMaterialDto } from '../settings/redux/productionOrders/interfaces';
 import { latest } from 'immer/dist/internal';
+import { useAppSelector } from '@/store/hooks';
+import { LoadingOutlined, ScheduleOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 /**
  * @returns Sales Order Form component with {@link Input | inputs} connected to the form returned by {@link useSalesOrderForm} hook.
  */
@@ -41,7 +44,9 @@ const SalesOrderForm: FC = () => {
   const nameof = nameofFactory<SalesOrderFormData>();
   const { watch, setValue } = useFormContext();
 
-  const { status, salesOrderMaterialsAddAndUpdate } = watch();
+  const { loading } = useAppSelector((state) => state.productionOrdersModal);
+
+  const { salesOrderMaterialsAddAndUpdate } = watch();
 
   const { customerOptions, orderTypeOptions } = useSalesOrderOptions(entity);
 
@@ -81,6 +86,16 @@ const SalesOrderForm: FC = () => {
     );
   }, [salesOrderMaterialsAddAndUpdate, setValue]);
 
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 20,
+        color: 'white',
+      }}
+      spin
+    />
+  );
+
   return (
     <div className='sales-order-container'>
       <div className='form-container'>
@@ -90,6 +105,12 @@ const SalesOrderForm: FC = () => {
           autoComplete='off'
           onSubmit={(e): void => e.preventDefault()}
         >
+          {loading && (
+            <div className='spinner-overlay'>
+              <Spin size='large' />
+            </div>
+          )}
+
           {!!entity?.orderNumber && (
             <div className='orderNumber'>
               <CustomInput type='readonly' name={nameof('orderNumber')} width='full-width' />

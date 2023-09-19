@@ -33,7 +33,7 @@ export const usePOModalValidation = ({ ns, form }: POModalValidationProps): void
     }
 
     if (error) {
-      notificationFail(translate('create_fail'));
+      notificationFail(error ? error : translate('create_fail'));
       reset(undefined, {
         keepIsSubmitted: false,
         keepValues: true,

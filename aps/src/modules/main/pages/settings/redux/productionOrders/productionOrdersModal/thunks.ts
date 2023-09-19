@@ -20,7 +20,7 @@ export const createProductionOrdersFromSalesOrder = createAsyncThunk(
       const { data } = response;
       return data;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

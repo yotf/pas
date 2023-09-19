@@ -7,7 +7,7 @@ import CustomButton from '@/modules/shared/components/button/button.component';
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { nameofFactory } from '@/modules/shared/utils/utils';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { GenerateProductionCalendarFormData } from '../../../settings/redux/productionCalendars/interfaces';
 import { useProductionCalendarOptions } from '../../hooks/useProductionCalendarOptions';
@@ -38,6 +38,9 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
   const { workCenterOptions } = useProductionCalendarOptions(entity);
   const form = useFormContext();
   const { initialDate, finalDate } = form.watch();
+
+
+  const editingMultiple = useMemo(() => !!entity?.length && entity?.length > 1, [entity?.length]);
 
   return (
     <div className={'top-section' + (!checking ? ' new' : '')}>
@@ -77,7 +80,12 @@ export const ProductionCalendarInputs: FC<ProductionCalendarInputsProps> = ({
           disabled={checking}
         />
       </div>
-      <CustomButton type='button' color='green' onClick={exportToExcel}>
+      <CustomButton
+        type='button'
+        color='green'
+        onClick={exportToExcel}
+        isDisabled={!checking || editingMultiple}
+      >
         <div className='button-children'>
           <img src={copy} alt='' />
           <span>{translate('excel_button')}</span>
