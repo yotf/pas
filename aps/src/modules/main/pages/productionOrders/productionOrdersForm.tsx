@@ -205,19 +205,21 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [materialMeasures, setValue]);
 
   useEffect(() => {
-    if (!materialMeasures || !quantity1) return;
+    if (!materialMeasures || !quantity1 || quantity1 === entity?.quantity1) return;
     setValue('quantity2', quantity1 * materialMeasures?.factorAreaToPc);
     setValue('quantity3', quantity1 * materialMeasures?.factorAreaToKG);
-  }, [materialMeasures, quantity1, setValue]);
+  }, [quantity1, setValue]);
 
   useEffect(() => {
     setValue('salesOrderDelivery', selectedSalesOrder?.salesOrderDelivery || '');
   }, [selectedSalesOrder, setValue]);
 
   useEffect(() => {
-    setValue('routingId', materialMeasures?.routingId ?? undefined);
-    trigger('routingId');
-  }, [JSON.stringify(materialMeasures), setValue]);
+    if ( materialId != entity?.materialDto.id) {
+      setValue('routingId', materialMeasures?.routingId ?? undefined);
+      trigger('routingId');
+    }
+  }, [materialId, setValue, isPlanned]);
 
   useEffect(() => {
     if (!foreseenDelivery) setValue('foreseenDelivery', undefined);
@@ -244,6 +246,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   useEffect(() => {
     if (routingId && (routingId !== entity?.routingId || discardOperations)) {
+      debugger;
       dispatch(getRouting(routingId));
     }
   }, [dispatch, entity?.routingId, routingId]);

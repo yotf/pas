@@ -60,11 +60,16 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         salesOrderMaterialId: numberNotRequired,
         foreseenDeliveryPOOrigin: stringNotRequired,
         origin: numberNotRequired,
-        quantity1: Yup.number()
+        quantity1: numberNotRequired
           .required(translate('required'))
+          .test('wrongType', translate('numeric'), (value) => {
+          if (!value) return true;
+            if (!isNaN(value) && isFinite(value)) return true;
+            return false;
+          })
           .min(1, translate('min_length', { name: '1' }))
-          .max(99999, translate('max_length', { name: '99999' }))
-          .typeError(translate('numeric')),
+          .max(99999, translate('max_length', { name: '99999' })),
+        //.typeError(translate('numeric')),
         quantity2: numberNotRequired,
         quantity3: numberNotRequired,
         unitOfMeasure1Id: numberNotRequired,
