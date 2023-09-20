@@ -220,6 +220,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
                     ns={ns}
                     factorAreaToPc={selectedMaterialFull?.factorAreaToPc}
                     remove={remove}
+                    factorAreaToKG={selectedMaterialFull?.factorAreaToKG}
                   />
                 );
               })}

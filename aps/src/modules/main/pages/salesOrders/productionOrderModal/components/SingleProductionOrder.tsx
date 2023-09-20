@@ -17,6 +17,7 @@ export type SingleProductionOrderProps = {
   ns: string;
   factorAreaToPc: number | undefined;
   remove: UseFieldArrayRemove;
+  factorAreaToKG: number | undefined;
 };
 /**
  *
@@ -31,6 +32,7 @@ const SingleProductionOrder: FC<SingleProductionOrderProps> = ({
   index,
   ns,
   factorAreaToPc,
+  factorAreaToKG,
   remove,
 }): JSX.Element => {
   const { translate } = useTranslate({ ns: ns });
@@ -45,6 +47,10 @@ const SingleProductionOrder: FC<SingleProductionOrderProps> = ({
     setValue(
       `productionOrders.${index}.quantity2`,
       Math.ceil(productionOrders[index]?.quantity1! * (factorAreaToPc || 1)),
+    );
+    setValue(
+      `productionOrders.${index}.quantity3`,
+      Math.ceil(productionOrders[index]?.quantity1! * (factorAreaToKG || 1)),
     );
   }, [factorAreaToPc, index, productionOrders[index]?.quantity1, setValue, productionOrders]);
 
