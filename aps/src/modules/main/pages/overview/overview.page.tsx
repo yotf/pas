@@ -15,7 +15,7 @@ import { limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/uti
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 import dayjs from 'dayjs';
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { STATISTICS_PAGE } from '../../consts/pageRouter';
@@ -116,11 +116,11 @@ const Overview: FC = () => {
     }
   }, [finalDate, initialDate, trigger]);
 
-  const maxAllowedWorkcenters = 10;
+  // const maxAllowedWorkcenters = 10;
 
-  useEffect(() => {
-    if (workCenters?.length === maxAllowedWorkcenters) trigger('workCenters');
-  }, [trigger, workCenters]);
+  // useEffect(() => {
+  //   if (workCenters?.length === maxAllowedWorkcenters) trigger('workCenters');
+  // }, [trigger, workCenters]);
 
   const goToStatistics = (): void => {
     navigate(STATISTICS_PAGE, {
@@ -158,12 +158,17 @@ const Overview: FC = () => {
         shouldTouch: true,
       }),
     );
-    form.trigger();
+    form.trigger('workCenters');
   };
 
   useEffect(() => {
     form.setValue('backlog', 0);
   }, []);
+
+  const excelDisabled = useMemo(() => {
+    debugger;
+    return mappedTables?.length === 0 || !mappedTables.find((mt) => mt.tableData.length > 0);
+  }, [mappedTables]);
   return (
     <FormProvider {...form}>
       <OverviewContextProvider value={{ ns: ns, overviewFormData: getValues() }}>
@@ -193,6 +198,7 @@ const Overview: FC = () => {
                 name={nameof('orderType')}
                 options={orderTypeOptions}
                 isAutocomplete={true}
+                width='full-width'
               />
             </div>
             <div className='po'>
@@ -267,7 +273,7 @@ const Overview: FC = () => {
                   type='button'
                   color='green'
                   onClick={exportToExcel}
-                  isDisabled={mappedTables?.length === 0}
+                  isDisabled={excelDisabled}
                 >
                   <div className='button-children'>
                     <img src={copy} alt='' />
