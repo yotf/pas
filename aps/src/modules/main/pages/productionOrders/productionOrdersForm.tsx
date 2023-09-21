@@ -215,7 +215,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [selectedSalesOrder, setValue]);
 
   useEffect(() => {
-    if ( materialId != entity?.materialDto.id) {
+    if (materialId != entity?.materialDto?.id) {
       setValue('routingId', materialMeasures?.routingId ?? undefined);
       trigger('routingId');
     }
