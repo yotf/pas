@@ -66,6 +66,18 @@ const Statistics: FC = () => {
     }
   }, [finalDate, initialDate, trigger]);
 
+  const selectAllWorkCenters = (e: any) => {
+    form.setValue(
+      'workCenters',
+      workCenterOptions.map((wc) => Number(wc.value), {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      }),
+    );
+    form.trigger('workCenters');
+  };
+
   return (
     <FormProvider {...form}>
       <div className='title-container'>
@@ -83,6 +95,11 @@ const Statistics: FC = () => {
               isRequired={true}
               allowClear={true}
             />
+            <CustomButton type='button' color='blue' onClick={selectAllWorkCenters}>
+              <div className='button-children'>
+                <span>{translate('select_all_work_centers')}</span>
+              </div>
+            </CustomButton>
           </div>
           <CustomInput
             type='date'

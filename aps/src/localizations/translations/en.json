@@ -1314,6 +1314,7 @@
     "sequence": "Sequence",
     "delayed_orders_heading": "Delayed Orders",
     "setupTime": "Setup Time",
+    "select_all_work_centers": "Select All",
     "validation": {
       "initial_date_lower": "Initial date must be lower than Final date"
     }

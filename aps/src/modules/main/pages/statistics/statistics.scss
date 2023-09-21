@@ -37,6 +37,15 @@
 
   .workCenters {
     grid-column: span 2;
+    display: flex;
+    gap: 20px;
+    div:first-child {
+      flex-grow: 1;
+    }
+
+    .button {
+      align-self: flex-end;
+    }
 
     @media screen and (width < 930px) {
       grid-column: span 3;
