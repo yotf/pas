@@ -84,17 +84,20 @@ const Statistics: FC = () => {
         <h2 className='table-container__title'>{translate('title')}</h2>
         <div className='statistics-container'>
           <div className='workCenters'>
-            <CustomInput
-              isAutocomplete={true}
-              type={'select'}
-              label={translate('workCenters')}
-              name={nameof('workCenters')}
-              width='full-width'
-              mode='multiple'
-              options={workCenterOptions}
-              isRequired={true}
-              allowClear={true}
-            />
+            <div className='workCenterField'>
+              <CustomInput
+                isAutocomplete={true}
+                type={'select'}
+                label={translate('workCenters')}
+                name={nameof('workCenters')}
+                width='full-width'
+                mode='multiple'
+                options={workCenterOptions}
+                isRequired={true}
+                allowClear={true}
+              />
+            </div>
+
             <CustomButton type='button' color='blue' onClick={selectAllWorkCenters}>
               <div className='button-children'>
                 <span>{translate('select_all_work_centers')}</span>

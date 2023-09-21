@@ -39,7 +39,7 @@
     grid-column: span 2;
     display: flex;
     gap: 20px;
-    div:first-child {
+    .workCenterField {
       flex-grow: 1;
     }
 
