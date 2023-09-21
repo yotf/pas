@@ -39,35 +39,35 @@ const SimulationActions: FC = (): JSX.Element => {
 
   return (
     <div className='generate'>
-      <div className='date-inputs'>
-        <CustomInput
-          type='date'
-          isRequired={true}
-          label={translate('initialDate')}
-          name={nameof('initialDate')}
-          width='full-width'
-          noPastDates={true}
-        />
+      <CustomInput
+        type='date'
+        isRequired={true}
+        label={translate('initialDate')}
+        name={nameof('initialDate')}
+        width='full-width'
+        noPastDates={true}
+      />
 
-        <CustomInput
-          type='date'
-          isRequired={true}
-          label={translate('finalDate')}
-          name={nameof('finalDate')}
-          width='full-width'
-          disableDatesFrom={dayjs(initialDate)}
-        />
+      <CustomInput
+        type='date'
+        isRequired={true}
+        label={translate('finalDate')}
+        name={nameof('finalDate')}
+        width='full-width'
+        disableDatesFrom={dayjs(initialDate)}
+      />
+      <div className='button-container'>
+        <CustomButton
+          type='button'
+          color='blue'
+          isDisabled={!isValid || !isDirty || isSubmitting}
+          onClick={getSimulations}
+        >
+          <div className='button-children'>
+            <span>{translate('generate_data')}</span>
+          </div>
+        </CustomButton>
       </div>
-      <CustomButton
-        type='button'
-        color='blue'
-        isDisabled={!isValid || !isDirty || isSubmitting}
-        onClick={getSimulations}
-      >
-        <div className='button-children'>
-          <span>{translate('generate_data')}</span>
-        </div>
-      </CustomButton>
     </div>
   );
 };

@@ -81,20 +81,21 @@ const SimulationRouting: FC<SimulationRoutingProps> = ({
         error={getRoutingErrors(index, 'repeat')}
         onKeyDownEvent={limitToNumericKeyDown}
       />
-      <div className='date-wrapper'>
-        <div className='date-input'>
-          <CustomInput
-            type='date'
-            isRequired={true}
-            name={`routings[${index}].routingInitialDate`}
-            label={getRoutingLabel(index, 'routingInitialDate')}
-            placeholder={translate('initialDate')}
-            width='full-width'
-            noPastDates={true}
-            disableDatesFrom={dayjs()}
-            error={getRoutingErrors(index, 'routingInitialDate')}
-          />
-        </div>
+
+      <div className='date-input'>
+        <CustomInput
+          type='date'
+          isRequired={true}
+          name={`routings[${index}].routingInitialDate`}
+          label={getRoutingLabel(index, 'routingInitialDate')}
+          placeholder={translate('initialDate')}
+          width='full-width'
+          noPastDates={true}
+          disableDatesFrom={dayjs()}
+          error={getRoutingErrors(index, 'routingInitialDate')}
+        />
+      </div>
+      <div className='delivery-and-trash'>
         <div className='date-input'>
           <CustomInput
             type='date'
@@ -107,8 +108,9 @@ const SimulationRouting: FC<SimulationRoutingProps> = ({
             error={getRoutingErrors(index, 'routingDeliveryDate')}
           />
         </div>
-        <div className='delete-icon'>
-          {fieldsLength > 1 && <DeleteOutlined onClick={(): void => remove(index)} />}
+
+        <div className={'delete-icon ' + (fieldsLength > 1 ? '' : 'hidden')}>
+          <DeleteOutlined onClick={(): void => remove(index)} />
         </div>
       </div>
     </div>

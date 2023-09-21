@@ -6,7 +6,7 @@
 
 .simulation-container {
   width: 100%;
-  padding: 0 1.5em;
+  padding: 0 3em;
   margin: 16px 0 0;
 
   .simulation-inputs {
@@ -32,12 +32,26 @@
       @media (width>797px) and (width < 1200px) {
         .routing .custom-input {
           min-width: 100px;
+          line-height: unset;
         }
       }
       .routing {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
         gap: 24px;
         align-items: flex-end;
+
+        .delivery-and-trash {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          .date-input {
+            flex-grow: 1;
+          }
+          .delete-icon {
+            min-width: unset;
+          }
+        }
 
         .error-message {
           top: 55px !important;
@@ -69,6 +83,7 @@
 
         .custom-input {
           width: 100%;
+          //font-size: 14px;
 
           div {
             width: 100%;
@@ -89,6 +104,9 @@
         .delete-icon {
           align-self: center;
           cursor: pointer;
+          &.hidden {
+            display: none;
+          }
         }
       }
 
