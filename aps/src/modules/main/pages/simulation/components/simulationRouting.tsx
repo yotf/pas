@@ -3,7 +3,7 @@
  */
 
 import CustomInput from '@/modules/shared/components/input/input.component';
-import { onKeydownEvent } from '@/modules/shared/utils/utils';
+import { limitToNumericKeyDown, onKeydownEvent } from '@/modules/shared/utils/utils';
 import { DeleteOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { FC } from 'react';
@@ -55,28 +55,31 @@ const SimulationRouting: FC<SimulationRoutingProps> = ({
         />
       </div>
       <CustomInput
-        type='number'
+        type='tel'
+        maxLength={4}
         label={getRoutingLabel(index, 'quantity')}
         placeholder={translate('quantity')}
         name={`routings[${index}].quantity`}
         error={getRoutingErrors(index, 'quantity')}
-        onKeyDownEvent={onKeydownEvent}
+        onKeyDownEvent={limitToNumericKeyDown}
       />
       <CustomInput
-        type='number'
+        type='tel'
+        maxLength={2}
         label={getRoutingLabel(index, 'numberOfPOs')}
         placeholder={translate('numberOfPOs')}
         name={`routings[${index}].numberOfPOs`}
         error={getRoutingErrors(index, 'numberOfPOs')}
-        onKeyDownEvent={onKeydownEvent}
+        onKeyDownEvent={limitToNumericKeyDown}
       />
       <CustomInput
-        type='number'
+        type='tel'
+        maxLength={2}
         label={getRoutingLabel(index, 'repeat')}
         placeholder={translate('repeat')}
         name={`routings[${index}].repeat`}
         error={getRoutingErrors(index, 'repeat')}
-        onKeyDownEvent={onKeydownEvent}
+        onKeyDownEvent={limitToNumericKeyDown}
       />
       <div className='date-wrapper'>
         <div className='date-input'>
