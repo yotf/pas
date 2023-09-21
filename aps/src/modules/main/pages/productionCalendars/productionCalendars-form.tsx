@@ -24,8 +24,7 @@ import { useProductionCalendarValidationChecks } from './hooks/useProductionCale
 import { useWorkCapacitiesTable } from './hooks/useWorkCapacitiesTable';
 import './productionCalendar-form.scss';
 import { LoadingOutlined, ScheduleOutlined } from '@ant-design/icons';
-import { State } from '../settings/redux/slice';
-import { IdentifiableEntity } from '../settings/redux/thunks';
+import lamma from '@/assets/lamma.gif';
 import { Spin } from 'antd';
 /**
  *
@@ -84,7 +83,8 @@ const ProductionCalendarForm: FC = (): JSX.Element => {
     >
       {loading && (
         <div className='spinner-overlay'>
-          <Spin size='large' />
+          {/* <Spin size='large' /> */}
+          <img src={lamma} />
         </div>
       )}
       <ProductionCalendarInputs checking={false} ns={ns} />
