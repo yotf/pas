@@ -19,7 +19,7 @@ export const useSimulationDeliveryDates = (form: UseFormReturn<SimulationFormDat
 
   const newRoutings = useMemo(() => {
     const routingsMapped: RoutingInputs[] = routings?.map((rf) => {
-      const found = routingsDeliveryDates.find((rdd: any) => rdd.routingId === rf.routingId);
+      const found = routingsDeliveryDates?.find((rdd: any) => rdd.routingId === rf.routingId);
       if (found) {
         return { ...rf, routingDeliveryDate: found.deliveryDate! };
       }

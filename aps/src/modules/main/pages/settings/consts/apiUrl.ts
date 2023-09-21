@@ -25,7 +25,7 @@ export const BASE_WORK_CENTERS_API = 'WorkCenters';
 export const BASE_MATERIALS_API = 'materials';
 export const BASE_SALES_ORDERS_API = 'SalesOrders';
 
-export const BASE_SIMULATION_API = 'Simulation';
+export const BASE_SIMULATION_API = 'Simulations';
 export const BASE_SALES_ORDERS_MATERIALS_API = `${BASE_SALES_ORDERS_API}/getSalesOrdersWithMaterials`;
 export const BASE_PRODUCTION_CALENDAR_API = 'ProductionCalendar';
 export const BASE_PRODUCTION_ORDER_API = 'ProductionOrders';

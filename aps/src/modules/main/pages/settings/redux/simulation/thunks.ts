@@ -9,10 +9,14 @@ export const getSimulationData = createAsyncThunk(
   BASE_SIMULATION_API,
   async (simulationFormData: SimulationFormData, { rejectWithValue }) => {
     try {
-      // const response = await ApiService.post<SimulationDataOverview>(BASE_SIMULATION_API, simulationFormData);
-      // const { data } = response;
+      const response = await ApiService.post<SimulationDataOverview>(
+        BASE_SIMULATION_API,
+        simulationFormData,
+      );
+      const { data } = response;
+      return data;
 
-      return mockedSimulationData;
+      //return mockedSimulationData;
     } catch (err: any) {
       return rejectWithValue(err.response ? err.response.status : err.message);
     }
