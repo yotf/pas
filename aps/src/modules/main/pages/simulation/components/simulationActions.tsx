@@ -44,7 +44,7 @@ const SimulationActions: FC = (): JSX.Element => {
         isRequired={true}
         label={translate('initialDate')}
         name={nameof('initialDate')}
-        width='full-width'
+        //  width='full-width'
         noPastDates={true}
       />
 
@@ -53,7 +53,7 @@ const SimulationActions: FC = (): JSX.Element => {
         isRequired={true}
         label={translate('finalDate')}
         name={nameof('finalDate')}
-        width='full-width'
+        // width='full-width'
         disableDatesFrom={dayjs(initialDate)}
       />
       <div className='button-container'>
