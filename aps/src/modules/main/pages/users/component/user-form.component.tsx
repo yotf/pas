@@ -49,7 +49,7 @@ const UserForm: FC<UserProps> = ({ user }) => {
   };
 
   useEffect(() => {
-    if (!language) setValue('language', languageOptions?.[0]?.value);
+    if (!user.language) setValue('language', languageOptions?.[0]?.value);
   }, [language]);
 
   const languageChanged = useMemo(
