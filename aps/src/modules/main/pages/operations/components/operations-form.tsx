@@ -5,7 +5,7 @@
 import CustomInput from '@/modules/shared/components/input/input.component';
 import CustomSwitch from '@/modules/shared/components/input/switch/switch.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/lib/select';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
@@ -19,6 +19,7 @@ import {
 } from '@/modules/shared/utils/utils';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
+import { getConfiguration } from '../../settings/redux/configuration/thunks';
 
 export type OperationsFormType = {
   form: UseFormReturn<OperationFormData, any>;
@@ -38,9 +39,10 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   const ns = 'operations';
   const { translate } = useTranslate({ ns: ns });
   const { translate: translateAllocation } = useTranslate({ ns: 'allocation_labels' });
-  const { entity } = useAppSelector((state) => state.operation);
+  const { entity, error } = useAppSelector((state) => state.operation);
   const { data: configuration } = useAppSelector((state) => state.configuration);
   const [allocationModelOpened, setIsAllocationModalOpened] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
   const convertForDropdown = useCallback(
     (arr: (SettingsPageItem | AllocationBased)[] | undefined): DefaultOptionType[] => {
       if (arr === undefined) return [];
@@ -50,6 +52,10 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     },
     [translateAllocation],
   );
+
+  useEffect(() => {
+    dispatch(getConfiguration());
+  }, [dispatch]);
 
   const { allocationBased } = form.watch();
 
