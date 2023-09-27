@@ -69,7 +69,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     () =>
       mapDataToOptions(
         configuration.quantities1.map((q) => q.unitOfMeasure) as SettingsPageItem[],
-        entity?.unitOfMeasure
+        entity?.unitOfMeasure && entity.allocationBased !== AllocationBasedEnum.formula
           ? { label: entity?.unitOfMeasure.name, value: entity.unitOfMeasure.id! }
           : undefined,
       ),
@@ -110,6 +110,8 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
       ? setValue('unitOfMeasureId', kgOption[0].value)
+      : entity?.allocationBased === AllocationBasedEnum.formula
+      ? form.setValue('unitOfMeasureId', undefined)
       : form.resetField('unitOfMeasureId');
   }, [allocationBased]);
 
