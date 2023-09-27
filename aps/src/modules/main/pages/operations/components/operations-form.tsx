@@ -42,6 +42,7 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
   const { entity, error } = useAppSelector((state) => state.operation);
   const { data: configuration } = useAppSelector((state) => state.configuration);
   const [allocationModelOpened, setIsAllocationModalOpened] = useState<boolean>(false);
+  const [allocationChanged, setAllocationChanged] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const convertForDropdown = useCallback(
     (arr: (SettingsPageItem | AllocationBased)[] | undefined): DefaultOptionType[] => {
@@ -64,25 +65,15 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [allocationBased],
   );
 
-  const UoMOptions = useMemo(
+  const q1Options = useMemo(
     () =>
-      allocationBased === AllocationBasedEnum.quantity1
-        ? mapDataToOptions(
-            configuration.quantities1.map((q) => q.unitOfMeasure) as SettingsPageItem[],
-            entity?.unitOfMeasure
-              ? { label: entity?.unitOfMeasure.name, value: entity.unitOfMeasure.id! }
-              : undefined,
-          )
-        : mapDataToOptions(
-            configuration.defaultKg?.unitOfMeasure
-              ? [configuration.defaultKg?.unitOfMeasure]
-              : undefined,
-            entity?.unitOfMeasure
-              ? { value: entity?.unitOfMeasure.id!, label: entity?.unitOfMeasure.name }
-              : undefined,
-          ),
+      mapDataToOptions(
+        configuration.quantities1.map((q) => q.unitOfMeasure) as SettingsPageItem[],
+        entity?.unitOfMeasure
+          ? { label: entity?.unitOfMeasure.name, value: entity.unitOfMeasure.id! }
+          : undefined,
+      ),
     [
-      allocationBased,
       entity?.unitOfMeasure,
       configuration.quantities1,
       configuration.quantities2,
@@ -90,7 +81,21 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     ],
   );
 
+  const kgOption = useMemo(
+    () =>
+      entity?.allocationBased === AllocationBasedEnum.formula && !allocationChanged
+        ? [{ label: entity.unitOfMeasure.name, value: entity.unitOfMeasure.id }]
+        : [
+            {
+              label: configuration.defaultKg?.unitOfMeasure?.name,
+              value: configuration.defaultKg?.unitOfMeasure?.id,
+            },
+          ],
+    [configuration.defaultKg, entity?.unitOfMeasure, entity?.allocationBased, allocationChanged],
+  );
+
   const handleAllocationBasedChange = (callback: () => void) => {
+    setAllocationChanged(true);
     if (entity?.usedInPlanning || entity?.usedInWorkCenter) {
       setIsAllocationModalOpened(true);
     } else {
@@ -104,13 +109,8 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
 
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
-      ? setValue('unitOfMeasureId', UoMOptions?.[0]?.value as number)
+      ? setValue('unitOfMeasureId', kgOption[0].value)
       : form.resetField('unitOfMeasureId');
-    // : setValue('unitOfMeasureId', undefined, {
-    //     shouldValidate: true,
-    //     shouldDirty: true,
-    //     shouldTouch: true,
-    //   });
   }, [allocationBased]);
 
   return (
@@ -223,9 +223,13 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
                 error={errors.unitOfMeasureId}
                 type='select'
                 placeholder={translate('unit_of_measure_placeholder')}
-                label={translate('unit_of_measure_label')}
+                label={
+                  allocationBased === AllocationBasedEnum.formula
+                    ? translate('unit_of_formula_label')
+                    : translate('unit_of_measure_label')
+                }
                 register={register('unitOfMeasureId')}
-                options={UoMOptions}
+                options={allocationBased === AllocationBasedEnum.formula ? kgOption : q1Options}
                 width='full-width'
                 disabled={disableInput}
                 isRequired={true}
