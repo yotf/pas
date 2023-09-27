@@ -76,7 +76,6 @@ const OperationsForm: FC<OperationsFormType> = ({ form }) => {
     [
       entity?.unitOfMeasure,
       configuration.quantities1,
-      configuration.quantities2,
       configuration.defaultKg,
     ],
   );

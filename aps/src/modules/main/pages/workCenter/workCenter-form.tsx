@@ -7,7 +7,7 @@ import CustomSwitch from '@/modules/shared/components/input/switch/switch.compon
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { DefaultOptionType } from 'antd/lib/select';
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { SettingsPageItem } from '../settings/consts/interfaces';
 import { AllocationBased } from '../settings/redux/operations/interfaces';
@@ -43,6 +43,8 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
     resetField,
   } = form;
 
+  const [allocationChanged, setAllocationChanged] = useState<boolean>(false);
+
   const { allocationBased } = watch();
 
   const convertForDropdown = useCallback(
@@ -59,40 +61,71 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
     dispatch(getConfiguration());
   }, [dispatch]);
 
-  const UoMs = useMemo(() => {
-    const unitOfMeasures = quantities1.map((q1) => q1.unitOfMeasure);
-    const kgMeasure = defaultKg?.unitOfMeasure;
-    return allocationBased === AllocationBasedEnum.quantity1
-      ? mapDataToOptions(
-          unitOfMeasures as SettingsPageItem[],
-          entity?.unitOfMeasure
-            ? { value: entity.unitOfMeasure.id!, label: entity.unitOfMeasure.name }
-            : undefined,
-        )
-      : mapDataToOptions(
-          kgMeasure ? [kgMeasure] : undefined,
-          entity?.unitOfMeasure
-            ? { value: entity?.unitOfMeasure.id!, label: entity?.unitOfMeasure.name }
-            : undefined,
-        );
-  }, [allocationBased, quantities1, entity?.unitOfMeasure,defaultKg]);
+  // const UoMs = useMemo(() => {
+  //   const unitOfMeasures = quantities1.map((q1) => q1.unitOfMeasure);
+  //   const kgMeasure = defaultKg?.unitOfMeasure;
+  //   return allocationBased === AllocationBasedEnum.quantity1
+  //     ? mapDataToOptions(
+  //         unitOfMeasures as SettingsPageItem[],
+  //         entity?.unitOfMeasure
+  //           ? { value: entity.unitOfMeasure.id!, label: entity.unitOfMeasure.name }
+  //           : undefined,
+  //       )
+  //     : mapDataToOptions(kgMeasure ? [kgMeasure] : undefined);
+  // }, [allocationBased, quantities1, entity?.unitOfMeasure, defaultKg]);
+
+  const q1Options = useMemo(
+    () =>
+      mapDataToOptions(
+        quantities1.map((q) => q.unitOfMeasure) as SettingsPageItem[],
+        entity?.unitOfMeasure && entity.allocationBased !== AllocationBasedEnum.formula
+          ? { label: entity?.unitOfMeasure.name, value: entity.unitOfMeasure.id! }
+          : undefined,
+      ),
+    [entity?.unitOfMeasure, quantities1, defaultKg],
+  );
+
+  const kgOption = useMemo(
+    () =>
+      entity?.allocationBased === AllocationBasedEnum.formula && !allocationChanged
+        ? [{ label: entity?.unitOfMeasure?.name, value: entity?.unitOfMeasure?.id }]
+        : [
+            {
+              label: defaultKg?.unitOfMeasure?.name,
+              value: defaultKg?.unitOfMeasure?.id,
+            },
+          ],
+    [defaultKg, entity?.unitOfMeasure, entity?.allocationBased, allocationChanged],
+  );
 
   const UoMdisabled = useMemo(
     () => allocationBased === AllocationBasedEnum.formula,
     [allocationBased],
   );
 
+  // useEffect(() => {
+  //   allocationBased === AllocationBasedEnum.formula
+  //     ? setValue('unitOfMeasureId', UoMs?.[0]?.value as number)
+  //     : resetField('unitOfMeasureId');
+  // }, [allocationBased]);
+
   useEffect(() => {
     allocationBased === AllocationBasedEnum.formula
-      ? setValue('unitOfMeasureId', UoMs?.[0]?.value as number)
-      : null;
+      ? setValue('unitOfMeasureId', kgOption[0].value)
+      : entity?.allocationBased === AllocationBasedEnum.formula
+      ? form.setValue('unitOfMeasureId', undefined)
+      : form.resetField('unitOfMeasureId');
   }, [allocationBased]);
-
   const { openRadioChangeModal, radioChangeModal } = useRadioChangeModal({
     ns: ns,
     form: form,
     usedInPlanning: entity?.usedInPlanning!,
   });
+
+  const handleRadioChange = (callback: () => void) => {
+    setAllocationChanged(true);
+    openRadioChangeModal(callback);
+  };
 
   useEffect(() => {
     resetField('weightCapacity');
@@ -142,7 +175,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
             register={register('allocationBased')}
             options={convertForDropdown(entity?.allocations)}
             width='full-width'
-            customChangeEvent={openRadioChangeModal}
+            customChangeEvent={handleRadioChange}
           />
         </div>
 
@@ -170,7 +203,7 @@ const WorkCenterForm: FC<WorkCenterFormType> = ({ form }) => {
             }
             label={UoMdisabled ? translate('unitOfMeasureName') : translate('unitOfQuantityName')}
             register={register('unitOfMeasureId')}
-            options={UoMs}
+            options={allocationBased === AllocationBasedEnum.formula ? kgOption : q1Options}
             width='full-width'
             disabled={UoMdisabled}
             readOnly={UoMdisabled}
