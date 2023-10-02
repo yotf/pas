@@ -18,7 +18,7 @@ export const getSimulationData = createAsyncThunk(
 
       //return mockedSimulationData;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );

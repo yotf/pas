@@ -17,12 +17,15 @@ import { useSimulationDataForm } from './hooks/useSimulationDataForm';
 import { useSimulationDeliveryDates } from './hooks/useSimulationDeliveryDates';
 import { useSimulationSchema } from './hooks/useSimulationSchema';
 import './simulation.scss';
+import { notificationFail } from '@/modules/shared/services/notification.service';
 /**
  *
  * @returns
  */
 const Simulation: FC = () => {
-  const { realDataOverview, simulationDataOverview } = useAppSelector((state) => state.simulation);
+  const { realDataOverview, simulationDataOverview, error, loading } = useAppSelector(
+    (state) => state.simulation,
+  );
 
   const { translate } = useTranslate({ ns: 'simulation' });
 
@@ -44,7 +47,12 @@ const Simulation: FC = () => {
     form: simulationDataForm,
   });
 
-  const { watch, trigger, getFieldState } = form;
+  const {
+    watch,
+    trigger,
+    getFieldState,
+    formState: { isSubmitted },
+  } = form;
 
   const { initialDate, routings, finalDate } = watch();
 
@@ -62,6 +70,14 @@ const Simulation: FC = () => {
   useEffect(() => {
     if (finalDate && initialDate) trigger('initialDate');
   }, [finalDate, initialDate, trigger]);
+
+  useEffect(() => {
+    if (loading) return;
+    if (error) {
+      notificationFail(error);
+      return;
+    }
+  }, [error, loading, isSubmitted, translate]);
 
   useSimulationDeliveryDates(form);
 

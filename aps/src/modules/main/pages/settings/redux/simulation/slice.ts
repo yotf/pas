@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialSimulationState } from './states';
 import { getSimulationData } from './thunks';
+import { AxiosErrorFormat } from '../slice';
 
 const simulation = createSlice({
   name: 'simulation',
@@ -25,7 +26,7 @@ const simulation = createSlice({
     });
     builder.addCase(getSimulationData.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = (action.payload as AxiosErrorFormat).data;
     });
     builder.addCase(getSimulationData.pending, (state) => {
       state.loading = true;

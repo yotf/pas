@@ -40,7 +40,9 @@ import { salesOrdersReducer } from '@/modules/main/pages/settings/redux/salesOrd
 import { selectionsReducer } from '@/modules/main/pages/settings/redux/selections/slice';
 import { sharedTableReducer } from '@/modules/main/pages/settings/redux/sharedTableState/slice';
 import { SharedTableStateType } from '@/modules/main/pages/settings/redux/sharedTableState/states';
-import { SimulationDataOverview } from '@/modules/main/pages/settings/redux/simulation/interfaces';
+import {
+  SimulationResponse,
+} from '@/modules/main/pages/settings/redux/simulation/interfaces';
 import { simulationReducer } from '@/modules/main/pages/settings/redux/simulation/slice';
 import { sizeRangesReducer } from '@/modules/main/pages/settings/redux/sizeRanges/slice';
 import { StatisticsResponse } from '@/modules/main/pages/settings/redux/statistics/interfaces';
@@ -175,7 +177,7 @@ export type StoreType = CombinedState<
     productionOrdersModal: POModalInitialStateResponse;
     reallocationOfPlanning: BaseResponse;
     statistics: StatisticsResponse;
-    simulation: SimulationDataOverview;
+    simulation: SimulationResponse;
     overview: OverviewResponse;
     orderReplacement: OrderReplacementResponse;
     configuration: ConfigurationResponse;
