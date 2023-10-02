@@ -55,7 +55,7 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         productionOrderNumber: numberNotRequired,
         materialId: numberRequired,
         routingId: numberRequired,
-        initialDate: Yup.string().notRequired(),
+        initialDate: Yup.string().required(translate('required')),
         finalDelivery: stringNotRequired,
         salesOrderMaterialId: numberNotRequired,
         foreseenDeliveryPOOrigin: stringNotRequired,
@@ -63,7 +63,7 @@ export const useProductionOrderSchema = (): OptionalObjectSchema<
         quantity1: numberNotRequired
           .required(translate('required'))
           .test('wrongType', translate('numeric'), (value) => {
-          if (!value) return true;
+            if (!value) return true;
             if (!isNaN(value) && isFinite(value)) return true;
             return false;
           })
