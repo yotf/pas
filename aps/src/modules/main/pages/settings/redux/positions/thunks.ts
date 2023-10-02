@@ -28,7 +28,7 @@ export const upsertPositionThunk = createAsyncThunk(
       const response = payload.id
         ? await ApiService.put<SettingsPageItem>(BASE_POSITIONS_API, payload.id, payload)
         : await ApiService.post<SettingsPageItem>(BASE_POSITIONS_API, payload);
-      dispatch(getAllPositions());
+      dispatch(getAllPositions(payload.id || response.data.id));
       return payload.id ? payload : response.data;
     } catch (err: any) {
       const errors: { description: string }[] = err?.response?.data ?? [];
@@ -48,10 +48,10 @@ export const deletePositionThunk = createAsyncThunk(
       dispatch(getAllPositions());
       return payload;
     } catch (err: any) {
-    // const errors = err.response?.data;
-    // if (errors) {
-    //   return rejectWithValue(errors);
-    // }
+      // const errors = err.response?.data;
+      // if (errors) {
+      //   return rejectWithValue(errors);
+      // }
       return rejectWithValue(err.response ? err.response : err.message);
     }
   },
