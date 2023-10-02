@@ -51,12 +51,12 @@ export const usePOModalInitialValues = ({
   }, [selectedMaterial, selectedRouting, setValue]);
 
   useEffect(() => {
-    if (!selectedMaterial || !selectedRouting) return;
+    if (!selectedMaterial || !selectedRouting || numberOfProductionOrders) return;
     setValue(
       'numberOfProductionOrders',
       Math.ceil(Number(selectedMaterial!.quantity1! / selectedRouting?.lotStandardQuantity ?? 0)),
     );
-  }, [selectedMaterial, selectedRouting, setValue]);
+  }, [selectedMaterial, selectedRouting, setValue, numberOfProductionOrders]);
 
   const productionOrderInitial: ProductionOrderFormData = useMemo(
     () => ({
@@ -69,7 +69,7 @@ export const usePOModalInitialValues = ({
       customerOrderNumber: entity?.customerOrderNumber,
       salesOrderId: entity?.id,
       salesOrderMaterialId: selectedMaterial?.id,
-      routingId: selectedRouting? selectedRouting.id : selectedMaterialFull?.routing?.id,
+      routingId: selectedRouting ? selectedRouting.id : selectedMaterialFull?.routing?.id,
       creationDate: dayjs().format(),
       initialDate: dayjs().format(),
       salesOrderDelivery: entity?.salesOrderDelivery || undefined,
