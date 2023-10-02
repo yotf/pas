@@ -18,6 +18,7 @@ export interface UniqueFieldValidationProps<T extends object> {
   translate: (value: string, options?: Record<string, string> | undefined) => string;
   /** Sets if error message should be cleared after being set or saved for next render */
   shouldClear?: boolean;
+  ns?: string;
 }
 /**
  * Renders errors below given propertyNames of the form
@@ -28,6 +29,7 @@ export const useUniqueFieldValidation = <T extends object>({
   validationError,
   translate,
   shouldClear = undefined,
+  ns,
 }: UniqueFieldValidationProps<T>): void => {
   const [lastFailedValue, setLastFailedValue] = useState<string | undefined>(undefined);
 
@@ -53,7 +55,7 @@ export const useUniqueFieldValidation = <T extends object>({
   useEffect(() => {
     const prop = propertyName.toString();
     if (!errors[propertyName] && field !== undefined && field === lastFailedValue) {
-      setError(prop, duplicateError);
+      if (ns !== 'unit_of_measure') setError(prop, duplicateError);
       return;
     }
     if (errors[propertyName] === duplicateError && field !== lastFailedValue) {

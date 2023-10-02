@@ -9,8 +9,12 @@ import { StoreType } from '../../../../../store';
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { useTranslate } from '../../../../shared/hooks/translate.hook';
 import BaseResponse from '../../../../shared/services/interfaces';
-import { notificationSuccess } from '../../../../shared/services/notification.service';
+import {
+  notificationFail,
+  notificationSuccess,
+} from '../../../../shared/services/notification.service';
 import { resetPagination } from '../redux/sharedTableState/slice';
+import { AxiosErrorFormat } from '../redux/slice';
 
 export type Callbacks = {
   handleOk: (close: () => void) => () => void;
@@ -84,6 +88,7 @@ export const useEntityFormCallbacks = <T extends FieldValues, K extends BaseResp
         onClose.current();
         form.reset();
       } else {
+        if (ns === 'unit_of_measure') notificationFail(error);
         form.reset(undefined, {
           keepValues: !!error,
           keepErrors: !!error,

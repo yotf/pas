@@ -39,6 +39,7 @@ export const useSettingsFormErrors = (
     validationError: validationErrors ? validationErrors[0] : undefined,
     translate,
     shouldClear: isOpen,
+    ns: ns,
   });
 
   return form;
