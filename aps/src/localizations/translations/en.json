@@ -1357,7 +1357,8 @@
       "initial_date_error": "Routing Initial Date must be in range between Delivery Initial Date and Final Date",
       "final_date_error": "Routing Delivery Date cannot be after Final Date",
       "max_length": "Max number of characters is {{value}}",
-      "initial_date_lower": "Initial date must be lower than Final date"
+      "initial_date_lower": "Initial date must be lower than Final date",
+      "min_value": "Must be equal to or greater than 1"
     }
   },
   "productionOrderModal": {

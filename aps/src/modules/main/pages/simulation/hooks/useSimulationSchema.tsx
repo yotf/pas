@@ -105,9 +105,11 @@ export const useSimulationSchema = (): OptionalObjectSchema<
         routings: Yup.array(
           Yup.object<Shape<Required<RoutingInputs>>>({
             routingId: requiredNumber,
-            numberOfPOs: requiredNumber.test(maxLength('numberOfPOs', 2)),
-            quantity: requiredNumber.test(maxLength('quantity', 4)),
-            repeat: requiredNumber.test(maxLength('repeat', 2)),
+            numberOfPOs: requiredNumber
+              .test(maxLength('numberOfPOs', 2))
+              .min(1, translate('min_value')),
+            quantity: requiredNumber.test(maxLength('quantity', 4)).min(1, translate('min_value')),
+            repeat: requiredNumber.test(maxLength('repeat', 2)).min(1, translate('min_value')),
             routingDeliveryDate: Yup.string(),
             routingInitialDate: Yup.string()
               .required(translate('required'))
