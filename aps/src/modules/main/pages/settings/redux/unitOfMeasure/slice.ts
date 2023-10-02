@@ -43,7 +43,7 @@ const unitOfMeasureSlice = createSlice({
     });
     builder.addCase(upsertUnitOfMeasureThunk.rejected, (state, action: any) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload.errors;
       if (action.payload.type === 'validationErrors') {
         state.validationErrors = action.payload.errors as SettingsValidationError[];
       }
