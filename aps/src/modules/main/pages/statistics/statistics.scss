@@ -11,9 +11,9 @@
   gap: 20px 28px;
   align-items: end;
 
-  .custom-input .error-message {
-    bottom: -30px;
-  }
+  // .custom-input .error-message {
+  // bottom: -30px;
+  // }
 
   @media screen and (width < 930px) {
     grid-template-columns: repeat(3, minmax(120px, 1fr));
@@ -35,6 +35,15 @@
     align-self: center;
   }
 
+  .custom-input {
+    margin-top: 0;
+    margin-bottom: auto;
+  }
+  .button {
+    margin-top: 22px;
+    margin-bottom: auto;
+  }
+
   .workCenters {
     grid-column: span 2;
     display: flex;
@@ -44,12 +53,14 @@
     }
 
     .button {
-      align-self: flex-end;
+      align-self: flex-start;
+      margin-top: 22px;
     }
 
     @media screen and (width < 930px) {
       grid-column: span 3;
     }
+
     .custom-input > * > input,
     .ant-select:not(.ant-select-customize-input) .ant-select-selector {
       min-height: 50px;
