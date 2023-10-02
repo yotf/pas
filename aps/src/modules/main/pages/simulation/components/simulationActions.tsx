@@ -34,7 +34,12 @@ const SimulationActions: FC = (): JSX.Element => {
   const { initialDate } = watch();
 
   const getSimulations = (): void => {
-    dispatch(getSimulationData(getValues()));
+    let formData = getValues();
+    formData.routings.forEach((obj) => {
+      delete obj['routingDeliveryDate'];
+    });
+
+    dispatch(getSimulationData(formData));
   };
 
   return (
