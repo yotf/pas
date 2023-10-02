@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
  */
 export const emptyRouting = {
   routingId: undefined,
-  quantity: 0,
-  numberOfPOs: 0,
-  repeat: 0,
+  quantity: 1,
+  numberOfPOs: 1,
+  repeat: 1,
   routingInitialDate: dayjs().add(1, 'day').toISOString(),
   routingDeliveryDate: undefined,
 };
