@@ -19,6 +19,15 @@
       height: 50px;
     }
 
+    .custom-switch {
+      //height: fit-content;
+      //  height: 50px;
+      gap: 10px;
+      button {
+        height: 24px;
+      }
+    }
+
     button {
       align-self: flex-end;
       height: 50px;

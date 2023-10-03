@@ -6,6 +6,7 @@ export interface ReallocationOfPlanningForm {
   productionOrderDelivery?: string;
   salesOrderDelivery?: string;
   reallocationOperations?: PORoutingOperations[];
+  limitCapacity?: boolean;
 }
 
 export interface ReallocationOperationMapped {

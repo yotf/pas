@@ -24,6 +24,7 @@ import { mockedReallocationOperations } from './mockedReallocationData';
 import './reallocationOfPlanning.scss';
 import { useReallocationOfPlanningSchema } from './useReallocationOfPlanningSchema';
 import { Modal } from 'antd';
+import CustomSwitch from '@/modules/shared/components/input/switch/switch.component';
 
 export type UseRedirectModalReturnType = {
   reallocationModal: JSX.Element;
@@ -85,6 +86,7 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
     setValue,
     watch,
     formState: { isValid },
+    register,
   } = form;
 
   const { productionOrderDelivery, salesOrderDelivery } = watch();
@@ -163,6 +165,12 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
                   )}
                 </>
               </CustomButton>
+           
+
+              <CustomSwitch
+                label={translate('limitCapacity')}
+                name={register('limitCapacity').name}
+              />
             </div>
           </div>
           <div className='table-wrapper'>

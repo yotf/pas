@@ -90,6 +90,7 @@ export const ReallocationTable: FC = (): JSX.Element => {
         name={`reallocationOperations[${index}].planningDate`}
         allowClear={false}
         disabled={POSchedule || record.executedDate}
+        noPastDates={true}
       ></CustomInput>
     ),
   };

@@ -1248,6 +1248,7 @@
     "planningDate": "Foreseen Date",
     "show-pending": "Backlog",
     "backlog": "Backlog",
+    "limitCapacity": "Limit Capacity",
     "validation": {
       "required": "This field is required",
       "date_range": "Date Range needs to be shorter than 2 weeks",
@@ -1415,6 +1416,7 @@
     "schedule": "Schedule",
     "unschedule": "Un-schedule",
     "display_operations": "Display Operations",
+    "limitCapacity": "Limit Capacity",
     "validation": {
       "reallocation_success": "Production Order status changed successfully",
       "reallocation_fail": "An error occured while changing Production Order status"
