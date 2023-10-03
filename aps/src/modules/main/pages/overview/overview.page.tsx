@@ -135,13 +135,15 @@ const Overview: FC = () => {
   }, [dispatch]);
 
   const exportToExcel = useCallback(() => {
-    const sheets: Sheet[] = mappedTables.map(
-      (item) =>
-        ({
-          sheetname: item.workCenterName,
-          aoa_sheet_data: getDataForExcel(item.tableData, columnsOrder(), translate),
-        } as Sheet),
-    );
+    const sheets: Sheet[] = mappedTables
+      .filter((item) => item.tableData.length > 0)
+      .map(
+        (item) =>
+          ({
+            sheetname: item.workCenterName,
+            aoa_sheet_data: getDataForExcel(item.tableData, columnsOrder(), translate),
+          } as Sheet),
+      );
 
     exportToExcelFile({
       filename: translate('title'),
