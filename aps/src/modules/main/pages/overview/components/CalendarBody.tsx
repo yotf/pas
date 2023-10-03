@@ -30,7 +30,11 @@ export const CalendarBody: FC<CalendarBodyProps> = ({
       {allProductionOrderOperations.map((poOperation) => {
         return (
           <tr key={uuid()}>
-            <td>{dayjs(poOperation.planningDate).isBefore(now)? poOperation.operationTime:'/'}</td>
+            <td>
+              {dayjs(poOperation.planningDate).startOf('day').isBefore(now.startOf('day'))
+                ? poOperation.operationTime
+                : '/'}
+            </td>
             {weekWithWorkingDays.map((day) => {
               return dayjs(poOperation.planningDate).isSame(day.date, 'day') ? (
                 <td
