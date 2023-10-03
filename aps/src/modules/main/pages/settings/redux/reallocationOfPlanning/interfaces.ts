@@ -21,4 +21,5 @@ export interface ReallocationOperationMapped {
   planningDate: string;
   executedDate: string;
   pO_RoutingOperationId: number;
+  skipped: boolean;
 }

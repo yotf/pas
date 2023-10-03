@@ -13,7 +13,6 @@ import {
   ReallocationOfPlanningForm,
   ReallocationOperationMapped,
 } from '../../../settings/redux/reallocationOfPlanning/interfaces';
-import { mockedProductionOrder } from '../mockedReallocationData';
 import { useReallocationMappedData } from './useReallocationMappedData';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getAllWorkCentersWithOperations } from '../../../settings/redux/workCenters copy/thunks';
@@ -42,7 +41,7 @@ export const ReallocationTable: FC = (): JSX.Element => {
     keyName: 'fieldId',
   });
 
-  const POSchedule = mockedProductionOrder.statusOfPlanningEnum === 2;
+  //const POSchedule = mockedProductionOrder.statusOfPlanningEnum === 2;
 
   const columnsOrder: (keyof ReallocationOperationMapped)[] = useMemo(
     () => [
@@ -77,7 +76,7 @@ export const ReallocationTable: FC = (): JSX.Element => {
           width={'full-width'}
           name={`reallocationOperations[${index}].workCenterId`}
           isAutocomplete={true}
-          disabled={POSchedule || record.executedDate}
+          disabled={record.executedDate || record.skipped}
           allowClear={false}
         ></CustomInput>
       );
@@ -89,7 +88,7 @@ export const ReallocationTable: FC = (): JSX.Element => {
         width={'full-width'}
         name={`reallocationOperations[${index}].planningDate`}
         allowClear={false}
-        disabled={POSchedule || record.executedDate}
+        disabled={record.skipped || record.executedDate}
         noPastDates={true}
       ></CustomInput>
     ),

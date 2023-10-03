@@ -26,6 +26,7 @@ export const useReallocationMappedData = (
       operationTime: operation.standardTime,
       setupTime: operation.setupTime,
       status: operation.pO_OperationStatusEnum,
+      skipped: operation.skipped,
     };
   });
   return mappedData;
