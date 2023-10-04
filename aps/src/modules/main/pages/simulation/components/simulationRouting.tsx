@@ -3,7 +3,7 @@
  */
 
 import CustomInput from '@/modules/shared/components/input/input.component';
-import { limitToNumericKeyDown, onKeydownEvent } from '@/modules/shared/utils/utils';
+import { limitToNumericKeyDown } from '@/modules/shared/utils/utils';
 import { DeleteOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { FC } from 'react';

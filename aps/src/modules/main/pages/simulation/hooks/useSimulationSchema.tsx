@@ -44,6 +44,17 @@ export const useSimulationSchema = (): OptionalObjectSchema<
     );
   };
 
+  const tooManyRepeatsValidation = (
+    value: undefined | number,
+    context: Yup.TestContext,
+  ): boolean => {
+    if (!finalDateRef.current || !context.parent.routingInitialDate || !value) return true;
+
+    return !dayjs(context.parent.routingInitialDate)
+      .add(value, 'day')
+      .isAfter(dayjs(finalDateRef.current));
+  };
+
   const routingInitialDateValidator: {
     name: string;
     message: Message;
@@ -109,7 +120,14 @@ export const useSimulationSchema = (): OptionalObjectSchema<
               .test(maxLength('numberOfPOs', 2))
               .min(1, translate('min_value')),
             quantity: requiredNumber.test(maxLength('quantity', 4)).min(1, translate('min_value')),
-            repeat: requiredNumber.test(maxLength('repeat', 2)).min(1, translate('min_value')),
+            repeat: requiredNumber
+              .test(maxLength('repeat', 2))
+              .min(1, translate('min_value'))
+              .test({
+                name: 'repeatTest',
+                message: translate('repeat_error'),
+                test: tooManyRepeatsValidation,
+              }),
             routingDeliveryDate: Yup.string(),
             routingInitialDate: Yup.string()
               .required(translate('required'))

@@ -1355,7 +1355,9 @@
     "routingInitialDate": "Initial Date",
     "routingDeliveryDate": "Delivery Date",
     "routingId": "Routing",
+
     "validation": {
+      "repeat_error": "Can't fit this many repetitions in the simulation scope",
       "required": "This field is required",
       "initial_date_error": "Routing Initial Date must be in range between Delivery Initial Date and Final Date",
       "final_date_error": "Routing Delivery Date cannot be after Final Date",
