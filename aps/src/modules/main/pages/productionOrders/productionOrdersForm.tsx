@@ -117,7 +117,12 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   const form = useFormContext<ProductionOrderFormData>();
 
-  const { watch, setValue, getValues, trigger } = form;
+  const {
+    watch,
+    setValue,
+    getValues,
+    trigger
+  } = form;
 
   const {
     quantity1,
@@ -158,9 +163,13 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   );
 
   useEffect(() => {
-    setValue('unitOfMeasure1Id', materialMeasures?.unitOfMeasure1?.id || undefined);
-    setValue('unitOfMeasure2Id', materialMeasures?.unitOfMeasure2?.id || undefined);
-    setValue('unitOfMeasure3Id', defaultKg?.id || undefined);
+    setValue('unitOfMeasure1Id', materialMeasures?.unitOfMeasure1?.id || undefined, {
+      shouldDirty: false,
+    });
+    setValue('unitOfMeasure2Id', materialMeasures?.unitOfMeasure2?.id || undefined, {
+      shouldDirty: false,
+    });
+    setValue('unitOfMeasure3Id', defaultKg?.id || undefined, { shouldDirty: false });
   }, [materialMeasures, setValue]);
 
   const materialOptionsAll = useMemo(() => {
@@ -197,11 +206,11 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [materialMeasures]);
 
   useEffect(() => {
-    setValue('materialGroupId', materialMeasures?.materialGroupId);
-    setValue('articleId', materialMeasures?.articleId);
-    setValue('colorId', materialMeasures?.colorId);
-    setValue('thicknessId', materialMeasures?.thicknessId);
-    setValue('selectionId', materialMeasures?.selectionId);
+    setValue('materialGroupId', materialMeasures?.materialGroupId, { shouldDirty: false });
+    setValue('articleId', materialMeasures?.articleId, { shouldDirty: false });
+    setValue('colorId', materialMeasures?.colorId, { shouldDirty: false });
+    setValue('thicknessId', materialMeasures?.thicknessId, { shouldDirty: false });
+    setValue('selectionId', materialMeasures?.selectionId, { shouldDirty: false });
   }, [materialMeasures, setValue]);
 
   useEffect(() => {
@@ -211,32 +220,36 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   }, [quantity1, setValue]);
 
   useEffect(() => {
-    setValue('salesOrderDelivery', selectedSalesOrder?.salesOrderDelivery || '');
+    setValue('salesOrderDelivery', selectedSalesOrder?.salesOrderDelivery || '', {
+      shouldDirty: false,
+    });
   }, [selectedSalesOrder, setValue]);
 
   useEffect(() => {
     if (materialId != entity?.materialDto?.id) {
-      setValue('routingId', materialMeasures?.routingId ?? undefined);
+      setValue('routingId', materialMeasures?.routingId ?? undefined, { shouldDirty: false });
       trigger('routingId');
     }
   }, [materialId, setValue, isPlanned]);
 
   useEffect(() => {
-    if (!foreseenDelivery) setValue('foreseenDelivery', undefined);
-    if (!finalDelivery) setValue('finalDelivery', undefined);
-    if (!foreseenDeliveryPOOrigin) setValue('foreseenDeliveryPOOrigin', undefined);
-    if (!salesOrderDelivery) setValue('salesOrderDelivery', undefined);
+    if (!foreseenDelivery) setValue('foreseenDelivery', undefined, { shouldDirty: false });
+    if (!finalDelivery) setValue('finalDelivery', undefined, { shouldDirty: false });
+    if (!foreseenDeliveryPOOrigin)
+      setValue('foreseenDeliveryPOOrigin', undefined, { shouldDirty: false });
+    if (!salesOrderDelivery) setValue('salesOrderDelivery', undefined, { shouldDirty: false });
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
   // useEffect(() => {
   //   //  if (origin) dispatch(getProductionOrder(origin));
   // }, [origin]);
   // useEffect(() => {
-  //   debugger;
+  //   debu;
   //   if (selectedOrigin) setValue('foreseenDeliveryPOOrigin', selectedOrigin.foreseenDelivery);
   // }, [selectedOrigin]);
 
   useEffect(() => {
+    if (!routingAddAndUpdateOperations || routingAddAndUpdateOperations?.length === 0) return;
     setValue('pO_RoutingOperationAddAndUpdateDtos', routingAddAndUpdateOperations, {
       shouldValidate: true,
       shouldDirty: true,
@@ -246,7 +259,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
   useEffect(() => {
     if (routingId && (routingId !== entity?.routingId || discardOperations)) {
-      debugger;
       dispatch(getRouting(routingId));
     }
   }, [dispatch, entity?.routingId, routingId]);
