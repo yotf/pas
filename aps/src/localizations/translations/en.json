@@ -1271,6 +1271,8 @@
     "ok_text": "Proceed",
     "create_success": "Production Orders have been successfully replaced",
     "create_fail": "An error occured while replacing Production Orders",
+    "order_load_success": "Production orders loaded successfully",
+    "order_load_fail": "Couldn't load production orders",
     "table": {
       "out_production_orders_title": "Out Production Orders",
       "in_production_orders_title": "In Production Orders",

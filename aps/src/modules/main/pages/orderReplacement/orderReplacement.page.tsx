@@ -4,13 +4,18 @@
 
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { OrderReplacementFormData } from '../settings/redux/orderReplacement/interfaces';
 import Form from './components/form/form';
 import ProductionOrdersTable from './components/productionOrdersTable/productionOrdersTable.component';
 import { useOrderReplacementSchema } from './hooks/useOrderReplacementSchema';
 import './orderReplacement.page.scss';
+import { useAppSelector } from '@/store/hooks';
+import {
+  notificationFail,
+  notificationSuccess,
+} from '@/modules/shared/services/notification.service';
 /**
  * Creates a form using useForm hook with a validation schema provided by the {@link useOrderReplacementSchema}.
  * Two {@link ProductionOrdersTable} components are used to present in and out data for selected customers and sales orders.
@@ -19,10 +24,22 @@ import './orderReplacement.page.scss';
 const OrderReplacementPage: FC = () => {
   const validationScheme = useOrderReplacementSchema();
 
+  const { data, loading, error } = useAppSelector((state) => state.orderReplacement);
+
   const form = useForm<OrderReplacementFormData>({
     resolver: yupResolver(validationScheme),
     mode: 'onBlur',
   });
+
+
+  useEffect(() => {
+    if (loading) return;
+    if (error) {
+      notificationFail('order_load_fail');
+    } else {
+      notificationSuccess(translate('order_load_success'));
+    }
+  }, [error, loading]);
 
   const { translate } = useTranslate({ ns: 'orderReplacement' });
 
