@@ -44,6 +44,7 @@ const Form: FC<FormProps> = ({ translate }) => {
     getValues,
     watch,
     setValue,
+    clearErrors,
   } = form;
 
   const { inCustomerId, outCustomerId } = watch();
@@ -64,11 +65,13 @@ const Form: FC<FormProps> = ({ translate }) => {
   useEffect(() => {
     dispatch(getSalesOrderByCustomer({ id: outCustomerId, salesOrderType: 'out' }));
     setValue('outSalesOrderNumberId', '');
+    clearErrors('outSalesOrderNumberId');
   }, [dispatch, outCustomerId, setValue]);
 
   useEffect(() => {
     dispatch(getSalesOrderByCustomer({ id: inCustomerId, salesOrderType: 'in' }));
     setValue('inSalesOrderNumberId', '');
+    clearErrors('inSalesOrderNumberId');
   }, [dispatch, inCustomerId]);
 
   const inSalesOrderOptions: DefaultOptionType[] = useMemo(

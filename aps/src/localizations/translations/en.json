@@ -1289,7 +1289,8 @@
       "foreseenDelivery": "Foreseen Delivery Date"
     },
     "validation": {
-      "required": "This field is required"
+      "required": "This field is required",
+      "same_order_number_error": "In and out order numbers must be different"
     }
   },
   "statistics": {

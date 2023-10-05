@@ -2,6 +2,7 @@
  * @module useMappedOverviews
  */
 
+import { SettingsPageItem } from '../../settings/consts/interfaces';
 import {
   OverviewWorkCenter,
   OverviewProductionOrderOperationMapped,
@@ -11,6 +12,7 @@ import { productionOrderMapper } from '../utils/productionOrderMapper';
 export type MappedOverviewTable = {
   workCenterName: string;
   tableData: OverviewProductionOrderOperationMapped[];
+  department: SettingsPageItem;
 };
 /**
  *
@@ -23,9 +25,14 @@ export const useMappedOverviewTables = (data: OverviewWorkCenter[]): MappedOverv
 
   while (i < data.length) {
     const mappedTable = data[i].pO_RoutingOperations.map(productionOrderMapper);
-    mappedTables.push({ workCenterName: data[i].workCenter.name, tableData: mappedTable });
+    mappedTables.push({
+      department: data[i].workCenter.department,
+      workCenterName: data[i].workCenter.name,
+      tableData: mappedTable,
+    });
     i++;
   }
 
-  return mappedTables;
+  const sortedByDepartment = mappedTables.sort((a, b) => a.department.id! - b.department.id!);
+  return sortedByDepartment;
 };

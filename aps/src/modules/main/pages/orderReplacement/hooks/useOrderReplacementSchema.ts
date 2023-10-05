@@ -31,13 +31,37 @@ export const useOrderReplacementSchema = (): OptionalObjectSchema<
         .transform((val) => val || undefined),
     [translate],
   );
+
+  const cantBeSameOrderNumberOut = (
+    value: undefined | number,
+    context: Yup.TestContext,
+  ): boolean => {
+    if (value === context.parent.inSalesOrderNumberId) return false;
+    return true;
+  };
+
+  const cantBeSameOrderNumberIn = (
+    value: undefined | number,
+    context: Yup.TestContext,
+  ): boolean => {
+    if (value === context.parent.outSalesOrderNumberId) return false;
+    return true;
+  };
   const schema = useMemo(
     () =>
       Yup.object<Shape<Required<OrderReplacementFormData>>>({
         inCustomerId: numberRequired,
-        inSalesOrderNumberId: numberRequired,
+        inSalesOrderNumberId: numberRequired.test({
+          name: 'sameOrder',
+          message: translate('same_order_number_error'),
+          test: cantBeSameOrderNumberIn,
+        }),
         outCustomerId: numberRequired,
-        outSalesOrderNumberId: numberRequired,
+        outSalesOrderNumberId: numberRequired.test({
+          name: 'sameOrder',
+          message: translate('same_order_number_error'),
+          test: cantBeSameOrderNumberOut,
+        }),
       }),
     [numberRequired],
   );
