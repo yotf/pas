@@ -31,12 +31,24 @@ const OrderReplacementPage: FC = () => {
     mode: 'onBlur',
   });
 
-
   useEffect(() => {
     if (loading) return;
     if (error) {
       notificationFail('order_load_fail');
     } else {
+      if (data.inProductionOrders.length === 0 && data.outProductionOrders.length === 0) {
+        notificationFail(translate('no_POs'));
+        return;
+      }
+      if (data.inProductionOrders.length === 0) {
+        notificationFail(translate('no_IN_orders'));
+        return;
+      }
+      if (data.outProductionOrders.length === 0) {
+        notificationFail(translate('no_OUT_orders'));
+        return;
+      }
+
       notificationSuccess(translate('order_load_success'));
     }
   }, [error, loading]);

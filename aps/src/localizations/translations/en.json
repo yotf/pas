@@ -1273,6 +1273,9 @@
     "create_fail": "An error occured while replacing Production Orders",
     "order_load_success": "Production orders loaded successfully",
     "order_load_fail": "Couldn't load production orders",
+    "no_POs": "No production orders for selected parameters",
+    "no_IN_orders": "No IN production orders for selected parameters",
+    "no_OUT_orders": "No OUT production orders for selected parameters",
     "table": {
       "out_production_orders_title": "Out Production Orders",
       "in_production_orders_title": "In Production Orders",
