@@ -27,6 +27,7 @@ export const useReallocationOfPlanningSchema = (): OptionalObjectSchema<
         reallocationOperations: Yup.array(Yup.object())
           .notRequired()
           .min(1) as unknown as Yup.AnyObjectSchema,
+        limitCapacity: Yup.boolean().required(),
       }),
 
     [],

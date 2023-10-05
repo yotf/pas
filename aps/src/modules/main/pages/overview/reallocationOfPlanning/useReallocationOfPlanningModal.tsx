@@ -159,13 +159,8 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
                 onClick={(): void => setIsConfirmModalOpen(true)}
                 isDisabled={!isValid}
               >
-                <>
-                  {translate(
-                    selectedProductionOrder?.statusOfPlanningEnum === 1 ? 'unschedule' : 'schedule',
-                  )}
-                </>
+                <>{translate('unschedule')}</>
               </CustomButton>
-           
 
               <CustomSwitch
                 label={translate('limitCapacity')}
@@ -176,7 +171,11 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
           <div className='table-wrapper'>
             <ReallocationTable />
           </div>
-          <ConfirmationModal open={isConfirmModalOpen} setIsOpen={setIsConfirmModalOpen} />
+          <ConfirmationModal
+            open={isConfirmModalOpen}
+            setIsOpen={setIsConfirmModalOpen}
+            selectedProductionOrder={selectedProductionOrder}
+          />
         </FormProvider>
       )}
     </Modal>
