@@ -168,7 +168,6 @@ const Overview: FC = () => {
   }, []);
 
   const excelDisabled = useMemo(() => {
-    debugger;
     return mappedTables?.length === 0 || !mappedTables.find((mt) => mt.tableData.length > 0);
   }, [mappedTables]);
   return (

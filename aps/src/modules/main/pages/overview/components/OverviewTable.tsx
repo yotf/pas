@@ -33,10 +33,9 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   }, [dispatch]);
 
   const overviewColumnsVisibility = useAppSelector((state) => state.columnConfig.data);
-  const { workCenterName, tableData } = overviewTableData;
+  const { workCenterName, tableData, department } = overviewTableData;
 
   const { data } = useAppSelector((state) => state.overview);
-
 
   const { openReallocationModal, reallocationModal } = useReallocationOfPlanningModal();
 
@@ -98,7 +97,7 @@ export const OverviewTable: FC<OverviewTableProps> = ({
     <div className='table-wrapper'>
       <div className='table-header'>
         <h2>
-          {translate('work_center_heading')}: {workCenterName}
+          {/* {translate('work_center_heading')}:*/} {`${workCenterName} (${department.name})`}
         </h2>
       </div>
       <div className='calendar-wrapper'>
