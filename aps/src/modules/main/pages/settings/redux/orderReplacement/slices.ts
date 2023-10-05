@@ -4,6 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialOrderPlacementState } from './state';
 import { getOrderReplacement, getSalesOrderByCustomer, performOrderReplacement } from './thunks';
+import { AxiosErrorFormat } from '../slice';
 
 const orderReplacementSlice = createSlice({
   name: 'orderReplacementSlice',
@@ -32,7 +33,7 @@ const orderReplacementSlice = createSlice({
     });
     builder.addCase(getSalesOrderByCustomer.rejected, (state, action) => {
       //  state.loading = false;
-      state.error = action.error.message;
+      state.error = (action.payload as AxiosErrorFormat).data;
     });
     builder.addCase(getOrderReplacement.pending, (state) => {
       state.loading = true;
@@ -72,7 +73,7 @@ const orderReplacementSlice = createSlice({
     });
     builder.addCase(performOrderReplacement.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = (action.payload as AxiosErrorFormat).data;
     });
   },
 });

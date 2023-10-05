@@ -22,12 +22,13 @@ import { SalesOrderResponse } from '../../../settings/redux/salesOrders/interfac
 
 export interface FormProps {
   translate: (value: string, options?: Record<string, string> | undefined) => string;
+  replaceCallback: () => void;
 }
 /**
  * @param translate Localization function
  * @returns Order replacement form. Validates user inputs and sends API requests if entered data is valid
  */
-const Form: FC<FormProps> = ({ translate }) => {
+const Form: FC<FormProps> = ({ translate, replaceCallback }) => {
   const { inProductionOrders, outProductionOrders, inSalesOrders, outSalesOrders } = useAppSelector(
     (state) => state.orderReplacement.data,
   );
@@ -105,7 +106,7 @@ const Form: FC<FormProps> = ({ translate }) => {
     [dispatch],
   );
 
-  const { openConfirmationModal, modal } = useConfirmationModal(translate);
+  const { openConfirmationModal, modal } = useConfirmationModal(translate, replaceCallback);
 
   const replaceOrdersDisable = useMemo(
     () => !inProductionOrders?.length || !outProductionOrders?.length,
@@ -117,7 +118,7 @@ const Form: FC<FormProps> = ({ translate }) => {
     [fetchOrderReplacement, getValues],
   );
 
-  useOrderReplacementValidationChecks(translate);
+  //useOrderReplacementValidationChecks(translate);
 
   return (
     <div className='form-container'>

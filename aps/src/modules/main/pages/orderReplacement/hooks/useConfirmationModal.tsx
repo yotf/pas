@@ -24,6 +24,7 @@ export type UseConfirmationModalReturn = {
  */
 export const useConfirmationModal = (
   translate: (value: string, options?: Record<string, string> | undefined) => string,
+  replaceCallback: () => void,
 ): UseConfirmationModalReturn => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { inProductionOrders, outProductionOrders } = useAppSelector(
@@ -43,18 +44,19 @@ export const useConfirmationModal = (
   const handleOk = useMemo(
     () =>
       handleSubmit((formData: OrderReplacementFormData) => {
-      
         const data = {
           outProductionOrders: outProductionOrders.map((po) => po.id),
           inProductionOrders: inProductionOrders.map((po) => po.id),
         };
-    
+
         dispatch(performOrderReplacement(data));
         dispatch(clearOrderReplacementData());
         //    notificationSuccess(translate('create_success'));
         form.reset(undefined, {
           keepIsSubmitted: false,
         });
+
+        replaceCallback();
         //
         closeModal();
       }),

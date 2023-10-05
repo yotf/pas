@@ -37,7 +37,7 @@ export const getOrderReplacement = createAsyncThunk(
       //   );
       //   return response.data;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response: err.message);
     }
   },
 );
@@ -84,7 +84,7 @@ export const performOrderReplacement = createAsyncThunk(
       );
       return response.data;
     } catch (err: any) {
-      return rejectWithValue(err.response ? err.response.status : err.message);
+      return rejectWithValue(err.response ? err.response : err.message);
     }
   },
 );
