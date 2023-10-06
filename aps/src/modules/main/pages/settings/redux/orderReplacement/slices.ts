@@ -3,7 +3,7 @@
  */
 import { createSlice } from '@reduxjs/toolkit';
 import { initialOrderPlacementState } from './state';
-import { getOrderReplacement, getSalesOrderByCustomer, performOrderReplacement } from './thunks';
+import { getOrderReplacement, getSalesOrderByCustomer } from './thunks';
 import { AxiosErrorFormat } from '../slice';
 
 const orderReplacementSlice = createSlice({
@@ -49,31 +49,6 @@ const orderReplacementSlice = createSlice({
     builder.addCase(getOrderReplacement.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
-    });
-    // builder.addCase(getSalesOrderReplacementForm.pending, (state) => {
-    //   state.loading = true;
-    //   state.error = undefined;
-    // });
-    // builder.addCase(getSalesOrderReplacementForm.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.form = action.payload;
-    //   state.error = undefined;
-    // });
-    // builder.addCase(getSalesOrderReplacementForm.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message;
-    // });
-    builder.addCase(performOrderReplacement.pending, (state) => {
-      state.loading = true;
-      state.error = undefined;
-    });
-    builder.addCase(performOrderReplacement.fulfilled, (state) => {
-      state.loading = false;
-      state.error = undefined;
-    });
-    builder.addCase(performOrderReplacement.rejected, (state, action) => {
-      state.loading = false;
-      state.error = (action.payload as AxiosErrorFormat).data;
     });
   },
 });

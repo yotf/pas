@@ -22,17 +22,21 @@ import { SalesOrderResponse } from '../../../settings/redux/salesOrders/interfac
 
 export interface FormProps {
   translate: (value: string, options?: Record<string, string> | undefined) => string;
-  replaceCallback: () => void;
 }
 /**
  * @param translate Localization function
  * @returns Order replacement form. Validates user inputs and sends API requests if entered data is valid
  */
-const Form: FC<FormProps> = ({ translate, replaceCallback }) => {
+const Form: FC<FormProps> = ({ translate }) => {
   const { inProductionOrders, outProductionOrders, inSalesOrders, outSalesOrders } = useAppSelector(
     (state) => state.orderReplacement.data,
   );
   const { data: customers } = useAppSelector((state) => state.customers);
+  const [generateSubmitted, setGenerated] = useState<boolean>(false);
+
+  const generateCallback = (generated: boolean) => {
+    setGenerated(generated);
+  };
 
   const customerOptions: DefaultOptionType[] = useMemo(
     () => mapDataToOptions(customers),
@@ -48,7 +52,7 @@ const Form: FC<FormProps> = ({ translate, replaceCallback }) => {
     clearErrors,
   } = form;
 
-  const { inCustomerId, outCustomerId } = watch();
+  const { inCustomerId, outCustomerId, outSalesOrderNumberId, inSalesOrderNumberId } = watch();
 
   console.log(getValues());
 
@@ -74,6 +78,14 @@ const Form: FC<FormProps> = ({ translate, replaceCallback }) => {
     setValue('inSalesOrderNumberId', '');
     clearErrors('inSalesOrderNumberId');
   }, [dispatch, inCustomerId]);
+
+  useEffect(() => {
+    clearErrors('inSalesOrderNumberId');
+  }, [outSalesOrderNumberId]);
+
+  useEffect(() => {
+    clearErrors('outSalesOrderNumberId');
+  }, [inSalesOrderNumberId]);
 
   const inSalesOrderOptions: DefaultOptionType[] = useMemo(
     () =>
@@ -102,11 +114,12 @@ const Form: FC<FormProps> = ({ translate, replaceCallback }) => {
   const fetchOrderReplacement = useCallback(
     (data: OrderReplacementFormData): void => {
       dispatch(getOrderReplacement(data));
+      setGenerated(true);
     },
     [dispatch],
   );
 
-  const { openConfirmationModal, modal } = useConfirmationModal(translate, replaceCallback);
+  const { openConfirmationModal, modal } = useConfirmationModal(translate);
 
   const replaceOrdersDisable = useMemo(
     () => !inProductionOrders?.length || !outProductionOrders?.length,
@@ -118,7 +131,7 @@ const Form: FC<FormProps> = ({ translate, replaceCallback }) => {
     [fetchOrderReplacement, getValues],
   );
 
-  //useOrderReplacementValidationChecks(translate);
+  useOrderReplacementValidationChecks(translate, generateCallback, generateSubmitted);
 
   return (
     <div className='form-container'>

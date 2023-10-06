@@ -11,7 +11,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useFormContext, UseFormReturn } from 'react-hook-form';
 import { OrderReplacementFormData } from '../../settings/redux/orderReplacement/interfaces';
 import { clearOrderReplacementData } from '../../settings/redux/orderReplacement/slices';
-import { performOrderReplacement } from '../../settings/redux/orderReplacement/thunks';
+import { performOrderReplacement } from '../../settings/redux/orderReplacement/performReplacement/thunks';
 
 export type UseConfirmationModalReturn = {
   modal: JSX.Element;
@@ -24,7 +24,6 @@ export type UseConfirmationModalReturn = {
  */
 export const useConfirmationModal = (
   translate: (value: string, options?: Record<string, string> | undefined) => string,
-  replaceCallback: () => void,
 ): UseConfirmationModalReturn => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { inProductionOrders, outProductionOrders } = useAppSelector(
@@ -51,13 +50,10 @@ export const useConfirmationModal = (
 
         dispatch(performOrderReplacement(data));
         dispatch(clearOrderReplacementData());
-        //    notificationSuccess(translate('create_success'));
         form.reset(undefined, {
           keepIsSubmitted: false,
         });
 
-        replaceCallback();
-        //
         closeModal();
       }),
     [closeModal, dispatch, form, handleSubmit, translate, inProductionOrders, outProductionOrders],
