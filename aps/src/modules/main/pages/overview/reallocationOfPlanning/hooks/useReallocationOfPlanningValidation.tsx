@@ -12,6 +12,8 @@ import { useContext, useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { ReallocationOfPlanningForm } from '../../../settings/redux/reallocationOfPlanning/interfaces';
 import { OverviewContext, OverviewContextValue } from '../../context/overview.context';
+import { getAllProductionOrders } from '../../../settings/redux/productionOrders/thunks';
+import { getAllOverviewCenters } from '../../../settings/redux/overview/thunks';
 /**
  *
  * @param form React hook form from {@link useReallocationOfPlanningModal}
@@ -55,7 +57,7 @@ export const useReallocationValidation = (
       keepIsSubmitted: false,
       keepValues: true,
     });
-    // add when switch to real data
-    // dispatch(getAllOverviewCenters(overviewFormData));
+    dispatch(getAllProductionOrders());
+    dispatch(getAllOverviewCenters(overviewFormData));
   }, [dispatch, error, isSubmitted, loading, overviewFormData, reset, translate]);
 };

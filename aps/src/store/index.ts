@@ -40,9 +40,7 @@ import { salesOrdersReducer } from '@/modules/main/pages/settings/redux/salesOrd
 import { selectionsReducer } from '@/modules/main/pages/settings/redux/selections/slice';
 import { sharedTableReducer } from '@/modules/main/pages/settings/redux/sharedTableState/slice';
 import { SharedTableStateType } from '@/modules/main/pages/settings/redux/sharedTableState/states';
-import {
-  SimulationResponse,
-} from '@/modules/main/pages/settings/redux/simulation/interfaces';
+import { SimulationResponse } from '@/modules/main/pages/settings/redux/simulation/interfaces';
 import { simulationReducer } from '@/modules/main/pages/settings/redux/simulation/slice';
 import { sizeRangesReducer } from '@/modules/main/pages/settings/redux/sizeRanges/slice';
 import { StatisticsResponse } from '@/modules/main/pages/settings/redux/statistics/interfaces';
@@ -85,6 +83,7 @@ import { ColumnConfigResponse } from '@/modules/main/pages/settings/redux/column
 import { productionOrderStatusReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrdersStatus/slice';
 import { productionOrderExecutionReducer } from '@/modules/main/pages/settings/redux/productionOrders/productionOrderExecute/slice';
 import { workCentersWithOperationsReducer } from '@/modules/main/pages/settings/redux/workCenters copy/slice';
+import { performOrderReplacementReducer } from '@/modules/main/pages/settings/redux/orderReplacement/performReplacement/slices';
 /** Used for logging redux actions and the state changes they cause in the console. Disabled for production builds*/
 const middlewares: Middleware<Record<string, never>, any, Dispatch<AnyAction>>[] = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -135,6 +134,7 @@ export const rootReducer = combineReducers<StoreType>({
   orderReplacement: orderReplacementReducer,
   configuration: configurationReducer,
   columnConfig: columnConfigReducer,
+  performOrderReplacement: performOrderReplacementReducer,
 });
 /**Type used for settings page slices */
 export type SettingsType = {
@@ -180,6 +180,7 @@ export type StoreType = CombinedState<
     simulation: SimulationResponse;
     overview: OverviewResponse;
     orderReplacement: OrderReplacementResponse;
+    performOrderReplacement: BaseResponse;
     configuration: ConfigurationResponse;
     columnConfig: ColumnConfigResponse;
     productionOrderNumbers: ProductionOrderNumberInitialStateResponse;

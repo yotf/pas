@@ -11,10 +11,13 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { ReallocationOfPlanningForm } from '../../../settings/redux/reallocationOfPlanning/interfaces';
 import { upsertReallocation } from '../../../settings/redux/reallocationOfPlanning/thunks';
+import { updateProductionOrderStatus } from '../../../settings/redux/productionOrders/productionOrdersStatus/thunks';
+import { ProductionOrder } from '../../../settings/redux/productionOrders/interfaces';
 
 export type ConfirmationModalProps = {
   open: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  selectedProductionOrder?: ProductionOrder;
 };
 /**
  *
@@ -25,6 +28,7 @@ export type ConfirmationModalProps = {
 export const ConfirmationModal = ({
   open: isOpen,
   setIsOpen,
+  selectedProductionOrder,
 }: ConfirmationModalProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
@@ -46,7 +50,12 @@ export const ConfirmationModal = ({
   const onSubmit = useMemo(
     () =>
       handleSubmit((data: ReallocationOfPlanningForm) => {
-        dispatch(upsertReallocation(data));
+        dispatch(
+          updateProductionOrderStatus({
+            productionOrders: [selectedProductionOrder?.id!],
+            statusOfPlanningEnum: selectedProductionOrder?.statusOfPlanningEnum! - 1,
+          }),
+        );
       }),
     [dispatch, handleSubmit],
   );
