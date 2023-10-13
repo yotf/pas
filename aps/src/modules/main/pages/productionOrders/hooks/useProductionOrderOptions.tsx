@@ -39,6 +39,7 @@ export type UseProductionOrderOptions = {
  */
 export const useProductionOrderOptions = (
   entity: ProductionOrder | undefined,
+  customerId: number | undefined,
 ): UseProductionOrderOptions => {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -142,20 +143,23 @@ export const useProductionOrderOptions = (
   const salesOrderSequenceOptions: DefaultOptionType[] = useMemo(() => {
     const salesOrderMaterialValuePairs: any = [];
     const salesOrderMaterialLabelPairs: any = [];
+    debugger;
 
-    salesOrders.forEach((so) => {
-      so.salesOrderMaterials?.forEach((som) => {
-        salesOrderMaterialValuePairs.push(`${so.id}-${som.id}`);
-        salesOrderMaterialLabelPairs.push(`${so.orderNumber} - Seq. ${som.sequence}`);
+    salesOrders
+      .filter((so) => so.customerId === customerId)
+      .forEach((so) => {
+        so.salesOrderMaterials?.forEach((som) => {
+          salesOrderMaterialValuePairs.push(`${so.id}-${som.id}`);
+          salesOrderMaterialLabelPairs.push(`${so.orderNumber} - Seq. ${som.sequence}`);
+        });
       });
-    });
 
     const combined = salesOrderMaterialValuePairs.map((value: any, ix: number) => {
       const label = salesOrderMaterialLabelPairs[ix];
       return { value, label };
     });
     return combined;
-  }, [salesOrders]);
+  }, [salesOrders, customerId]);
 
   return {
     customerOptions,

@@ -103,26 +103,9 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const nameof = nameofFactory<ProductionOrderFormData>();
-
-  const {
-    customerOptions,
-    orderTypeOptions,
-    materialOptions,
-    routingOptions,
-
-    salesOrderSequenceOptions,
-    originPOOptions,
-    defaultKg,
-  } = useProductionOrderOptions(entity);
-
   const form = useFormContext<ProductionOrderFormData>();
 
-  const {
-    watch,
-    setValue,
-    getValues,
-    trigger
-  } = form;
+  const { watch, setValue, getValues, trigger } = form;
 
   const {
     quantity1,
@@ -134,7 +117,19 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     routingAddAndUpdateOperations,
     statusOfPlanningEnum,
     salesOrderSequence,
+    customerId,
   } = watch();
+
+  const {
+    customerOptions,
+    orderTypeOptions,
+    materialOptions,
+    routingOptions,
+
+    salesOrderSequenceOptions,
+    originPOOptions,
+    defaultKg,
+  } = useProductionOrderOptions(entity, customerId);
 
   const initialDateDisabled = useMemo(() => !!entity?.origin, [entity?.origin]);
   const isEditing = useMemo(() => !!entity?.id && !copy, [entity?.id, copy]);
@@ -270,6 +265,10 @@ const ProductionOrderForm: FC<POProps> = (props) => {
       setValue('salesOrderMaterialId', Number(soMid));
     }
   }, [salesOrderSequence]);
+
+  useEffect(() => {
+    if (customerId) setValue('salesOrderSequence', undefined);
+  }, [customerId]);
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
     return (
@@ -409,14 +408,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
 
           <div className='sales-order'>
             <CustomInput
-              type='text'
-              label={translate('customerOrderNumber')}
-              name={nameof('customerOrderNumber')}
-              readOnly={isPlanned}
-              disabled={isPlanned}
-              maxLength={50}
-            />
-            <CustomInput
               type='select'
               label={translate('salesOrderSequence')}
               name={nameof('salesOrderSequence')}
@@ -425,6 +416,14 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               isRequired={true}
               readOnly={isPlanned}
               disabled={isPlanned}
+            />
+            <CustomInput
+              type='text'
+              label={translate('customerOrderNumber')}
+              name={nameof('customerOrderNumber')}
+              readOnly={isPlanned}
+              disabled={isPlanned}
+              maxLength={50}
             />
             <CustomInput
               type='date'
