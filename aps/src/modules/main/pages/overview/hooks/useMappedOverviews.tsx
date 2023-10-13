@@ -33,6 +33,10 @@ export const useMappedOverviewTables = (data: OverviewWorkCenter[]): MappedOverv
     i++;
   }
 
-  const sortedByDepartment = mappedTables.sort((a, b) => a.department.id! - b.department.id!);
+  const sortedByDepartment = mappedTables.sort((a, b) => {
+    const nameA = a.department.name.toLowerCase();
+    const nameB = b.department.name.toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
   return sortedByDepartment;
 };
