@@ -42,6 +42,7 @@ import {
   notificationSuccess,
 } from '@/modules/shared/services/notification.service';
 import { getProductionOrder } from '../settings/redux/productionOrders/thunks';
+import { getAllSalesOrders } from '../settings/redux/salesOrders/thunks';
 //import { getProductionOrder } from '../settings/redux/productionOrders/thunks';
 
 /**
@@ -146,6 +147,10 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   };
 
   const { materialId, salesOrderId } = watch();
+
+  useEffect(() => {
+    dispatch(getAllSalesOrders());
+  }, []);
 
   const materialMeasures = useMemo(
     () => materials.find((material) => material.id === materialId),
@@ -269,6 +274,16 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   useEffect(() => {
     if (customerId) setValue('salesOrderSequence', undefined);
   }, [customerId]);
+
+  useEffect(() => {
+    if (salesOrderSequence) {
+      const selectedSOId = Number(salesOrderSequence.split('-')[0]);
+      const selectedCustomerOrderNumber = salesOrders.find(
+        (so) => so.id === selectedSOId,
+      )?.customerOrderNumber;
+      setValue('customerOrderNumber', selectedCustomerOrderNumber);
+    }
+  }, [salesOrderSequence]);
 
   const mapRoutingOperations = (arr: RoutingRoute[]): RoutingRouteFormData[] => {
     return (
