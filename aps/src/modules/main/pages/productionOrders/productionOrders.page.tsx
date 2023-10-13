@@ -98,9 +98,8 @@ const ProductionOrdersTable: FC = () => {
       salesOrderNumber: obj.salesOrderDto?.orderNumber,
       salesOrderType: obj.salesOrderDto?.orderType.name,
       materialName: obj.materialDto?.name ?? '',
-      articleName:
-        obj.salesOrderMaterialDto?.material?.article?.name || obj.materialDto?.article?.name,
-      colorName: obj.salesOrderMaterialDto?.material?.color?.name || obj.materialDto?.color?.name,
+      articleName: obj.materialDto?.article?.name, //|| obj.salesOrderMaterialDto?.material?.article?.name,
+      colorName:  obj.materialDto?.color?.name, //|| obj.salesOrderMaterialDto?.material?.color?.name
       quantity1: obj.quantity1,
       unitOfMeasure1: obj.unitOfMeasure1?.name,
       quantity2: obj.quantity2,

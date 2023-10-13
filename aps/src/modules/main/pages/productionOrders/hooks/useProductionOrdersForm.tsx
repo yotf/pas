@@ -104,9 +104,9 @@ export const useProductionOrderForm = ({
               statusOfPlanningEnum: copy ? 1 : entity.statusOfPlanningEnum,
               situationEnum: entity.situationEnum,
               productionOrderTypeId: entity.productionOrderTypeId,
-              customerId: entity.salesOrderDto?.customerId,
+              customerId: entity.customerDto?.id,
               customerOrderNumber:
-                entity.customerOrderNumber || entity.salesOrderDto?.customerOrderNumber,
+                entity.customerOrderNumber,// || entity.salesOrderDto?.customerOrderNumber,
               salesOrderId: entity.salesOrderId,
               salesOrderSequence: `${entity.salesOrderId}-${entity?.salesOrderMaterialDto?.id}`,
               salesOrderMaterialId: entity.salesOrderMaterialId,
@@ -127,11 +127,11 @@ export const useProductionOrderForm = ({
               creationDate: dateFormatter(entity?.changeHistoryDto?.createdOn),
               salesOrderDelivery: entity.salesOrderDto?.salesOrderDelivery || undefined,
               remark: entity.remark,
-              materialGroupId: entity.salesOrderMaterialDto?.material?.materialGroupId,
-              articleId: entity.salesOrderMaterialDto?.material?.articleId,
-              colorId: entity.salesOrderMaterialDto?.material?.colorId,
-              thicknessId: entity.salesOrderMaterialDto?.material?.thicknessId,
-              selectionId: entity.salesOrderMaterialDto?.material?.selectionId,
+              materialGroupId: entity.materialDto?.materialGroupId,
+              articleId: entity.materialDto.articleId,
+              colorId: entity.materialDto.colorId,
+              thicknessId: entity.materialDto.thicknessId,
+              selectionId: entity.materialDto.selectionId,
               pO_RoutingOperationAddAndUpdateDtos:
                 entity.pO_RoutingOperations.map(routingOperationMapper) ?? [],
               routingAddAndUpdateOperations:
