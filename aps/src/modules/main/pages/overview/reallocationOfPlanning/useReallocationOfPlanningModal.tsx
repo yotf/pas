@@ -72,7 +72,7 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
     [],
   );
 
-  const handleOk = useCallback((): void => {
+  const closeModalCallback = useCallback((): void => {
     closeModal();
   }, [closeModal]);
 
@@ -98,6 +98,7 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
     setValue('productionOrderDelivery', selectedProductionOrder?.foreseenDelivery || '');
     setValue('salesOrderDelivery', selectedProductionOrder?.salesOrderDto.salesOrderDelivery || '');
     setValue('reallocationOperations', entity?.pO_RoutingOperations);
+    setValue('limitCapacity', true);
   }, [selectedProductionOrder, setValue, entity?.pO_RoutingOperations]);
 
   const activePO = useMemo(
@@ -107,14 +108,14 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
     [selectedProductionOrder],
   );
 
-  useReallocationValidation(form);
+  useReallocationValidation(form, closeModalCallback);
 
   const reallocationModal: JSX.Element = (
     <Modal
       centered
       open={isOpen}
-      okText={translate('ok_text')}
-      onOk={handleOk}
+      // okText={translate('ok_text')}
+      // onOk={handleOk}
       cancelText={translate('cancel')}
       onCancel={closeModal}
       closable={true}
@@ -157,7 +158,6 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
                 color='white'
                 type='button'
                 onClick={(): void => setIsConfirmModalOpen(true)}
-                isDisabled={!isValid}
               >
                 <>{translate('unschedule')}</>
               </CustomButton>

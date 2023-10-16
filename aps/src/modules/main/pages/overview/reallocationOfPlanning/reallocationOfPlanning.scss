@@ -23,6 +23,8 @@
       //height: fit-content;
       //  height: 50px;
       gap: 10px;
+      align-self: center;
+      margin-top: 20px;
       button {
         height: 24px;
       }
@@ -32,6 +34,12 @@
       align-self: flex-end;
       height: 50px;
     }
+  }
+}
+
+.ant-modal-footer {
+  .ant-btn:last-child {
+    display: none;
   }
 }
 

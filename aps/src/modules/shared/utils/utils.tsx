@@ -17,6 +17,18 @@ export const dateFormatter = (date: string | undefined): string => {
   return dayjs(date).format(euDateFormat);
 };
 
+export const removeFalsyProperties = (obj: object) => {
+  const newObj: { [key: string]: any } = {};
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (value) {
+      newObj[key] = value;
+    }
+  }
+
+  return newObj;
+};
+
 export const limitNumberOfChars = (
   event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
   maxLength: number,

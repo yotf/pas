@@ -13,7 +13,6 @@ export const useReallocationMappedData = (
   data: PORoutingOperations[],
 ): ReallocationOperationMapped[] => {
   const mappedData = data.map((operation: PORoutingOperations, i): ReallocationOperationMapped => {
-    debugger;
     return {
       sequence: operation.sequence || i + 1,
       operationId: operation.operationId,

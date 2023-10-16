@@ -67,7 +67,6 @@ export const ReallocationTable: FC = (): JSX.Element => {
           wc.allowedOperations.find((op) => op.operationId === record.operationId),
         ),
       );
-      debugger;
 
       return (
         <CustomInput

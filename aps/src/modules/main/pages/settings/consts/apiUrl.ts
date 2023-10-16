@@ -32,6 +32,7 @@ export const BASE_PRODUCTION_ORDER_API = 'ProductionOrders';
 export const BASE_STATISTICS_API = 'Statistics';
 export const BASE_REALLOCATION_API = 'ReallocationOfPlanning';
 export const BASE_OVERVIEW_API = 'Overviews';
+export const GET_OVERVIEW_API = `${BASE_OVERVIEW_API}/getOverview`
 export const BASE_ORDER_REPLACEMENT = 'OrderReplacement';
 export const BASE_ORDER_REPLACEMENT_RESPONSE = `${BASE_ORDER_REPLACEMENT}/table`;
 export const ORDER_REPLACEMENT_SALES_ORDER_BY_CUSTOMER_ID = `${BASE_ORDER_REPLACEMENT}/getSalesOrdersByCustomer`;
