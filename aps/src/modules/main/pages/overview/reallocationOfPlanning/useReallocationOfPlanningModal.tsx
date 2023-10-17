@@ -120,6 +120,7 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
       onCancel={closeModal}
       closable={true}
       title={translate('title')}
+      className='reallocation-modal'
     >
       {loading ? (
         <div className='reallocation-of-planning'>Loading...</div>

@@ -37,9 +37,11 @@
   }
 }
 
-.ant-modal-footer {
-  .ant-btn:last-child {
-    display: none;
+.reallocation-modal {
+  .ant-modal-footer {
+    .ant-btn:last-child {
+      display: none;
+    }
   }
 }
 
