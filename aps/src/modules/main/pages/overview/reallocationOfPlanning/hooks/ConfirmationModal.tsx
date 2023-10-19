@@ -9,10 +9,9 @@ import { useAppDispatch } from '@/store/hooks';
 import { Modal } from 'antd';
 import { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { ReallocationOfPlanningForm } from '../../../settings/redux/reallocationOfPlanning/interfaces';
-import { upsertReallocation } from '../../../settings/redux/reallocationOfPlanning/thunks';
-import { updateProductionOrderStatus } from '../../../settings/redux/productionOrders/productionOrdersStatus/thunks';
+import { ReallocationOfPlanningForm } from '../../../settings/redux/overview/reallocationOfPlanning/interfaces';
 import { ProductionOrder } from '../../../settings/redux/productionOrders/interfaces';
+import { unschedulePO } from '../../../settings/redux/overview/thunks';
 
 export type ConfirmationModalProps = {
   open: boolean;
@@ -50,14 +49,9 @@ export const ConfirmationModal = ({
   const onSubmit = useMemo(
     () =>
       handleSubmit((data: ReallocationOfPlanningForm) => {
-        dispatch(
-          updateProductionOrderStatus({
-            productionOrders: [selectedProductionOrder?.id!],
-            statusOfPlanningEnum: selectedProductionOrder?.statusOfPlanningEnum! - 1,
-          }),
-        );
+        dispatch(unschedulePO(selectedProductionOrder!.id!));
       }),
-    [dispatch, handleSubmit],
+    [dispatch, handleSubmit, selectedProductionOrder],
   );
 
   const handleOk = useCallback((): void => {

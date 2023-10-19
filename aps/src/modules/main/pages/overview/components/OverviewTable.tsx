@@ -18,55 +18,34 @@ import { getOverviewColumns } from '../../settings/redux/columns/thunks';
 export type OverviewTableProps = {
   overviewTableData: MappedOverviewTable;
   translate: (value: string, options?: Record<string, string> | undefined) => string;
+  refreshOverview: () => void;
 };
 /**
  * @param overviewTableData Data returned from {@link useMappedOverviews} hook for one work center
  * @returns One overview table with its {@link TableCalendar}. Creates a Reallocation of Planning modal and callback to open it and passes it to each created table.
  */
+
 export const OverviewTable: FC<OverviewTableProps> = ({
   overviewTableData,
   translate,
+  refreshOverview,
 }: OverviewTableProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getOverviewColumns());
-  }, [dispatch]);
+  
 
   const overviewColumnsVisibility = useAppSelector((state) => state.columnConfig.data);
   const { workCenterName, tableData, department } = overviewTableData;
 
   const { data } = useAppSelector((state) => state.overview);
+  const refreshOverviewCallback = () => {
+    refreshOverview();
+  };
 
-  const { openReallocationModal, reallocationModal } = useReallocationOfPlanningModal();
+  const { openReallocationModal, reallocationModal } =
+    useReallocationOfPlanningModal(refreshOverviewCallback);
 
   const columnsOrder = overviewTableColumns.filter(
     (col, i) => overviewColumnsVisibility?.[i]?.isVisible,
   );
-
-  // const columnsOrder: (keyof OverviewProductionOrderOperationMapped)[] = useMemo(
-  //   () => [
-  //     'orderNumber',
-  //     'orderType',
-  //     'customerName',
-  //     'salesOrderNumber',
-  //     'materialName',
-  //     'articleName',
-  //     'colorName',
-  //     'operationName',
-  //     'foreseenDeliveryDate',
-  //     'estimatedTime',
-  //     'setupTime',
-  //     'quantity1',
-  //     'unitOfMeasure1',
-  //     'salesOrderDeliveryDate',
-  //     'PODelivery',
-  //     'POPosition',
-  //     'operationTime',
-  //     'planningDate',
-  //     'executedDate',
-  //   ],
-  //   [],
-  // );
 
   const customColumns: Partial<
     Record<keyof OverviewProductionOrderOperationMapped, (value: any) => ReactNode>

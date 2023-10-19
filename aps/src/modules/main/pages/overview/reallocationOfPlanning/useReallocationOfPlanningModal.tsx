@@ -12,11 +12,8 @@ import dayjs from 'dayjs';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { OverviewProductionOrderOperationMapped } from '../../settings/redux/overview/interfaces';
-import {
-  getAllProductionOrders,
-  getProductionOrder,
-} from '../../settings/redux/productionOrders/thunks';
-import { ReallocationOfPlanningForm } from '../../settings/redux/reallocationOfPlanning/interfaces';
+import { getProductionOrder } from '../../settings/redux/productionOrders/thunks';
+import { ReallocationOfPlanningForm } from '../../settings/redux/overview/reallocationOfPlanning/interfaces';
 import { ConfirmationModal } from './hooks/ConfirmationModal';
 import { useReallocationValidation } from './hooks/useReallocationOfPlanningValidation';
 import { ReallocationTable } from './hooks/ReallocationTable';
@@ -25,19 +22,34 @@ import './reallocationOfPlanning.scss';
 import { useReallocationOfPlanningSchema } from './useReallocationOfPlanningSchema';
 import { Modal } from 'antd';
 import CustomSwitch from '@/modules/shared/components/input/switch/switch.component';
+import { ReallocationConfirmationModal } from './hooks/ReallocationConfirmationModal';
 
 export type UseRedirectModalReturnType = {
   reallocationModal: JSX.Element;
   openReallocationModal: (selectedOperation: OverviewProductionOrderOperationMapped) => void;
 };
+export interface ReallocationData {
+  productionOrderId: number;
+  workCenterId?: number;
+  pO_RoutingId: number;
+  planningDate?: string;
+  limitCapacity: boolean;
+}
 /**
  *
  * @returns Reallocation of planning modal with form, form validation and function for opening it
  */
-export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => {
+export const useReallocationOfPlanningModal = (
+  refreshOverviewCallback: () => void,
+): UseRedirectModalReturnType => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
-  const { data, loading, entity } = useAppSelector((state) => state.productionOrders);
+  const [reallocationConfirmModalOpen, setReallocationConfirmModalOpen] = useState<boolean>(false);
+
+  const [reallocationData, setReallocationData] = useState<ReallocationData | undefined>(undefined);
+  const [reallocationSubmitted, setReallocationSubmitted] = useState<boolean>(false);
+  const [reallocationChanged, setReallocationChanged] = useState<boolean>(false);
+  const { loading, entity } = useAppSelector((state) => state.productionOrders);
 
   const [selectedPOId, setSelectedPOid] = useState<number>();
   const dispatch = useAppDispatch();
@@ -45,36 +57,6 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
   const { translate } = useTranslate({
     ns: 'reallocationOfPlanning',
   });
-
-  useEffect(() => {
-    if (!data.length) {
-      dispatch(getAllProductionOrders());
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const selectedProductionOrder = useMemo(() => {
-    return data.find((po) => po.id === selectedPOId);
-  }, [data, selectedPOId]);
-
-  useEffect(() => {
-    dispatch(getProductionOrder(selectedPOId));
-  }, [selectedProductionOrder]);
-
-  const closeModal = useCallback((): void => {
-    setIsOpen(false);
-  }, []);
-  const openReallocationModal = useCallback(
-    (selectedOperation: OverviewProductionOrderOperationMapped): void => {
-      setIsOpen(true);
-      setSelectedPOid(selectedOperation.id);
-    },
-    [],
-  );
-
-  const closeModalCallback = useCallback((): void => {
-    closeModal();
-  }, [closeModal]);
 
   const validationSchema = useReallocationOfPlanningSchema();
   const form = useForm<ReallocationOfPlanningForm>({
@@ -93,22 +75,68 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
 
   const nameof = nameofFactory<ReallocationOfPlanningForm>();
 
+  const openReallocationConfirmModal = useCallback((data: ReallocationData): void => {
+    setReallocationConfirmModalOpen(true);
+    setReallocationData(data);
+  }, []);
+
+  const openReallocationModal = useCallback(
+    (selectedOperation: OverviewProductionOrderOperationMapped): void => {
+      debugger;
+      setIsOpen(true);
+      setSelectedPOid(selectedOperation.id);
+      dispatch(getProductionOrder(selectedOperation.id));
+    },
+    [],
+  );
+  const closeModal = useCallback((): void => {
+    setIsOpen(false);
+    setSelectedPOid(undefined);
+    if (reallocationChanged) {
+      refreshOverviewCallback();
+    }
+    setReallocationChanged(false);
+  }, [reallocationChanged, refreshOverviewCallback]);
+
+  const unscheduleCloseModalCallback = useCallback((): void => {
+    closeModal();
+  }, [closeModal]);
+
+  const reallocationSubmittedCallback = useCallback((): void => {
+    setReallocationSubmitted(true);
+  }, []);
+  const reallocationOKCallback = useCallback((): void => {
+    setReallocationSubmitted(false);
+    setReallocationChanged(true);
+    debugger;
+  }, []);
+
+  // useEffect(() => {
+  //   if (!selectedPOId) return;
+  //   dispatch(getProductionOrder(selectedPOId));
+  // }, [selectedPOId, dispatch]);
+
   useEffect(() => {
-    setValue('productionOrderNumber', selectedProductionOrder?.productionOrder_Id ?? 0);
-    setValue('productionOrderDelivery', selectedProductionOrder?.foreseenDelivery || '');
-    setValue('salesOrderDelivery', selectedProductionOrder?.salesOrderDto.salesOrderDelivery || '');
+    setValue('productionOrderNumber', entity?.productionOrder_Id ?? 0);
+    setValue('productionOrderDelivery', entity?.foreseenDelivery || '');
+    setValue('salesOrderDelivery', entity?.salesOrderDto?.salesOrderDelivery || '');
     setValue('reallocationOperations', entity?.pO_RoutingOperations);
     setValue('limitCapacity', true);
-  }, [selectedProductionOrder, setValue, entity?.pO_RoutingOperations]);
+    debugger;
+  }, [entity, setValue, entity?.pO_RoutingOperations]);
 
   const activePO = useMemo(
-    () =>
-      selectedProductionOrder?.finalDelivery ||
-      selectedProductionOrder?.salesOrderDto.salesOrderDelivery,
-    [selectedProductionOrder],
+    () => entity?.finalDelivery || entity?.salesOrderDto?.salesOrderDelivery,
+    [entity],
   );
 
-  useReallocationValidation(form, closeModalCallback);
+  useReallocationValidation(
+    form,
+    unscheduleCloseModalCallback,
+    entity?.id!,
+    reallocationOKCallback,
+    reallocationSubmitted,
+  );
 
   const reallocationModal: JSX.Element = (
     <Modal
@@ -170,12 +198,21 @@ export const useReallocationOfPlanningModal = (): UseRedirectModalReturnType => 
             </div>
           </div>
           <div className='table-wrapper'>
-            <ReallocationTable />
+            <ReallocationTable
+              selectedPOId={selectedPOId}
+              openReallocationConfirmModal={openReallocationConfirmModal}
+            />
           </div>
           <ConfirmationModal
             open={isConfirmModalOpen}
             setIsOpen={setIsConfirmModalOpen}
-            selectedProductionOrder={selectedProductionOrder}
+            selectedProductionOrder={entity}
+          />
+          <ReallocationConfirmationModal
+            isOpen={reallocationConfirmModalOpen}
+            setIsOpen={setReallocationConfirmModalOpen}
+            reallocationData={reallocationData!}
+            reallocationSubmittedCallback={reallocationSubmittedCallback}
           />
         </FormProvider>
       )}

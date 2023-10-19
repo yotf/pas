@@ -11,9 +11,9 @@ export const initialOrderPlacementState: OrderReplacementResponse = {
     outProductionOrders: [],
     inProductionOrders: [],
     inSalesOrders: [],
-    outSalesOrders:[],
+    outSalesOrders: [],
   },
   form: [],
-  loading: true,
+  loading: false,
   error: undefined,
 };

@@ -73,7 +73,7 @@ export interface Input {
     event: React.KeyboardEvent<HTMLInputElement> | React.KeyboardEvent<HTMLTextAreaElement>,
   ) => void;
   /** Passed for select element to handle selection change */
-  handleSelectionChange?: (value: any, option: any) => void;
+  handleSelectionChange?: (value: any, option?: any) => void;
   dropDownStyle?: object;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onTextChange?: (value: number | string) => void;

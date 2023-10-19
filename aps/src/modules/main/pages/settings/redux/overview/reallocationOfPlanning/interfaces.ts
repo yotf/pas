@@ -1,5 +1,5 @@
 /**@module ReallocationOfPlanningInterfaces */
-import { PORoutingOperations } from '../productionOrders/interfaces';
+import { PORoutingOperations } from '../../productionOrders/interfaces';
 
 export interface ReallocationOfPlanningForm {
   productionOrderNumber: number;

@@ -10,12 +10,9 @@ import {
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { useContext, useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
-import { ReallocationOfPlanningForm } from '../../../settings/redux/reallocationOfPlanning/interfaces';
+import { ReallocationOfPlanningForm } from '../../../settings/redux/overview/reallocationOfPlanning/interfaces';
 import { OverviewContext, OverviewContextValue } from '../../context/overview.context';
-import { getAllProductionOrders } from '../../../settings/redux/productionOrders/thunks';
-import { getAllOverviewCenters } from '../../../settings/redux/overview/thunks';
-
-import { ProductionOrder } from '../../../settings/redux/productionOrders/interfaces';
+import { getProductionOrder } from '../../../settings/redux/productionOrders/thunks';
 /**
  *
  * @param form React hook form from {@link useReallocationOfPlanningModal}
@@ -24,6 +21,9 @@ import { ProductionOrder } from '../../../settings/redux/productionOrders/interf
 export const useReallocationValidation = (
   form: UseFormReturn<ReallocationOfPlanningForm>,
   closeModalCallback: () => void,
+  selectedPOId: number,
+  reallocationOKCallback: () => void,
+  reallocationSubmitted: boolean,
 ): void => {
   const { overviewFormData } = useContext<OverviewContextValue>(OverviewContext);
 
@@ -34,7 +34,10 @@ export const useReallocationValidation = (
 
   const { translate } = useTranslate({ ns: 'reallocationOfPlanning', keyPrefix: 'validation' });
 
-  const { loading, error } = useAppSelector((state) => state.reallocationOfPlanning);
+  const { loading, error } = useAppSelector((state) => state.overview);
+  const { loading: loadingReallocation, error: reallocationError } = useAppSelector(
+    (state) => state.reallocationOfPlanning,
+  );
 
   const dispatch = useAppDispatch();
 
@@ -44,7 +47,7 @@ export const useReallocationValidation = (
     }
 
     if (error !== 'Rejected') {
-      notificationFail(translate('reallocation_fail'));
+      notificationFail(translate('unschedule_fail'));
     }
 
     if (error) {
@@ -56,13 +59,25 @@ export const useReallocationValidation = (
       return;
     }
 
-    notificationSuccess(translate('reallocation_success'));
+    notificationSuccess(translate('schedule_success'));
     reset(undefined, {
       keepIsSubmitted: false,
       keepValues: true,
     });
-    // dispatch(getAllProductionOrders());
-    dispatch(getAllOverviewCenters(overviewFormData));
     closeModalCallback();
   }, [dispatch, error, isSubmitted, loading, overviewFormData, reset, translate]);
+
+  useEffect(() => {
+    if (!reallocationSubmitted || loadingReallocation) {
+      return;
+    }
+
+    if (reallocationError) {
+      notificationFail(translate('reallocation_fail'));
+      return;
+    }
+    notificationSuccess(translate('reallocation_success'));
+    dispatch(getProductionOrder(selectedPOId));
+    reallocationOKCallback();
+  }, [dispatch, error, loadingReallocation, selectedPOId, translate]);
 };

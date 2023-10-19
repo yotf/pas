@@ -6,23 +6,35 @@ import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTable } from '@/modules/shared/hooks/table/table.hook';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { dateFormatter, mapDataToOptions } from '@/modules/shared/utils/utils';
-import { FC, ReactNode, useEffect, useMemo } from 'react';
+import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { PORoutingOperations } from '../../../settings/redux/productionOrders/interfaces';
 import {
   ReallocationOfPlanningForm,
   ReallocationOperationMapped,
-} from '../../../settings/redux/reallocationOfPlanning/interfaces';
+} from '../../../settings/redux/overview/reallocationOfPlanning/interfaces';
 import { useReallocationMappedData } from './useReallocationMappedData';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { getAllWorkCentersWithOperations } from '../../../settings/redux/workCenters copy/thunks';
+import { ReallocationData } from '../useReallocationOfPlanningModal';
+import dayjs from 'dayjs';
 
 /**
  *
  * @returns Reallocation of planning table with operations from selected production order
  */
-export const ReallocationTable: FC = (): JSX.Element => {
+
+type ReallocationTableProps = {
+  selectedPOId: number | undefined;
+  openReallocationConfirmModal: (data: ReallocationData) => void;
+};
+
+export const ReallocationTable: FC<ReallocationTableProps> = ({
+  selectedPOId,
+  openReallocationConfirmModal,
+}): JSX.Element => {
   const { translate } = useTranslate({ ns: 'reallocationOfPlanning' });
+
   // const { workCenterOptions } = useStatisticsOptions();
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -42,6 +54,32 @@ export const ReallocationTable: FC = (): JSX.Element => {
   });
 
   //const POSchedule = mockedProductionOrder.statusOfPlanningEnum === 2;
+
+  const handleWorkCenterReallocation = (
+    newValue: any,
+    option: any,
+    record: ReallocationOperationMapped,
+  ) => {
+    const reallocationData: ReallocationData = {
+      productionOrderId: selectedPOId!,
+      workCenterId: newValue,
+      pO_RoutingId: record.pO_RoutingOperationId,
+      // planningDate: dayjs(record.planningDate).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+      limitCapacity: getValues().limitCapacity!,
+    };
+    openReallocationConfirmModal(reallocationData);
+  };
+
+  const handleDateReallocation = (newValue: any, record: ReallocationOperationMapped) => {
+    const reallocationData: ReallocationData = {
+      productionOrderId: selectedPOId!,
+      //workCenterId: newValue,
+      pO_RoutingId: record.pO_RoutingOperationId,
+      planningDate: dayjs(newValue).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]'),
+      limitCapacity: getValues().limitCapacity!,
+    };
+    openReallocationConfirmModal(reallocationData);
+  };
 
   const columnsOrder: (keyof ReallocationOperationMapped)[] = useMemo(
     () => [
@@ -77,6 +115,9 @@ export const ReallocationTable: FC = (): JSX.Element => {
           isAutocomplete={true}
           disabled={record.executedDate || record.skipped}
           allowClear={false}
+          handleSelectionChange={(value, option) =>
+            handleWorkCenterReallocation(value, option, record)
+          }
         ></CustomInput>
       );
     },
@@ -88,6 +129,7 @@ export const ReallocationTable: FC = (): JSX.Element => {
         name={`reallocationOperations[${index}].planningDate`}
         allowClear={false}
         disabled={record.skipped || record.executedDate}
+        handleSelectionChange={(value) => handleDateReallocation(value, record)}
         noPastDates={true}
       ></CustomInput>
     ),

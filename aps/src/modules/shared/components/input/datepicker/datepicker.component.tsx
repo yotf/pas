@@ -20,6 +20,7 @@ export type DatePickerProps = HTMLAttributes<HTMLInputElement> & {
   disableDatesFrom?: Dayjs;
   disableDatesAfter?: Dayjs;
   disabled?: boolean;
+  onSelectionChange?: (value: Dayjs | null) => void;
 };
 /**
  *
@@ -39,6 +40,7 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
   disableDatesFrom,
   disableDatesAfter,
   disabled,
+  onSelectionChange,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -78,7 +80,11 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
             picker='date'
             disabled={disabled}
             disabledDate={disableDates}
-            onSelect={(value): void => field.onChange(value?.toISOString() ?? '')}
+            onSelect={
+              onSelectionChange
+                ? onSelectionChange
+                : (value): void => field.onChange(value?.toISOString() ?? '')
+            }
             onChange={(value): void => field.onChange(value?.toISOString() ?? '')}
           />
         </Space>

@@ -139,6 +139,7 @@ const CustomInput: React.FC<Input> = ({
             name={fieldName}
             disableDatesFrom={disableDatesFrom}
             disableDatesAfter={disableDatesAfter}
+            onSelectionChange={handleSelectionChange}
           />
         );
       case 'readonly':

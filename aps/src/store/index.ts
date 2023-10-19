@@ -31,7 +31,7 @@ import { productionOrderReducer } from '@/modules/main/pages/settings/redux/prod
 import { productionOrderTypesReducer } from '@/modules/main/pages/settings/redux/productionOrderTypes/slice';
 import { RoutingsResponse } from '@/modules/main/pages/settings/redux/routings/interfaces';
 import { routingsReducer } from '@/modules/main/pages/settings/redux/routings/slice';
-import { reallocationReducer } from '@/modules/main/pages/settings/redux/reallocationOfPlanning/slice';
+import { reallocationReducer } from '@/modules/main/pages/settings/redux/overview/reallocationOfPlanning/slice';
 import {
   SalesOrder,
   SalesOrdersResponse,

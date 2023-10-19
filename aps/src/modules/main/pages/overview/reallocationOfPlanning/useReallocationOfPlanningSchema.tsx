@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import * as Yup from 'yup';
 import { OptionalObjectSchema, TypeOfShape } from 'yup/lib/object';
 import { AnyObject } from 'yup/lib/types';
-import { ReallocationOfPlanningForm } from '../../settings/redux/reallocationOfPlanning/interfaces';
+import { ReallocationOfPlanningForm } from '../../settings/redux/overview/reallocationOfPlanning/interfaces';
 
 type EntityShape = Shape<ReallocationOfPlanningForm>;
 /**

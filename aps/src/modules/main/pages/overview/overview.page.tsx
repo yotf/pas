@@ -32,21 +32,18 @@ import { useMappedOverviewTables } from './hooks/useMappedOverviews';
 import { useOverviewOptions } from './hooks/useOverviewOptions';
 import { useOverviewSchema } from './hooks/useOverviewSchema';
 import './overview.scss';
-import { overviewTableColumns } from '@/modules/shared/consts';
+import { getOverviewColumns } from '../settings/redux/columns/thunks';
 /**
  *
  * @returns Overview tables and form. Uses {@link useMappedOverviews} hook to split the data from the API and render it. Defines overview form and inputs and
  * their validation.
  */
 const Overview: FC = () => {
-  const { data } = useAppSelector((state) => state.overview);
-
-  // //useEffect(()=>dispatch(getColumnsOrder()),[dispatch])
-  // const columnsOrderForTable = useCallback(() => {
-  //   //TODO
-
-  //   return overviewTableColumns;
-  // }, []);
+  const { data, loading } = useAppSelector((state) => state.overview);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getOverviewColumns());
+  }, [dispatch]);
 
   const columnsOrder = useCallback(
     (): (keyof OverviewProductionOrderOperationMapped)[] => [
@@ -88,7 +85,7 @@ const Overview: FC = () => {
     watch,
     handleSubmit,
     trigger,
-    formState: { isDirty, isValid },
+    formState: { isDirty, isValid, isSubmitted },
     getValues,
     setValue,
   } = form;
@@ -97,7 +94,6 @@ const Overview: FC = () => {
 
   const { orderTypeOptions, workCenterOptions } = useOverviewOptions();
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const getOverviewCenters = useCallback(
@@ -106,6 +102,10 @@ const Overview: FC = () => {
     },
     [dispatch],
   );
+
+  const refreshOverview = useCallback(() => {
+    getOverviewCenters(getValues());
+  }, [getOverviewCenters, getValues]);
 
   const mappedTables = useMappedOverviewTables(data);
 
@@ -172,6 +172,13 @@ const Overview: FC = () => {
   }, [mappedTables]);
   return (
     <FormProvider {...form}>
+      {loading && isSubmitted && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <OverviewContextProvider value={{ ns: ns, overviewFormData: getValues() }}>
         <div className='overview-container'>
           <h2 className='table-container__title'>{translate('title')}</h2>
@@ -286,7 +293,12 @@ const Overview: FC = () => {
           </div>
 
           {mappedTables.map((wc) => (
-            <OverviewTable key={wc.workCenterName} overviewTableData={wc} translate={translate} />
+            <OverviewTable
+              key={wc.workCenterName}
+              overviewTableData={wc}
+              translate={translate}
+              refreshOverview={refreshOverview}
+            />
           ))}
         </div>
       </OverviewContextProvider>

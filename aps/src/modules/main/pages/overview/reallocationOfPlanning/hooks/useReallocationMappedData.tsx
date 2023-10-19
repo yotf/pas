@@ -3,7 +3,7 @@
  */
 
 import { PORoutingOperations } from '../../../settings/redux/productionOrders/interfaces';
-import { ReallocationOperationMapped } from '../../../settings/redux/reallocationOfPlanning/interfaces';
+import { ReallocationOperationMapped } from '../../../settings/redux/overview/reallocationOfPlanning/interfaces';
 /**
  *
  * @param data Operations from selected Production Order
