@@ -14,6 +14,7 @@ import { Operation, OperationMapped } from '../settings/redux/operations/interfa
 import { filterOperations } from '../settings/redux/operations/slice';
 import { deleteOperationThunk, getAllOperations } from '../settings/redux/operations/thunks';
 import './tableStyles.scss';
+import { useAppSelector } from '@/store/hooks';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * The table is wrapped with {@link ExportToExcelContext.ExportToExcelProvider} which allows the exportToExcel function to create excel reports from values returned by {@link useExportToExcel.useExportToExcel} hook.
@@ -47,6 +48,7 @@ const OperationsTable: FC = () => {
   );
   const getName = useCallback((obj: OperationMapped) => obj.name, []);
   const stateSelector = useCallback((state: CombinedState<StoreType>) => state.operation, []);
+  const { loading } = useAppSelector(stateSelector);
 
   const { translate } = useTranslate({ ns: 'operations' });
 
@@ -66,6 +68,13 @@ const OperationsTable: FC = () => {
 
   return (
     <ExportToExcelProvider value={contextValue}>
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <div className={'operations-table'}>
         <PageTable
           ns='operations'

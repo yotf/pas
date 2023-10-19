@@ -74,7 +74,8 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const { data: materials } = useAppSelector((state) => state.materials);
   const { data: salesOrders } = useAppSelector((state) => state.salesOrders);
   const { entity: selectedRouting } = useAppSelector((state) => state.routings);
-  const { loading, error: executionError } = useAppSelector(
+  const { loading } = useAppSelector((state) => state.productionOrders);
+  const { loading: loadingExecute, error: executionError } = useAppSelector(
     (state) => state.productionOrderExecution,
   );
   // const { entity: selectedOrigin } = useAppSelector((state) => state.productionOrders);
@@ -83,7 +84,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const [executionSubmitted, setExecutionSubmitted] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!executionSubmitted || loading) return;
+    if (!executionSubmitted || loadingExecute) return;
     if (executionError) {
       const errorMessage =
         typeof executionError === 'string' ? executionError : translate('execute_fail');
@@ -93,7 +94,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
       dispatch(getProductionOrder(entity?.id));
     }
     setExecutionSubmitted(false);
-  }, [executionError, loading, executionSubmitted, translate]);
+  }, [executionError, loadingExecute, executionSubmitted, translate]);
 
   const executeOperationCallback = () => {
     setExecutionSubmitted(true);
@@ -106,7 +107,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
   const nameof = nameofFactory<ProductionOrderFormData>();
   const form = useFormContext<ProductionOrderFormData>();
 
-  const { watch, setValue, getValues, trigger } = form;
+  const { watch, setValue, trigger } = form;
 
   const {
     quantity1,
@@ -347,9 +348,17 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     setPendingValue({ id: undefined, value: undefined });
     setDiscardOperationModalVisible(false);
   };
+  debugger;
 
   return (
     <div className='production-order-container'>
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <div className='form-container'>
         <form
           className='productionOrder-form'

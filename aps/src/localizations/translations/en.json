@@ -1290,7 +1290,8 @@
     },
     "validation": {
       "required": "This field is required",
-      "same_order_number_error": "In and out order numbers must be different"
+      "same_order_number_error": "In and out order numbers must be different",
+      "replace_success": "Orders replaced successfully"
     }
   },
   "statistics": {
@@ -1425,9 +1426,12 @@
     "unschedule": "Un-schedule",
     "display_operations": "Display Operations",
     "limitCapacity": "Limit Capacity",
+    "allocation_confirm_message": "This will re-allocate the selected operation. Are you sure you want to proceed?",
     "validation": {
-      "reallocation_success": "Production Order status changed successfully",
-      "reallocation_fail": "An error occured while changing Production Order status"
+      "unschedule_success": "Production Order un-scheduled successfully",
+      "unschedule_fail": "An error occured while unscheduling Production Order",
+      "reallocation_success": "Operation reallocated successfully",
+      "reallocation_fail": "An error occured while reallocating operation"
     }
   },
   "confirmation_modal": {

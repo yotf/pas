@@ -99,7 +99,7 @@ const ProductionOrdersTable: FC = () => {
       salesOrderType: obj.salesOrderDto?.orderType.name,
       materialName: obj.materialDto?.name ?? '',
       articleName: obj.materialDto?.article?.name, //|| obj.salesOrderMaterialDto?.material?.article?.name,
-      colorName:  obj.materialDto?.color?.name, //|| obj.salesOrderMaterialDto?.material?.color?.name
+      colorName: obj.materialDto?.color?.name, //|| obj.salesOrderMaterialDto?.material?.color?.name
       quantity1: obj.quantity1,
       unitOfMeasure1: obj.unitOfMeasure1?.name,
       quantity2: obj.quantity2,
@@ -141,14 +141,15 @@ const ProductionOrdersTable: FC = () => {
     setSituationChangeRequested(true);
   };
 
-  const { loading, error } = useAppSelector((state) => state.productionOrderStatus);
+  const { loading: loadingStatus, error } = useAppSelector((state) => state.productionOrderStatus);
+  const { loading } = useAppSelector((state) => state.productionOrders);
 
   const [statusValue, setStatusValue] = useState<number>(1);
   const [situationValue, setSituationValue] = useState<number>(0);
   const [situationChangeRequested, setSituationChangeRequested] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!situationChangeRequested || loading) return;
+    if (!situationChangeRequested || loadingStatus) return;
 
     const newStatus = POFormStatus[statusValue - 1];
     if (error) {
@@ -159,7 +160,7 @@ const ProductionOrdersTable: FC = () => {
       );
     }
     setSituationChangeRequested(false);
-  }, [situationChangeRequested, loading, error]);
+  }, [situationChangeRequested, loadingStatus, error]);
 
   useEffect(() => {
     onSelectionChange();
@@ -198,16 +199,6 @@ const ProductionOrdersTable: FC = () => {
   const ns = 'productionOrder';
 
   const { translate } = useTranslate({ ns: ns });
-
-  const antIcon = (
-    <LoadingOutlined
-      style={{
-        fontSize: 20,
-        color: 'white',
-      }}
-      spin
-    />
-  );
 
   const actionButtons = (
     <>
@@ -295,9 +286,18 @@ const ProductionOrdersTable: FC = () => {
 
   return (
     <ExportToExcelProvider value={contextValue}>
-      {loading && situationChangeRequested && (
+      {loadingStatus && situationChangeRequested && (
         <div className='spinner-overlay'>
-          <Spin size='large' />
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
         </div>
       )}
       <PageTable

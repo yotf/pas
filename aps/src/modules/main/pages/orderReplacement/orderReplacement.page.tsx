@@ -28,8 +28,11 @@ const OrderReplacementPage: FC = () => {
 
   const { translate } = useTranslate({ ns: 'orderReplacement' });
 
+
+
   return (
     <FormProvider {...form}>
+     
       <div className='order-replacement-container'>
         <h2 className='table-container__title'>{translate('title')}</h2>
         <Form translate={translate} />

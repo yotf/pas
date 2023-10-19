@@ -20,6 +20,7 @@ import { exportToExcelFile, getDataForExcel } from '@/modules/shared/utils/expor
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { useExportToExcel } from '@/modules/shared/hooks/useExportToExcel';
 import { ExportToExcelProvider } from '../../components/maintain/contexts/exportToExcel.context';
+import { useAppSelector } from '@/store/hooks';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * The table is wrapped with {@link ExportToExcelContext.ExportToExcelProvider} which allows the exportToExcel function to create excel reports from values returned by {@link useExportToExcel} hook.
@@ -46,6 +47,8 @@ const ProductionCalendarTable: FC = () => {
     [],
   );
 
+  const { loading } = useAppSelector(stateSelector);
+
   const { translate } = useTranslate({ ns: 'productionCalendar' });
 
   const { contextValue, uiData, sort } = useExportToExcel<ProductionCalendarMapped>();
@@ -63,6 +66,13 @@ const ProductionCalendarTable: FC = () => {
   }, [columnsOrder, sort, translate, uiData]);
   return (
     <ExportToExcelProvider value={contextValue}>
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <PageTable
         ns={'productionCalendar'}
         columnsOrder={columnsOrder}

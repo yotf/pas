@@ -15,6 +15,7 @@ import { Material, MaterialMapped } from '../settings/redux/materials/interfaces
 import { filterMaterials } from '../settings/redux/materials/slice';
 import { deleteMaterial, getAllMaterials } from '../settings/redux/materials/thunks';
 import './tableStyles.scss';
+import { useAppSelector } from '@/store/hooks';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * The table is wrapped with {@link ExportToExcelContext.ExportToExcelProvider } which allows the exportToExcel function to create excel reports from values returned by {@link useExportToExcel} hook.
@@ -73,6 +74,8 @@ const MaterialsTable: FC = () => {
 
   const { translate } = useTranslate({ ns: 'materials' });
 
+  const { loading } = useAppSelector(stateSelector);
+
   const exportToExcel = useCallback(() => {
     exportToExcelFile({
       filename: translate('title'),
@@ -87,6 +90,13 @@ const MaterialsTable: FC = () => {
 
   return (
     <ExportToExcelProvider value={contextValue}>
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <div className={'materials-table'}>
         <PageTable
           ns={'materials'}

@@ -15,6 +15,7 @@ import './routings-table.scss';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { exportToExcelFile, getDataForExcel } from '@/modules/shared/utils/exportToExcel.utils';
 import { useExportToExcel } from '@/modules/shared/hooks/useExportToExcel';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * The table is wrapped with {@link ExportToExcelContext.ExportToExcelProvider} which allows the exportToExcel function to create excel reports from values returned by {@link useExportToExcel} hook.
@@ -53,6 +54,7 @@ const RoutingsTable: FC = () => {
   const stateSelector = useCallback((state: CombinedState<StoreType>) => state.routings, []);
 
   const { contextValue, uiData, sort } = useExportToExcel<RoutingMapped>();
+  const { loading } = useAppSelector(stateSelector);
 
   const exportToExcel = useCallback(() => {
     exportToExcelFile({
@@ -68,6 +70,13 @@ const RoutingsTable: FC = () => {
 
   return (
     <ExportToExcelProvider value={contextValue}>
+      {loading  && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <div className={'routings-table'}>
         <PageTable
           ns={'routings'}

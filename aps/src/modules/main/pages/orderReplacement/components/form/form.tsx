@@ -45,12 +45,14 @@ const Form: FC<FormProps> = ({ translate }) => {
 
   const form = useFormContext();
   const {
-    formState: { isDirty, isValid },
+    formState: { isDirty, isValid, isSubmitted },
     getValues,
     watch,
     setValue,
     clearErrors,
   } = form;
+
+  const { loading } = useAppSelector((state) => state.orderReplacement);
 
   const { inCustomerId, outCustomerId, outSalesOrderNumberId, inSalesOrderNumberId } = watch();
 
@@ -135,6 +137,13 @@ const Form: FC<FormProps> = ({ translate }) => {
 
   return (
     <div className='form-container'>
+      {loading && (generateSubmitted || isSubmitted) && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <div className='order-placement-inputs'>
         <CustomInput
           type='select'

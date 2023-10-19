@@ -54,6 +54,8 @@ export const useOrderReplacementValidationChecks = (
 
   useEffect(() => {
     if (tablesLoading || !generateSubmitted) return;
+
+    generateCallback(false);
     if (tableLoadError) {
       notificationFail(tableLoadError);
     } else {
@@ -69,9 +71,7 @@ export const useOrderReplacementValidationChecks = (
         notificationFail(translate('no_OUT_orders'));
         return;
       }
-
       notificationSuccess(translate('order_load_success'));
-      generateCallback(false);
     }
   }, [tableLoadError, tablesLoading, generateSubmitted, translate]);
 };

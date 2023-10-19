@@ -143,7 +143,6 @@ export const useProductionOrderOptions = (
   const salesOrderSequenceOptions: DefaultOptionType[] = useMemo(() => {
     const salesOrderMaterialValuePairs: any = [];
     const salesOrderMaterialLabelPairs: any = [];
-    debugger;
 
     salesOrders
       .filter((so) => so.customerId === customerId)

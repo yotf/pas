@@ -78,6 +78,13 @@ const Users: FC = () => {
 
   return (
     <FormProvider {...form}>
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <div data-testid='users' className='users'>
         <SettingsTable
           isLoading={loading!}

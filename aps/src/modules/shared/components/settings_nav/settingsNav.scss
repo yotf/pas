@@ -5,10 +5,11 @@
   flex-direction: column;
   flex: 0 0 200px;
   gap: 24px;
-  padding-left: 1.5em;
+
   overflow: auto;
 
   .settings-link {
+    padding-left: 24px;
     color: $gray-color;
     font-size: 14px;
     line-height: 21px;
@@ -17,6 +18,14 @@
     vertical-align: top;
     font-weight: 600;
     text-decoration: none;
+    // transition: outline 0.3s; /* Add a smooth transition effect */
+    &:focus {
+      outline: none; /* Remove outline for programmatic focus, such as clicking */
+    }
+    &:focus-visible {
+      outline: 1.5px solid $blue-color;
+      outline-offset: -1px;
+    }
   }
 
   .active {

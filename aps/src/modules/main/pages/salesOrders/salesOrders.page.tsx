@@ -15,6 +15,7 @@ import PageTable from '../../components/table/page-table.component';
 import { SalesOrder, SalesOrderMapped } from '../settings/redux/salesOrders/interfaces';
 import { filterSalesOrder } from '../settings/redux/salesOrders/slice';
 import { deleteSalesOrderThunk, getAllSalesOrders } from '../settings/redux/salesOrders/thunks';
+import { useAppSelector } from '@/store/hooks';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * The table is wrapped with {@link ExportToExcelContext.ExportToExcelProvider} which allows the exportToExcel function to create excel reports from values returned by {@link useExportToExcel} hook.
@@ -57,6 +58,7 @@ const SalesOrdersTable: FC = () => {
   };
 
   const { contextValue, uiData, sort } = useExportToExcel<SalesOrderMapped>();
+  const { loading } = useAppSelector(stateSelector);
 
   const exportToExcel = useCallback(() => {
     exportToExcelFile({
@@ -72,6 +74,13 @@ const SalesOrdersTable: FC = () => {
 
   return (
     <ExportToExcelProvider value={contextValue}>
+      {loading && (
+        <div className='spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
       <PageTable
         ns={ns}
         columnsOrder={columnsOrder}
