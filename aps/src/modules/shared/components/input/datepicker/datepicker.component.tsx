@@ -20,6 +20,7 @@ export type DatePickerProps = HTMLAttributes<HTMLInputElement> & {
   disableDatesFrom?: Dayjs;
   disableDatesAfter?: Dayjs;
   disabled?: boolean;
+  value?: string;
   onSelectionChange?: (value: Dayjs | null) => void;
 };
 /**
@@ -41,6 +42,7 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
   disableDatesAfter,
   disabled,
   onSelectionChange,
+  value,
   ...props
 }) => {
   const { control } = useFormContext();
@@ -68,27 +70,35 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
       defaultValue={''}
       name={name}
       control={control}
-      render={({ field }): ReactElement => (
-        <Space direction='vertical'>
-          <DatePicker
-            {...props}
-            {...field}
-            inputReadOnly={readOnly}
-            defaultValue={undefined}
-            value={field.value ? dayjs(field.value) : undefined}
-            format={format}
-            picker='date'
-            disabled={disabled}
-            disabledDate={disableDates}
-            onSelect={
-              onSelectionChange
-                ? onSelectionChange
-                : (value): void => field.onChange(value?.toISOString() ?? '')
-            }
-            onChange={(value): void => field.onChange(value?.toISOString() ?? '')}
-          />
-        </Space>
-      )}
+      render={({ field }): ReactElement => {
+        const newValue = value ? dayjs(value) : field.value ? dayjs(field.value) : undefined;
+        return (
+          <Space direction='vertical'>
+            <DatePicker
+              {...props}
+              {...field}
+              inputReadOnly={readOnly}
+              defaultValue={undefined}
+              value={newValue}
+              format={format}
+              picker='date'
+              disabled={disabled}
+              disabledDate={disableDates}
+              onSelect={
+                onSelectionChange
+                  ? onSelectionChange
+                  : (value): void => {
+                      return field.onChange(value?.toISOString() ?? '');
+                    }
+              }
+              onChange={(value): void => {
+                if (onSelectionChange) return;
+                return field.onChange(value?.toISOString() ?? '');
+              }}
+            />
+          </Space>
+        );
+      }}
     />
   );
 };

@@ -135,6 +135,7 @@ const CustomInput: React.FC<Input> = ({
         return (
           <CustomDatePicker
             noPastDates={noPastDates}
+            value={value}
             {...props}
             name={fieldName}
             disableDatesFrom={disableDatesFrom}
@@ -186,6 +187,8 @@ const CustomInput: React.FC<Input> = ({
     onKeyDownEvent,
     selectedStartTime,
     onTextChange,
+    fieldName,
+    handleSelectionChange,
   ]);
   return (
     <div className={`custom-input ${width}`}>

@@ -40,6 +40,7 @@ import { getOverviewColumns } from '../settings/redux/columns/thunks';
  */
 const Overview: FC = () => {
   const { data, loading } = useAppSelector((state) => state.overview);
+ 
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getOverviewColumns());
@@ -173,12 +174,13 @@ const Overview: FC = () => {
   return (
     <FormProvider {...form}>
       {loading && isSubmitted && (
-        <div className='spinner-overlay'>
+        <div className='reallocation-spinner-overlay'>
           <div className='loader-container'>
             <span className='loader-20'></span>
           </div>
         </div>
       )}
+
       <OverviewContextProvider value={{ ns: ns, overviewFormData: getValues() }}>
         <div className='overview-container'>
           <h2 className='table-container__title'>{translate('title')}</h2>

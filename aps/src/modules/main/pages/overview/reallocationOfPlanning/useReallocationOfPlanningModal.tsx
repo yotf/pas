@@ -50,6 +50,9 @@ export const useReallocationOfPlanningModal = (
   const [reallocationSubmitted, setReallocationSubmitted] = useState<boolean>(false);
   const [reallocationChanged, setReallocationChanged] = useState<boolean>(false);
   const { loading, entity } = useAppSelector((state) => state.productionOrders);
+  const { loading: reallocationExecuting } = useAppSelector(
+    (state) => state.reallocationOfPlanning,
+  );
 
   const [selectedPOId, setSelectedPOid] = useState<number>();
   const dispatch = useAppDispatch();
@@ -82,7 +85,6 @@ export const useReallocationOfPlanningModal = (
 
   const openReallocationModal = useCallback(
     (selectedOperation: OverviewProductionOrderOperationMapped): void => {
-      debugger;
       setIsOpen(true);
       setSelectedPOid(selectedOperation.id);
       dispatch(getProductionOrder(selectedOperation.id));
@@ -108,8 +110,7 @@ export const useReallocationOfPlanningModal = (
   const reallocationOKCallback = useCallback((): void => {
     setReallocationSubmitted(false);
     setReallocationChanged(true);
-    debugger;
-  }, []);
+  }, [selectedPOId, dispatch]);
 
   // useEffect(() => {
   //   if (!selectedPOId) return;
@@ -123,7 +124,7 @@ export const useReallocationOfPlanningModal = (
     setValue('reallocationOperations', entity?.pO_RoutingOperations);
     setValue('limitCapacity', true);
     debugger;
-  }, [entity, setValue, entity?.pO_RoutingOperations]);
+  }, [entity, setValue, JSON.stringify(entity?.pO_RoutingOperations)]);
 
   const activePO = useMemo(
     () => entity?.finalDelivery || entity?.salesOrderDto?.salesOrderDelivery,
@@ -139,84 +140,102 @@ export const useReallocationOfPlanningModal = (
   );
 
   const reallocationModal: JSX.Element = (
-    <Modal
-      centered
-      open={isOpen}
-      // okText={translate('ok_text')}
-      // onOk={handleOk}
-      cancelText={translate('cancel')}
-      onCancel={closeModal}
-      closable={true}
-      title={translate('title')}
-      className='reallocation-modal'
-    >
-      {loading ? (
-        <div className='reallocation-of-planning'>Loading...</div>
-      ) : (
-        <FormProvider {...form}>
-          <div className='reallocation-of-planning'>
-            <div className='reallocation-inputs'>
-              <CustomInput
-                type='text'
-                label={translate('productionOrderNumber')}
-                name={nameof('productionOrderNumber')}
-                disabled={true}
-              />
-              <CustomInput
-                type='date'
-                label={translate('productionOrderDelivery')}
-                name={nameof('productionOrderDelivery')}
-                disabled={true}
-              />
+    <>
+      {reallocationExecuting && (
+        <div className='reallocation-spinner-overlay'>
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+        </div>
+      )}
+      <Modal
+        centered
+        open={isOpen}
+        // okText={translate('ok_text')}
+        // onOk={handleOk}
+        cancelText={translate('cancel')}
+        onCancel={closeModal}
+        closable={true}
+        title={translate('title')}
+        className='reallocation-modal'
+      >
+        {loading ? (
+          <>
+            <div className='reallocation-of-planning'>Loading...</div>
+          </>
+        ) : (
+          <FormProvider {...form}>
+            {reallocationExecuting && (
+              <div className='reallocation-spinner-overlay'>
+                <div className='loader-container'>
+                  <span className='loader-20'></span>
+                </div>
+              </div>
+            )}
+            <div className='reallocation-of-planning'>
+              <div className='reallocation-inputs'>
+                <CustomInput
+                  type='text'
+                  label={translate('productionOrderNumber')}
+                  name={nameof('productionOrderNumber')}
+                  disabled={true}
+                />
+                <CustomInput
+                  type='date'
+                  label={translate('productionOrderDelivery')}
+                  name={nameof('productionOrderDelivery')}
+                  disabled={true}
+                />
 
-              <CustomInput
-                type='date'
-                label={translate('salesOrderDelivery')}
-                name={nameof('salesOrderDelivery')}
-                disabled={true}
-              />
-              <div
-                className={`indicator ${
-                  activePO &&
-                  (dayjs(productionOrderDelivery).isBefore(dayjs(salesOrderDelivery))
-                    ? 'green-indicator'
-                    : 'red-indicator')
-                }`}
-              ></div>
-              <CustomButton
-                color='white'
-                type='button'
-                onClick={(): void => setIsConfirmModalOpen(true)}
-              >
-                <>{translate('unschedule')}</>
-              </CustomButton>
+                <CustomInput
+                  type='date'
+                  label={translate('salesOrderDelivery')}
+                  name={nameof('salesOrderDelivery')}
+                  disabled={true}
+                />
+                <div
+                  className={`indicator ${
+                    activePO &&
+                    (dayjs(productionOrderDelivery).isBefore(dayjs(salesOrderDelivery))
+                      ? 'green-indicator'
+                      : 'red-indicator')
+                  }`}
+                ></div>
+                <CustomButton
+                  color='white'
+                  type='button'
+                  onClick={(): void => setIsConfirmModalOpen(true)}
+                >
+                  <>{translate('unschedule')}</>
+                </CustomButton>
 
-              <CustomSwitch
-                label={translate('limitCapacity')}
-                name={register('limitCapacity').name}
+                <CustomSwitch
+                  label={translate('limitCapacity')}
+                  name={register('limitCapacity').name}
+                />
+              </div>
+            </div>
+            <div className='table-wrapper'>
+              <ReallocationTable
+                selectedPOId={selectedPOId}
+                openReallocationConfirmModal={openReallocationConfirmModal}
               />
             </div>
-          </div>
-          <div className='table-wrapper'>
-            <ReallocationTable
-              selectedPOId={selectedPOId}
-              openReallocationConfirmModal={openReallocationConfirmModal}
+            <ConfirmationModal
+              open={isConfirmModalOpen}
+              setIsOpen={setIsConfirmModalOpen}
+              selectedProductionOrder={entity}
             />
-          </div>
-          <ConfirmationModal
-            open={isConfirmModalOpen}
-            setIsOpen={setIsConfirmModalOpen}
-            selectedProductionOrder={entity}
-          />
-          <ReallocationConfirmationModal
-            isOpen={reallocationConfirmModalOpen}
-            setIsOpen={setReallocationConfirmModalOpen}
-            reallocationData={reallocationData!}
-            reallocationSubmittedCallback={reallocationSubmittedCallback}
-          />
-        </FormProvider>
-      )}
-    </Modal>
+            <ReallocationConfirmationModal
+              isOpen={reallocationConfirmModalOpen}
+              setIsOpen={setReallocationConfirmModalOpen}
+              reallocationData={reallocationData!}
+              reallocationSubmittedCallback={reallocationSubmittedCallback}
+            />
+          </FormProvider>
+        )}
+      </Modal>
+    </>
   );
 
   return { reallocationModal, openReallocationModal };

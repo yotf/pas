@@ -34,6 +34,7 @@ export const ReallocationTable: FC<ReallocationTableProps> = ({
   openReallocationConfirmModal,
 }): JSX.Element => {
   const { translate } = useTranslate({ ns: 'reallocationOfPlanning' });
+  const { entity } = useAppSelector((state) => state.productionOrders);
 
   // const { workCenterOptions } = useStatisticsOptions();
   const dispatch = useAppDispatch();
@@ -45,7 +46,7 @@ export const ReallocationTable: FC<ReallocationTableProps> = ({
 
   const form = useFormContext<ReallocationOfPlanningForm>();
 
-  const { control, getValues } = form;
+  const { control, getValues, register } = form;
 
   useFieldArray({
     control,
@@ -71,6 +72,7 @@ export const ReallocationTable: FC<ReallocationTableProps> = ({
   };
 
   const handleDateReallocation = (newValue: any, record: ReallocationOperationMapped) => {
+    debugger;
     const reallocationData: ReallocationData = {
       productionOrderId: selectedPOId!,
       //workCenterId: newValue,
@@ -122,17 +124,27 @@ export const ReallocationTable: FC<ReallocationTableProps> = ({
       );
     },
     executedDate: (value) => <span>{dateFormatter(value)}</span>,
-    planningDate: (_value, record, index) => (
-      <CustomInput
-        type={'date'}
-        width={'full-width'}
-        name={`reallocationOperations[${index}].planningDate`}
-        allowClear={false}
-        disabled={record.skipped || record.executedDate}
-        handleSelectionChange={(value) => handleDateReallocation(value, record)}
-        noPastDates={true}
-      ></CustomInput>
-    ),
+    planningDate: (_value, record, index) => {
+      const previousPlanningDate = getValues().reallocationOperations?.[index - 1]?.planningDate;
+      const previousLeadTime = getValues().reallocationOperations?.[index - 1]?.leadTime;
+      return (
+        <CustomInput
+          type={'date'}
+          width={'full-width'}
+          name={`reallocationOperations[${index}].planningDate`}
+          disableDatesFrom={
+            previousPlanningDate && dayjs(previousPlanningDate).isAfter(dayjs())
+              ? dayjs(previousPlanningDate).add(previousLeadTime ?? 0, 'day')
+              : undefined
+          }
+          value={record.planningDate}
+          allowClear={false}
+          disabled={record.skipped || record.executedDate}
+          handleSelectionChange={(value) => handleDateReallocation(value, record)}
+          noPastDates={true}
+        ></CustomInput>
+      );
+    },
   };
 
   const mappedData = useReallocationMappedData(getValues().reallocationOperations ?? []);

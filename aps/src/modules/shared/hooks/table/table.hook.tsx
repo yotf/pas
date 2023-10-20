@@ -22,16 +22,9 @@ import { ReactNode, useCallback, useContext, useEffect, useMemo } from 'react';
 import { useTranslate } from '../translate.hook';
 import { createColumns } from './table.columns';
 import './table.scss';
-import {
-  MaintainContext,
-  MaintainContextValue,
-} from '@/modules/main/components/maintain/contexts/maintain.context';
-import { SalesOrder } from '@/modules/main/pages/settings/redux/orderReplacement/interfaces';
-import {
-  SalesOrderResponse,
-  SalesOrderFormData,
-  SalesMaterialFormData,
-} from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
+import { MaintainContext } from '@/modules/main/components/maintain/contexts/maintain.context';
+
+import { SalesMaterialFormData } from '@/modules/main/pages/settings/redux/salesOrders/interfaces';
 import { POFormStatus } from '../../consts';
 import { ProductionOrder } from '@/modules/main/pages/settings/redux/productionOrders/interfaces';
 /**
@@ -199,6 +192,7 @@ export const useTable = <T extends object>({
         </Space>
       ),
     });
+
   const table =
     dataSource?.length && dataSource[0] ? (
       <div className='table-wrapper'>
