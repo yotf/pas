@@ -76,35 +76,6 @@
       display: inline-block;
       animation: rotation 1s linear infinite;
     }
-
-    .loader-62 {
-      width: $size / 6;
-      height: 40px;
-      border-radius: 4px;
-      display: inline-block;
-      position: relative;
-      background: currentColor;
-      color: $huni-logo-color;
-      color: white;
-      animation: animloader61 0.3s 0.3s linear infinite alternate;
-      &::after,
-      &::before {
-        content: '';
-        width: $size / 6;
-        height: 40px;
-        border-radius: 4px;
-        background: currentColor;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 20px;
-        animation: animloader61 0.3s 0.45s linear infinite alternate;
-      }
-      &::before {
-        left: -20px;
-        animation-delay: 0s;
-      }
-    }
   }
 
   @keyframes animloader61 {
