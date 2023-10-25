@@ -45,8 +45,6 @@ import {
   notificationFail,
   notificationSuccess,
 } from '@/modules/shared/services/notification.service';
-import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
 /**
  * Defines columns order, mapper, getName and stateSelector consts which are passed down to the {@link PageTable} component that handles the rendering.
  * Adds additional filters and checkbox row selection to the table which is specific for this page.

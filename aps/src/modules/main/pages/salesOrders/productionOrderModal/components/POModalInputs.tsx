@@ -4,7 +4,7 @@
 
 import CustomInput from '@/modules/shared/components/input/input.component';
 import { useTranslate } from '@/modules/shared/hooks/translate.hook';
-import { nameofFactory } from '@/modules/shared/utils/utils';
+import { limitToNumericKeyDown, nameofFactory } from '@/modules/shared/utils/utils';
 import { FC, useContext, useEffect } from 'react';
 import { ProductionOrderModalForm } from '../../../settings/redux/productionOrders/productionOrdersModal/interfaces';
 import { useProductionOrderModalOptions } from '../useProductionOrderModalOptions';
@@ -42,6 +42,7 @@ const POModalInputs: FC<POModalInputsProps> = ({ ns, productionOrderInitial }) =
         label={translate('numberOfProductionOrders')}
         name={nameof('numberOfProductionOrders')}
         width='full-width'
+        onKeyDownEvent={limitToNumericKeyDown}
         isRequired
       />
       <CustomInput

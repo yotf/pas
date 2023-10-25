@@ -83,8 +83,11 @@ const ProductionCalendarForm: FC = (): JSX.Element => {
     >
       {loading && (
         <div className='spinner-overlay'>
-          {/* <Spin size='large' /> */}
-          <img src={lamma} />
+          <div className='loader-container'>
+            <span className='loader-20'></span>
+          </div>
+
+          {/* <img src={lamma} /> */}
         </div>
       )}
       <ProductionCalendarInputs checking={false} ns={ns} />

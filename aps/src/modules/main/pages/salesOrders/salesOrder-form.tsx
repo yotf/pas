@@ -26,8 +26,6 @@ import dayjs from 'dayjs';
 import { SalesOrderMaterialDto } from '../settings/redux/productionOrders/interfaces';
 import { latest } from 'immer/dist/internal';
 import { useAppSelector } from '@/store/hooks';
-import { LoadingOutlined, ScheduleOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
 /**
  * @returns Sales Order Form component with {@link Input | inputs} connected to the form returned by {@link useSalesOrderForm} hook.
  */
@@ -86,15 +84,7 @@ const SalesOrderForm: FC = () => {
     );
   }, [salesOrderMaterialsAddAndUpdate, setValue]);
 
-  const antIcon = (
-    <LoadingOutlined
-      style={{
-        fontSize: 20,
-        color: 'white',
-      }}
-      spin
-    />
-  );
+
 
   return (
     <div className='sales-order-container'>
@@ -107,7 +97,9 @@ const SalesOrderForm: FC = () => {
         >
           {loading && (
             <div className='spinner-overlay'>
-              <Spin size='large' />
+              <div className='loader-container'>
+                <span className='loader-20'></span>
+              </div>
             </div>
           )}
 

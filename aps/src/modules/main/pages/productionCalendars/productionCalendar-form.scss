@@ -14,26 +14,3 @@ p {
 .span-full {
   grid-column: span 2;
 }
-
-// .grayed-out-table {
-// opacity: 0.6; /* Adjust the opacity to control the level of grayed-out effect */
-// pointer-events: none; /* Prevent interaction with the table */
-// }
-.production-calendar-form {
-  .spinner-overlay {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 64px);
-    background-color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Make sure the overlay appears above other content */
-    .ant-spin {
-      z-index: 10000;
-    }
-  }
-}
