@@ -84,6 +84,10 @@ export const getJwt = (): string | null => {
 export const getRole = (): string | null => {
   return localStorage.getItem(ROLE_KEY);
 };
+
+export const getLang = (): string | null => {
+  return localStorage.getItem(LANGUAGE_KEY);
+};
 /**
  *
  * @returns user's name
