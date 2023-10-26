@@ -155,16 +155,19 @@ export const useTable = <T extends object>({
       width: 100,
       render: (value: T & { date: string }, record: T) => {
         const isDisabled = disableDeleteButtonCondition?.(record);
+
         return (
           <Space size='middle' className='action-container'>
             {!!entity?.id &&
-              openProductionModal &&
-              !copying &&
-              (value as unknown as SalesMaterialFormData)?.id !== 0 && (
-                <Tooltip title={translate('production_order_tooltip')}>
-                  <CodeSandboxOutlined onClick={doProductionModal(value)} />
-                </Tooltip>
-              )}
+            openProductionModal &&
+            !copying &&
+            (value as unknown as SalesMaterialFormData)?.id !== 0 ? (
+              <Tooltip title={translate('production_order_tooltip')}>
+                <CodeSandboxOutlined onClick={doProductionModal(value)} />
+              </Tooltip>
+            ) : (
+              <div className='empty-action'></div>
+            )}
             {hasViewOnlyElements &&
             (dayjs(value.date).isBefore(dayjs(), 'day') ||
               dayjs(value.date).isSame(dayjs(), 'day')) ? (

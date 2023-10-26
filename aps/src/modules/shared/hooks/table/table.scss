@@ -59,6 +59,9 @@
     border-radius: 8px;
     @include box-shadow;
     border: 1px solid $navy-5;
+    .action-container .empty-action {
+      width: 14px;
+    }
   }
 
   .ant-table-thead
