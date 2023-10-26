@@ -40,7 +40,7 @@ import { getOverviewColumns } from '../settings/redux/columns/thunks';
  */
 const Overview: FC = () => {
   const { data, loading } = useAppSelector((state) => state.overview);
- 
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getOverviewColumns());
@@ -138,13 +138,14 @@ const Overview: FC = () => {
   const exportToExcel = useCallback(() => {
     const sheets: Sheet[] = mappedTables
       .filter((item) => item.tableData.length > 0)
-      .map(
-        (item) =>
-          ({
-            sheetname: item.workCenterName,
-            aoa_sheet_data: getDataForExcel(item.tableData, columnsOrder(), translate),
-          } as Sheet),
-      );
+      .map((item) => {
+        return {
+          sheetname: item.workCenterName.replace(/\//g, '-'),
+          aoa_sheet_data: getDataForExcel(item.tableData, columnsOrder(), translate),
+        } as Sheet;
+      });
+
+    debugger;
 
     exportToExcelFile({
       filename: translate('title'),
