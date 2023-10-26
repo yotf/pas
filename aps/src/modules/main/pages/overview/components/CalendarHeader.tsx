@@ -68,7 +68,11 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
         <th key={uuid()} className={day.isWorkingDay}>
           <span>{day.date.format('DD/MM').replace('/', '.')}</span>
           <br />
-          <span className={day.isOverbooked}>{(day.totalAllocatedTime as number).toFixed(3)}</span>
+          <span className={day.isOverbooked}>
+            {Number.isInteger(day.totalAllocatedTime)
+              ? day.totalAllocatedTime
+              : (day.totalAllocatedTime as number).toFixed(3)}
+          </span>
         </th>
       ))}
     </thead>

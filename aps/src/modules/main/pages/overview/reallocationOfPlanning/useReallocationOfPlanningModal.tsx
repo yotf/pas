@@ -123,7 +123,6 @@ export const useReallocationOfPlanningModal = (
     setValue('salesOrderDelivery', entity?.salesOrderDto?.salesOrderDelivery || '');
     setValue('reallocationOperations', entity?.pO_RoutingOperations);
     setValue('limitCapacity', true);
-    debugger;
   }, [entity, setValue, JSON.stringify(entity?.pO_RoutingOperations)]);
 
   const activePO = useMemo(

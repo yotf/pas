@@ -30,8 +30,6 @@ export const OverviewTable: FC<OverviewTableProps> = ({
   translate,
   refreshOverview,
 }: OverviewTableProps): JSX.Element => {
-  
-
   const overviewColumnsVisibility = useAppSelector((state) => state.columnConfig.data);
   const { workCenterName, tableData, department } = overviewTableData;
 
@@ -94,9 +92,6 @@ export const OverviewTable: FC<OverviewTableProps> = ({
               })}
             />
             <div className={`calendar calendar-open`}>
-              {/* <button onClick={(): void => setToggleCalendar(!toggleCalendar)}>
-              {toggleCalendar ? '>' : '<'}
-            </button> */}
               <div className='calendar-table'>
                 <TableCalendar calendarData={calendarData} />
               </div>
