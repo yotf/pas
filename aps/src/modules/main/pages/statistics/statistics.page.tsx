@@ -151,6 +151,7 @@ const Statistics: FC = () => {
               register={register('numberOfSalesOrders')}
               disabled={true}
               readOnly={true}
+              width='full-width'
             />
             <CustomInput
               type='text'
@@ -159,6 +160,7 @@ const Statistics: FC = () => {
               register={register('delayedSalesOrders')}
               disabled={true}
               readOnly={true}
+              width='full-width'
             />
             <CustomInput
               type='text'
@@ -167,6 +169,7 @@ const Statistics: FC = () => {
               register={register('numberOfPO')}
               disabled={true}
               readOnly={true}
+              width='full-width'
             />
             <CustomInput
               type='text'
@@ -175,6 +178,7 @@ const Statistics: FC = () => {
               register={register('delayedPO')}
               disabled={true}
               readOnly={true}
+              width='full-width'
             />
             <CustomInput
               type='text'
@@ -184,6 +188,7 @@ const Statistics: FC = () => {
               disabled={true}
               readOnly={true}
               icon={percent}
+              width='full-width'
               iconRight
             />
             <CustomInput
@@ -191,6 +196,7 @@ const Statistics: FC = () => {
               label={translate('allocatedMinutes')}
               placeholder={translate('allocatedMinutes')}
               register={register('allocatedMinutes')}
+              width='full-width'
               disabled={true}
               readOnly={true}
             />
@@ -201,12 +207,14 @@ const Statistics: FC = () => {
               register={register('setupMinutes')}
               disabled={true}
               readOnly={true}
+              width='full-width'
             />
             <CustomInput
               type='text'
               label={translate('availableMinutes')}
               placeholder={translate('availableMinutes')}
               register={register('availableMinutes')}
+              width='full-width'
               disabled={true}
               readOnly={true}
             />
