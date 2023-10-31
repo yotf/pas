@@ -146,6 +146,12 @@ export const useTable = <T extends object>({
     dispatch(setPagination(page));
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(setPagination(1));
+    };
+  }, [dispatch]);
+
   columns =
     columns || createColumns(dataSource, translateHeader, columnsOrder, customColumns, preventSort);
   if (useActions)
