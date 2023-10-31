@@ -175,7 +175,7 @@ const Overview: FC = () => {
   return (
     <FormProvider {...form}>
       {loading && isSubmitted && (
-        <div className='reallocation-spinner-overlay'>
+        <div className='spinner-overlay'>
           <div className='loader-container'>
             <span className='loader-20'></span>
           </div>

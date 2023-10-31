@@ -192,7 +192,7 @@ export const useProductionOrderModal = (): UseRedirectModalReturnType => {
                   <span>{translate('quantity1')}</span>= {selectedMaterial?.quantity1}
                 </h3>
                 <h3>
-                  <span>{translate('quantity2')}</span>={selectedMaterial?.quantity2}
+                  <span>{translate('quantity2')}</span>= {selectedMaterial?.quantity2}
                 </h3>
               </div>
               <POModalInputs ns={ns} productionOrderInitial={productionOrderInitial} />

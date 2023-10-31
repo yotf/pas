@@ -16,7 +16,7 @@ export const useDelayedOrders = (): JSX.Element => {
 
   const mapper = useCallback((obj: DelayedOrder): DelayedOrderMapped => {
     return {
-      sequence: obj.sequence + 1,
+      sequence: obj.sequence,
       salesOrderNumber: obj.salesOrderNumber,
       customerName: obj.customer,
       materialName: obj.material,
