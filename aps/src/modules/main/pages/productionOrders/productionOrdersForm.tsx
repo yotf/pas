@@ -348,7 +348,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     setPendingValue({ id: undefined, value: undefined });
     setDiscardOperationModalVisible(false);
   };
-  debugger;
 
   return (
     <div className='production-order-container'>

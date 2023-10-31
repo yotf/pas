@@ -99,7 +99,8 @@ export const OverviewTable: FC<OverviewTableProps> = ({
           </>
         ) : (
           <div className='empty-table-container'>
-            <Empty description={translate('empty')} data-testid='empty' />
+            <span> {translate('empty')}</span>
+            {/* // <Empty description={translate('empty')} data-testid='empty' /> */}
           </div>
         )}
       </div>

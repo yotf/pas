@@ -81,7 +81,7 @@
   }
 
   .table-wrapper {
-    margin-top: 50px;
+    margin-top: 24px;
     padding-right: 4.75em;
 
     .calendar-wrapper {
@@ -91,6 +91,10 @@
 
       .empty-table-container {
         width: 100%;
+        // text-align: center;
+        font-size: 14px;
+        padding-top: 10px;
+        color: $navy-60;
       }
 
       .calendar {

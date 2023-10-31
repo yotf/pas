@@ -59,7 +59,7 @@ export const useReallocationValidation = (
       return;
     }
 
-    notificationSuccess(translate('schedule_success'));
+    notificationSuccess(translate('unschedule_success'));
     reset(undefined, {
       keepIsSubmitted: false,
       keepValues: true,
