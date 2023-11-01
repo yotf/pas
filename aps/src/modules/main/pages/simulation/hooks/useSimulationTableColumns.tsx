@@ -19,13 +19,17 @@ const titles: string[] = [' ', 'Real Data', 'Simulation Data'];
 
 const getTimeElement = (value: number): ReactNode => (
   <span className={`availability ${availabilityStyling(value)}`}>
-    {value < 0 ? `(${Math.abs(value)})` : value}
+    {value < 0
+      ? `(${Math.abs(value).toLocaleString('en', { useGrouping: true })})`
+      : value.toLocaleString('en', { useGrouping: true })}
   </span>
 );
 
 const customColumns: Partial<Record<keyof SimulationWorkCenter, (value: any) => ReactNode>> = {
   availableTime: getTimeElement,
   simulatedAvailableTime: getTimeElement,
+  totalAvailability: (value: number) => value.toLocaleString('en', { useGrouping: true }),
+  allocatedTime: (value: number) => value.toLocaleString('en', { useGrouping: true }),
 };
 /**
  *

@@ -8,7 +8,6 @@ import { availabilityStyling } from '@/modules/shared/utils/utils';
 import { useAppSelector } from '@/store/hooks';
 import { ReactNode } from 'react';
 import { WorkCenterStatistics } from '../../settings/redux/statistics/interfaces';
-import { getLang } from '@/modules/auth/services/auth.service';
 
 export const useStatisticsTable = (): any => {
   const { data } = useAppSelector((state) => state.statistics);
@@ -18,9 +17,14 @@ export const useStatisticsTable = (): any => {
   const customColumns: Partial<Record<keyof WorkCenterStatistics, (value: any) => ReactNode>> = {
     availability: (value: number) => (
       <span className={`availability ${availabilityStyling(value)}`}>
-        {value < 0 ? `(${Math.abs(value)})` : value.toLocaleString('en', { useGrouping: true })}
+        {value < 0
+          ? `(${Math.abs(value).toLocaleString('en', { useGrouping: true })})`
+          : value.toLocaleString('en', { useGrouping: true })}
       </span>
     ),
+    availableMinutes: (value: number) => value.toLocaleString('en', { useGrouping: true }),
+    allocatedTime: (value: number) => value.toLocaleString('en', { useGrouping: true }),
+    setupTime: (value: number) => value.toLocaleString('en', { useGrouping: true }),
   };
 
   const table = useTable({

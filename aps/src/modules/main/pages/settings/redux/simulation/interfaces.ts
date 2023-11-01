@@ -17,11 +17,11 @@ export interface SimulationFormData {
 }
 /**Data presented in the overview sections of the page. Recieved from the API */
 export interface DataOverview {
-  occupancy: number;
-  totalMinutes: number;
-  allocatedMinutes: number;
-  minutes: number;
-  availableMinutes: number;
+  occupancy: string;
+  totalMinutes: string;
+  allocatedMinutes: string;
+  minutes: string;
+  availableMinutes: string;
 }
 /**One work center of the simulation page table */
 export interface SimulationWorkCenter {

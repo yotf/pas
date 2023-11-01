@@ -33,14 +33,14 @@ const SimulationDataOverview: FC<SimulationDataOverviewProps> = ({
       <div className='data-grid'>
         <FormProvider {...form}>
           <CustomInput
-            type='number'
+            type='text'
             label={translate('occupancy')}
             placeholder={translate('occupancy')}
             name={nameOfData('occupancy')}
             readOnly={true}
           />
           <CustomInput
-            type='number'
+            type='text'
             label={translate('totalMinutes')}
             placeholder={translate('totalMinutes')}
             name={nameOfData('totalMinutes')}
@@ -48,21 +48,21 @@ const SimulationDataOverview: FC<SimulationDataOverviewProps> = ({
           />
           <div className='break'></div>
           <CustomInput
-            type='number'
+            type='text'
             label={translate('allocatedMinutes')}
             placeholder={translate('allocatedMinutes')}
             name={nameOfData('allocatedMinutes')}
             readOnly={true}
           />
           <CustomInput
-            type='number'
+            type='text'
             label={translate('minutes')}
             placeholder={translate('minutes')}
             name={nameOfData('minutes')}
             readOnly={true}
           />
           <CustomInput
-            type='number'
+            type='text'
             label={translate('availableMinutes')}
             placeholder={translate('availableMinutes')}
             name={nameOfData('availableMinutes')}

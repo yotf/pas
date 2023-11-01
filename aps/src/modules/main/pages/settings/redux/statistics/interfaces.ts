@@ -19,14 +19,14 @@ export interface WorkCenterStatistics {
 }
 /** Response from the API */
 export interface StatisticsGeneratedData {
-  numberOfSalesOrders: number;
-  delayedSalesOrders: number;
-  numberOfPO: number;
-  delayedPO: number;
-  occupancy: number;
-  allocatedMinutes: number;
-  setupMinutes: number;
-  availableMinutes: number;
+  numberOfSalesOrders: string;
+  delayedSalesOrders: string;
+  numberOfPO: string;
+  delayedPO: string;
+  occupancy: string;
+  allocatedMinutes: string;
+  setupMinutes: string;
+  availableMinutes: string;
   workCentersData: WorkCenterStatistics[];
 }
 /**Delayed order recieved from the API */

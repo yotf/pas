@@ -21,10 +21,39 @@ export const useSimulationDataForm = ({
   const { setValue } = form;
 
   useEffect(() => {
-    setValue('occupancy', simulationOverviewData?.occupancy ?? undefined);
-    setValue('allocatedMinutes', simulationOverviewData?.allocatedMinutes ?? undefined);
-    setValue('availableMinutes', simulationOverviewData?.availableMinutes ?? undefined);
-    setValue('minutes', simulationOverviewData?.minutes ?? undefined);
-    setValue('totalMinutes', simulationOverviewData?.totalMinutes ?? undefined);
+    setValue(
+      'occupancy',
+      (simulationOverviewData?.occupancy &&
+        Number(simulationOverviewData?.occupancy)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setValue(
+      'allocatedMinutes',
+      simulationOverviewData?.allocatedMinutes
+        ? Number(simulationOverviewData?.allocatedMinutes)?.toLocaleString('en', {
+            useGrouping: true,
+          })
+        : '',
+    );
+    setValue(
+      'availableMinutes',
+      simulationOverviewData?.availableMinutes
+        ? Number(simulationOverviewData?.availableMinutes)?.toLocaleString('en', {
+            useGrouping: true,
+          })
+        : '',
+    );
+    setValue(
+      'minutes',
+      simulationOverviewData?.minutes
+        ? Number(simulationOverviewData?.minutes)?.toLocaleString('en', { useGrouping: true })
+        : '',
+    );
+    setValue(
+      'totalMinutes',
+      simulationOverviewData?.totalMinutes
+        ? Number(simulationOverviewData?.totalMinutes)?.toLocaleString('en', { useGrouping: true })
+        : '',
+    );
   }, [setValue, simulationOverviewData]);
 };

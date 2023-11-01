@@ -98,7 +98,7 @@ const SalesOrderModal: FC<Props> = ({ material, onClose, option }) => {
       setValue(
         'quantity2',
         selectedMaterialFull?.factorAreaToPc
-          ? selectedMaterialFull?.factorAreaToPc * Number(q1)
+          ? Number((selectedMaterialFull?.factorAreaToPc * Number(q1)).toFixed(2))
           : undefined,
       );
     }

@@ -35,26 +35,52 @@ export const useStatisticsForms = (): StatisticsFormsReturn => {
   const { setValue: setInnerFormValue } = innerForm;
 
   useEffect(() => {
-    if (data) {
-      setInnerFormValue('allocatedMinutes', data.allocatedMinutes);
-      setInnerFormValue('availableMinutes', data.availableMinutes);
-      setInnerFormValue('delayedPO', data.delayedPO);
-      setInnerFormValue('numberOfPO', data.numberOfPO);
-      setInnerFormValue('numberOfSalesOrders', data.numberOfSalesOrders);
-      setInnerFormValue('occupancy', data.occupancy);
-      setInnerFormValue('setupMinutes', data.setupMinutes);
-      setInnerFormValue('delayedSalesOrders', data.delayedSalesOrders);
-    }
+    setInnerFormValue(
+      'allocatedMinutes',
+      (data?.allocatedMinutes &&
+        Number(data?.allocatedMinutes)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'availableMinutes',
+      (data?.availableMinutes &&
+        Number(data?.availableMinutes)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'delayedPO',
+      (data?.delayedPO && Number(data?.delayedPO)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'numberOfPO',
+      (data?.numberOfPO && Number(data?.numberOfPO)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'numberOfSalesOrders',
+      (data?.numberOfSalesOrders &&
+        Number(data?.numberOfSalesOrders)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'occupancy',
+      (data?.occupancy && Number(data?.occupancy)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'setupMinutes',
+      (data?.setupMinutes &&
+        Number(data?.setupMinutes)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
+    setInnerFormValue(
+      'delayedSalesOrders',
+      (data?.delayedSalesOrders &&
+        Number(data?.delayedSalesOrders)?.toLocaleString('en', { useGrouping: true })) ??
+        '',
+    );
   }, [data, setInnerFormValue]);
-
-  useEffect(() => {
-    if (location.state) {
-      setValue('initialDate', location.state.initialDate);
-      setValue('finalDate', location.state.finalDate);
-      setValue('workCenters', location.state.workCenters);
-      trigger();
-    }
-  }, [location, setValue, trigger]);
 
   return { form, innerForm };
 };
