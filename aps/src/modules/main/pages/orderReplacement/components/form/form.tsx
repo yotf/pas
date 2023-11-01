@@ -70,12 +70,14 @@ const Form: FC<FormProps> = ({ translate }) => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!outCustomerId) return;
     dispatch(getSalesOrderByCustomer({ id: outCustomerId, salesOrderType: 'out' }));
     setValue('outSalesOrderNumberId', '');
     clearErrors('outSalesOrderNumberId');
   }, [dispatch, outCustomerId, setValue]);
 
   useEffect(() => {
+    if (!inCustomerId) return;
     dispatch(getSalesOrderByCustomer({ id: inCustomerId, salesOrderType: 'in' }));
     setValue('inSalesOrderNumberId', '');
     clearErrors('inSalesOrderNumberId');

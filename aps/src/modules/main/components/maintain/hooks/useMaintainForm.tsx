@@ -45,6 +45,7 @@ export const useMaintainForm = <Entity, SingleEntity, FormData extends FieldValu
   const editEntity = useMemo(() => mapEntityToFormData(entity), [entity, mapEntityToFormData]);
 
   useEffect(() => {
+    if (!id) return;
     dispatch(readThunk(id));
   }, [dispatch, id, readThunk]);
 

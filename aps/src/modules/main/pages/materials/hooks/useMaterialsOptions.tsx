@@ -148,7 +148,6 @@ export const useMaterialsOptions = (entity?: Material): UseRoutingSetupReturnTyp
   );
 
   const selectionOptions: DefaultOptionType[] = useMemo(() => {
-    debugger;
     return mapDataToOptions(
       selections,
       entity?.selection ? { label: entity.selection.name, value: entity.selection.id! } : undefined,
