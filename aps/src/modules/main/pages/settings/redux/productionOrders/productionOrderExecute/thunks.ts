@@ -13,7 +13,6 @@ export const executeProductionOrderOperation = createAsyncThunk(
         executionDate: payload.executionDate,
       });
       const { data } = response;
-      debugger;
       return data;
     } catch (err: any) {
       return rejectWithValue(err.response ? err.response : err.message);

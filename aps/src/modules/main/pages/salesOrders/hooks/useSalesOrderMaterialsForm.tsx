@@ -70,7 +70,6 @@ export const useSalesOrderMaterialsForm = ({ material, onClose, option }: Props)
   const onSubmit = useMemo(
     () =>
       handleSubmit((data: SalesMaterialFormData) => {
-        //debugger;
         const salesOrderMaterials = recalculateMaterials(data);
         setValue('salesOrderMaterialsAddAndUpdate', salesOrderMaterials, {
           shouldDirty: true,

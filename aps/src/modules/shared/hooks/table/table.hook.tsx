@@ -130,8 +130,6 @@ export const useTable = <T extends object>({
   //   [(entity?.id, (entity as unknown as ProductionOrder)?.statusOfPlanningEnum)],
   // );
 
-  // debugger;
-
   const doEdit = useCallback((value: T) => () => onEdit?.(value), [onEdit]);
   const doDelete = useCallback((value: T) => () => onDelete?.(value), [onDelete]);
 

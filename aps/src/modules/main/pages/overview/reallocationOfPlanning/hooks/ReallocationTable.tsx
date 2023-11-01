@@ -72,7 +72,6 @@ export const ReallocationTable: FC<ReallocationTableProps> = ({
   };
 
   const handleDateReallocation = (newValue: any, record: ReallocationOperationMapped) => {
-    debugger;
     const reallocationData: ReallocationData = {
       productionOrderId: selectedPOId!,
       //workCenterId: newValue,

@@ -145,8 +145,6 @@ const Overview: FC = () => {
         } as Sheet;
       });
 
-    debugger;
-
     exportToExcelFile({
       filename: translate('title'),
       sheets: sheets,
