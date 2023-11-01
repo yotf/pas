@@ -16,7 +16,6 @@ export const useSalesOrderMaterialOptions = (
   }));
 
   const materialOptions: DefaultOptionType[] = useMemo(() => {
-    debugger;
     return mapDataToOptions(
       materials,
       material?.materialName

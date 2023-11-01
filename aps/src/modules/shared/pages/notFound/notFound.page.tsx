@@ -6,7 +6,7 @@ import { useTranslate } from '@/modules/shared/hooks/translate.hook';
 import { RootState } from '@/store';
 import { useAppSelector } from '@/store/hooks';
 import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CustomButton from '../../components/button/button.component';
 import './notFound.scss';
 /**
@@ -14,10 +14,15 @@ import './notFound.scss';
  * @returns Page rendered by {@link GuardedRoute} in case the user is not authorized to access parts of the app
  */
 const NotFoundPage: FC = () => {
-  const navigate = useNavigate();
+  const { state } = useLocation();
+  let prevPage = state?.from?.match(/\/([^/]+\/)/)?.[1] || MAIN_LAYOUT;
+  prevPage = !prevPage.startsWith('/') ? `/${prevPage}` : prevPage;
+
   const isAuthenticated = useAppSelector((state: RootState) => !!state.auth.token);
+  const navigate = useNavigate();
+
   const redirection = (): void => {
-    navigate(isAuthenticated ? MAIN_LAYOUT : LOGIN_PAGE);
+    navigate(isAuthenticated ? prevPage : LOGIN_PAGE);
   };
   const { translate } = useTranslate({
     ns: 'not-found',

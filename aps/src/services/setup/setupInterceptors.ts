@@ -36,7 +36,11 @@ const setup = (
       const originalConfig = err.config;
       if (originalConfig.url !== LOGIN_API && err.response) {
         if (err.response.status === 404) {
-          router.navigate(NOT_FOUND_PATH);
+          const location = window.location.pathname;
+          const options = !location.includes('not-found')
+            ? { state: { from: location } }
+            : { state: (router as any).location.state };
+          router.navigate(NOT_FOUND_PATH, options);
           return;
         }
         // Access Token was expired
