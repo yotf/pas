@@ -1,7 +1,6 @@
 /** @module SimulationThunks */
 import ApiService from '@/modules/shared/services/api.service';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { mockedSimulationData } from '../../../simulation/mockedSimulationData';
 import { BASE_SIMULATION_API } from '../../consts/apiUrl';
 import { SimulationDataOverview, SimulationFormData } from './interfaces';
 /**Gets routing delivery dates and simulated work center data for the simulation page */
