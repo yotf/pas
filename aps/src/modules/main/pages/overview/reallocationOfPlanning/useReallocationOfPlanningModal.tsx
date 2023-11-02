@@ -17,7 +17,6 @@ import { ReallocationOfPlanningForm } from '../../settings/redux/overview/reallo
 import { ConfirmationModal } from './hooks/ConfirmationModal';
 import { useReallocationValidation } from './hooks/useReallocationOfPlanningValidation';
 import { ReallocationTable } from './hooks/ReallocationTable';
-import { mockedReallocationOperations } from './mockedReallocationData';
 import './reallocationOfPlanning.scss';
 import { useReallocationOfPlanningSchema } from './useReallocationOfPlanningSchema';
 import { Modal } from 'antd';

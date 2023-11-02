@@ -1,6 +1,6 @@
 /**@module StatisticsThunks */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { mockedDelayedOrders } from '../../../statistics/mockedStatisticsData';
+
 import {
   BASE_STATISTICS_API,
   STATISTICS_DELAYED_ORDERS_API,
