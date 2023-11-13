@@ -188,20 +188,20 @@ const ProductionOrderForm: FC<POProps> = (props) => {
         value: materialMeasures?.materialGroup.id!,
       },
       articleId: {
-        label: materialMeasures?.article.name,
-        value: materialMeasures?.article.id!,
+        label: materialMeasures?.article?.name,
+        value: materialMeasures?.article?.id,
       },
       colorId: {
-        label: materialMeasures?.color.name,
-        value: materialMeasures?.color.id!,
+        label: materialMeasures?.color?.name,
+        value: materialMeasures?.color?.id,
       },
       thicknessId: {
-        label: materialMeasures?.thickness.name,
-        value: materialMeasures?.thickness.id!,
+        label: materialMeasures?.thickness?.name,
+        value: materialMeasures?.thickness?.id,
       },
       selectionId: {
-        label: materialMeasures?.selection.name,
-        value: materialMeasures?.selection.id!,
+        label: materialMeasures?.selection?.name,
+        value: materialMeasures?.selection?.id!,
       },
     };
   }, [materialMeasures]);
