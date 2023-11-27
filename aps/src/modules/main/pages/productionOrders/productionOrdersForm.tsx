@@ -241,14 +241,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
     if (!salesOrderDelivery) setValue('salesOrderDelivery', undefined, { shouldDirty: false });
   }, [finalDelivery, foreseenDelivery, foreseenDeliveryPOOrigin, salesOrderDelivery, setValue]);
 
-  // useEffect(() => {
-  //   //  if (origin) dispatch(getProductionOrder(origin));
-  // }, [origin]);
-  // useEffect(() => {
-  //   debu;
-  //   if (selectedOrigin) setValue('foreseenDeliveryPOOrigin', selectedOrigin.foreseenDelivery);
-  // }, [selectedOrigin]);
-
   useEffect(() => {
     if (!routingAddAndUpdateOperations || routingAddAndUpdateOperations?.length === 0) return;
     setValue('pO_RoutingOperationAddAndUpdateDtos', routingAddAndUpdateOperations, {
@@ -487,9 +479,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               onKeyDownEvent={limitToNumericKeyDown}
             />
 
-            {/* <div className='uom-label'>
-            {unitOfMeasureOptions.find((uom) => uom.value === unitOfMeasure1Id)?.label}
-          </div> */}
             <div className='uom-label'>{materialOptionsAll.unitOfMeasure1Id.label}</div>
 
             <CustomInput
@@ -500,9 +489,6 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               //  disabled={true}
             />
 
-            {/* <div className='uom-label'>
-            {unitOfMeasureOptions.find((uom) => uom.value === unitOfMeasure2Id)?.label}
-          </div> */}
             <div className='uom-label'>{materialOptionsAll.unitOfMeasure2Id.label}</div>
 
             <CustomInput
@@ -511,9 +497,7 @@ const ProductionOrderForm: FC<POProps> = (props) => {
               name={nameof('quantity3')}
               readOnly
             />
-            {/* <div className='uom-label'>
-          {unitOfMeasureOptions.find((uom) => uom.value === unitOfMeasure3Id)?.label}
-        </div> */}
+
             <div className='uom-label'>{defaultKg?.name}</div>
             <div className='details'>{translate('material_details')}</div>
 
